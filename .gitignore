@@ -1,0 +1,16 @@
+# Secrets — never commit
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Token Factory spend ledger (local budget cap)
+.token_factory_spend.json
+.tavily_spend.json
