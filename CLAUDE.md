@@ -16,6 +16,8 @@ Early-stage Python project for the Nebius x NVIDIA Global AI Hackathon (https://
 - CPT: show bare codes only, never the AMA descriptors, and include the AMA attribution line.
 - The build plan and day-by-day schedule are in `docs/plan.md`.
 
+**Repo:** github.com/codebreaker32/denial-auditor. Team **Fine Print**: Aman Bihari, Bhawna. **Keep the repo PRIVATE until the user explicitly says to make it public** (user rule). The hackathon requires a public repo at submission, so remind the user before the deadline, but never change the visibility yourself.
+
 Hard requirements from the official rules (failing any of these fails the pass/fail Stage One check):
 - The project must make a **runtime call to the Nebius Token Factory inference API**, or be deployed on Nebius AI Cloud (Serverless Jobs, Serverless Endpoints or DevPods).
 - It must use **at least one NVIDIA open source model** (e.g. Nemotron 3 Nano / Super / Ultra).
