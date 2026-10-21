@@ -26,7 +26,7 @@ Team **Fine Print** (Aman Bihari, Bhawna) is entering the Nebius x NVIDIA Global
 - `budget.py` additions only.
 - Passcode-gated live mode, with a public precomputed mode.
 - Hosting on **AWS Lightsail** (user's AWS account; usage so far is covered by credits).
-- Nebius stays in the story through **Token Factory** (every model call) plus a **Nebius Serverless Job** (policy drift watcher).
+- Nebius stays in the story through **Token Factory** (every model call). **Update 2026-10-21:** there are no Nebius AI Cloud credits, so the drift watcher runs as a **nightly cron on the Lightsail server** instead of a Nebius Serverless Job. Sandboxes beta access was granted but isn't used, since nothing in the pipeline runs untrusted code.
 
 **Rules that still apply:**
 - Implementation starts only on approval of this plan.
@@ -54,7 +54,7 @@ resolver: MA/FFS → CMS Coverage API, version by DOS │ commercial → Tavily 
         └► appeal: quote bank of verified spans → Ultra draft → Super "payer reviewer" critique → Ultra revise
              └► CITATION GATE (exact match) ─► deadline from fixed rules table ─► human exports and sends
 Prevention mode = the same resolver/criteria/match run on a prior-auth request.
-Drift watcher = Nebius Serverless Job re-checks CMS versions for open cases (no LLM; $0 cap).
+Drift watcher = nightly cron on the Lightsail server re-checks CMS versions for open cases (no LLM; $0 cap).
 ```
 
 ## Modules (`src/nebius_nvidia/` unless noted)
@@ -74,7 +74,7 @@ Drift watcher = Nebius Serverless Job re-checks CMS versions for open cases (no 
 | `pipeline.py` | A | `run_case(case_dir, routing, session) -> CaseRun`; CLI `python -m nebius_nvidia.pipeline cases/case_001` |
 | `rules.py`, `intake.py`, `triage.py` | B | Deadline table; letter reading (`pypdfium2` for rasterising; **not PyMuPDF**, which is AGPL); CARC → class table (bare codes + our own labels) |
 | `app/` (root) | B | Streamlit `streamlit_app.py`, `pages/`, `components.py`, `.streamlit/config.toml` |
-| `jobs/drift.py` (root) | A | Nebius Serverless Job, CPU, 10-min timeout, `TOKEN_FACTORY_BUDGET_USD=0` |
+| `jobs/drift.py` (root) | A | Nightly cron on the Lightsail server, `TOKEN_FACTORY_BUDGET_USD=0`; writes `drift_report.json` that the app reads from disk |
 | `eval/` (root) | B | `make_scenarios.py`, `gen_notes.py`, `gen_letters.py`, `run_eval.py`, `score.py`, `results/` |
 | `tests/` (root) | both | pytest, offline (below) |
 
@@ -172,10 +172,8 @@ Polish: one theme, ~40 lines of CSS, wide layout, and the AMA attribution footer
   - Deployed caps: `TOKEN_FACTORY_BUDGET_USD=4`, `TAVILY_CREDIT_CAP=1200`.
   - Ledger on persistent disk (instance) or a recorded reset count (container service), so restarts × cap fit inside the reserve.
 - **Access:** public mode serves 6 precomputed CaseRuns at $0. **Live mode needs a passcode**, which goes in the Devpost testing instructions. Limits: 3 live runs per session, 30 per day (SQLite counter); the ledger cap is the final stop.
-- **Drift watcher = Nebius Serverless Job** (`nebius ai job create`, CPU, 10-min timeout, LLM cap $0). It writes `drift_report.json`, which the app reads (S3 or a committed artifact).
-  - Trigger by hand for the demo; GitHub Actions cron is a stretch goal. Say "nightly" only if it really runs nightly.
+- **Drift watcher = nightly cron on the Lightsail server** (LLM cap $0). It writes `drift_report.json` to the same disk the app reads.
   - Demo: a prevention case opened under v37 and scheduled after 10/23/2025 gets flagged v37→v40, with the criterion diff.
-  - Needs Nebius AI Cloud access. Pennies of CPU; confirmed on day 1.
 
 ## Testing
 - `tests/`, as `[dev]` extras. An autouse fixture makes **any network call fail**. Fixtures are trimmed CMS JSON for L34220 v37/v40 and its revision history.
@@ -194,12 +192,12 @@ Polish: one theme, ~40 lines of CSS, wide layout, and the AMA attribution footer
 
 | Day | Aman | Bhawna | End-of-day checkpoint |
 |---|---|---|---|
-| Wed 21 | `models.py` together; delete `policy.py`; `text.py`, `cms.py` + tests; `scripts/probe_models.py` (≈$0.02); `structured()`; check Nebius AI Cloud access; create an AWS IAM deploy user | 30 scenario specs; `rules.py` with sources; Streamlit skeleton + theme; ≤2-credit Tavily extract test (cms.gov, Aetna 0236) | pytest green; L34220 resolves by DOS; output mode known for each model |
+| Wed 21 | `models.py` together; delete `policy.py`; `text.py`, `cms.py` + tests; `scripts/probe_models.py` (≈$0.02); `structured()`; ~~check Nebius AI Cloud access~~ (none: Token Factory only); create an AWS IAM deploy user (awaiting the user's OK) | 30 scenario specs; `rules.py` with sources; Streamlit skeleton + theme; ≤2-credit Tavily extract test (cms.gov, Aetna 0236) | pytest green; L34220 resolves by DOS; output mode known for each model |
 | Thu 22 | `criteria.py` + gold criteria; `citations.py`; **hello-Streamlit on Lightsail (WebSockets test)** | `gen_notes.py` (10 cases) + `gen_letters.py`; worklist + board on the fixture | 7/7 gold criteria with 100% spans verified; hosting decided |
 | Fri 23 | `facts.py`, `match.py`, `pipeline.py` CLI with trace and $ | `intake.py`, `triage.py`; all 30 cases | Demo case end to end in the CLI |
 | Sat 24 | `appeal.py`, doc request, `resolver.py` (Tavily: Aetna, MA criteria, supporting sources) | UI on the real pipeline: appeal + gate + tamper demo + `st.status`; scorer on 10 cases | Gated appeal in the local UI; Aetna case → doc request |
 | Sun 25 | Deploy to Lightsail; passcode + rate limit; precompute 6 cases. **Pipeline feature freeze** | First 30-case eval + failure analysis | **Public demo URL live**; first eval table |
-| Mon 26 | Prevention mode; drift Job on Nebius; Policy watch page | NANO_ONLY ablation; fix the worst failure class together | Eval + ablation table; drift Job has run once |
+| Mon 26 | Prevention mode; drift watcher cron on Lightsail; Policy watch page | NANO_ONLY ablation; fix the worst failure class together | Eval + ablation table; drift Job has run once |
 | Tue 27 | Hardening (timeouts, 429s, error states); verify the rules on eCFR; fact-check statistics; README | Design polish; screenshots; video script | **UI freeze**; demo script runs 3× clean |
 | Wed 28 | Architecture diagram; Devpost text; Token Factory feedback section; **remind the user the repo must be public** | Record and edit the video (<3 min) | Video v1; Devpost draft saved |
 | Thu 29 | Final numbers in README; final redeploy; check licence detection | Final video public on YouTube | **Submitted Thursday evening PT** |
@@ -236,7 +234,7 @@ Estimated cost per routed case is ~$0.05 (NANO_ONLY ~$0.01). Check against the T
 | **Lightning latency (50–190 s per call, probe)** | Run criteria extraction once per policy version and cache it; precompute for the demo; fall back to Super (262k context) if it's too slow for the eval |
 | Empty content from reasoning | Retry with doubled tokens; turn thinking off for extraction if supported |
 | WebSockets on the host | Day-2 test; Lightsail instance + Caddy fallback |
-| No Nebius AI Cloud access for the Job | Run the drift watcher in GitHub Actions instead; Token Factory still carries the Nebius story |
+| No Nebius AI Cloud credits | **Happened:** the drift watcher runs as cron on Lightsail; Token Factory alone meets the 'runs on Nebius' rule |
 | Eval grading itself | The spec is ground truth; the round-trip check is deterministic |
 | CMS down during the demo | Precomputed mode; export stays blocked until re-verify works (by design) |
 | Video carries the submission | Script Tue 27, record Wed 28 |
