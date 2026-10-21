@@ -86,7 +86,7 @@ Ideas borrowed from the deleted `policy.py`: double unescape, inclusive effectiv
 |---|---|---|---|
 | Read a scanned letter | Super-VL | 4096 | Base64 PNG of pages 1–2 |
 | Triage fallback | Nano | 2048 | Only when there's no CARC code |
-| Policy → criteria | Lightning | 16384 | Whole LCD (~30k tokens), cached per version |
+| Policy → criteria | **Super** (was Lightning) | 16384 | Code numbers sentences; model picks ids. 7/7 gold in 3/3 runs, ~$0.01, cached per version. LCD is only ~3k tokens |
 | Chart facts | Nano | 4096 | Every fact carries a quote |
 | Criterion ↔ chart | Nano × N | 2048 | Given code-computed facts ("conservative care: 35 days") |
 | Draft / revise | Ultra | 8192 | Can cite only quote-bank IDs |
@@ -231,7 +231,7 @@ Estimated cost per routed case is ~$0.05 (NANO_ONLY ~$0.01). Check against the T
 | Risk | Mitigation |
 |---|---|
 | JSON schema not honoured | **Resolved 2026-10-21:** all five models honour json_schema (probe); fallbacks kept |
-| **Lightning latency (50–190 s per call, probe)** | Run criteria extraction once per policy version and cache it; precompute for the demo; fall back to Super (262k context) if it's too slow for the eval |
+| **Lightning latency (50–230 s per call)** | **Resolved:** criteria extraction moved to Super (7/7 gold, 3/3 runs); Lightning not on any request path |
 | Empty content from reasoning | Retry with doubled tokens; turn thinking off for extraction if supported |
 | WebSockets on the host | Day-2 test; Lightsail instance + Caddy fallback |
 | No Nebius AI Cloud credits | **Happened:** the drift watcher runs as cron on Lightsail; Token Factory alone meets the 'runs on Nebius' rule |

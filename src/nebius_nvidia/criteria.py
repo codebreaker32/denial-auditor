@@ -5,6 +5,11 @@ numbered sentence units (text.segment); the model only says which units form
 each criterion. Spans are then cut from the source by offset, so every
 criterion's wording is the policy's own characters by construction.
 
+Model choice (scripts/check_criteria.py on L34220 v40, 2026-10-21): Super and Ultra
+both recalled 7/7 gold criteria in 3/3 runs; Super is ~3x cheaper (~$0.01 vs ~$0.03,
+60-100 s vs ~25 s). Lightning was slowest (~230 s) and missed one; Nano 6/7.
+The result is cached per policy version, so latency only matters on a cache miss.
+
 Results are cached per (policy sha256, model) under .cache/criteria/.
 """
 
@@ -14,7 +19,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-from nebius_nvidia.llm import LIGHTNING, structured
+from nebius_nvidia.llm import SUPER, structured
 from nebius_nvidia.models import Criterion, PolicyDoc
 from nebius_nvidia.text import locate, segment
 
@@ -92,7 +97,7 @@ def build_criteria(picks: list[CriterionPick], doc: PolicyDoc, units: list[tuple
 
 
 def extract_criteria(
-    doc: PolicyDoc, model: str = LIGHTNING, tracker=None, use_cache: bool = True, thinking: bool | None = None
+    doc: PolicyDoc, model: str = SUPER, tracker=None, use_cache: bool = True, thinking: bool | None = None
 ) -> list[Criterion]:
     tag = "" if thinking is None else f"_think{int(thinking)}"
     cache = CACHE_DIR / f"{doc.sha256[:16]}_{model.split('/')[-1]}{tag}.json"

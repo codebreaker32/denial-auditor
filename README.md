@@ -22,11 +22,11 @@ Built for the [Nebius x NVIDIA Global AI Hackathon](https://nebiusglobalaihackat
 |---|---|
 | Read a scanned denial letter | Nemotron 3.5 Super-VL (Token Factory) |
 | Extract codes and dates; triage; check each criterion against the chart | Nemotron 3 Nano (Token Factory) |
-| Turn a full coverage policy into criteria in one pass | Nemotron 3.5 Lightning, 1M context (Token Factory) |
+| Pick the policy sentences that state each coverage criterion (spans cut from the source by code) | Nemotron 3 Super (Token Factory) |
 | Draft the appeal, then critique it as the payer's reviewer and revise | Nemotron 3 Ultra / Super (Token Factory) |
 | Find and extract payer policies and supporting sources at runtime | Tavily search / extract / map |
 | Versioned Medicare coverage policies (LCDs) | CMS Coverage API |
-| Nightly policy-change watcher | Nebius Serverless Jobs |
+| Nightly policy-change watcher | Cron on the app server (no LLM) |
 
 ## Setup
 
