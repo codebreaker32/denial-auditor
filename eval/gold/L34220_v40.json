@@ -1,0 +1,14 @@
+{
+  "policy": "L34220",
+  "version": "40",
+  "note": "Hand-labelled coverage criteria in CMS LCD L34220 v40 (Lumbar MRI, eff 10/23/2025). Each value is a phrase that must fall inside one extracted criterion's verified span.",
+  "anchors": {
+    "G1_red_flag_indication": "Lumbar MRI may be indicated for a patient with a",
+    "G2_red_flag_list": "Saddle anesthesia",
+    "G3_first_month": "spinal imaging tests are not generally necessary during the first month of symptoms",
+    "G4_four_weeks_conservative": "conservative management lasting at least four weeks",
+    "G5_ddd_hnp_no_surgery": "uncomplicated degenerative disc disease or herniated nucleus pulposus",
+    "G6_findings_affect_treatment": "When the findings will not affect the treatment choices",
+    "G7_duplication": "duplication of other imaging studies"
+  }
+}

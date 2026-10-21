@@ -39,6 +39,11 @@ def _normalize_with_map(s: str) -> tuple[str, list[int]]:
         if ch in _INVISIBLE:
             continue
         ch = _QUOTE_MAP.get(ch, ch)
+        if ch in ",.;:)!?" and out and out[-1] == " ":
+            # "condition , such" == "condition, such": a stray space before punctuation
+            # (common in CMS text) doesn't change meaning.
+            out.pop()
+            idx.pop()
         if ch.isspace():
             if not out or out[-1] == " ":
                 continue
@@ -69,3 +74,32 @@ def locate(span: str, text: str) -> tuple[int, int] | None:
     if pos < 0:
         return None
     return idx[pos], idx[pos + len(needle) - 1] + 1
+
+
+_ABBREVIATIONS = {"e.g", "i.e", "etc", "vs", "dr", "mr", "mrs", "ms", "no", "fig", "approx", "u.s"}
+
+
+def segment(text: str) -> list[tuple[int, int]]:
+    """Split text into sentence-level units, as (start, end) offsets into `text`.
+
+    Paragraphs split on blank lines; a bullet ("• ...") is one unit; other
+    paragraphs split into sentences, skipping abbreviations like "e.g.".
+    Every unit is text[start:end] with surrounding whitespace excluded.
+    """
+    units: list[tuple[int, int]] = []
+    for para in re.finditer(r"\S(?:.*?\S)?(?=\n\s*\n|\s*\Z)", text, flags=re.S):
+        p_start, p_text = para.start(), para.group()
+        if p_text.startswith("•"):
+            units.append((p_start, para.end()))
+            continue
+        cursor = 0
+        for m in re.finditer(r'[.!?]["”)]?\s+(?=["“(]?[A-Z0-9])', p_text):
+            word = re.search(r"([A-Za-z.]+)[.!?]$", p_text[cursor : m.start() + 1])
+            if word and word.group(1).lower().rstrip(".") in _ABBREVIATIONS:
+                continue
+            end = m.end() - len(m.group()) + len(m.group().rstrip())
+            units.append((p_start + cursor, p_start + end))
+            cursor = m.end()
+        if cursor < len(p_text):
+            units.append((p_start + cursor, p_start + len(p_text)))
+    return units

@@ -44,3 +44,34 @@ def test_locate_rejects_changed_word_and_empty():
     assert locate("lasting at least two weeks", text) is None
     assert locate("", text) is None
     assert locate("   ", text) is None
+
+
+def test_normalize_stray_space_before_punctuation():
+    assert normalize("condition , such") == normalize("condition, such")
+    assert locate('a "red-flag" condition, such as', "a “red-flag” condition , such as x") is not None
+
+
+def test_segment_sentences_bullets_and_abbreviations():
+    from nebius_nvidia.text import segment
+
+    text = 'First sentence here. Second one (e.g. an example) continues. "Quoted" third.\n\n"Red flags" include:\n\n• Fever\n\n• Chills'
+    units = [text[s:e] for s, e in segment(text)]
+    assert units == [
+        "First sentence here.",
+        "Second one (e.g. an example) continues.",
+        '"Quoted" third.',
+        '"Red flags" include:',
+        "• Fever",
+        "• Chills",
+    ]
+
+
+def test_build_criteria_runs_and_range(cms_fixture):
+    from nebius_nvidia.cms import lcd_from_row
+    from nebius_nvidia.criteria import CriterionPick, build_criteria, numbered
+
+    doc = lcd_from_row(cms_fixture["L34220_v40"][0])
+    _, units = numbered(doc)
+    crit = build_criteria([CriterionPick(summary="x", kind="red_flag", sentence_ids=[10, 11, 12, 30, 9999])], doc, units)
+    assert len(crit) == 2  # [10-12] and [30]; 9999 dropped
+    assert all(c.span_verified and doc.text[c.span_start : c.span_end] == c.verbatim_span for c in crit)
