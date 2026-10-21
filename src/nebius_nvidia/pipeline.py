@@ -9,6 +9,7 @@ import json
 from datetime import date
 from pathlib import Path
 
+from nebius_nvidia.appeal import documentation_request, draft_appeal
 from nebius_nvidia.cms import cms
 from nebius_nvidia.cost import CostTracker
 from nebius_nvidia.criteria import extract_criteria
@@ -50,7 +51,8 @@ def load_notes(case_dir: Path) -> list[ChartNote]:
     return [ChartNote.model_validate(n) for n in json.loads((case_dir / "notes.json").read_text())]
 
 
-def run_case(case_dir: Path, use_text: bool = False, as_of: date | None = None) -> tuple[CaseRun, ChartFacts | None]:
+def run_case(case_dir: Path, use_text: bool = False, as_of: date | None = None, matcher: str | None = None,
+             with_appeal: bool = True) -> tuple[CaseRun, ChartFacts | None]:
     case_dir = Path(case_dir)
     scenario = Scenario.load(case_dir)
     tracker = CostTracker()
@@ -67,8 +69,13 @@ def run_case(case_dir: Path, use_text: bool = False, as_of: date | None = None) 
         notes = load_notes(case_dir)
         facts = extract_facts(notes, denial.dos, tracker=tracker)
         run.policy, run.criteria = policy, criteria
-        run.matches = match_all(criteria, notes, facts, denial.dos, tracker=tracker)
+        run.matches = match_all(criteria, notes, facts, denial.dos, tracker=tracker, cpt=denial.cpt,
+                                **({"model": matcher} if matcher else {}))
     run.verdict = verdict(tri, run.matches)
+    if with_appeal and run.verdict == "appeal":
+        run.appeal, _bank, run.gate = draft_appeal(run, load_notes(case_dir), scenario.patient_name, tracker=tracker)
+    elif run.verdict == "doc_request":
+        run.doc_request = documentation_request(run, scenario.patient_name)
     run.trace = tracker.steps
     return run, facts
 
@@ -103,6 +110,15 @@ def print_board(run: CaseRun, facts: ChartFacts | None) -> None:
         print(f"\n(· {na} criteria not applicable to this case)")
     dl = run.deadline
     print(f"\nVERDICT: {run.verdict.upper()}")
+    if run.doc_request:
+        print("\n" + run.doc_request)
+    if run.appeal:
+        print(f"\n----- APPEAL (revision {run.appeal.revision}; {len(run.appeal.critique)} critique items addressed) -----")
+        print(run.appeal.rendered)
+        g = run.gate
+        print(f"----- CITATION GATE: {'PASS — export enabled' if g.ok else 'BLOCKED — ' + g.reason} -----")
+        for c in g.checks:
+            print(f"  {'✓' if c.status == 'verified' else '✗'} {c.text[:90]!r} {c.source_id or ''}")
     if dl:
         print(f"Deadline: {dl.due} ({dl.days_left} days left as of review) — {dl.citation} {'' if dl.verified else '(UNVERIFIED)'}")
     by_model: dict[str, float] = {}
@@ -116,8 +132,9 @@ def main() -> None:
     ap.add_argument("case_dir")
     ap.add_argument("--text", action="store_true", help="read letter.txt with Nano instead of letter.png with Super-VL")
     ap.add_argument("--json", help="write the CaseRun as JSON here")
+    ap.add_argument("--no-appeal", action="store_true", help="skip drafting the appeal letter")
     args = ap.parse_args()
-    run, facts = run_case(Path(args.case_dir), use_text=args.text)
+    run, facts = run_case(Path(args.case_dir), use_text=args.text, with_appeal=not args.no_appeal)
     print_board(run, facts)
     if args.json:
         Path(args.json).write_text(run.model_dump_json(indent=1))

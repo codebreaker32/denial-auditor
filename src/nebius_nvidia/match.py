@@ -17,6 +17,13 @@ from nebius_nvidia.facts import ChartFacts, Quoted, notes_block, verify_quote
 from nebius_nvidia.llm import NANO, structured
 from nebius_nvidia.models import ChartNote, Criterion, CriterionMatch, TriageResult, Verdict
 
+# Our own plain labels for the ordered study (not the AMA CPT descriptors).
+STUDY_LABELS = {
+    "72148": "lumbar spine MRI without contrast",
+    "72149": "lumbar spine MRI with contrast",
+    "72158": "lumbar spine MRI without and then with contrast",
+}
+
 SYSTEM = """You check ONE coverage criterion from a payer policy against a patient's chart, for a medical-billing team.
 
 Decide the status:
@@ -39,10 +46,12 @@ class MatchDraft(BaseModel):
     rationale: str
 
 
-def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, dos: date, model: str = NANO, tracker=None) -> CriterionMatch:
+def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, dos: date, model: str = NANO,
+              tracker=None, cpt: str | None = None) -> CriterionMatch:
     prompt = (
         f"CRITERION ({criterion.kind}; applies when: {criterion.applies_when or 'always'}):\n"
         f"<policy_text>{criterion.verbatim_span}</policy_text>\n\n"
+        f"ORDERED STUDY: {STUDY_LABELS.get(cpt or '', 'lumbar spine MRI')} (a single study; no repeat or second study unless the facts say so)\n"
         f"DATE OF SERVICE: {dos}\n\nCOMPUTED FACTS (from verified chart quotes):\n{facts.summary()}\n\n"
         f"CHART NOTES:\n{notes_block(notes)}"
     )
@@ -68,9 +77,9 @@ def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, d
 
 
 def match_all(criteria: list[Criterion], notes: list[ChartNote], facts: ChartFacts, dos: date,
-              model: str = NANO, tracker=None, workers: int = 4) -> list[CriterionMatch]:
+              model: str = NANO, tracker=None, workers: int = 4, cpt: str | None = None) -> list[CriterionMatch]:
     with ThreadPoolExecutor(workers) as pool:
-        return list(pool.map(lambda c: match_one(c, notes, facts, dos, model, tracker), criteria))
+        return list(pool.map(lambda c: match_one(c, notes, facts, dos, model, tracker, cpt), criteria))
 
 
 def verdict(triage: TriageResult, matches: list[CriterionMatch]) -> Verdict:

@@ -89,7 +89,7 @@ def fact_sheet(s: Scenario) -> tuple[str, dict[str, list[str]]]:
         need[f"treatment_{i}"] = [fmt(t.start), fmt(t.end)]
     if f.red_flags:
         for i, rf in enumerate(f.red_flags):
-            need[f"red_flag_{i}"] = [rf.split()[0].lower()]
+            need[f"red_flag_{i}"] = []  # synonyms are fine ("intravenous drug use"); the sentence must exist
     else:
         need["no_red_flags"] = []
     if f.radiculopathy != "none":

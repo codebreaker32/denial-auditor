@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_005-n1",
+  "date": "2026-05-30",
+  "note_type": "initial_visit",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nLow back pain began on 05/29/2026.\nThe patient denies any red flags such as trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficit.\nExam: Tenderness over lumbar paraspinals, limited range of motion due to discomfort. Neurologic exam shows normal lower-extremity strength, reflexes, and sensation.\nAssessment: Acute low back pain, likely muscular/lumbar strain.\nPlan: Initiated NSAIDs today; advised activity modification; follow-up in 2 weeks."
+ },
+ {
+  "note_id": "case_005-n2",
+  "date": "2026-07-10",
+  "note_type": "pt_note",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient returns for physical therapy follow-up. She reports ongoing low back pain.\nExam: Similar lumbar tenderness, neurologic exam unchanged.\nAssessment: Persistent low back pain despite conservative measures.\nPlan: NSAIDs were started on 05/30/2026 and continued through 07/10/2026 with partial response. Physical therapy was started on 06/05/2026, consisted of 10 sessions, and ended on 07/10/2026 with no improvement. Consider obtaining lumbar MRI to further evaluate."
+ },
+ {
+  "note_id": "case_005-n3",
+  "date": "2026-07-15",
+  "note_type": "follow_up",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient follows up after completing physical therapy. She reports continued low back pain without improvement.\nExam: Unchanged lumbar tenderness, neurologic exam within normal limits.\nAssessment: Chronic low back pain, failed conservative therapy.\nPlan: NSAIDs were started on 05/30/2026 and continued through 07/10/2026 with partial response. Physical therapy was started on 06/05/2026, consisted of 10 sessions, and ended on 07/10/2026 with no improvement. Spine surgery referral is under consideration pending MRI findings."
+ },
+ {
+  "note_id": "case_005-n4",
+  "date": "2026-08-10",
+  "note_type": "imaging_order",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient returns for follow-up after completing conservative therapy.\nExam: Stable.\nAssessment: Chronic low back pain, unchanged.\nPlan: Lumbar MRI ordered today. Spine surgery referral is under consideration pending MRI findings."
+ }
+]

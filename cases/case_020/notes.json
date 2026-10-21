@@ -1,0 +1,23 @@
+[
+ {
+  "note_id": "case_020-n1",
+  "date": "2026-07-26",
+  "note_type": "initial_visit",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Marley Standin, 69-year-old male.\nHPI: The patient reports onset of low back pain on 07/25/2026. He also reports fever and intravenous drug use. He denies recent trauma, bowel or bladder incontinence, and unexplained weight loss.\nExam: Vital signs stable. Inspection of lumbar spine shows no deformity. Palpation reveals tenderness over lumbar paraspinals. Range of motion limited due to pain. Neurologic examination demonstrates normal lower-extremity strength, reflexes, and sensation.\nAssessment: Acute low back pain with concerning red flags (fever, IV drug use).\nPlan: Low back pain began on 07/25/2026. Patient reports fever. Patient reports intravenous drug use. Continue activity modification, NSAIDs as needed, and close monitoring. Return sooner if neurologic symptoms develop. Consider obtaining lumbar MRI if pain persists beyond two weeks from onset."
+ },
+ {
+  "note_id": "case_020-n2",
+  "date": "2026-08-02",
+  "note_type": "follow_up",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Marley Standin, 69-year-old male.\nHPI: Returns for follow-up of low back pain that started 07/25/2026. He continues to report fever and intravenous drug use. Pain remains moderate, aggravated by prolonged sitting. No new neurologic symptoms.\nExam: Similar to prior visit; lower-extremity strength 5/5 bilaterally, reflexes 2+, sensation intact. No erythema or edema over spine.\nAssessment: Persistent low back pain with unresolved red flags.\nPlan: Continue current symptomatic management. No conservative treatments have been initiated. Advise urgent reevaluation if fever worsens or neurologic changes occur. Plan to obtain lumbar MRI if symptoms persist beyond two weeks from onset (i.e., after 08/08/2026)."
+ },
+ {
+  "note_id": "case_020-n3",
+  "date": "2026-08-10",
+  "note_type": "imaging_order",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Marley Standin, 69-year-old male.\nHPI: Low back pain ongoing since 07/25/2026, accompanied by persistent fever and intravenous drug use. No change in neurologic status.\nExam: Stable vital signs. Lumbar spine tender to palpation. Lower-extremity strength 5/5, reflexes 2+, sensation normal. No signs of spinal cord compression.\nAssessment: Ongoing low back pain with red flags raising concern for spinal epidural abscess.\nPlan: Order urgent lumbar MRI to evaluate for spinal epidural abscess. No conservative treatments have been initiated. Follow up after imaging results."
+ }
+]

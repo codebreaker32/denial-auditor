@@ -85,3 +85,32 @@ def test_criteria_spans_always_pass_gate(doc, session):
     picks = [CriterionPick(summary="s", kind="duration", sentence_ids=[i]) for i in range(1, len(units) + 1)]
     for c in build_criteria(picks, doc, units):
         assert check(f"> {c.verbatim_span}\n", session).ok, c.verbatim_span[:80]
+
+
+def _run_with_bank(doc):
+    from datetime import date
+
+    from nebius_nvidia.models import CaseRun, Criterion, CriterionMatch, Denial, Evidence, TriageResult
+
+    crit = Criterion(criterion_id="C1", doc_id="L34220v40", summary="s", kind="duration",
+                     verbatim_span="conservative management lasting at least four weeks", span_start=0, span_end=1, span_verified=True)
+    m = CriterionMatch(criterion_id="C1", status="met", rationale="r",
+                       evidence=[Evidence(note_id="note-pt", quote="Physical therapy 3x weekly from 07/01/2026 to 08/05/2026 with no improvement.", verified=True)])
+    denial = Denial(payer_name="p", plan_type="MA", cpt="72148", icd10=["M54.50"], dos=date(2026, 8, 14),
+                    notice_date=date(2026, 8, 28), reason_text="x")
+    tri = TriageResult(reason_class="clinical", route="clinical_review", method="carc_table")
+    return CaseRun(case_id="c", denial=denial, triage=tri, policy=doc, criteria=[crit], matches=[m], verdict="appeal")
+
+
+def test_rendered_markers_pass_gate_and_typed_quotes_fail(doc, session):
+    from nebius_nvidia.appeal import build_quote_bank, render
+    from nebius_nvidia.models import AppealDraft, Section
+
+    bank = build_quote_bank(_run_with_bank(doc), [])
+    assert [q.qid for q in bank] == ["P1", "E1"]
+    good = AppealDraft(sections=[Section(heading="Policy", body="The policy says:\n{{Q:P1}}\nThe chart shows:\n{{Q:E1}}")])
+    assert check(render(good, bank), session).ok
+    typed = AppealDraft(sections=[Section(heading="Policy", body='{{Q:P1}}\nThe policy only requires "two weeks of conservative care".')])
+    assert not check(render(typed, bank), session).ok
+    unknown = AppealDraft(sections=[Section(heading="Policy", body="{{Q:P1}}\n{{Q:P9}}")])
+    assert not check(render(unknown, bank), session).ok
