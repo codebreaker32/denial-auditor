@@ -1,0 +1,52 @@
+{
+ "case_id": "case_027",
+ "group": "F_administrative",
+ "patient_name": "Val Simulant",
+ "plan_type": "MA",
+ "payer": "Harbor Health MA (synthetic)",
+ "practice_state": "AZ",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-08-08",
+ "notice_date": "2026-08-20",
+ "carc": [
+  "29"
+ ],
+ "reason_text": "Claim received after the filing deadline.",
+ "facts": {
+  "age": 73,
+  "sex": "F",
+  "onset": "2026-05-23",
+  "treatments": [
+   {
+    "kind": "nsaids",
+    "start": "2026-05-24",
+    "end": "2026-07-07",
+    "sessions": null,
+    "response": "partial"
+   },
+   {
+    "kind": "physical_therapy",
+    "start": "2026-05-26",
+    "end": "2026-07-07",
+    "sessions": 12,
+    "response": "no_improvement"
+   }
+  ],
+  "red_flags": [],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "Spine surgery referral is under consideration pending MRI findings",
+  "surgery_or_injection_considered": true
+ },
+ "expected": {
+  "route": "fix_checklist",
+  "verdict": "fix_checklist",
+  "gold": {},
+  "why": "Check proof of timely filing; appeal only with that proof."
+ }
+}

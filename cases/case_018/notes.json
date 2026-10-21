@@ -1,0 +1,23 @@
+[
+ {
+  "note_id": "case_018-n1",
+  "date": "2026-07-20",
+  "note_type": "initial_visit",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Mr. Kendall Pretend is a 66-year-old male. Low back pain began on 07/19/2026. He denies trauma. History of cancer. Pain that worsens when supine or at night. He denies fever, weight loss, or bowel/bladder changes.\nExam: Vital signs stable. Inspection of lumbar spine shows no deformity. Palpation reveals tenderness over paraspinal muscles without midline tenderness. Range of motion limited due to discomfort. Neurologic exam: normal lower-extremity strength, reflexes and sensation. No radiculopathy.\nAssessment: Acute low back pain, likely mechanical, with red flags for malignancy given cancer history and nocturnal pain.\nPlan: Continue conservative measures with activity modification, acetaminophen as needed. MRI to evaluate for spinal metastasis given cancer history. Return in one week."
+ },
+ {
+  "note_id": "case_018-n2",
+  "date": "2026-07-27",
+  "note_type": "follow_up",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Mr. Kendall Pretend returns for follow-up of low back pain. Low back pain began on 07/19/2026 and persists. He denies new symptoms. History of cancer. Pain that worsens when supine or at night.\nExam: Vital signs stable. Lumbar spine inspection unchanged. Tenderness persists. Neurologic exam: normal lower-extremity strength, reflexes and sensation. No radiculopathy.\nAssessment: Ongoing mechanical low back pain with red flags for malignancy.\nPlan: Continue current symptomatic management. MRI to evaluate for spinal metastasis given cancer history. Re-evaluate in one week."
+ },
+ {
+  "note_id": "case_018-n3",
+  "date": "2026-08-05",
+  "note_type": "imaging_order",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Mr. Kendall Pretend presents with persistent low back pain since 07/19/2026. He reports ongoing discomfort worse at night. History of cancer. Pain that worsens when supine or at night.\nExam: Vital signs stable. Lumbar spine exam shows tenderness without neurological deficits. Neurologic exam: normal lower-extremity strength, reflexes and sensation. No radiculopathy.\nAssessment: Chronic low back pain, red flags present, prior lumbar imaging none.\nPlan: No conservative treatments have been initiated to date. MRI to evaluate for spinal metastasis given cancer history. Order lumbar MRI today."
+ }
+]

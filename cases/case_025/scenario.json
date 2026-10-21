@@ -1,0 +1,52 @@
+{
+ "case_id": "case_025",
+ "group": "F_administrative",
+ "patient_name": "Shiloh Testwood",
+ "plan_type": "MA",
+ "payer": "Evergreen Medicare Advantage (synthetic)",
+ "practice_state": "OR",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-08-06",
+ "notice_date": "2026-08-17",
+ "carc": [
+  "16"
+ ],
+ "reason_text": "Claim is missing the referring provider's NPI.",
+ "facts": {
+  "age": 83,
+  "sex": "F",
+  "onset": "2026-05-25",
+  "treatments": [
+   {
+    "kind": "nsaids",
+    "start": "2026-05-26",
+    "end": "2026-07-13",
+    "sessions": null,
+    "response": "partial"
+   },
+   {
+    "kind": "physical_therapy",
+    "start": "2026-06-01",
+    "end": "2026-07-13",
+    "sessions": 12,
+    "response": "no_improvement"
+   }
+  ],
+  "red_flags": [],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "MRI to localize the level before a planned L4-L5 epidural steroid injection",
+  "surgery_or_injection_considered": true
+ },
+ "expected": {
+  "route": "fix_checklist",
+  "verdict": "fix_checklist",
+  "gold": {},
+  "why": "Resubmit a corrected claim with the referring provider NPI."
+ }
+}

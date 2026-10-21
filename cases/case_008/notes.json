@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_008-n1",
+  "date": "2025-02-23",
+  "note_type": "initial_visit",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: The patient reports onset of low back pain on 02/22/2025. She reports pain radiating down one leg with no objective findings. She denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.\nExam: Lower-extremity strength, reflexes and sensation are normal.\nAssessment: Lumbar radiculopathy without neurologic deficit.\nPlan: Initiate NSAIDs today. Arrange physical therapy to start in one week. Return in 2 weeks."
+ },
+ {
+  "note_id": "case_008-n2",
+  "date": "2025-04-05",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: The patient returns for follow\u2011up after completing a course of NSAIDs and physical therapy. NSAIDs were started on 02/23/2025 and discontinued on 04/05/2025 with a partial response. Physical therapy was begun on 03/01/2025, consisting of 10 sessions, and concluded on 04/05/2025 with no improvement. She continues to report pain radiating down one leg with no objective findings. She denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.\nExam: Lower-extremity strength, reflexes and sensation remain normal.\nAssessment: Persistent lumbar radiculopathy, inadequate response to conservative measures.\nPlan: Continue current analgesics as needed. Order lumbar MRI to further evaluate etiology."
+ },
+ {
+  "note_id": "case_008-n3",
+  "date": "2025-04-10",
+  "note_type": "follow_up",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: The patient reports ongoing low back pain with radiculopathy despite completing NSAIDs and physical therapy. NSAIDs were started on 02/23/2025 and discontinued on 04/05/2025 with a partial response. Physical therapy was begun on 03/01/2025, consisting of 10 sessions, and concluded on 04/05/2025 with no improvement. She continues to describe pain radiating down one leg with no objective findings. She denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.\nExam: Lower-extremity strength, reflexes and sensation are normal.\nAssessment: Chronic lumbar radiculopathy refractory to conservative therapy.\nPlan: Obtain lumbar MRI to delineate anatomic correlates; epidural steroid injection or surgical referral will be considered based on results."
+ },
+ {
+  "note_id": "case_008-n4",
+  "date": "2025-06-02",
+  "note_type": "imaging_order",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: The patient presents for discussion of imaging after failed conservative therapy. She reports pain radiating down one leg with no objective findings. She denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.\nExam: Lower-extremity strength, reflexes and sensation are normal.\nAssessment: Lumbar radiculopathy persisting despite NSAIDs and physical therapy.\nPlan: Order lumbar MRI today. MRI results will decide between epidural steroid injection and surgical referral."
+ }
+]

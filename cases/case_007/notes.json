@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_007-n1",
+  "date": "2025-03-17",
+  "note_type": "initial_visit",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient is a 66-year-old female presenting with low back pain. She reports onset of low back pain on 03/16/2025. Denies any trauma or neurologic symptoms. Started NSAIDs on 03/17/2025. Plans to begin physical therapy on 03/23/2025. Exam shows normal lower-extremity strength, reflexes, and sensation. Assessment: acute low back pain without radiculopathy. Plan: Continue NSAIDs, start PT as scheduled, follow up in 2 weeks."
+ },
+ {
+  "note_id": "case_007-n2",
+  "date": "2025-05-11",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nReturn visit for low back pain. NSAIDs were started on 03/17/2025 and discontinued on 05/11/2025 with partial response. Physical therapy was initiated on 03/23/2025, completed 14 sessions, and ended on 05/11/2025 with no improvement. Denies new neurologic symptoms. Exam unchanged. Assessment: persistent low back pain despite conservative measures. Plan: Consider MRI lumbar spine to further evaluate; continue symptomatic care."
+ },
+ {
+  "note_id": "case_007-n3",
+  "date": "2025-05-16",
+  "note_type": "follow_up",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nFollow-up visit after completion of conservative therapy. The patient denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, and progressive neurologic deficit. NSAIDs were started on 03/17/2025 and discontinued on 05/11/2025 with partial response. Physical therapy was initiated on 03/23/2025, completed 14 sessions, and ended on 05/11/2025 with no improvement. Spine surgery referral is under consideration pending MRI findings. Exam: stable, no change in strength or reflexes. Assessment: inadequate response to NSAIDs and physical therapy. Plan: Order lumbar MRI today to assess for structural pathology; await results before definitive intervention."
+ },
+ {
+  "note_id": "case_007-n4",
+  "date": "2025-06-02",
+  "note_type": "imaging_order",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nOrder for lumbar MRI placed today 06/02/2025. Patient continues to experience low back pain despite NSAIDs and physical therapy. No new neurologic deficits. Spine surgery referral is under consideration pending MRI findings. Assessment: need imaging to guide possible surgical referral. Plan: Perform lumbar MRI; review results and discuss with patient."
+ }
+]

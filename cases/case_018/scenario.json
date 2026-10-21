@@ -1,0 +1,48 @@
+{
+ "case_id": "case_018",
+ "group": "D_red_flag_early",
+ "patient_name": "Kendall Pretend",
+ "plan_type": "MA",
+ "payer": "Sunrise Senior Advantage (synthetic MA plan)",
+ "practice_state": "UT",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-08-05",
+ "notice_date": "2026-08-25",
+ "carc": [
+  "50"
+ ],
+ "reason_text": "Not medically necessary: imaging within the first month of symptoms.",
+ "facts": {
+  "age": 66,
+  "sex": "M",
+  "onset": "2026-07-19",
+  "treatments": [],
+  "red_flags": [
+   "History of cancer",
+   "Pain that worsens when supine or at night"
+  ],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "MRI to evaluate for spinal metastasis given cancer history",
+  "surgery_or_injection_considered": false
+ },
+ "expected": {
+  "route": "clinical_review",
+  "verdict": "appeal",
+  "gold": {
+   "G1_red_flag_indication": "met",
+   "G2_red_flag_list": "met",
+   "G3_first_month": "met",
+   "G4_four_weeks_conservative": "not_applicable",
+   "G5_ddd_hnp_no_surgery": "not_applicable",
+   "G6_findings_affect_treatment": "met",
+   "G7_duplication": "met"
+  },
+  "why": "Red flag(s) documented (History of cancer, Pain that worsens when supine or at night); the first-month limit doesn't apply."
+ }
+}

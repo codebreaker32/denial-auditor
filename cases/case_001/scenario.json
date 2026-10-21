@@ -1,0 +1,60 @@
+{
+ "case_id": "case_001",
+ "group": "A_ma_met",
+ "patient_name": "Avery Sample",
+ "plan_type": "MA",
+ "payer": "Evergreen Medicare Advantage (synthetic)",
+ "practice_state": "AZ",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-07-28",
+ "notice_date": "2026-08-13",
+ "carc": [
+  "50"
+ ],
+ "reason_text": "Not medically necessary. The documentation submitted does not support the need for advanced imaging.",
+ "facts": {
+  "age": 66,
+  "sex": "M",
+  "onset": "2026-04-19",
+  "treatments": [
+   {
+    "kind": "nsaids",
+    "start": "2026-04-20",
+    "end": "2026-06-19",
+    "sessions": null,
+    "response": "partial"
+   },
+   {
+    "kind": "physical_therapy",
+    "start": "2026-04-24",
+    "end": "2026-06-19",
+    "sessions": 16,
+    "response": "no_improvement"
+   }
+  ],
+  "red_flags": [],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "MRI results will decide between epidural steroid injection and surgical referral",
+  "surgery_or_injection_considered": true
+ },
+ "expected": {
+  "route": "clinical_review",
+  "verdict": "appeal",
+  "gold": {
+   "G1_red_flag_indication": "not_applicable",
+   "G2_red_flag_list": "not_applicable",
+   "G3_first_month": "met",
+   "G4_four_weeks_conservative": "met",
+   "G5_ddd_hnp_no_surgery": "met",
+   "G6_findings_affect_treatment": "met",
+   "G7_duplication": "met"
+  },
+  "why": "No red flags; failed at least four weeks of conservative care; findings will change treatment."
+ }
+}

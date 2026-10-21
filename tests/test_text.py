@@ -75,3 +75,25 @@ def test_build_criteria_runs_and_range(cms_fixture):
     crit = build_criteria([CriterionPick(summary="x", kind="red_flag", sentence_ids=[10, 11, 12, 30, 9999])], doc, units)
     assert len(crit) == 2  # [10-12] and [30]; 9999 dropped
     assert all(c.span_verified and doc.text[c.span_start : c.span_end] == c.verbatim_span for c in crit)
+
+
+def test_realign_shifts_off_by_one_pick(cms_fixture):
+    from nebius_nvidia.cms import lcd_from_row
+    from nebius_nvidia.criteria import CriterionPick, build_criteria, numbered
+
+    doc = lcd_from_row(cms_fixture["L34220_v40"][0])
+    _, units = numbered(doc)
+    target = next(i for i, (s, e) in enumerate(units, 1) if "lasting at least four weeks" in doc.text[s:e])
+    words = " ".join(doc.text[units[target - 1][0] : units[target - 1][1]].split()[:6])
+    for wrong in (target - 1, target + 1, target):
+        crit = build_criteria([CriterionPick(summary="x", kind="duration", sentence_ids=[wrong], first_words=words)], doc, units)
+        assert "lasting at least four weeks" in crit[0].verbatim_span
+
+
+def test_heading_only_pick_dropped(cms_fixture):
+    from nebius_nvidia.cms import lcd_from_row
+    from nebius_nvidia.criteria import CriterionPick, build_criteria, numbered
+
+    doc = lcd_from_row(cms_fixture["L34220_v40"][0])
+    _, units = numbered(doc)
+    assert build_criteria([CriterionPick(summary="x", kind="duration", sentence_ids=[1])], doc, units) == []

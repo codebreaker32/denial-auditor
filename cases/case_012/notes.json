@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_012-n1",
+  "date": "2026-06-17",
+  "note_type": "initial_visit",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nLow back pain began on 06/16/2026.\nThe patient denies trauma, fever, weight loss, bowel or bladder dysfunction, saddle anesthesia, or progressive neurologic deficits.\nThere is diminished ankle reflex on the right side.\nPatient is a 50-year-old female with aching lumbar pain worsened by flexion and prolonged sitting. Exam reveals lumbar paraspinal tenderness. Assessment: Lumbar radiculopathy likely L5/S1. Plan: Start ibuprofen 600 mg PO TID today; initiate a course of physical therapy to begin in a few days; advise activity modification and return in 2 weeks."
+ },
+ {
+  "note_id": "case_012-n2",
+  "date": "2026-07-26",
+  "note_type": "pt_note",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nNSAIDs were started on 06/17/2026 and continued through 07/26/2026 with partial relief.\nPhysical therapy was initiated on 06/21/2026, consisting of 10 sessions through 07/26/2026, with no improvement noted.\nPatient reports ongoing low back pain with mild improvement from NSAIDs but no change with PT. Exam shows persistent lumbar tenderness and unchanged diminished ankle reflex on the right. Assessment: Continued lumbar radiculopathy L5/S1 despite conservative measures. Plan: Obtain lumbar MRI to further delineate pathology; consider epidural steroid injection or surgical referral based on imaging."
+ },
+ {
+  "note_id": "case_012-n3",
+  "date": "2026-07-30",
+  "note_type": "follow_up",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nNSAIDs were started on 06/17/2026 and continued through 07/26/2026 with partial relief.\nPhysical therapy was initiated on 06/21/2026, consisting of 10 sessions through 07/26/2026, with no improvement noted.\nWe will obtain a lumbar MRI to further evaluate the lumbar radiculopathy.\nPatient reports persistent pain; exam unchanged. Assessment: Lumbar radiculopathy L5/S1 refractory to NSAIDs and PT. Plan: Schedule MRI for 07/31/2026; await results before deciding on epidural steroid injection versus surgical referral."
+ },
+ {
+  "note_id": "case_012-n4",
+  "date": "2026-07-31",
+  "note_type": "imaging_order",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nLumbar MRI ordered today, 07/31/2026.\nDepending on the MRI findings, we will consider either an epidural steroid injection or a surgical referral.\nPatient remains symptomatic with low back pain and unchanged neurologic exam. Assessment: Awaiting imaging to guide definitive management. Plan: Review MRI results upon availability."
+ }
+]

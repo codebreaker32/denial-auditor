@@ -1,0 +1,52 @@
+{
+ "case_id": "case_026",
+ "group": "F_administrative",
+ "patient_name": "Tatum Mockwell",
+ "plan_type": "MA",
+ "payer": "Sunrise Senior Advantage (synthetic MA plan)",
+ "practice_state": "UT",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-08-10",
+ "notice_date": "2026-08-21",
+ "carc": [
+  "27"
+ ],
+ "reason_text": "Member's coverage was not active on the date of service.",
+ "facts": {
+  "age": 78,
+  "sex": "M",
+  "onset": "2026-05-21",
+  "treatments": [
+   {
+    "kind": "nsaids",
+    "start": "2026-05-22",
+    "end": "2026-07-07",
+    "sessions": null,
+    "response": "partial"
+   },
+   {
+    "kind": "physical_therapy",
+    "start": "2026-05-26",
+    "end": "2026-07-07",
+    "sessions": 12,
+    "response": "no_improvement"
+   }
+  ],
+  "red_flags": [],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "Spine surgery referral is under consideration pending MRI findings",
+  "surgery_or_injection_considered": true
+ },
+ "expected": {
+  "route": "fix_checklist",
+  "verdict": "fix_checklist",
+  "gold": {},
+  "why": "Verify eligibility; bill the correct payer or the patient."
+ }
+}

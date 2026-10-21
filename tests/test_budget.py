@@ -54,3 +54,20 @@ def test_zero_cap_blocks_everything(transport, monkeypatch):
     monkeypatch.setenv("TOKEN_FACTORY_BUDGET_USD", "0")
     with pytest.raises(BudgetExceeded):
         post(transport, {"model": "cheap", "max_tokens": 1})
+
+
+def test_ledger_survives_concurrent_updates(tmp_path):
+    """Regression: the lock was released before the write was flushed, so parallel
+    calls could read an empty file and reset the ledger to zero."""
+    from concurrent.futures import ThreadPoolExecutor
+
+    path = str(tmp_path / "ledger.json")
+
+    def add(_):
+        with budget._locked_json(path, {"n": 0}) as data:
+            data["n"] += 1
+
+    with ThreadPoolExecutor(16) as pool:
+        list(pool.map(add, range(400)))
+    with budget._locked_json(path, {"n": 0}) as data:
+        assert data["n"] == 400

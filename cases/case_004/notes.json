@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_004-n1",
+  "date": "2026-05-13",
+  "note_type": "initial_visit",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Casey Example, 71-year-old male\nDate: 05/13/2026\nSubjective: The patient reports onset of low back pain on 05/12/2026. The patient describes radicular pain down one leg, but objective neurologic examination reveals no deficits. The patient denies any red flag symptoms including trauma, cancer, fever, weight loss, bowel or bladder dysfunction, saddle anesthesia, or progressive neurologic deficit. He denies fever or weight loss.\nObjective: Neurologic examination shows normal strength, reflexes, and sensation in the lower extremities. Lumbar paraspinal tenderness present.\nAssessment: Acute lumbar strain with possible radiculopathy.\nPlan: Initiate ibuprofen 600 mg PO TID starting today (05/13/2026) for anti-inflammatory effect. Advise activity modification and heat/ice. Schedule physical therapy evaluation to begin on 05/19/2026. Re-evaluate in 2 weeks."
+ },
+ {
+  "note_id": "case_004-n2",
+  "date": "2026-06-23",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Casey Example, 71-year-old male\nDate: 06/23/2026\nSubjective: The patient reports ongoing low back pain with radicular discomfort down the right leg, unchanged from prior visits. He denies new red flag symptoms.\nObjective: Neurologic exam remains normal strength, reflexes, and sensation in lower extremities. Lumbar paraspinal tenderness persists.\nAssessment: Persistent lumbar radiculopathy despite conservative therapy.\nPlan: Document completion of physical therapy course. NSAIDs were started on 05/13/2026 and continued through 06/23/2026 with partial relief. Physical therapy consisting of 10 sessions was conducted from 05/19/2026 to 06/23/2026 without improvement. Recommend follow-up with physician to discuss further management."
+ },
+ {
+  "note_id": "case_004-n3",
+  "date": "2026-06-28",
+  "note_type": "follow_up",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Casey Example, 71-year-old male\nDate: 06/28/2026\nSubjective: The patient continues to experience low back pain with radicular pain down one leg. He denies any new red flag symptoms.\nObjective: Neurologic examination shows normal strength, reflexes, and sensation in lower extremities.\nAssessment: Ongoing lumbar radiculopathy after completed conservative therapy.\nPlan: Summarizing treatment history: NSAIDs were started on 05/13/2026 and continued through 06/23/2026 with partial relief. Physical therapy consisting of 10 sessions was conducted from 05/19/2026 to 06/23/2026 without improvement. Given lack of improvement, we will obtain a lumbar MRI to further evaluate the persistent low back pain and radiculopathy."
+ },
+ {
+  "note_id": "case_004-n4",
+  "date": "2026-08-13",
+  "note_type": "imaging_order",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Casey Example, 71-year-old male\nDate: 08/13/2026\nSubjective: The patient reports persistent low back pain with radiculopathy despite NSAIDs and physical therapy. He denies any red flag symptoms.\nObjective: Neurologic exam remains normal.\nAssessment: Lumbar radiculopathy unresponsive to conservative management.\nPlan: MRI lumbar spine ordered today (08/13/2026). Upon receipt of MRI results, we will determine whether to proceed with an epidural steroid injection or surgical referral."
+ }
+]

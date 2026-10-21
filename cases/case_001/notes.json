@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_001-n1",
+  "date": "2026-04-20",
+  "note_type": "initial_visit",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Mr. Avery Sample is a 66\u2011year\u2011old man who reports onset of low back pain on 04/19/2026. He denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficits.\nExam: Inspection shows normal lumbar curvature. Palpation reveals mild paraspinal tenderness without step-off. Range of motion is limited due to discomfort. Neurologic examination of the lower extremities demonstrates intact strength, normal reflexes, and sensation to light touch.\nAssessment: Acute lumbar strain, mechanical low back pain (M54.50).\nPlan: Initiate NSAID therapy today (04/20/2026). Advise activity modification, ice/heat as needed. Schedule physical therapy evaluation to begin in the near future. Return in 4 weeks or sooner if symptoms worsen."
+ },
+ {
+  "note_id": "case_001-n2",
+  "date": "2026-06-19",
+  "note_type": "pt_note",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Mr. Avery Sample returns for follow\u2011up of his low back pain that began on 04/19/2026. He reports completing a course of NSAIDs started on 04/20/2026 and finished today, noting only partial relief of his discomfort. He also completed 16 sessions of physical therapy that started on 04/24/2026 and concluded today, describing no improvement in pain or function despite adherence to the home exercise program.\nExam: Lumbar inspection unchanged. Tenderness persists mildly. Range of motion remains limited. Neurologic exam shows normal strength, reflexes, and sensation in both lower extremities; no signs of radiculopathy.\nAssessment: Persistent mechanical low back pain despite NSAID trial and completed physical therapy.\nPlan: Discuss next steps; obtain lumbar magnetic resonance imaging to further evaluate disc pathology. Continue analgesics as needed and advise avoidance of aggravating activities."
+ },
+ {
+  "note_id": "case_001-n3",
+  "date": "2026-06-24",
+  "note_type": "follow_up",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Mr. Avery Sample presents for routine follow\u2011up approximately five days after completing his conservative regimen. He recalls that his low back pain started on 04/19/2026. He underwent NSAID therapy from 04/20/2026 through 06/19/2026, which afforded only partial symptom relief. He also completed a structured physical therapy program consisting of 16 sessions administered from 04/24/2026 to 06/19/2026, with no improvement in pain or functional status.\nExam: Inspection of the lumbar spine reveals no deformity. Palpation yields mild paraspinal tenderness. Flexion and extension are limited by discomfort. Neurologic testing demonstrates intact motor strength (5/5 bilaterally), normal deep tendon reflexes, and intact sensation to pinprick and light touch; no asymmetric findings suggestive of radiculopathy.\nAssessment: Chronic mechanical low back pain unresponsive to NSAIDs and a full course of physical therapy.\nPlan: Order lumbar magnetic resonance imaging to delineate any underlying structural abnormality. Await results to guide decision between epidural steroid injection and surgical consultation."
+ },
+ {
+  "note_id": "case_001-n4",
+  "date": "2026-07-28",
+  "note_type": "imaging_order",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Mr. Avery Sample returns after his lumbar MRI was ordered on 07/28/2026. He continues to experience low back pain that began on 04/19/2026, unchanged despite prior NSAID use and physical therapy.\nExam: Lumbar inspection symmetric. Tenderness modest. Range of motion restricted by pain. Neurologic examination shows normal strength, reflexes, and sensation in the lower extremities; no focal deficits.\nAssessment: Ongoing mechanical low back pain awaiting MRI characterization.\nPlan: Await MRI results; MRI results will decide between epidural steroid injection and surgical referral."
+ }
+]

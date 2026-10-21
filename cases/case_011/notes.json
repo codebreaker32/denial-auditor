@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_011-n1",
+  "date": "2026-06-18",
+  "note_type": "initial_visit",
+  "author_role": "Primary Care Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nDate: 06/18/2026\nAuthor Role: Primary Care Physician\n\nHPI: The patient reports onset of low back pain on 06/17/2026. She describes aching pain localized to the lumbar region, worsening with flexion and prolonged sitting.\n\nExam: Lumbar spine inspection shows no deformity. Palpation reveals paraspinal tenderness at L4-L5. Straight leg raise is negative bilaterally. Neurologic exam demonstrates diminished ankle reflex and L5/S1-myotome weakness.\n\nAssessment: Acute lumbar radiculopathy, likely L5/S1.\n\nPlan: NSAID therapy was started on 06/18/2026 and will be continued as needed. Physical therapy is scheduled to begin on 06/23/2026 for up to 12 sessions. Advise activity modification. Re-evaluate in 2 weeks."
+ },
+ {
+  "note_id": "case_011-n2",
+  "date": "2026-07-28",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nDate: 07/28/2026\nAuthor Role: Physical Therapist\n\nHPI: Patient returns for completion of prescribed physical therapy course. She reports ongoing low back pain with intermittent flare-ups. NSAID therapy was started on 06/18/2026 and continued through 07/28/2026 with partial response. The patient denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.\n\nExam: On examination, there is diminished ankle reflex and L5/S1-myotome weakness consistent with radiculopathy. Lumbar paraspinal tenderness persists. Straight leg raise remains negative.\n\nAssessment: Persistent lumbar radiculopathy despite conservative measures.\n\nPlan: A course of physical therapy consisting of 10 sessions was conducted from 06/23/2026 to 07/28/2026, showing no improvement. Spine surgery referral is under consideration pending the MRI findings. Continue NSAIDs as needed and arrange lumbar MRI for further evaluation."
+ },
+ {
+  "note_id": "case_011-n3",
+  "date": "2026-08-02",
+  "note_type": "follow_up",
+  "author_role": "Primary Care Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nDate: 08/02/2026\nAuthor Role: Primary Care Physician\n\nHPI: The patient continues to experience low back pain with radiculopathy symptoms. She reports no signs of trauma, cancer, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic weakness.\n\nExam: Persistent paraspinal tenderness at L4-L5. Straight leg raise negative. Neurologic exam reveals diminished ankle reflex and L5/S1-myotome weakness.\n\nAssessment: Ongoing lumbar radiculopathy after failed conservative therapy.\n\nPlan: Conservative management included NSAID therapy from 06/18/2026 to 07/28/2026 with partial response and a physical therapy program of 10 sessions from 06/23/2026 to 07/28/2026 that yielded no improvement. The next step is to obtain a lumbar MRI scheduled for 08/09/2026, after which a spine surgery referral will be considered based on findings."
+ },
+ {
+  "note_id": "case_011-n4",
+  "date": "2026-08-09",
+  "note_type": "imaging_order",
+  "author_role": "Ordering Provider",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nDate: 08/09/2026\nAuthor Role: Ordering Provider\n\nHPI: Patient presents for follow\u2011up of persistent lumbar radiculopathy despite NSAID therapy and physical therapy. She reports no signs of trauma, cancer, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic weakness.\n\nExam: Continued diminished ankle reflex and L5/S1-myotome weakness; no new neurologic changes.\n\nAssessment: Lumbar radiculopathy, likely L5/S1, unresponsive to conservative care.\n\nPlan: Lumbar MRI of the spine is ordered today, 08/09/2026, to evaluate for structural correlates. Spine surgery referral is under consideration pending the MRI findings. A referral for spine surgery will be discussed after the MRI results are reviewed."
+ }
+]

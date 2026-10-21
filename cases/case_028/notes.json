@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_028-n1",
+  "date": "2026-06-08",
+  "note_type": "initial_visit",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient is a 55-year-old male with new-onset low back pain. Low back pain began on 06/07/2026. He denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, and progressive neurologic deficit. Neurologic examination shows normal lower-extremity strength, reflexes, and sensation. He started NSAIDs today (06/08/2026). Physical therapy is scheduled to begin on 06/12/2026. Assessment: Acute lumbar musculoligamentous strain. Plan: Continue NSAIDs, initiate physical therapy as planned, and re-evaluate in two weeks."
+ },
+ {
+  "note_id": "case_028-n2",
+  "date": "2026-07-24",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient reports completion of a prescribed NSAID course and a 12-session physical therapy program. NSAIDs were started on 06/08/2026 and continued through 07/24/2026 with partial response. Physical therapy was initiated on 06/12/2026, completed 12 sessions by 07/24/2026, and showed no improvement. He denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, and progressive neurologic deficit. Neurologic exam remains normal with symmetric strength and reflexes. Assessment: Chronic low back pain unresponsive to conservative measures. Plan: Obtain lumbar MRI to localize the level before a planned L4-L5 epidural steroid injection; continue activity modification and consider epidural steroid injection after imaging."
+ },
+ {
+  "note_id": "case_028-n3",
+  "date": "2026-07-29",
+  "note_type": "follow_up",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient presents for review after completing conservative therapy. To summarize, NSAIDs were started on 06/08/2026 and continued through 07/24/2026 with partial response; physical therapy was initiated on 06/12/2026, completed 12 sessions by 07/24/2026, and showed no improvement. He denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, and progressive neurologic deficit. Neurologic exam is unchanged. Assessment: Ongoing lumbar pain without radiculopathy. Plan: The plan is to obtain an MRI to localize the level before a planned L4-L5 epidural steroid injection."
+ },
+ {
+  "note_id": "case_028-n4",
+  "date": "2026-08-06",
+  "note_type": "imaging_order",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient returns with persistent low back pain. Lumbar MRI ordered today, 08/06/2026, to localize the symptomatic level prior to a planned L4-L5 epidural steroid injection. He continues to deny trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, and progressive neurologic deficit. Neurologic exam remains normal. Assessment: Awaiting imaging results. Plan: Await MRI, then proceed with epidural steroid injection as appropriate."
+ }
+]

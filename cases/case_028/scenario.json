@@ -1,0 +1,52 @@
+{
+ "case_id": "case_028",
+ "group": "G_plan_exclusion",
+ "patient_name": "Wren Fakeley",
+ "plan_type": "COMMERCIAL_ERISA",
+ "payer": "Pinecrest Employer Health Plan (synthetic)",
+ "practice_state": "UT",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-08-06",
+ "notice_date": "2026-08-23",
+ "carc": [
+  "96"
+ ],
+ "reason_text": "Non-covered: advanced imaging at an out-of-network freestanding facility is excluded under this plan.",
+ "facts": {
+  "age": 55,
+  "sex": "M",
+  "onset": "2026-06-07",
+  "treatments": [
+   {
+    "kind": "nsaids",
+    "start": "2026-06-08",
+    "end": "2026-07-24",
+    "sessions": null,
+    "response": "partial"
+   },
+   {
+    "kind": "physical_therapy",
+    "start": "2026-06-12",
+    "end": "2026-07-24",
+    "sessions": 12,
+    "response": "no_improvement"
+   }
+  ],
+  "red_flags": [],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "MRI to localize the level before a planned L4-L5 epidural steroid injection",
+  "surgery_or_injection_considered": true
+ },
+ "expected": {
+  "route": "not_winnable",
+  "verdict": "not_winnable",
+  "gold": {},
+  "why": "The plan excludes this service; medical necessity evidence won't change the outcome. Explain to the patient."
+ }
+}

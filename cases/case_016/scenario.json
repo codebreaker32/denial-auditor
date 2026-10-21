@@ -1,0 +1,60 @@
+{
+ "case_id": "case_016",
+ "group": "C_ma_xray_demand",
+ "patient_name": "Hayden Mockup",
+ "plan_type": "MA",
+ "payer": "Sunrise Senior Advantage (synthetic MA plan)",
+ "practice_state": "OR",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-07-27",
+ "notice_date": "2026-08-11",
+ "carc": [
+  "50"
+ ],
+ "reason_text": "Denied: plain radiographs of the lumbar spine are required before advanced imaging.",
+ "facts": {
+  "age": 79,
+  "sex": "M",
+  "onset": "2026-05-25",
+  "treatments": [
+   {
+    "kind": "nsaids",
+    "start": "2026-05-26",
+    "end": "2026-07-11",
+    "sessions": null,
+    "response": "partial"
+   },
+   {
+    "kind": "physical_therapy",
+    "start": "2026-05-30",
+    "end": "2026-07-11",
+    "sessions": 12,
+    "response": "no_improvement"
+   }
+  ],
+  "red_flags": [],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "Spine surgery referral is under consideration pending MRI findings",
+  "surgery_or_injection_considered": true
+ },
+ "expected": {
+  "route": "clinical_review",
+  "verdict": "appeal",
+  "gold": {
+   "G1_red_flag_indication": "not_applicable",
+   "G2_red_flag_list": "not_applicable",
+   "G3_first_month": "met",
+   "G4_four_weeks_conservative": "met",
+   "G5_ddd_hnp_no_surgery": "met",
+   "G6_findings_affect_treatment": "met",
+   "G7_duplication": "met"
+  },
+  "why": "L34220 does not require prior radiographs; all of its criteria are met. MA plans must follow Medicare coverage criteria."
+ }
+}

@@ -13,11 +13,11 @@ Early-stage Python project for the Nebius x NVIDIA Global AI Hackathon (https://
 - A human always sends the appeal; the tool never submits anything.
 - Never claim inputs are "never trained on" until Token Factory's data terms are verified.
 - Policy sources: the CMS Coverage API is primary (versioned by effective date; licence token accepted by the user for personal, non-commercial use). The commercial payer is **Aetna CPB 0236** (HTML, a snapshot at fetch time). **UHC was dropped**, because its imaging criteria are eviCore text. **Never send eviCore, Carelon or ACR text to a model or store it**, because their terms forbid it; link to them by name only (`sources.assert_allowed`).
-- Hosting: the Streamlit app runs on **AWS Lightsail** (AWS CLI profile `aman`, deploy region `us-east-1`). The policy-change (drift) watcher runs as a **nightly cron job on the same Lightsail server**, with an LLM cap of $0. There are no Nebius AI Cloud credits (Token Factory only), so nothing runs on Nebius Serverless. The public demo serves precomputed cases; live runs need a passcode and are rate-limited.
+- Hosting: the Streamlit app runs on **AWS Lightsail** (deploy with AWS CLI profile **`aman-deploy`**: IAM user `denial-auditor-deploy`, Lightsail + read-only cost access only, region `us-east-1`; profile `aman` is the root account, so use it only for account admin). The policy-change (drift) watcher runs as a **nightly cron job on the same Lightsail server**, with an LLM cap of $0. There are no Nebius AI Cloud credits (Token Factory only), so nothing runs on Nebius Serverless. The public demo serves precomputed cases; live runs need a passcode and are rate-limited.
 - CPT: show bare codes only, never the AMA descriptors, and include the AMA attribution line.
 - The build plan and day-by-day schedule are in `docs/plan.md`.
 
-**Implementation was approved on 2026-10-20 against `docs/plan.md`** (user rule: no implementation without the user's go-ahead). Stay within the plan; ask before any change to scope, product, hosting or budget.
+**Implementation was approved on 2026-10-20 against `docs/plan.md`** (user rule: no implementation without the user's go-ahead). Stay within the plan; ask before any change to scope, product, hosting or budget. **Keep working through the plan without stopping for check-ins until the user says "wrap up"** (user rule); still ask before decisions that need them.
 
 **Repo:** github.com/codebreaker32/denial-auditor. Team **Fine Print**: Aman Bihari, Bhawna. **Keep the repo PRIVATE until the user explicitly says to make it public** (user rule). The hackathon requires a public repo at submission, so remind the user before the deadline, but never change the visibility yourself.
 

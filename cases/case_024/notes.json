@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_024-n1",
+  "date": "2026-07-03",
+  "note_type": "initial_visit",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient is a 78-year-old male presenting with new-onset low back pain. Low back pain began on 07/02/2026. He describes aching discomfort in the lumbar region without radiation. NSAIDs were initiated today. Denies fever, weight loss, or bowel/bladder changes. On exam, lumbar spine shows tenderness to palpation; lower-extremity strength, reflexes, and sensation are intact. Assessment: Acute lumbar strain, likely degenerative. Plan: Continue NSAIDs, consider physical therapy, return in 2 weeks or sooner if worsening."
+ },
+ {
+  "note_id": "case_024-n2",
+  "date": "2026-07-22",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nFollow-up note for physical therapy. The patient reports ongoing low back pain with partial relief from medications. NSAIDs were started on 07/03/2026 and continued through 07/22/2026 with partial relief. Physical therapy was initiated on 07/08/2026, consisting of 4 sessions, and concluded on 07/22/2026 without improvement. He denies new neurologic symptoms. Exam: lumbar paraspinal tenderness, full range of motion, strength 5/5 bilaterally, reflexes 2+, sensation normal. Assessment: Persistent lumbargia despite NSAIDs and a course of PT. Plan: Discuss advanced imaging; consider lumbar MRI if symptoms persist."
+ },
+ {
+  "note_id": "case_024-n3",
+  "date": "2026-07-24",
+  "note_type": "follow_up",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nThe patient returns for evaluation after completing conservative therapy. He continues to experience low back pain without improvement. The patient denies any red flag symptoms such as fever, weight loss, trauma, cancer, bowel or bladder dysfunction, saddle anesthesia, or progressive neurologic deficit. He completed a course of NSAIDs from 07/03/2026 to 07/22/2026 with partial relief and attended 4 sessions of physical therapy from 07/08/2026 to 07/22/2026 without improvement. A lumbar MRI is planned to further evaluate the persistent low back pain. Exam: unchanged from prior visit, non-focal neurologic exam. Assessment: Chronic low back pain refractory to initial conservative management. Plan: Order lumbar MRI today; await results before considering spine surgery referral."
+ },
+ {
+  "note_id": "case_024-n4",
+  "date": "2026-07-25",
+  "note_type": "imaging_order",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nToday a lumbar MRI was ordered for evaluation of refractory low back pain. Spine surgery referral is under consideration pending MRI findings. The patient remains without red flag symptoms and continues to deny fever, weight loss, or neurologic deficit. Exam: stable. Assessment: Awaiting MRI results to guide further management. Plan: Review imaging once available and discuss surgical consultation if indicated."
+ }
+]

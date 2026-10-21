@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_010-n1",
+  "date": "2026-06-14",
+  "note_type": "initial_visit",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: The patient reports onset of low back pain on 06/13/2026. She began NSAID therapy today, 06/14/2026, for pain relief. She denies any red\u2011flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.\nExam: Lumbar spine inspection shows no deformity. Palpation reveals mild paraspinal tenderness. Motor strength 5/5 bilaterally. Reflexes 2+ at knees and ankles. Sensation intact to light touch.\nAssessment: Acute lumbar musculoligamentous strain, possible early radiculopathy.\nPlan: Continue NSAIDs as needed. Initiate physical therapy starting 06/20/2026 (two times per week). Return in 4 weeks for reassessment; if symptoms persist, obtain lumbar MRI."
+ },
+ {
+  "note_id": "case_010-n2",
+  "date": "2026-07-25",
+  "note_type": "pt_note",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: The patient returns after completing a course of NSAID therapy and physical therapy. NSAID therapy was started on 06/14/2026 and continued through 07/25/2026 with partial response. Physical therapy was initiated on 06/20/2026, consisting of 10 sessions completed by 07/25/2026, with no improvement in symptoms. She reports ongoing low back pain radiating to the left buttock and posterior thigh.\nExam: Lumbar spine tenderness persists. Straight leg raise positive at 40 degrees on left. Motor strength: left ankle dorsiflexion 4/5, otherwise 5/5. Reflexes: left ankle reflex diminished, patellar reflexes 2+. Sensation decreased in L5 distribution.\nAssessment: Persistent lumbar radiculopathy (L5/S1) despite conservative therapy.\nPlan: Obtain lumbar MRI to further evaluate structural correlates; continue NSAIDs for symptomatic relief; consider epidural steroid injection pending imaging."
+ },
+ {
+  "note_id": "case_010-n3",
+  "date": "2026-07-30",
+  "note_type": "follow_up",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: The patient awaits lumbar MRI scheduled for 07/31/2026. Her low back pain with radicular symptoms remains unchanged since last visit. She completed a course of NSAID therapy from 06/14/2026 to 07/25/2026 with partial response, and finished 10 sessions of physical therapy from 06/20/2026 to 07/25/2026 without symptom improvement.\nExam: On examination, she exhibits diminished ankle reflex and L5/S1-distributed weakness consistent with radiculopathy. Motor strength 4/5 in left great toe extension, otherwise 5/5. Sensation decreased over lateral foot.\nAssessment: Chronic low back pain with L5/S1 radiculopathy refractory to conservative management.\nPlan: Proceed with lumbar MRI as ordered; await results to guide next steps, which may include epidural steroid injection or surgical referral."
+ },
+ {
+  "note_id": "case_010-n4",
+  "date": "2026-07-31",
+  "note_type": "imaging_order",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: The patient undergoes lumbar MRI today, 07/31/2026, to evaluate persistent radiculopathy.\nExam: No acute changes; neurologic findings as previously noted.\nAssessment: Awaiting MRI results to confirm lumbar pathology.\nPlan: The results of the lumbar MRI will determine whether an epidural steroid injection or surgical referral is pursued."
+ }
+]

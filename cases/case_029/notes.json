@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_029-n1",
+  "date": "2026-05-21",
+  "note_type": "initial_visit",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient is a 40-year-old female presenting with low back pain. The patient reports that her low back pain started on 05/20/2026. She describes aching pain localized to the lumbar region, worsened with prolonged sitting and bending. She denies trauma, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits. On examination, she has normal lower-extremity strength, reflexes, and sensation. Physical therapy is recommended. Assessment: acute lumbar strain. Plan: Continue NSAIDs, start physical therapy, follow up in two weeks."
+ },
+ {
+  "note_id": "case_029-n2",
+  "date": "2026-07-05",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nFollow-up note for physical therapy completion. The patient reports ongoing low back pain despite treatment. She was prescribed NSAIDs starting 05/21/2026 and continuing through 07/05/2026, which provided partial relief. Physical therapy was initiated on 05/24/2026, consisting of 12 sessions through 07/05/2026, with no improvement noted. She denies trauma, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits. Examination shows normal lower-extremity strength, reflexes, and sensation. Assessment: chronic low back pain unresponsive to NSAIDs and physical therapy. Plan: Consider advanced imaging; discuss epidural steroid injection vs surgical referral pending MRI results."
+ },
+ {
+  "note_id": "case_029-n3",
+  "date": "2026-07-10",
+  "note_type": "follow_up",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nFollow-up visit after completion of conservative therapy. The patient reports persistent low back pain. She was prescribed NSAIDs starting 05/21/2026 and continuing through 07/05/2026, which provided partial relief. Physical therapy was initiated on 05/24/2026, consisting of 12 sessions through 07/05/2026, with no improvement noted. She denies trauma, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits. Neurologic exam remains normal. Assessment: refractory lumbar degenerative disc disease. Plan: The plan is that MRI results will determine whether she proceeds to an epidural steroid injection or surgical referral. She will obtain lumbar MRI to further evaluate."
+ },
+ {
+  "note_id": "case_029-n4",
+  "date": "2026-08-06",
+  "note_type": "imaging_order",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nOrder note: Lumbar MRI requested. The patient has undergone a full course of conservative management including NSAIDs from 05/21/2026 to 07/05/2026 with partial relief and physical therapy from 05/24/2026 to 07/05/2026 (12 sessions) with no improvement. She denies trauma, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits. Neurologic exam is normal. Assessment: Persistent low back pain unresponsive to conservative measures. Plan: Order lumbar spine MRI without contrast; results will guide decision between epidural steroid injection and surgical referral."
+ }
+]

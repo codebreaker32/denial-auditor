@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_030-n1",
+  "date": "2026-05-13",
+  "note_type": "initial_visit",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nLow back pain began on 05/12/2026. She describes diffuse lumbar discomfort without radicular symptoms. Denies trauma, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive weakness. On exam, lumbar paraspinal tenderness, normal lower-extremity strength, reflexes, and sensation. Assessment: mechanical low back pain. Plan: Initiate NSAID therapy today, start physical therapy referral for 12 sessions, advise activity modification, and reassess in two weeks."
+ },
+ {
+  "note_id": "case_030-n2",
+  "date": "2026-06-30",
+  "note_type": "pt_note",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient returns for follow-up after completing prescribed therapies. NSAID therapy was started on 05/13/2026 and continued through 06/30/2026 with partial response. Physical therapy consisting of 12 sessions was initiated on 05/19/2026 and completed on 06/30/2026, showing no improvement. Lumbar exam reveals mild paraspinal tenderness, normal strength, reflexes, and sensation. Assessment: persistent low back pain despite conservative measures. Plan: Continue activity modification, consider lumbar MRI if symptoms persist."
+ },
+ {
+  "note_id": "case_030-n3",
+  "date": "2026-07-05",
+  "note_type": "follow_up",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nAt this visit, the patient reports ongoing low back pain without improvement. The patient denies trauma, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, and progressive neurologic deficits. Conservative treatment included NSAID therapy from 05/13/2026 to 06/30/2026 with partial response and physical therapy of 12 sessions from 05/19/2026 to 06/30/2026 with no improvement. Assessment: chronic low back pain refractory to initial conservative care. Plan: Obtain lumbar MRI to further evaluate; based on results, consider epidural steroid injection or surgical referral."
+ },
+ {
+  "note_id": "case_030-n4",
+  "date": "2026-08-05",
+  "note_type": "imaging_order",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nToday a lumbar MRI is ordered to evaluate persistent low back pain. MRI results will decide between epidural steroid injection and surgical referral. Neurologic exam remains normal. Plan: Schedule MRI, review results in one week, and discuss further interventions based on findings."
+ }
+]

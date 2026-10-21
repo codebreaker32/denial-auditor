@@ -1,0 +1,23 @@
+[
+ {
+  "note_id": "case_019-n1",
+  "date": "2026-07-25",
+  "note_type": "initial_visit",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Logan Notreal, 69-year-old female.\nHPI: Patient reports onset of low back pain on 07/24/2026. She describes constant aching pain in the lumbar region without radiation. She reports new-onset saddle anesthesia. She also notes recent onset of bladder dysfunction. She denies fever, weight loss, or trauma.\nROS: otherwise negative.\nVital signs: stable.\nGeneral: well-appearing but in mild discomfort.\nSpine: tenderness over lumbar paraspinals, range of motion limited due to pain.\nNeuro: Strength 5/5 bilaterally in upper extremities; lower extremity strength 5/5 hip flexion, 4/5 knee extension, 4/5 ankle dorsiflexion; right ankle jerk is 1+ (hypoactive). Sensation decreased in saddle area. Rectal tone reduced.\nAssessment: Low back pain (\\\"M54.50\\\") with concerning features for possible cauda equina syndrome given saddle anesthesia and bladder dysfunction.\nPlan: Continue close monitoring; advise patient to return immediately for worsening symptoms; no conservative treatment has been initiated; obtain urgent lumbar MRI to rule out cauda equina syndrome."
+ },
+ {
+  "note_id": "case_019-n2",
+  "date": "2026-07-28",
+  "note_type": "follow_up",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Logan Notreal, 69-year-old female.\nHPI: Low back pain ongoing since 07/24/2026. She continues to report saddle anesthesia and recent onset of bladder dysfunction.\nReview: Denies fever, chills, weight loss.\nVitals: stable.\nExam: Similar to prior; right ankle jerk remains 1+. Sensory deficit in saddle area persists.\nAssessment: Persistent low back pain with red flags suggestive of cauda equina syndrome.\nPlan: No conservative treatment has been initiated to date; continue to monitor closely; obtain urgent lumbar MRI to rule out cauda equina syndrome."
+ },
+ {
+  "note_id": "case_019-n3",
+  "date": "2026-08-02",
+  "note_type": "imaging_order",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Logan Notreal, 69-year-old female.\nHPI: Low back pain started 07/24/2026; persistent saddle anesthesia and bladder dysfunction.\nExam: As prior; right ankle jerk 1+; saddle anesthesia; decreased rectal tone.\nAssessment: High suspicion for cauda equina syndrome.\nPlan: Obtain urgent lumbar MRI to rule out cauda equina syndrome."
+ }
+]

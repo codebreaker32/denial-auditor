@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_022-n1",
+  "date": "2026-07-16",
+  "note_type": "initial_visit",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient is a 79-year-old female presenting with low back pain. Low back pain began on 07/15/2026. She describes aching pain in the lumbar region without radicular symptoms. NSAIDs were started today, 07/16/2026. She denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficits. Plan to initiate physical therapy in the coming days and reassess in one week."
+ },
+ {
+  "note_id": "case_022-n2",
+  "date": "2026-08-02",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nFollow-up visit on 08/02/2026. Patient reports continued low back pain. NSAIDs were started on 07/16/2026 and continued through 08/02/2026 with partial relief. Physical therapy was initiated on 07/19/2026, consisting of 4 sessions through 08/02/2026, with no improvement noted. She denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficits. Plan to consider further imaging if symptoms persist."
+ },
+ {
+  "note_id": "case_022-n3",
+  "date": "2026-08-07",
+  "note_type": "follow_up",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nVisit on 08/07/2026. Patient continues to experience low back pain despite prior interventions. NSAIDs were started on 07/16/2026 and continued through 08/02/2026 with partial relief. Physical therapy was initiated on 07/19/2026, consisting of 4 sessions through 08/02/2026, with no improvement noted. She denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficits. The plan is to obtain a lumbar MRI to further evaluate; MRI results will decide between epidural steroid injection and surgical referral."
+ },
+ {
+  "note_id": "case_022-n4",
+  "date": "2026-08-09",
+  "note_type": "imaging_order",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nImaging order placed on 08/09/2026. Lumbar MRI ordered today to evaluate persistent low back pain. Patient has completed NSAIDs from 07/16/2026 to 08/02/2026 with partial relief and physical therapy from 07/19/2026 to 08/02/2026, 4 sessions, with no improvement. She denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficits. MRI results will decide between epidural steroid injection and surgical referral."
+ }
+]

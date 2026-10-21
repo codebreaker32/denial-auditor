@@ -1,0 +1,60 @@
+{
+ "case_id": "case_023",
+ "group": "E_ma_too_early",
+ "patient_name": "Peyton Fictive",
+ "plan_type": "MA",
+ "payer": "Evergreen Medicare Advantage (synthetic)",
+ "practice_state": "OR",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-07-26",
+ "notice_date": "2026-08-06",
+ "carc": [
+  "50"
+ ],
+ "reason_text": "Not medically necessary. Insufficient trial of conservative treatment.",
+ "facts": {
+  "age": 69,
+  "sex": "F",
+  "onset": "2026-07-02",
+  "treatments": [
+   {
+    "kind": "nsaids",
+    "start": "2026-07-03",
+    "end": "2026-07-23",
+    "sessions": null,
+    "response": "partial"
+   },
+   {
+    "kind": "physical_therapy",
+    "start": "2026-07-09",
+    "end": "2026-07-23",
+    "sessions": 4,
+    "response": "no_improvement"
+   }
+  ],
+  "red_flags": [],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "MRI results will decide between epidural steroid injection and surgical referral",
+  "surgery_or_injection_considered": true
+ },
+ "expected": {
+  "route": "clinical_review",
+  "verdict": "dont_appeal",
+  "gold": {
+   "G1_red_flag_indication": "not_applicable",
+   "G2_red_flag_list": "not_applicable",
+   "G3_first_month": "not_met",
+   "G4_four_weeks_conservative": "not_met",
+   "G5_ddd_hnp_no_surgery": "met",
+   "G6_findings_affect_treatment": "met",
+   "G7_duplication": "met"
+  },
+  "why": "Symptoms under one month and under four weeks of conservative care, with no red flags. The denial is consistent with L34220."
+ }
+}

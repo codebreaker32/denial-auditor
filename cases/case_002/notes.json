@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_002-n1",
+  "date": "2026-05-08",
+  "note_type": "initial_visit",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient reports low back pain onset on 05/07/2026. She reports pain radiating down one leg, but objective neurologic findings are absent. She denies any red\u2011flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.\nExam: Lower\u2011extremity strength, reflexes, and sensation are normal. No spinal tenderness or muscle spasm noted.\nAssessment: Lumbar radiculopathy, unspecified (M54.50).\nPlan: Prescribed NSAIDs starting today. Physical therapy has been referred; patient to initiate therapy as soon as scheduling permits. Return for evaluation in two weeks."
+ },
+ {
+  "note_id": "case_002-n2",
+  "date": "2026-06-14",
+  "note_type": "pt_note",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns for follow\u2011up after completing prescribed NSAIDs and physical therapy. She reports ongoing low back pain with radicular component.\nExam: No change in neurologic status; strength remains 5/5 bilaterally, reflexes 2+, sensation intact.\nAssessment: Persistent lumbar radiculopathy despite conservative therapy.\nPlan: NSAIDs were started on 05/08/2026 and continued through 06/14/2026 with partial response. Physical therapy was initiated on 05/10/2026, conducted for 10 sessions, and ended on 06/14/2026 with no improvement. Consider next steps including possible MRI."
+ },
+ {
+  "note_id": "case_002-n3",
+  "date": "2026-06-19",
+  "note_type": "follow_up",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient continues to experience low back pain with leg radiation. She has completed both NSAIDs and physical therapy courses.\nExam: Neurologic exam unchanged; lower\u2011extremity strength, reflexes, and sensation remain normal.\nAssessment: Ongoing radiculopathy refractory to initial conservative management.\nPlan: NSAIDs were started on 05/08/2026 and continued through 06/14/2026 with partial response. Physical therapy was initiated on 05/10/2026, conducted for 10 sessions, and ended on 06/14/2026 with no improvement. MRI results will determine whether she proceeds to an epidural steroid injection or surgical referral."
+ },
+ {
+  "note_id": "case_002-n4",
+  "date": "2026-08-14",
+  "note_type": "imaging_order",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient presents with persistent low back pain and radiculopathy after failing NSAIDs and a full course of physical therapy.\nExam: Neurologic examination remains normal without focal deficits.\nAssessment: Lumbar radiculopathy, unspecified (M54.50), unresponsive to conservative therapy.\nPlan: Ordered lumbar MRI of the spine to be performed today. Results will guide further management, which may include epidural steroid injection or surgical consultation."
+ }
+]

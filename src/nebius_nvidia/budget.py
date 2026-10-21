@@ -62,6 +62,10 @@ def _locked_json(path: str, default: dict):
             f.seek(0)
             f.truncate()
             json.dump(data, f, indent=2)
+            # Flush before unlocking: otherwise the buffered write lands after the lock is
+            # released, and a concurrent reader sees an empty file and resets the ledger.
+            f.flush()
+            os.fsync(f.fileno())
         finally:
             fcntl.flock(f, fcntl.LOCK_UN)
 

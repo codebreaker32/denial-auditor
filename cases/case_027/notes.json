@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_027-n1",
+  "date": "2026-05-24",
+  "note_type": "initial_visit",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient is a 73-year-old female presenting with low back pain.\nHPI: She reports onset of low back pain on 05/23/2026. She describes the pain as diffuse, achy, worsened with prolonged sitting and relieved by lying down. She denies fever, weight loss, trauma, cancer, bowel or bladder dysfunction, saddle anesthesia, or progressive neurologic deficits.\nShe started NSAIDs today, 05/24/2026, for pain relief.\nPhysical examination: Tenderness over lumbar paraspinal muscles, normal range of motion. Neurologic exam shows normal lower-extremity strength, reflexes, and sensation.\nAssessment: Acute low back pain, likely musculoskeletal.\nPlan: Continue NSAIDs as needed. Consider initiating physical therapy. Return to clinic in 2 weeks or sooner if symptoms worsen."
+ },
+ {
+  "note_id": "case_027-n2",
+  "date": "2026-07-07",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient returns for follow-up of low back pain.\nHPI: She reports ongoing low back pain with partial relief from NSAIDs. She completed a course of physical therapy today.\nShe denies fever, weight loss, trauma, cancer, bowel or bladder dysfunction, saddle anesthesia, or progressive neurologic deficits.\nTreatment summary: NSAIDs were started on 05/24/2026 and discontinued on 07/07/2026 with a partial response. Physical therapy was initiated on 05/26/2026, completed 12 sessions, and ended on 07/07/2026 with no improvement.\nExam: Lumbar spine tenderness persists; neurologic exam remains normal lower-extremity strength, reflexes, and sensation.\nAssessment: Chronic low back pain with inadequate response to conservative measures.\nPlan: Continue NSAIDs for symptomatic relief. Discuss possible advanced imaging; spine surgery referral is under consideration pending MRI findings. Re-evaluate in 4 weeks."
+ },
+ {
+  "note_id": "case_027-n3",
+  "date": "2026-07-12",
+  "note_type": "follow_up",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient returns for follow-up after completing conservative therapy.\nHPI: She reports persistent low back pain despite NSAIDs and physical therapy. She recalls onset of low back pain on 05/23/2026.\nShe denies fever, weight loss, trauma, cancer, bowel or bladder dysfunction, saddle anesthesia, or progressive neurologic deficits.\nConservative treatment course: NSAIDs were started on 05/24/2026 and discontinued on 07/07/2026 with a partial response. Physical therapy was initiated on 05/26/2026, completed 12 sessions, and ended on 07/07/2026 with no improvement.\nPlan: Continue NSAIDs as needed. Obtain lumbar MRI to further evaluate; spine surgery referral is under consideration pending MRI findings. Return in 6 weeks or sooner if symptoms change."
+ },
+ {
+  "note_id": "case_027-n4",
+  "date": "2026-08-08",
+  "note_type": "imaging_order",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient returns for evaluation of persistent low back pain.\nHPI: She reports onset of low back pain on 05/23/2026. She describes ongoing discomfort despite NSAIDs and physical therapy.\nShe denies fever, weight loss, trauma, cancer, bowel or bladder dysfunction, saddle anesthesia, or progressive neurologic deficits.\nSummary of conservative treatment: NSAIDs were started on 05/24/2026 and discontinued on 07/07/2026 with a partial response. Physical therapy was initiated on 05/26/2026, completed 12 sessions, and ended on 07/07/2026 with no improvement.\nAssessment: Chronic low back pain unresponsive to conservative management.\nPlan: Order lumbar MRI of the spine today, 08/08/2026. Spine surgery referral is under consideration pending MRI findings. Continue NSAIDs for symptom control. Follow up in 2 weeks after imaging."
+ }
+]

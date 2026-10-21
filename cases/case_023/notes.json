@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_023-n1",
+  "date": "2026-07-03",
+  "note_type": "initial_visit",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient is a 69\u2011year\u2011old female presenting with new onset low back pain. She reports onset of low back pain on 07/02/2026. She denies any red\u2011flag symptoms including trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit. Neurologic exam shows normal lower\u2011extremity strength, reflexes, and sensation. No radiculopathy noted. Assessment: nonspecific low back pain. Plan: Initiate NSAID therapy today; refer for physical therapy evaluation; advise activity modification; follow\u2011up in 2 weeks."
+ },
+ {
+  "note_id": "case_023-n2",
+  "date": "2026-07-23",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPt seen for lumbar physical therapy. Patient reports low back pain ongoing. NSAID therapy was started on 07/03/2026 and continued through 07/23/2026, resulting in partial relief. Physical therapy was initiated on 07/09/2026, consisting of 4 sessions, and concluded on 07/23/2026 with no improvement in pain or function. Lumbar paraspinal tenderness persists; range of motion limited due to discomfort. Neurologic re\u2011exam remains normal. Assessment: persistent mechanical low back pain despite NSAIDs and PT. Plan: Continue conservative management; consider advanced imaging if symptoms persist."
+ },
+ {
+  "note_id": "case_023-n3",
+  "date": "2026-07-25",
+  "note_type": "follow_up",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nFollow\u2011up visit for persistent low back pain. Patient denies red\u2011flag symptoms. Neurologic exam unchanged, normal. To summarize treatment history: NSAID therapy was started on 07/03/2026 and continued through 07/23/2026, resulting in partial relief. Physical therapy was initiated on 07/09/2026, consisting of 4 sessions, and concluded on 07/23/2026 with no improvement. Despite these interventions, pain remains moderate. Assessment: chronic low back pain unresponsive to initial conservative measures. Plan: Obtain lumbar MRI to delineate anatomic pathology; subsequent management will depend on MRI findings."
+ },
+ {
+  "note_id": "case_023-n4",
+  "date": "2026-07-26",
+  "note_type": "imaging_order",
+  "author_role": "Ordering Provider",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nImaging order placed for lumbar MRI. Patient is a 69\u2011year\u2011old female with low back pain onset 07/02/2026, failed NSAIDs and PT. She denies red\u2011flag symptoms. Neurologic exam normal. Assessment: indeterminate low back pain requiring advanced imaging. Plan: MRI results will decide between epidural steroid injection and surgical referral."
+ }
+]

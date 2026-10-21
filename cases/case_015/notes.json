@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_015-n1",
+  "date": "2026-05-05",
+  "note_type": "initial_visit",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: He reports that his low back pain began on 05/04/2026. He describes moderate lumbar discomfort radiating slightly to the buttocks, worsened by prolonged sitting. He started NSAIDs today for pain relief.\nExam: Lower extremity strength 5/5, reflexes 2+, sensation intact. No spinal tenderness or muscle spasm noted.\nAssessment: Acute low back pain, likely muscular/lumbar strain.\nPlan: Continue NSAIDs as needed. Initiate physical therapy twice weekly. Return in two weeks for follow\u2011up."
+ },
+ {
+  "note_id": "case_015-n2",
+  "date": "2026-06-15",
+  "note_type": "pt_note",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: The patient returns after two weeks of NSAIDs and physical therapy. He notes mild improvement with NSAIDs but persistent discomfort.\nExam: Strength remains 5/5, reflexes normal, no neurologic deficits.\nAssessment: Subacute low back pain with partial response to NSAIDs and no improvement after physical therapy.\nPlan: NSAIDs were started on 05/05/2026 and continued through 06/15/2026 with partial relief. He completed a course of physical therapy consisting of 10 sessions that started on 05/11/2026 and ended on 06/15/2026, with no improvement in symptoms. Consider obtaining lumbar MRI to further evaluate."
+ },
+ {
+  "note_id": "case_015-n3",
+  "date": "2026-06-20",
+  "note_type": "follow_up",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient reports ongoing low back pain despite completed treatments. Denies any new symptoms.\nExam: Neuro exam normal lower-extremity strength, reflexes and sensation.\nAssessment: Persistent low back pain without red flags.\nPlan: He denies any red flag symptoms including trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit. Continue activity modification and consider MRI if symptoms persist."
+ },
+ {
+  "note_id": "case_015-n4",
+  "date": "2026-07-25",
+  "note_type": "imaging_order",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient continues to experience lumbar pain; prior conservative measures have failed.\nExam: Unchanged neurologic exam.\nAssessment: Low back pain refractory to NSAIDs and physical therapy, needing further anatomic localization.\nPlan: The MRI will be used to localize the level prior to a planned L4-L5 epidural steroid injection. Schedule lumbar MRI today."
+ }
+]

@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_006-n1",
+  "date": "2026-05-09",
+  "note_type": "initial_visit",
+  "author_role": "Clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nQuinn Mockdata is a 79-year-old female presenting with new-onset low back pain. She reports onset of low back pain on 05/08/2026. She describes pain radiating down her left leg, without any weakness or bowel/bladder changes. She denies fever, weight loss, trauma, or cancer history. On exam, she has normal lower-extremity strength, reflexes, and sensation; no neurologic deficit. Assessment: Lumbar radiculopathy suspected. Plan: Start ibuprofen (NSAID) today, 05/09/2026; prescribe physical therapy to begin on 05/12/2026; return in 4 weeks for follow\u2011up."
+ },
+ {
+  "note_id": "case_006-n2",
+  "date": "2026-06-16",
+  "note_type": "pt_note",
+  "author_role": "Clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nQuinn Mockdata returns for follow\u2011up after completing a course of NSAIDs and physical therapy. NSAIDs were started on 05/09/2026 and continued through 06/16/2026 with partial relief. She attended 10 sessions of physical therapy from 05/12/2026 to 06/16/2026 without improvement. She reports pain radiating down one leg, no objective findings. She denies any red flags such as trauma, cancer, fever, weight loss, bowel or bladder symptoms, saddle anesthesia, or progressive neurologic deficit. Examination shows normal lower-extremity strength, reflexes, and sensation. Assessment: Persistent lumbar radiculopathy despite conservative measures. Plan: Continue symptom monitoring; obtain lumbar MRI if symptoms persist; discuss possible spine surgery referral pending imaging."
+ },
+ {
+  "note_id": "case_006-n3",
+  "date": "2026-06-21",
+  "note_type": "follow_up",
+  "author_role": "Clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nQuinn Mockdata presents for routine follow\u2011up. NSAIDs were started on 05/09/2026 and continued through 06/16/2026 with partial relief. She attended 10 sessions of physical therapy from 05/12/2026 to 06/16/2026 without improvement. She reports pain radiating down one leg, no objective findings. She denies any red flags such as trauma, cancer, fever, weight loss, bowel or bladder symptoms, saddle anesthesia, or progressive neurologic deficit. Examination remains normal. Assessment: Ongoing lumbar radiculopathy unresponsive to conservative therapy. Plan: Continue observation; obtain lumbar MRI if symptoms do not improve; consider spine surgery referral pending imaging."
+ },
+ {
+  "note_id": "case_006-n4",
+  "date": "2026-08-11",
+  "note_type": "imaging_order",
+  "author_role": "Clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nQuinn Mockdata returns for evaluation after persistent low back pain with radiculopathy. She reports pain radiating down one leg, no objective findings. She denies any red flags such as trauma, cancer, fever, weight loss, bowel or bladder symptoms, saddle anesthesia, or progressive neurologic deficit. Neurologic exam shows normal lower-extremity strength, reflexes, and sensation. Assessment: Lumbar radiculopathy refractory to NSAIDs and physical therapy. Plan: Order lumbar MRI today; Spine surgery referral is under consideration pending MRI findings."
+ }
+]

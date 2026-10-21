@@ -1,0 +1,60 @@
+{
+ "case_id": "case_024",
+ "group": "E_ma_too_early",
+ "patient_name": "Remy Draftwell",
+ "plan_type": "MA",
+ "payer": "Sunrise Senior Advantage (synthetic MA plan)",
+ "practice_state": "CA",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-07-25",
+ "notice_date": "2026-08-06",
+ "carc": [
+  "50"
+ ],
+ "reason_text": "Not medically necessary. Insufficient trial of conservative treatment.",
+ "facts": {
+  "age": 78,
+  "sex": "M",
+  "onset": "2026-07-02",
+  "treatments": [
+   {
+    "kind": "nsaids",
+    "start": "2026-07-03",
+    "end": "2026-07-22",
+    "sessions": null,
+    "response": "partial"
+   },
+   {
+    "kind": "physical_therapy",
+    "start": "2026-07-08",
+    "end": "2026-07-22",
+    "sessions": 4,
+    "response": "no_improvement"
+   }
+  ],
+  "red_flags": [],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "Spine surgery referral is under consideration pending MRI findings",
+  "surgery_or_injection_considered": true
+ },
+ "expected": {
+  "route": "clinical_review",
+  "verdict": "dont_appeal",
+  "gold": {
+   "G1_red_flag_indication": "not_applicable",
+   "G2_red_flag_list": "not_applicable",
+   "G3_first_month": "not_met",
+   "G4_four_weeks_conservative": "not_met",
+   "G5_ddd_hnp_no_surgery": "met",
+   "G6_findings_affect_treatment": "met",
+   "G7_duplication": "met"
+  },
+  "why": "Symptoms under one month and under four weeks of conservative care, with no red flags. The denial is consistent with L34220."
+ }
+}

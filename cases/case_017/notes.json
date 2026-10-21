@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_017-n1",
+  "date": "2026-05-12",
+  "note_type": "initial_visit",
+  "author_role": "Provider",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient is a 67-year-old male presenting with new-onset low back pain that began on 05/11/2026. He describes aching discomfort in the lumbar region without radiation. The patient denies fever, weight loss, trauma, cancer history, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits. Neurologic examination shows normal strength, reflexes, and sensation in the lower extremities. Assessment: Nonspecific low back pain. Plan: Initiate ibuprofen 600 mg PO TID starting today; advise activity modification; consider referral to physical therapy if symptoms persist; return in 2 weeks."
+ },
+ {
+  "note_id": "case_017-n2",
+  "date": "2026-06-22",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient attended physical therapy session #10 today. Physical therapy was initiated on 05/18/2026, completed 10 sessions, and ended on 06/22/2026 with no improvement. He reports ongoing low back pain despite therapy. NSAIDs initiated on 05/12/2026 were continued through today with partial symptom relief. Neurologic exam remains normal. Assessment: Persistent low back pain despite therapy. Plan: Notify referring provider; advise continuation of NSAIDs; schedule follow-up for consideration of lumbar MRI."
+ },
+ {
+  "note_id": "case_017-n3",
+  "date": "2026-06-27",
+  "note_type": "follow_up",
+  "author_role": "Provider",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient returns for follow-up on 06/27/2026. He completed a course of NSAIDs started on 05/12/2026 and discontinued on 06/22/2026 with partial response. Physical therapy was initiated on 05/18/2026, completed 10 sessions, and ended on 06/22/2026 with no improvement. He continues to experience low back pain limiting prolonged sitting and standing. Neurologic exam remains normal without radiculopathy. Assessment: Low back pain inadequately controlled by NSAIDs and physical therapy. Plan: Obtain lumbar MRI to further evaluate structural pathology; results will guide decision between epidural steroid injection and surgical referral."
+ },
+ {
+  "note_id": "case_017-n4",
+  "date": "2026-08-04",
+  "note_type": "imaging_order",
+  "author_role": "Provider",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient presents today with persistent low back pain despite completing NSAIDs and physical therapy. Lumbar MRI is ordered today to evaluate for structural pathology. MRI results will decide between epidural steroid injection and surgical referral. No contraindications to MRI are noted. Plan: Schedule MRI within the week; review results upon availability."
+ }
+]

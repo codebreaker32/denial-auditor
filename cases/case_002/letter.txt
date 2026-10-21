@@ -1,0 +1,25 @@
+SYNTHETIC – NOT A REAL PATIENT
+FICTIONAL TEST NOTICE - not issued by any insurer
+
+Payer: Sunrise Senior Advantage (synthetic MA plan)
+
+Date of notice: 08/25/2026
+
+NOTICE OF DENIAL OF PAYMENT
+
+Member: Jordan Testcase
+Member ID: SYN-0573082
+Provider: Example Spine & Joint Clinic (synthetic)
+Service: Lumbar spine MRI
+CPT: 72148
+Diagnosis: M54.50
+Date of service: 08/14/2026
+
+Decision: DENIED
+Reason code(s): 50
+Reason: Not medically necessary. The documentation submitted does not support the need for advanced imaging.
+
+If you disagree with this decision, you have the right to appeal. You may request a reconsideration within 60 calendar days of receiving this notice.
+Send your request with any supporting medical records to the address on this notice.
+
+This notice was generated for software testing and refers to no real person.

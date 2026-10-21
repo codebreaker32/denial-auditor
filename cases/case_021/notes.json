@@ -1,0 +1,23 @@
+[
+ {
+  "note_id": "case_021-n1",
+  "date": "2026-08-02",
+  "note_type": "initial_visit",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Noel Stub is a 74-year-old male presenting with low back pain.\nLow back pain began on 08/01/2026.\nHe describes the pain as achy, localized to the lumbar spine, without radiation. He denies fever, weight loss, or bowel/bladder incontinence.\nExam: Vital signs stable. Inspection shows no deformity. Palpation reveals mild tenderness over the lumbar paraspinals. Range of motion is limited due to discomfort. Neurologic examination demonstrates normal lower-extremity strength, reflexes, and sensation.\nAssessment: Acute low back pain, likely muscular strain.\nPlan: Recommend observation, activity modification, and follow-up in 3 days. Return sooner if symptoms worsen or new neurologic deficits develop."
+ },
+ {
+  "note_id": "case_021-n2",
+  "date": "2026-08-05",
+  "note_type": "follow_up",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns for follow-up of low back pain. Reports no change in pain level since last visit. Denies new trauma, fever, weight loss, or neurologic symptoms.\nMinor trauma in a potentially osteoporotic patient.\nExam: Similar to prior visit; mild lumbar tenderness, otherwise normal neuro exam.\nAssessment: Persistent low back pain without other red flags.\nPlan: Continue observation and activity modification. Re-evaluate in 3 days or sooner if worsening."
+ },
+ {
+  "note_id": "case_021-n3",
+  "date": "2026-08-09",
+  "note_type": "imaging_order",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient continues to experience low back pain since onset on 08/01/2026. Pain remains unchanged despite observation and activity modification. He denies new trauma, fever, weight loss, or neurologic symptoms.\nExam: Stable; mild lumbar tenderness, normal lower-extremity strength, reflexes, and sensation.\nAssessment: Ongoing low back pain with minor trauma in a potentially osteoporotic patient; no radiculopathy.\nPlan: MRI to evaluate for vertebral compression fracture."
+ }
+]

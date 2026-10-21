@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_003-n1",
+  "date": "2026-05-04",
+  "note_type": "initial_visit",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nThe patient reports onset of low back pain on 05/03/2026. She describes diffuse lumbar discomfort without radiculopathy.\nExam: Inspection shows normal lumbar range of motion; palpation reveals paraspinal tenderness. Neurologic exam demonstrates normal lower-extremity strength, reflexes, and sensation. She denies any red flags including trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficit.\nAssessment: Acute low back pain, likely musculoskeletal.\nPlan: Start NSAIDs today (ibuprofen 600 mg q6h PRN). Refer to physical therapy for core strengthening and lumbar stabilization, aiming for 12 sessions over 6 weeks. Follow up in 2 weeks."
+ },
+ {
+  "note_id": "case_003-n2",
+  "date": "2026-06-18",
+  "note_type": "pt_note",
+  "author_role": "physical therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns for physical therapy check-in. Low back pain persists despite treatment.\nExam: Similar to prior; mild paraspinal tenderness; neurologic exam unchanged, normal lower-extremity strength, reflexes, sensation.\nAssessment: Ongoing low back pain after conservative measures.\nPlan: Document completion of conservative therapy. NSAIDs were started on 05/04/2026 and continued until 06/18/2026 with partial relief. Physical therapy was initiated on 05/07/2026, consisting of 12 sessions, and concluded on 06/18/2026 without improvement. No further PT authorized at this time. Consider advanced imaging."
+ },
+ {
+  "note_id": "case_003-n3",
+  "date": "2026-06-23",
+  "note_type": "follow_up",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient reports continued low back pain after completing NSAIDs and physical therapy. No new symptoms.\nExam: Stable; neurologic exam normal; no red flags.\nAssessment: Persistent low back pain unresponsive to NSAIDs and a full course of physical therapy.\nPlan: Since conservative therapy has failed, order lumbar MRI to evaluate for structural pathology. If MRI shows significant findings, spine surgery referral will be considered."
+ },
+ {
+  "note_id": "case_003-n4",
+  "date": "2026-08-05",
+  "note_type": "imaging_order",
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns for results discussion; MRI ordered previously.\nExam: Unchanged; neurologic exam normal.\nAssessment: Awaiting lumbar MRI results.\nPlan: Order lumbar spine MRI without contrast today. Spine surgery referral is under consideration pending MRI findings."
+ }
+]

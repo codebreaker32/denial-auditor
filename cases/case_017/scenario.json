@@ -1,0 +1,60 @@
+{
+ "case_id": "case_017",
+ "group": "C_ma_xray_demand",
+ "patient_name": "Jamie Fauxname",
+ "plan_type": "MA",
+ "payer": "Sunrise Senior Advantage (synthetic MA plan)",
+ "practice_state": "WA",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-08-04",
+ "notice_date": "2026-08-21",
+ "carc": [
+  "50"
+ ],
+ "reason_text": "Denied: plain radiographs of the lumbar spine are required before advanced imaging.",
+ "facts": {
+  "age": 67,
+  "sex": "M",
+  "onset": "2026-05-11",
+  "treatments": [
+   {
+    "kind": "nsaids",
+    "start": "2026-05-12",
+    "end": "2026-06-22",
+    "sessions": null,
+    "response": "partial"
+   },
+   {
+    "kind": "physical_therapy",
+    "start": "2026-05-18",
+    "end": "2026-06-22",
+    "sessions": 10,
+    "response": "no_improvement"
+   }
+  ],
+  "red_flags": [],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "MRI results will decide between epidural steroid injection and surgical referral",
+  "surgery_or_injection_considered": true
+ },
+ "expected": {
+  "route": "clinical_review",
+  "verdict": "appeal",
+  "gold": {
+   "G1_red_flag_indication": "not_applicable",
+   "G2_red_flag_list": "not_applicable",
+   "G3_first_month": "met",
+   "G4_four_weeks_conservative": "met",
+   "G5_ddd_hnp_no_surgery": "met",
+   "G6_findings_affect_treatment": "met",
+   "G7_duplication": "met"
+  },
+  "why": "L34220 does not require prior radiographs; all of its criteria are met. MA plans must follow Medicare coverage criteria."
+ }
+}

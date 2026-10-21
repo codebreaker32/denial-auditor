@@ -1,0 +1,52 @@
+{
+ "case_id": "case_029",
+ "group": "G_plan_exclusion",
+ "patient_name": "Arden Specimen",
+ "plan_type": "COMMERCIAL_ERISA",
+ "payer": "Pinecrest Employer Health Plan (synthetic)",
+ "practice_state": "WA",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-08-06",
+ "notice_date": "2026-08-27",
+ "carc": [
+  "204"
+ ],
+ "reason_text": "This service is not covered under the member's current benefit plan.",
+ "facts": {
+  "age": 40,
+  "sex": "F",
+  "onset": "2026-05-20",
+  "treatments": [
+   {
+    "kind": "nsaids",
+    "start": "2026-05-21",
+    "end": "2026-07-05",
+    "sessions": null,
+    "response": "partial"
+   },
+   {
+    "kind": "physical_therapy",
+    "start": "2026-05-24",
+    "end": "2026-07-05",
+    "sessions": 12,
+    "response": "no_improvement"
+   }
+  ],
+  "red_flags": [],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "MRI results will decide between epidural steroid injection and surgical referral",
+  "surgery_or_injection_considered": true
+ },
+ "expected": {
+  "route": "not_winnable",
+  "verdict": "not_winnable",
+  "gold": {},
+  "why": "The plan excludes this service; medical necessity evidence won't change the outcome. Explain to the patient."
+ }
+}

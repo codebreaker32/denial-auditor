@@ -1,0 +1,25 @@
+SYNTHETIC – NOT A REAL PATIENT
+FICTIONAL TEST NOTICE - not issued by any insurer
+
+Payer: Aetna (synthetic member)
+
+Date of notice: 08/24/2026
+
+NOTICE OF DENIAL OF PAYMENT
+
+Member: Parker Prototype
+Member ID: SYN-6402154
+Provider: Example Spine & Joint Clinic (synthetic)
+Service: Lumbar spine MRI
+CPT: 72148
+Diagnosis: M54.16
+Date of service: 08/09/2026
+
+Decision: DENIED
+Reason code(s): 50
+Reason: Not medically necessary per Clinical Policy Bulletin 0236.
+
+If you disagree with this decision, you have the right to appeal. You may file an internal appeal within 180 days of receiving this notice.
+Send your request with any supporting medical records to the address on this notice.
+
+This notice was generated for software testing and refers to no real person.

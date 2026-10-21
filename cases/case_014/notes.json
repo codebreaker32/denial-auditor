@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_014-n1",
+  "date": "2026-06-05",
+  "note_type": "initial_visit",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: The patient reports onset of low back pain on 06/04/2026. He describes the pain as diffuse lumbar aching worsened by flexion and prolonged standing. He denies radicular symptoms.\nExam: Inspection shows normal lumbar contour; palpation reveals mild paraspinal tenderness; range of motion limited due to discomfort. Neuro exam: normal lower-extremity strength, reflexes, and sensation.\nAssessment: Acute mechanical low back pain, likely degenerative.\nPlan: Start NSAIDs today (06/05/2026) for pain control. Referral to physical therapy to begin 06/11/2026. Advise activity modification and follow-up in 2 weeks. No red flags identified."
+ },
+ {
+  "note_id": "case_014-n2",
+  "date": "2026-07-16",
+  "note_type": "pt_note",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: He was prescribed NSAIDs starting 06/05/2026 and continued through 07/16/2026 with partial relief. Physical therapy was initiated on 06/11/2026, consisting of 10 sessions completed by 07/16/2026, without symptomatic improvement.\nExam: Similar to prior; mild paraspinal tenderness; neuro exam unchanged: normal lower-extremity strength, reflexes, sensation.\nAssessment: Persistent mechanical low back pain despite conservative measures. He denies any red flag symptoms such as fever, weight loss, trauma, cancer history, bowel/bladder dysfunction, saddle anesthesia, or progressive neurologic deficit.\nPlan: Continue NSAIDs as needed; consider advanced imaging."
+ },
+ {
+  "note_id": "case_014-n3",
+  "date": "2026-07-21",
+  "note_type": "follow_up",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: He completed a course of NSAIDs from 06/05/2026 to 07/16/2026 with partial response, and physical therapy from 06/11/2026 to 07/16/2026 comprising 10 sessions with no improvement.\nExam: Inspection normal; palpation shows mild lumbar tenderness; neuro exam: normal lower-extremity strength, reflexes, and sensation.\nAssessment: Chronic low back pain, unresponsive to NSAIDs and physical therapy.\nPlan: Order lumbar MRI to evaluate for structural pathology; pending results, a spine surgery referral will be considered."
+ },
+ {
+  "note_id": "case_014-n4",
+  "date": "2026-08-04",
+  "note_type": "imaging_order",
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns with ongoing low back pain despite completed NSAIDs and PT.\nExam: Unchanged; neuro exam normal lower-extremity strength, reflexes, sensation.\nAssessment: Persistent mechanical low back pain; need imaging.\nPlan: Order lumbar MRI today (08/04/2026). Pending lumbar MRI results, a spine surgery referral will be considered."
+ }
+]

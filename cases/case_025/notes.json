@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_025-n1",
+  "date": "2026-05-26",
+  "note_type": "initial_visit",
+  "author_role": "Provider",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Shiloh Testwood, 83-year-old female.\nHPI: The patient reports onset of low back pain on 05/25/2026. She describes aching pain in the lumbar region, worse with prolonged sitting and improving with rest. She denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficit.\nExam: Vital signs stable. Lumbar spine inspection shows no deformity. Palpation reveals mild paraspinal tenderness. Range of motion is limited due to discomfort. Neurologic examination of lower extremities shows normal strength, reflexes, and sensation.\nAssessment: Acute low back pain, likely musculoskeletal.\nPlan: Start ibuprofen 600 mg PO every 6-8 hours as needed for pain. Initiate a course of physical therapy focusing on core strengthening and lumbar flexion exercises, to begin next week. Return to clinic in 4 weeks or sooner if symptoms worsen."
+ },
+ {
+  "note_id": "case_025-n2",
+  "date": "2026-07-13",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Shiloh Testwood, 83-year-old female.\nHPI: Patient returns for completion of prescribed physical therapy course. She reports ongoing low back pain with partial relief from medication.\nExam: Lumbar range of motion remains restricted; tenderness paraspinally. No neurological deficits noted.\nAssessment: Completed 12-session physical therapy program; minimal functional improvement.\nPlan: She started NSAIDs on 05/26/2026 and continued them through 07/13/2026 with partial relief. Physical therapy was initiated on 06/01/2026, consisting of 12 sessions, and completed on 07/13/2026 without improvement. Recommend reevaluation by referring provider for further management."
+ },
+ {
+  "note_id": "case_025-n3",
+  "date": "2026-07-18",
+  "note_type": "follow_up",
+  "author_role": "Provider",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Shiloh Testwood, 83-year-old female.\nHPI: Patient reports persistent low back pain despite completing a course of NSAIDs and physical therapy. She notes mild improvement with medication but overall functional status unchanged.\nExam: Inspection shows no spinal deformity. Palpation reveals mild lumbar tenderness. Straight leg raise negative bilaterally. Lower extremity strength 5/5, reflexes 2+, sensation intact.\nAssessment: Chronic low back pain, unresponsive to conservative measures.\nPlan: Order lumbar MRI to evaluate for underlying structural pathology prior to considering epidural steroid injection. Continue acetaminophen as needed. Follow up in 2 weeks after imaging."
+ },
+ {
+  "note_id": "case_025-n4",
+  "date": "2026-08-06",
+  "note_type": "imaging_order",
+  "author_role": "Provider",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient: Shiloh Testwood, 83-year-old female.\nHPI: Patient returns for follow-up after unsuccessful conservative therapy. She continues to experience low back pain affecting daily activities.\nExam: No new neurological deficits. Lumbar tenderness persists.\nAssessment: Persistent lumbar pain necessitating imaging.\nPlan: The MRI is ordered to localize the level before a planned L4-L5 epidural steroid injection. Schedule lumbar spine MRI without contrast. Notify patient of results and discuss subsequent interventions."
+ }
+]

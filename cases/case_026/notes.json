@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_026-n1",
+  "date": "2026-05-22",
+  "note_type": "initial_visit",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient is a 78-year-old male presenting with new-onset low back pain. His low back pain began on 05/21/2026. He describes the pain as achy, localized to the lumbar region, worsened with prolonged sitting and relieved by lying down. He denies any recent trauma. Neurologic examination shows normal lower-extremity strength, reflexes, and sensation. He denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficit. Assessment: Acute lumbar strain, likely degenerative. Plan: Initiate NSAIDs starting today (05/22/2026). Recommend initiating physical therapy next week (approximately 05/29/2026) for core strengthening and flexion-based exercises. Follow up in 2 weeks."
+ },
+ {
+  "note_id": "case_026-n2",
+  "date": "2026-07-07",
+  "note_type": "pt_note",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient returns for physical therapy follow-up on 07/07/2026. He reports ongoing low back pain with partial relief from NSAIDs but no improvement despite PT. NSAIDs were started on 05/22/2026 and continued through 07/07/2026 with partial improvement. Physical therapy was initiated on 05/26/2026 and completed 12 sessions by 07/07/2026 with no improvement. Neurologic examination remains normal. Assessment: Persistent lumbar degenerative pain with inadequate response to conservative measures. Plan: Continue NSAIDs as tolerated, consider obtaining lumbar MRI to further evaluate, and discuss possible spine surgery referral pending imaging results. Follow up in 4 weeks."
+ },
+ {
+  "note_id": "case_026-n3",
+  "date": "2026-07-12",
+  "note_type": "follow_up",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nFollow-up visit on 07/12/2026. Patient reports continued low back pain unchanged since last visit. He underwent NSAIDs from 05/22/2026 to 07/07/2026 with partial improvement, and completed 12 sessions of physical therapy from 05/26/2026 to 07/07/2026 with no improvement. He denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficit. Neurologic exam shows normal lower-extremity strength, reflexes, and sensation. Assessment: Chronic low back pain refractory to initial conservative therapy. Plan: Obtain lumbar MRI to further evaluate anatomic correlates before considering spine surgery referral. Return in 4 weeks or sooner if symptoms worsen."
+ },
+ {
+  "note_id": "case_026-n4",
+  "date": "2026-08-10",
+  "note_type": "imaging_order",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nLumbar MRI ordered on 08/10/2026 after failure of conservative therapy. Patient\u2019s low back pain persists despite NSAIDs and physical therapy. Neurologic examination remains normal without radiculopathy. He denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficit. Assessment: Degenerative lumbar spine disease, likely contributing to mechanical back pain. Plan: Spine surgery referral is under consideration pending MRI findings. Results will guide further management."
+ }
+]

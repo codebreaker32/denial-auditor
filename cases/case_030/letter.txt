@@ -1,0 +1,25 @@
+SYNTHETIC – NOT A REAL PATIENT
+FICTIONAL TEST NOTICE - not issued by any insurer
+
+Payer: Pinecrest Employer Health Plan (synthetic)
+
+Date of notice: 08/20/2026
+
+NOTICE OF DENIAL OF PAYMENT
+
+Member: Blair Testford
+Member ID: SYN-6234505
+Provider: Example Spine & Joint Clinic (synthetic)
+Service: Lumbar spine MRI
+CPT: 72148
+Diagnosis: M54.50
+Date of service: 08/05/2026
+
+Decision: DENIED
+Reason code(s): 96
+Reason: Non-covered: imaging requested for an employment physical is excluded.
+
+If you disagree with this decision, you have the right to appeal. You may file an internal appeal within 180 days of receiving this notice.
+Send your request with any supporting medical records to the address on this notice.
+
+This notice was generated for software testing and refers to no real person.

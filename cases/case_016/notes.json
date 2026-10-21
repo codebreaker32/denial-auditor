@@ -1,0 +1,30 @@
+[
+ {
+  "note_id": "case_016-n1",
+  "date": "2026-05-26",
+  "note_type": "initial_visit",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient is a 79-year-old male presenting with low back pain.\nHPI: He reports onset of low back pain on 05/25/2026. He describes the pain as aching, localized to the lumbar region, worsened with prolonged sitting and relieved by lying down. Denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficit.\nExam: Vital signs stable. Lumbar spine inspection shows no deformity. Palpation reveals tenderness over paraspinal muscles without step-off. Range of motion limited due to discomfort. Neurologic exam: normal lower-extremity strength, reflexes, and sensation. No rectal sphincter tone assessed as patient declined.\nAssessment: Lumbar radiculopathy, unspecified (M54.50).\nPlan: Initiate NSAIDs starting today. Refer to physical therapy for evaluation and treatment. Return in 2 weeks."
+ },
+ {
+  "note_id": "case_016-n2",
+  "date": "2026-07-11",
+  "note_type": "pt_note",
+  "author_role": "Physical Therapist",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient returns for follow-up of low back pain after initiating NSAIDs and physical therapy.\nHPI: He reports ongoing lumbar discomfort, unchanged since last visit. He denies new neurological symptoms.\nExam: Mild lumbar paraspinal tenderness. Neurologic exam: normal lower-extremity strength, reflexes, and sensation.\nAssessment: Chronic low back pain, unspecified (M54.50).\nPlan: He was prescribed NSAIDs from 05/26/2026 to 07/11/2026 with partial response. He completed 12 sessions of physical therapy from 05/30/2026 to 07/11/2026 with no improvement. Consider continuation of NSAIDs as needed and reassess after imaging."
+ },
+ {
+  "note_id": "case_016-n3",
+  "date": "2026-07-16",
+  "note_type": "follow_up",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient seen for routine follow-up after completing conservative therapy.\nHPI: He states low back pain persists with no change in character. He denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, and progressive neurologic deficit.\nExam: Lumbar spine mildly tender to palpation. Neurologic exam: normal lower-extremity strength, reflexes, and sensation.\nAssessment: Persistent low back pain without radiculopathy.\nPlan: Consider lumbar MRI to further evaluate underlying pathology."
+ },
+ {
+  "note_id": "case_016-n4",
+  "date": "2026-07-27",
+  "note_type": "imaging_order",
+  "author_role": "Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient returns for discussion of imaging options after failed conservative management.\nHPI: He continues to experience low back pain despite NSAIDs and physical therapy. He denies any red flags.\nExam: Unchanged from prior visits. Neurologic exam: normal lower-extremity strength, reflexes, and sensation.\nAssessment: Low back pain unresponsive to conservative measures.\nPlan: Order lumbar MRI without contrast today. Spine surgery referral is under consideration pending MRI findings."
+ }
+]

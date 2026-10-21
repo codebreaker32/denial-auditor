@@ -21,9 +21,11 @@ from pydantic import BaseModel, Field
 
 from nebius_nvidia.llm import SUPER, structured
 from nebius_nvidia.models import Criterion, PolicyDoc
-from nebius_nvidia.text import locate, segment
+from nebius_nvidia.cms import LCD_SECTIONS
+from nebius_nvidia.text import locate, normalize, segment
 
 CACHE_DIR = Path(".cache/criteria")
+HEADINGS = set(LCD_SECTIONS.values())
 
 SYSTEM = """You identify the coverage criteria in a health-insurance coverage policy so a billing specialist can check a patient's chart against each one.
 
@@ -37,8 +39,9 @@ Return every criterion that decides whether the service is covered for a patient
 - limitations and exclusions: when the service is not reasonable and necessary.
 
 Skip background, definitions, technology descriptions, contraindications, and payment, billing and coding rules (units, professional components, who bills).
+Also skip general record-keeping rules that apply to every claim (records must be legible, orders must be signed and dated, records available on request, documentation must support the billed codes), and rules about the radiologist's interpretation report written after the scan (report content, format, headings). Keep documentation rules about the clinical reasons for ordering this service.
 
-For each criterion give sentence_ids: the consecutive sentence numbers (integers) that state it. Use the fewest sentences that fully state the rule.
+For each criterion give sentence_ids: the consecutive sentence numbers (integers) that state it, and first_words: the first 6 words of the FIRST of those sentences, copied exactly (used to double-check the numbering). Use the fewest sentences that fully state the rule. Never pick a heading on its own.
 summary is your own one-line plain-English paraphrase (display-only, never quoted). applies_when states the condition under which it applies (e.g. "no red flags present"), else null."""
 
 
@@ -47,6 +50,7 @@ class CriterionPick(BaseModel):
     kind: Literal["indication", "red_flag", "duration", "documentation", "exclusion"]
     applies_when: str | None = None
     sentence_ids: list[int] = Field(min_length=1)
+    first_words: str = ""
 
 
 class CriteriaOut(BaseModel):
@@ -69,15 +73,36 @@ def _runs(ids: list[int]) -> list[list[int]]:
     return runs
 
 
+def _realign(pick: CriterionPick, doc: PolicyDoc, units: list[tuple[int, int]], window: int = 2) -> list[int]:
+    """Models sometimes miscount sentence numbers by one or two. If first_words doesn't
+    match the first picked sentence, shift the whole pick to the nearby sentence it does match."""
+    ids = sorted(set(pick.sentence_ids))
+    words = normalize(pick.first_words).lower()
+    if not words or not ids:
+        return ids
+
+    def starts(i: int) -> bool:
+        return 1 <= i <= len(units) and normalize(doc.text[units[i - 1][0] : units[i - 1][1]]).lower().lstrip("• ").startswith(words.lstrip("• "))
+
+    if starts(ids[0]):
+        return ids
+    for shift in sorted(range(-window, window + 1), key=abs):
+        if shift and starts(ids[0] + shift):
+            return [i + shift for i in ids]
+    return ids
+
+
 def build_criteria(picks: list[CriterionPick], doc: PolicyDoc, units: list[tuple[int, int]]) -> list[Criterion]:
     """Turn the model's sentence picks into criteria with spans cut from the source.
 
-    Out-of-range ids are dropped; a non-consecutive pick becomes one criterion per run.
+    Picks are realigned by first_words; out-of-range ids are dropped; a
+    non-consecutive pick becomes one criterion per run; heading-only picks are dropped.
     """
     doc_id = f"{doc.policy_id}v{doc.version}"
     out: list[Criterion] = []
     for pick in picks:
-        valid = [i for i in pick.sentence_ids if 1 <= i <= len(units)]
+        valid = [i for i in _realign(pick, doc, units) if 1 <= i <= len(units)]
+        valid = [i for i in valid if doc.text[units[i - 1][0] : units[i - 1][1]] not in HEADINGS]
         for run in _runs(valid):
             start, end = units[run[0] - 1][0], units[run[-1] - 1][1]
             out.append(
