@@ -74,9 +74,16 @@ def chat(prompt: str, model: str = NANO, system: str | None = None, **kwargs) ->
 
 OutputMode = Literal["json_schema", "json_object", "prompt_only"]
 
-# How each model returns JSON reliably on Token Factory, from scripts/probe_models.py.
-# Unknown models fall back to prompt_only, which works everywhere.
-MODEL_CAPS: dict[str, OutputMode] = {}
+# How each model returns JSON reliably on Token Factory. scripts/probe_models.py
+# (2026-10-21): all five returned correct JSON in json_schema, json_object and
+# prompt_only modes. Unknown models fall back to prompt_only.
+MODEL_CAPS: dict[str, OutputMode] = {
+    NANO: "json_schema",
+    SUPER: "json_schema",
+    ULTRA: "json_schema",
+    LIGHTNING: "json_schema",
+    SUPER_VL: "json_schema",
+}
 
 MAX_TOKENS_CEILING = 32768
 

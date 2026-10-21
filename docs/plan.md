@@ -232,7 +232,8 @@ Estimated cost per routed case is ~$0.05 (NANO_ONLY ~$0.01). Check against the T
 
 | Risk | Mitigation |
 |---|---|
-| JSON schema not honoured | Probe; three-tier `structured()`; code verifies spans |
+| JSON schema not honoured | **Resolved 2026-10-21:** all five models honour json_schema (probe); fallbacks kept |
+| **Lightning latency (50–190 s per call, probe)** | Run criteria extraction once per policy version and cache it; precompute for the demo; fall back to Super (262k context) if it's too slow for the eval |
 | Empty content from reasoning | Retry with doubled tokens; turn thinking off for extraction if supported |
 | WebSockets on the host | Day-2 test; Lightsail instance + Caddy fallback |
 | No Nebius AI Cloud access for the Job | Run the drift watcher in GitHub Actions instead; Token Factory still carries the Nebius story |
