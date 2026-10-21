@@ -92,6 +92,11 @@ def _prices(base_url: str, api_key: str) -> dict[str, tuple[float, float]]:
     }
 
 
+def prices(base_url: str, api_key: str) -> dict[str, tuple[float, float]]:
+    """Public read-only view of Token Factory per-token prices (cached per process)."""
+    return dict(_prices(base_url, api_key))
+
+
 class BudgetTransport(httpx.BaseTransport):
     def __init__(self, base_url: str, api_key: str):
         self._inner = httpx.HTTPTransport()

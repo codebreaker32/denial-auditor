@@ -14,3 +14,6 @@ venv/
 # Token Factory spend ledger (local budget cap)
 .token_factory_spend.json
 .tavily_spend.json
+
+# Fetched policy text (CMS licence: personal, non-commercial)
+.cache/
