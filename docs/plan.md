@@ -258,3 +258,23 @@ Estimated cost per routed case is ~$0.05 (NANO_ONLY ~$0.01). Check against the T
   - The passcode run completes and the meter updates.
   - The 4th live run in a session is refused.
 - **Pre-submit (Oct 29):** licence detected on GitHub; repo public (**only after the user says so**); video under 3 min on YouTube; Devpost fields match the `docs/brief.md` checklist.
+
+## Status at end of Wed Oct 21
+
+**Done (all on `main`, private repo):**
+- Day 1–2 foundations: `models`, `cms` (version by DOS), `text` (normalize/locate/segment), `sources`, `rules` (eCFR-verified), `structured()` with retries, budget fixes (`prices()`, ledger flush race fixed and ledger reconciled to $0.60).
+- Criteria extraction: sentence-pick design; **Super, 7/7 gold in 3/3 runs**; first_words realignment; record-keeping and post-scan report rules skipped.
+- Citation gate + appeal writer (quote bank → Ultra → Super critique → Ultra revise) + templated documentation requests. Typed quotes and unknown markers are blocked (tested).
+- Intake 6/6 on scans (Super-VL ~6 s) and text (Nano 0.7 s); CARC triage.
+- 30 synthetic cases committed (scenarios, Super-written notes with deterministic checks, fictional faxed letters).
+- Eval runner with gold scoring and `--rescore`. 82 offline tests pass.
+- AWS deploy profile `aman-deploy` (Lightsail-only IAM user). No Nebius AI Cloud credits: drift watcher → Lightsail cron.
+
+**Open problem (top priority Thu):** criterion **matching** quality. Pilot (5 cases, Nano matcher, after gold-label fix): triage 5/5, **verdict 1/5**, gold statuses 20/35. Errors: no-red-flag patients get the red-flag list as `not_met` (should be `not_applicable`); first-month and findings-affect-treatment rules judged wrongly. A single `not_met` flips the verdict to `dont_appeal`. Super matcher pilot: `eval/results/pilot_super.md` (was still running at wrap-up). Options, in order:
+1. Matcher prompt: state the applies-when logic explicitly per criterion (red-flag rules → n/a without red flags; exceptions satisfied by red flags), and give the model the facts summary first.
+2. Use Super (or Ultra) for matching if it's clearly better; cost per case stays well under $0.10.
+3. Pre-classify applicability in code from `Criterion.applies_when` + computed facts before calling the model.
+
+**Not started:** Aetna resolver via Tavily (group B), Streamlit UI, Lightsail deploy + WebSocket test, prevention mode, drift cron, eval on all 30 + ablation, video, Devpost write-up.
+
+**Spend:** Token Factory ≈ $0.75 of $27 (plus the Super pilot still running) (see `.token_factory_spend.json`; check the dashboard); Tavily 8 of 4,125 credits.

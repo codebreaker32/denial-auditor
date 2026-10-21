@@ -103,6 +103,24 @@ def summarize(results: list[dict], tag: str) -> str:
     return "\n".join(lines)
 
 
+def rescore(tag: str, cases: Path) -> None:
+    from nebius_nvidia.models import CaseRun
+
+    path = Path("eval/results") / f"{tag}.json"
+    results = json.loads(path.read_text())
+    for r in results:
+        if "run" not in r:
+            continue
+        s = Scenario.load(cases / r["case"])
+        got = gold_statuses(CaseRun.model_validate(r["run"]))
+        r["verdict_expected"] = s.expected.verdict
+        r["gold"] = {g: {"expected": e, "got": got.get(g)} for g, e in s.expected.gold.items() if g in GOLD}
+    path.write_text(json.dumps(results, indent=1, default=str))
+    md = summarize(results, tag)
+    (path.with_suffix(".md")).write_text(md + "\n")
+    print(md)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--cases", default="cases")
@@ -112,7 +130,11 @@ def main() -> None:
     ap.add_argument("--text", action="store_true", help="read letter.txt (Nano) instead of the scan (Super-VL)")
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--tag", default="")
+    ap.add_argument("--rescore", help="re-score a saved eval/results/<tag>.json against current scenarios ($0)")
     args = ap.parse_args()
+    if args.rescore:
+        rescore(args.rescore, Path(args.cases))
+        return
 
     dirs = sorted(d for d in Path(args.cases).iterdir() if (d / "notes.json").exists())
     if args.groups:

@@ -51,9 +51,9 @@
    "G2_red_flag_list": "not_applicable",
    "G3_first_month": "met",
    "G4_four_weeks_conservative": "met",
-   "G5_ddd_hnp_no_surgery": "met",
+   "G5_ddd_hnp_no_surgery": "not_applicable",
    "G6_findings_affect_treatment": "met",
-   "G7_duplication": "met"
+   "G7_duplication": "not_applicable"
   },
   "why": "No red flags; failed at least four weeks of conservative care; findings will change treatment."
  }

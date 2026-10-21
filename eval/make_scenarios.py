@@ -40,9 +40,10 @@ GOLD_MET_NO_RED_FLAGS = {
     "G2_red_flag_list": "not_applicable",
     "G3_first_month": "met",
     "G4_four_weeks_conservative": "met",
-    "G5_ddd_hnp_no_surgery": "met",
+    # Exclusions that don't describe the case are not_applicable (matcher convention).
+    "G5_ddd_hnp_no_surgery": "not_applicable",
     "G6_findings_affect_treatment": "met",
-    "G7_duplication": "met",
+    "G7_duplication": "not_applicable",
 }
 GOLD_RED_FLAG = {
     "G1_red_flag_indication": "met",
@@ -51,7 +52,7 @@ GOLD_RED_FLAG = {
     "G4_four_weeks_conservative": "not_applicable",
     "G5_ddd_hnp_no_surgery": "not_applicable",
     "G6_findings_affect_treatment": "met",
-    "G7_duplication": "met",
+    "G7_duplication": "not_applicable",
 }
 GOLD_TOO_EARLY = {**GOLD_MET_NO_RED_FLAGS, "G3_first_month": "not_met", "G4_four_weeks_conservative": "not_met"}
 

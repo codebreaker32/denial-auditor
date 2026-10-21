@@ -40,7 +40,7 @@
    "G4_four_weeks_conservative": "not_applicable",
    "G5_ddd_hnp_no_surgery": "not_applicable",
    "G6_findings_affect_treatment": "met",
-   "G7_duplication": "met"
+   "G7_duplication": "not_applicable"
   },
   "why": "Red flag(s) documented (Minor trauma in a potentially osteoporotic patient); the first-month limit doesn't apply."
  }
