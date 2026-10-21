@@ -12,9 +12,12 @@ Early-stage Python project for the Nebius x NVIDIA Global AI Hackathon (https://
 - Deadlines come from a fixed rules table, never from the LLM.
 - A human always sends the appeal; the tool never submits anything.
 - Never claim inputs are "never trained on" until Token Factory's data terms are verified.
-- Policy sources: the CMS Coverage API is primary (versioned by effective date), followed by UHC public PDFs and Aetna CPB HTML. **Never send eviCore, Carelon or ACR text to a model or store it**, because their terms forbid it; link to them by name only.
+- Policy sources: the CMS Coverage API is primary (versioned by effective date; licence token accepted by the user for personal, non-commercial use). The commercial payer is **Aetna CPB 0236** (HTML, a snapshot at fetch time). **UHC was dropped**, because its imaging criteria are eviCore text. **Never send eviCore, Carelon or ACR text to a model or store it**, because their terms forbid it; link to them by name only (`sources.assert_allowed`).
+- Hosting: the Streamlit app runs on **AWS Lightsail**. The drift watcher is a **Nebius Serverless Job** with an LLM cap of $0. The public demo serves precomputed cases; live runs need a passcode and are rate-limited.
 - CPT: show bare codes only, never the AMA descriptors, and include the AMA attribution line.
 - The build plan and day-by-day schedule are in `docs/plan.md`.
+
+**Implementation was approved on 2026-10-20 against `docs/plan.md`** (user rule: no implementation without the user's go-ahead). Stay within the plan; ask before any change to scope, product, hosting or budget.
 
 **Repo:** github.com/codebreaker32/denial-auditor. Team **Fine Print**: Aman Bihari, Bhawna. **Keep the repo PRIVATE until the user explicitly says to make it public** (user rule). The hackathon requires a public repo at submission, so remind the user before the deadline, but never change the visibility yourself.
 
@@ -33,10 +36,14 @@ Deadline: **Oct 30, 2026, 10:00 am PT.** Stage Two judging weighs four criteria 
 python3 -m venv .venv
 ./.venv/bin/pip install -e .           # editable install (hatchling, src layout)
 cp .env.example .env                    # then set TAVILY_API_KEY and NEBIUS_TOKEN_FACTORY_KEY
+./.venv/bin/pip install -e '.[dev]'    # adds pytest
+./.venv/bin/pytest                      # offline unit tests: any network call fails the test
+./.venv/bin/pytest tests/test_cms.py::test_name   # a single test
+RUN_LIVE=1 ./.venv/bin/pytest tests/live          # opt-in live checks (costs ~$0.001 + 1 Tavily credit)
 ./.venv/bin/python smoke_test.py        # one live Tavily search + one Nemotron call
 ```
 
-The project has no test suite, linter or formatter set up yet. `smoke_test.py` is the only check, and it makes real network calls that use Tavily and Token Factory credits.
+There's no linter or formatter yet. Live checks and `smoke_test.py` spend real credits.
 
 ## Architecture
 
