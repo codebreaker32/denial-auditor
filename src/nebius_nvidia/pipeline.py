@@ -55,31 +55,42 @@ def load_notes(case_dir: Path) -> list[ChartNote]:
 
 
 def run_case(case_dir: Path, use_text: bool = False, as_of: date | None = None, matcher: str | None = None,
-             with_appeal: bool = True) -> tuple[CaseRun, ChartFacts | None]:
+             with_appeal: bool = True, progress=None) -> tuple[CaseRun, ChartFacts | None]:
+    """Run one case. `progress(message)` is called before each step (used by the live UI)."""
     case_dir = Path(case_dir)
     scenario = Scenario.load(case_dir)
     tracker = CostTracker()
+    say = progress or (lambda msg: None)
 
+    say("Reading the denial letter (Nemotron 3.5 Super-VL)" if not use_text else "Reading the denial letter (Nemotron 3 Nano)")
     denial = read_denial(case_dir / ("letter.txt" if use_text else "letter.png"), tracker=tracker,
                          practice_state=scenario.practice_state)
+    say("Triage by reason code")
     tri = triage(denial, tracker=tracker)
     run = CaseRun(case_id=scenario.case_id, denial=denial, triage=tri, verdict="fix_checklist",
                   deadline=deadline(denial.plan_type, denial.notice_date, today=as_of or review_date(denial)))
     facts = None
     if tri.route == "clinical_review":
+        say("Finding the policy in effect on the date of service"
+            + (" (CMS Coverage API)" if denial.plan_type in ("MA", "MEDICARE_FFS") else " (Tavily search)"))
         policy = resolve_policy(denial, scenario.practice_state)
+        say("Splitting the policy into rules (Nemotron 3 Super picks sentences)")
         criteria = extract_criteria(policy, tracker=tracker)
         notes = load_notes(case_dir)
+        say("Extracting chart facts with verified quotes (Nemotron 3 Nano)")
         facts = extract_facts(notes, denial.dos, tracker=tracker)
         run.policy, run.criteria = policy, criteria
+        say(f"Checking {len(criteria)} rules against the chart (Nemotron 3 Super)")
         run.matches = match_all(criteria, notes, facts, denial.dos, tracker=tracker, cpt=denial.cpt,
                                 **({"model": matcher} if matcher else {}))
-    run.verdict = verdict(tri, run.matches)
+    run.verdict = verdict(tri, run.matches, run.criteria)
     if with_appeal and run.verdict == "appeal":
+        say("Drafting the appeal (Ultra), payer-reviewer critique (Super), revision (Ultra), citation gate")
         run.appeal, _bank, run.gate = draft_appeal(run, load_notes(case_dir), scenario.patient_name, tracker=tracker)
     elif run.verdict == "doc_request":
         run.doc_request = documentation_request(run, scenario.patient_name)
     run.trace = tracker.steps
+    say(f"Done: {run.verdict.replace('_', ' ')} · ${run.cost_usd:.4f}")
     return run, facts
 
 

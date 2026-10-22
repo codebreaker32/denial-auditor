@@ -77,8 +77,13 @@ def load_runs() -> dict[str, dict]:
     return {p.stem: json.loads(p.read_text()) for p in sorted(RUNS.glob("case_*.json"))}
 
 
+def all_runs() -> dict[str, dict]:
+    """Precomputed runs plus any live runs from this session (live ones win)."""
+    return {**load_runs(), **st.session_state.get("live_runs", {})}
+
+
 def run_of(case_id: str) -> CaseRun:
-    return CaseRun.model_validate(load_runs()[case_id])
+    return CaseRun.model_validate(all_runs()[case_id])
 
 
 @st.cache_data

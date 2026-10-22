@@ -17,7 +17,7 @@ Early-stage Python project for the Nebius x NVIDIA Global AI Hackathon (https://
 - CPT: show bare codes only, never the AMA descriptors, and include the AMA attribution line.
 - The build plan and day-by-day schedule are in `docs/plan.md`.
 
-**Implementation was approved on 2026-10-20 against `docs/plan.md`** (user rule: no implementation without the user's go-ahead). Stay within the plan; ask before any change to scope, product, hosting or budget. **Keep working through the plan without stopping for check-ins until the user says "wrap up"** (user rule); still ask before decisions that need them.
+**Implementation was approved on 2026-10-20 against `docs/plan.md`** (user rule: no implementation without the user's go-ahead). Stay within the plan; ask before any change to scope, product, hosting or budget. **Keep working through the plan without stopping for check-ins until the user says "wrap up"** (user rule); still ask before decisions that need them. **At every wrap-up, shut down everything that costs money** (user rule): delete the Lightsail container service or instance (Lightsail bills stopped and disabled resources until they're deleted; `scripts/deploy.sh down`), stop local servers and background jobs, and confirm with `aws lightsail get-container-services --profile aman-deploy` that nothing is left running.
 
 **Repo:** github.com/codebreaker32/denial-auditor. Team **Fine Print**: Aman Bihari, Bhawna. **Keep the repo PRIVATE until the user explicitly says to make it public** (user rule). The hackathon requires a public repo at submission, so remind the user before the deadline, but never change the visibility yourself.
 

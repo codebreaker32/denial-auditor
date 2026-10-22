@@ -19,7 +19,7 @@ SYSTEM = """You extract clinical facts from outpatient chart notes for a medical
 For every fact, quote the ONE sentence from the notes that states it, copied exactly, with its note_id.
 - onset: when the low back pain began.
 - treatments: each conservative treatment (physical therapy, NSAIDs/medication, home exercise, chiropractic, activity modification) with start date, end date, number of sessions and response, quoting the sentence that gives the dates. One entry per treatment; use the most complete statement.
-- red_flags: only red-flag conditions that are PRESENT (e.g. history of cancer, fever, saddle anesthesia, bladder dysfunction, trauma, unexplained weight loss, IV drug use, immune suppression, progressive neurologic deficit). Never list a denied or absent condition.
+- red_flags: only red-flag conditions that are PRESENT, however they are worded. Examples: history of cancer; fever or chills; saddle anesthesia; new bladder dysfunction; major trauma; minor trauma such as a fall in a patient with osteoporosis or osteopenia; unexplained weight loss; IV or injection drug use; immune suppression (e.g. steroids, transplant); recent bacterial infection; pain worse at night or lying down; progressive neurologic deficit or motor weakness. Never list a denied or absent condition.
 - neuro_exam: the lower-extremity neurologic exam result: normal, abnormal, or not_documented.
 - radiculopathy: none, subjective (radiating pain only) or objective (motor or reflex findings in a nerve-root distribution).
 - prior_imaging: lumbar imaging done before this MRI order (x-ray, CT, MRI); [] if the notes say none.

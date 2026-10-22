@@ -16,6 +16,7 @@ st.set_page_config(page_title="Denial Auditor", page_icon="⚖️", layout="wide
 pages = [
     st.Page("pages/worklist.py", title="Worklist", icon=":material/inbox:", default=True),
     st.Page("pages/case.py", title="Case", icon=":material/fact_check:"),
+    st.Page("pages/live.py", title="Run live", icon=":material/play_circle:"),
     st.Page("pages/about.py", title="How it works", icon=":material/info:"),
 ]
 st.navigation(pages).run()

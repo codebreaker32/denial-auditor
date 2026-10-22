@@ -2,10 +2,10 @@ import streamlit as st
 
 from nebius_nvidia.citations import check
 from nebius_nvidia.models import ChartNote
-from ui import CASES, STATUS, VERDICT, esc, footer, quote_html, load_runs, notes_of, pill, run_of, scenario_of, session_for, setup
+from ui import CASES, STATUS, VERDICT, all_runs, esc, footer, quote_html, load_runs, notes_of, pill, run_of, scenario_of, session_for, setup
 
 setup("Case")
-runs = load_runs()
+runs = all_runs()
 if not runs:
     st.info("No case runs yet.")
     st.stop()
@@ -64,6 +64,8 @@ with tab_board:
         for m in sorted(shown, key=lambda m: ["not_met", "missing_documentation", "met"].index(m.status)):
             c = crit[m.criterion_id]
             s_label, s_kind = STATUS[m.status]
+            if m.status == "not_met" and c.kind == "indication" and run.verdict == "appeal":
+                s_label, s_kind = "Route not used", "mute"  # another route to coverage is met
             ev = "".join(
                 f'<div class="quote chart">{quote_html(e.quote)}</div><div class="cite">Chart: {e.note_id}{"" if e.verified else " · UNVERIFIED"}</div>'
                 for e in m.evidence)

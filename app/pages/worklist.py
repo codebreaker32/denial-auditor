@@ -1,13 +1,13 @@
 import streamlit as st
 
-from ui import VERDICT, footer, load_runs, scenario_of, setup
+from ui import VERDICT, all_runs, footer, scenario_of, setup
 
 setup("Worklist")
 st.title("Denial worklist")
 st.markdown('<div class="muted">Imaging denials, sorted so the winnable ones come first. '
             "Every verdict is backed by the payer's own policy text, quoted word for word.</div>", unsafe_allow_html=True)
 
-runs = load_runs()
+runs = all_runs()
 if not runs:
     st.info("No case runs yet. Build them with `python scripts/precompute.py`.")
     st.stop()

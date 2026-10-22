@@ -113,7 +113,8 @@ def summarize(results: list[dict], tag: str) -> str:
     return "\n".join(lines)
 
 
-def rescore(tag: str, cases: Path) -> None:
+def rescore(tag: str, cases: Path, apply_rules: bool = False, out_tag: str | None = None) -> None:
+    from nebius_nvidia.match import adjust, verdict
     from nebius_nvidia.models import CaseRun
 
     path = Path("eval/results") / f"{tag}.json"
@@ -122,12 +123,22 @@ def rescore(tag: str, cases: Path) -> None:
         if "run" not in r:
             continue
         s = Scenario.load(cases / r["case"])
-        got = gold_statuses(CaseRun.model_validate(r["run"]))
+        run = CaseRun.model_validate(r["run"])
+        if apply_rules:
+            # Re-apply the current code rules and verdict to the saved model statuses ($0).
+            kind = {c.criterion_id: c.kind for c in run.criteria}
+            for m in run.matches:
+                m.status = adjust(kind[m.criterion_id], m.status)
+            run.verdict = verdict(run.triage, run.matches, run.criteria)
+            r["verdict_got"] = run.verdict
+            r["run"] = json.loads(run.model_dump_json())
+        got = gold_statuses(run)
         r["verdict_expected"] = s.expected.verdict
         r["gold"] = {g: {"expected": e, "got": got.get(g)} for g, e in s.expected.gold.items() if g in GOLD}
-    path.write_text(json.dumps(results, indent=1, default=str))
-    md = summarize(results, tag)
-    (path.with_suffix(".md")).write_text(md + "\n")
+    out = Path("eval/results") / f"{out_tag or tag}.json"
+    out.write_text(json.dumps(results, indent=1, default=str))
+    md = summarize(results, out_tag or tag)
+    out.with_suffix(".md").write_text(md + "\n")
     print(md)
 
 
@@ -141,9 +152,10 @@ def main() -> None:
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--tag", default="")
     ap.add_argument("--rescore", help="re-score a saved eval/results/<tag>.json against current scenarios ($0)")
+    ap.add_argument("--rules", action="store_true", help="with --rescore: re-apply current code rules and verdict")
     args = ap.parse_args()
     if args.rescore:
-        rescore(args.rescore, Path(args.cases))
+        rescore(args.rescore, Path(args.cases), apply_rules=args.rules, out_tag=args.tag or None)
         return
 
     dirs = sorted(d for d in Path(args.cases).iterdir() if (d / "notes.json").exists())

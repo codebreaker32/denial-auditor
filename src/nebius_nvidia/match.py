@@ -14,7 +14,7 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 from nebius_nvidia.facts import ChartFacts, Quoted, notes_block, verify_quote
-from nebius_nvidia.llm import NANO, structured
+from nebius_nvidia.llm import SUPER, structured
 from nebius_nvidia.models import ChartNote, Criterion, CriterionMatch, TriageResult, Verdict
 
 # Our own plain labels for the ordered study (not the AMA CPT descriptors).
@@ -47,7 +47,7 @@ class MatchDraft(BaseModel):
     rationale: str
 
 
-def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, dos: date, model: str = NANO,
+def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, dos: date, model: str = SUPER,
               tracker=None, cpt: str | None = None) -> CriterionMatch:
     if criterion.kind == "red_flag" and not facts.draft.red_flags:
         # Decided in code: with no verified red flags, a red-flag route is not relevant.
@@ -71,17 +71,10 @@ def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, d
     )
     evidence = [verify_quote(e, notes) for e in draft.evidence]
     status = draft.status
-    rationale = draft.rationale
     if status == "met" and not any(e.verified for e in evidence):
         status = "missing_documentation"
-    elif status == "not_met" and criterion.kind == "indication":
-        # An indication is one route to coverage; not qualifying for it doesn't block
-        # coverage by itself (the verdict still needs some route to be met).
-        status = "not_applicable"
-        rationale = f"Route not available for this patient: {rationale}"
-    elif status == "not_met" and criterion.kind == "documentation":
-        # A documentation rule can only be satisfied by adding records, never fail outright.
-        status = "missing_documentation"
+    status = adjust(criterion.kind, status)
+    rationale = draft.rationale
     return CriterionMatch(
         criterion_id=criterion.criterion_id,
         status=status,
@@ -92,21 +85,49 @@ def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, d
 
 
 def match_all(criteria: list[Criterion], notes: list[ChartNote], facts: ChartFacts, dos: date,
-              model: str = NANO, tracker=None, workers: int = 4, cpt: str | None = None) -> list[CriterionMatch]:
+              model: str = SUPER, tracker=None, workers: int = 4, cpt: str | None = None) -> list[CriterionMatch]:
     with ThreadPoolExecutor(workers) as pool:
         return list(pool.map(lambda c: match_one(c, notes, facts, dos, model, tracker, cpt), criteria))
 
 
-def verdict(triage: TriageResult, matches: list[CriterionMatch]) -> Verdict:
-    """Fixed rule: administrative → fix it; exclusion → not winnable; otherwise
-    any unmet criterion → don't appeal; any undocumented one → ask the physician; else appeal."""
+ROUTE_KINDS = {"indication", "red_flag", "duration"}
+
+
+def adjust(kind: str, status: str) -> str:
+    """Code rules applied on top of the model's status.
+
+    - A documentation rule can only be satisfied by adding records, so it is never not_met.
+    - A restriction (exclusion) bites only with evidence the case falls under it, so an
+      undocumented one is not_applicable rather than missing documentation.
+    """
+    if kind == "documentation" and status == "not_met":
+        return "missing_documentation"
+    if kind == "exclusion" and status == "missing_documentation":
+        return "not_applicable"
+    return status
+
+
+def verdict(triage: TriageResult, matches: list[CriterionMatch], criteria: list[Criterion] | None = None) -> Verdict:
+    """Fixed rule over the statuses (no model decides this).
+
+    Indications are alternative routes to coverage: an unmet indication only matters
+    when no route is met. Any other unmet rule blocks.
+      administrative → fix it; exclusion → not winnable;
+      a non-indication rule not met → don't appeal;
+      any rule missing documentation → ask the physician;
+      some route met → appeal; a route clearly not met → don't appeal; otherwise ask.
+    """
     if triage.route == "fix_checklist":
         return "fix_checklist"
     if triage.route == "not_winnable":
         return "not_winnable"
-    statuses = {m.status for m in matches}
-    if "not_met" in statuses:
+    kind = {c.criterion_id: c.kind for c in criteria or []}
+    if any(m.status == "not_met" and kind.get(m.criterion_id) != "indication" for m in matches):
         return "dont_appeal"
-    if "missing_documentation" in statuses or "met" not in statuses:
+    if any(m.status == "missing_documentation" for m in matches):
         return "doc_request"
-    return "appeal"
+    if any(m.status == "met" and kind.get(m.criterion_id, "indication") in ROUTE_KINDS for m in matches):
+        return "appeal"
+    if any(m.status == "not_met" for m in matches):
+        return "dont_appeal"
+    return "doc_request"
