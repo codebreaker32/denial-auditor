@@ -278,3 +278,19 @@ Estimated cost per routed case is ~$0.05 (NANO_ONLY ~$0.01). Check against the T
 **Not started:** Aetna resolver via Tavily (group B), Streamlit UI, Lightsail deploy + WebSocket test, prevention mode, drift cron, eval on all 30 + ablation, video, Devpost write-up.
 
 **Spend:** Token Factory ≈ $0.75 of $27 (plus the Super pilot still running) (see `.token_factory_spend.json`; check the dashboard); Tavily 8 of 4,125 credits.
+
+## Status at end of Thu Oct 22
+
+**Done today:**
+- Matching fixed: effect-based statuses (supports / blocks / not relevant / undocumented), red-flag guard in code, `adjust()` rules, route-aware `verdict()`. Super is the matcher. 24 clinical cases: triage 24/24, **verdict 20/24 (83%)**, gold criteria 93%, $0.021/case (`eval/results/super_clinical_v1_rules.md`). Re-run fixed case_021 and Aetna's 6-week rule (5/5 at criterion level).
+- Finding: Aetna CPB 0236 has a separate "evaluation prior to epidural injection" route; the pipeline correctly qualified synthetic Aetna patients whose plan was an injection. The scenarios were changed to a surgical-referral plan (`eval/make_scenarios.py`).
+- Aetna via Tavily (runtime search), CMS retries + list snapshot, live mode (passcode, limits), progress callback, Dockerfile, `scripts/deploy.sh up|down|status`. **Lightsail deploy verified** (HTTPS, health 200, Streamlit WebSocket renders), then deleted at wrap-up.
+- Design: PRODUCT.md written; team renamed **Road House**; user chose a **custom web frontend** (FastAPI + hand-built HTML/CSS/JS) and the visual direction **"Highlighter on photocopy"** (contract in `.impeccable/surfaces/web-index-html.md`, seed fdbf0a84, code-led).
+
+**Next (Fri):**
+1. Regenerate notes for **case_009 and case_010** (scenario changed, notes still describe an injection): `./.venv/bin/python eval/gen_notes.py --only case_009,case_010 --force`, then re-run group B.
+2. Build the custom frontend per the direction contract (read `~/.claude/skills/impeccable/reference/craft-floor.md` first), FastAPI API over `pipeline.run_case` and `demo/runs/`; then finish review + DESIGN.md.
+3. Precompute showcase runs (`scripts/precompute.py`), deploy, full 30-case eval + Nano ablation.
+4. Update README/CLAUDE.md/brief for team name Road House (still says Fine Print).
+
+**Shutdown check (wrap-up rule):** Lightsail container service deleted (`scripts/deploy.sh status` empty); no local servers or background jobs running.

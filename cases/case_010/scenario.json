@@ -40,7 +40,7 @@
   "neuro_exam": "deficit",
   "radiculopathy": "objective",
   "prior_imaging": [],
-  "plan_after_mri": "MRI results will decide between epidural steroid injection and surgical referral",
+  "plan_after_mri": "Spine surgery referral is under consideration pending MRI findings",
   "surgery_or_injection_considered": true
  },
  "expected": {

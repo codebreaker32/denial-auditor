@@ -126,7 +126,10 @@ def scenarios() -> list[Scenario]:
             Facts(age=rng.randint(38, 62), sex=rng.choice("FM"), onset=onset,
                   treatments=conservative(onset, dos, 5),
                   neuro_exam="deficit", radiculopathy="objective",
-                  plan_after_mri=rng.choice(PLANS_AFTER_MRI), surgery_or_injection_considered=True),
+                  # Surgical referral only: an injection plan would qualify under CPB 0236's separate
+                  # "evaluation prior to epidural injection" route (the pipeline found this).
+                  plan_after_mri=(rng.choice(PLANS_AFTER_MRI), "Spine surgery referral is under consideration pending MRI findings")[1],
+                  surgery_or_injection_considered=True),
             Expected(route="clinical_review", verdict="dont_appeal",
                      gold={"A1_radiculopathy_6_weeks": "not_met"},
                      why="Aetna requires no improvement after 6 weeks of conservative therapy for radiculopathy; the chart shows 5. "

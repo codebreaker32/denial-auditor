@@ -3,28 +3,28 @@
   "note_id": "case_013-n1",
   "date": "2026-06-07",
   "note_type": "initial_visit",
-  "author_role": "Physician",
-  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHe reports onset of low back pain on 06/06/2026. He denies any red flags such as trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficit. He started NSAIDs on 06/07/2026 and continues them today. Objective findings include diminished ankle reflex and L5/S1 weakness consistent with radiculopathy. Assessment: Lumbar radiculopathy, likely L5/S1. Plan: Continue NSAIDs, initiate physical therapy, and consider epidural steroid injection after further imaging."
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: He reports onset of low back pain on 06/06/2026. He describes mechanical low back pain radiating to the left buttock, worsened by prolonged sitting and flexion. He denies fever, weight loss, trauma, cancer history, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits.\nExam: Lumbar spine inspection normal, palpation reveals paraspinal tenderness left L4-L5. Straight leg raise positive at 40 degrees left. Exam shows diminished ankle reflex and L5/S1 weakness consistent with radiculopathy. Strength 5/0 elsewhere.\nAssessment: Acute lumbar radiculopathy, likely L5/S1, M54.16.\nPlan: Start NSAIDs today (06/07/2026). Initiate physical therapy starting 06/11/2026 for core strengthening and lumbar stabilization. Continue activity as tolerated. Follow up in 2 weeks."
  },
  {
   "note_id": "case_013-n2",
   "date": "2026-07-16",
   "note_type": "pt_note",
-  "author_role": "Physician",
-  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHe started NSAIDs on 06/07/2026 and continued them through 07/16/2026; there were no scheduled sessions, and response was partial. He attended physical therapy from 06/11/2026 to 07/16/2026 for 10 sessions with no improvement. On examination, his symptoms remain unchanged. Assessment: Persistent lumbar radiculopathy with partial response to NSAIDs and no improvement with PT. Plan: Consider obtaining MRI to localize level before epidural steroid injection."
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns for follow-up after completing prescribed NSAIDs and physical therapy. He reports ongoing low back pain with left leg radiculopathy, unchanged since last visit.\nExam: Similar to prior, with persistent diminished ankle reflex and L5/S1 weakness.\nAssessment: Lumbar radiculopathy with partial response to NSAIDs and no improvement after physical therapy.\nPlan: He was prescribed NSAIDs from 06/07/2026 to 07/16/2026, which provided partial relief. He completed a course of physical therapy from 06/11/2026 to 07/16/2026 for 10 sessions without improvement. Obtain lumbar MRI to further evaluate; consider spine surgery referral pending results."
  },
  {
   "note_id": "case_013-n3",
   "date": "2026-07-21",
   "note_type": "follow_up",
-  "author_role": "Physician",
-  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHe reports onset of low back pain on 06/06/2026. He denies any red flags such as trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficit. He started NSAIDs on 06/07/2026 and continued them through 07/16/2026; there were no scheduled sessions, and response was partial. He attended physical therapy from 06/11/2026 to 07/16/2026 for 10 sessions with no improvement. Objective findings include diminished ankle reflex and L5/S1 weakness consistent with radiculopathy. The plan is to obtain an MRI to localize the level before proceeding with a planned L4-L5 epidural steroid injection. Assessment: Ongoing radiculopathy awaiting imaging. Plan: Order MRI lumbar spine today."
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient reports continued low back pain and left leg radiculopathy despite completion of NSAIDs and physical therapy. He notes no new symptoms.\nExam: Unchanged, with diminished ankle reflex and L5/S1 weakness.\nAssessment: Persistent lumbar radiculopathy refractory to conservative management.\nPlan: He was prescribed NSAIDs from 06/07/2026 to 07/16/2026, which provided partial relief. He completed a course of physical therapy from 06/11/2026 to 07/16/2026 for 10 sessions without improvement. Lumbar MRI will be ordered to further evaluate. Spine surgery referral is under consideration pending MRI findings."
  },
  {
   "note_id": "case_013-n4",
   "date": "2026-07-31",
   "note_type": "imaging_order",
-  "author_role": "Physician",
-  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHe reports onset of low back pain on 06/06/2026. He denies any red flags such as trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficit. Objective findings include diminished ankle reflex and L5/S1 weakness consistent with radiculopathy. He started NSAIDs on 06/07/2026 and continued them through 07/16/2026; there were no scheduled sessions, and response was partial. He attended physical therapy from 06/11/2026 to 07/16/2026 for 10 sessions with no improvement. Today, an MRI of the lumbar spine was ordered to localize the level before a planned L4-L5 epidural steroid injection. Assessment: Awaiting MRI results. Plan: Await imaging, then proceed with injection as indicated."
+  "author_role": "clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns after decision to obtain lumbar MRI based on persistent radiculopathy lacking improvement with NSAIDs and physical therapy.\nExam: Unchanged, diminished ankle reflex and L5/S1 weakness.\nAssessment: Lumbar radiculopathy, likely L5/S1, M54.16.\nPlan: Lumbar MRI ordered today (07/31/2026). Results will guide further management, including possible spine surgery referral."
  }
 ]

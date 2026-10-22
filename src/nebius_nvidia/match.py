@@ -114,8 +114,8 @@ def verdict(triage: TriageResult, matches: list[CriterionMatch], criteria: list[
     when no route is met. Any other unmet rule blocks.
       administrative → fix it; exclusion → not winnable;
       a non-indication rule not met → don't appeal;
-      any rule missing documentation → ask the physician;
-      some route met → appeal; a route clearly not met → don't appeal; otherwise ask.
+      some route met → appeal, or ask the physician if anything is undocumented;
+      no route met and one clearly fails → don't appeal yet; otherwise ask.
     """
     if triage.route == "fix_checklist":
         return "fix_checklist"
@@ -124,10 +124,13 @@ def verdict(triage: TriageResult, matches: list[CriterionMatch], criteria: list[
     kind = {c.criterion_id: c.kind for c in criteria or []}
     if any(m.status == "not_met" and kind.get(m.criterion_id) != "indication" for m in matches):
         return "dont_appeal"
-    if any(m.status == "missing_documentation" for m in matches):
-        return "doc_request"
-    if any(m.status == "met" and kind.get(m.criterion_id, "indication") in ROUTE_KINDS for m in matches):
-        return "appeal"
+    route_met = any(m.status == "met" and kind.get(m.criterion_id, "indication") in ROUTE_KINDS for m in matches)
+    # An undocumented *route* is just an unused alternative, not a reason to chase the physician.
+    missing = any(m.status == "missing_documentation" and kind.get(m.criterion_id) != "indication" for m in matches)
+    if route_met:
+        return "doc_request" if missing else "appeal"
     if any(m.status == "not_met" for m in matches):
+        # No route qualifies and one clearly fails (e.g. 5 of 6 required weeks): more
+        # paperwork won't fix it, so don't appeal yet.
         return "dont_appeal"
     return "doc_request"

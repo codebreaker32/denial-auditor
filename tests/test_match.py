@@ -28,6 +28,10 @@ def case(*rules):
         ([("indication", "not_met"), ("indication", "not_applicable")], "dont_appeal"),
         # Something undocumented → ask the physician.
         ([("duration", "met"), ("documentation", "missing_documentation")], "doc_request"),
+        # Aetna: the only route fails on duration; another rule undocumented → still don't appeal yet.
+        ([("indication", "not_met"), ("documentation", "missing_documentation")], "dont_appeal"),
+        # An undocumented alternative route doesn't trigger a physician request.
+        ([("duration", "met"), ("indication", "missing_documentation")], "appeal"),
         # Nothing decisive → ask.
         ([("exclusion", "not_applicable")], "doc_request"),
     ],
