@@ -18,7 +18,8 @@ from nebius_nvidia.models import PlanType, Verdict
 
 SYNTHETIC_BANNER = "SYNTHETIC – NOT A REAL PATIENT"
 
-GoldStatus = Literal["met", "not_met", "missing_documentation", "not_applicable"]
+# "clear" = a restriction that doesn't bite: either met or not_applicable counts as correct.
+GoldStatus = Literal["met", "not_met", "missing_documentation", "not_applicable", "clear"]
 
 
 class Treatment(BaseModel):

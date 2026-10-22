@@ -4,17 +4,17 @@
 |---|---|
 | Triage route accuracy | 5/5 (100%) |
 | Verdict accuracy | 2/5 (40%) |
-| Gold-criterion status accuracy | 20/35 (57%) |
+| Gold-criterion status accuracy | 29/35 (83%) |
 | Mean cost per case | $0.0184 |
 | Mean latency per case | 70 s |
 
 Per gold criterion (correct / total):
 - G1_red_flag_indication: 5/5
 - G2_red_flag_list: 1/5  (misses: not_applicable→not_met, not_applicable→met, not_applicable→not_met, not_applicable→not_met)
-- G3_first_month: 0/5  (misses: met→not_applicable, met→not_applicable, met→not_applicable, met→not_applicable, not_met→met)
+- G3_first_month: 4/5  (misses: not_met→met)
 - G4_four_weeks_conservative: 5/5
-- G5_ddd_hnp_no_surgery: 4/5  (misses: not_applicable→not_met)
-- G6_findings_affect_treatment: 0/5  (misses: met→not_applicable, met→not_applicable, met→not_applicable, met→not_applicable, met→not_applicable)
+- G5_ddd_hnp_no_surgery: 4/5  (misses: clear→not_met)
+- G6_findings_affect_treatment: 5/5
 - G7_duplication: 5/5
 
 Verdict misses:

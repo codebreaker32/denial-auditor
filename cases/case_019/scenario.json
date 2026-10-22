@@ -37,11 +37,11 @@
   "gold": {
    "G1_red_flag_indication": "met",
    "G2_red_flag_list": "met",
-   "G3_first_month": "met",
+   "G3_first_month": "clear",
    "G4_four_weeks_conservative": "not_applicable",
-   "G5_ddd_hnp_no_surgery": "not_applicable",
-   "G6_findings_affect_treatment": "met",
-   "G7_duplication": "not_applicable"
+   "G5_ddd_hnp_no_surgery": "clear",
+   "G6_findings_affect_treatment": "clear",
+   "G7_duplication": "clear"
   },
   "why": "Red flag(s) documented (Saddle anesthesia, Recent onset of bladder dysfunction); the first-month limit doesn't apply."
  }

@@ -9,6 +9,7 @@ import json
 from datetime import date
 from pathlib import Path
 
+from nebius_nvidia.aetna import lumbar_mri_policy
 from nebius_nvidia.appeal import documentation_request, draft_appeal
 from nebius_nvidia.cms import cms
 from nebius_nvidia.cost import CostTracker
@@ -44,7 +45,9 @@ def resolve_policy(denial: Denial, practice_state: str | None) -> PolicyDoc:
         if not lcd:
             raise UnsupportedPolicy(f"No Medicare LCD configured for lumbar MRI in {practice_state!r}")
         return cms().lcd_on(lcd, denial.dos)
-    raise UnsupportedPolicy(f"Commercial policy lookup for {denial.payer_name!r} is not wired in yet")
+    if "aetna" in denial.payer_name.lower():
+        return lumbar_mri_policy()  # located at runtime with Tavily search
+    raise UnsupportedPolicy(f"Commercial policy lookup for {denial.payer_name!r} is not configured yet")
 
 
 def load_notes(case_dir: Path) -> list[ChartNote]:

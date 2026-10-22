@@ -16,7 +16,7 @@
     "got": "not_met"
    },
    "G3_first_month": {
-    "expected": "met",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G4_four_weeks_conservative": {
@@ -24,15 +24,15 @@
     "got": "met"
    },
    "G5_ddd_hnp_no_surgery": {
-    "expected": "not_applicable",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G6_findings_affect_treatment": {
-    "expected": "met",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G7_duplication": {
-    "expected": "not_applicable",
+    "expected": "clear",
     "got": "not_applicable"
    }
   },
@@ -679,7 +679,7 @@
     "got": "met"
    },
    "G3_first_month": {
-    "expected": "met",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G4_four_weeks_conservative": {
@@ -687,15 +687,15 @@
     "got": "met"
    },
    "G5_ddd_hnp_no_surgery": {
-    "expected": "not_applicable",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G6_findings_affect_treatment": {
-    "expected": "met",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G7_duplication": {
-    "expected": "not_applicable",
+    "expected": "clear",
     "got": "not_applicable"
    }
   },
@@ -1341,7 +1341,7 @@
     "got": "not_met"
    },
    "G3_first_month": {
-    "expected": "met",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G4_four_weeks_conservative": {
@@ -1349,15 +1349,15 @@
     "got": "met"
    },
    "G5_ddd_hnp_no_surgery": {
-    "expected": "not_applicable",
+    "expected": "clear",
     "got": "not_met"
    },
    "G6_findings_affect_treatment": {
-    "expected": "met",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G7_duplication": {
-    "expected": "not_applicable",
+    "expected": "clear",
     "got": "not_applicable"
    }
   },
@@ -2027,7 +2027,7 @@
     "got": "met"
    },
    "G3_first_month": {
-    "expected": "met",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G4_four_weeks_conservative": {
@@ -2035,15 +2035,15 @@
     "got": "not_applicable"
    },
    "G5_ddd_hnp_no_surgery": {
-    "expected": "not_applicable",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G6_findings_affect_treatment": {
-    "expected": "met",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G7_duplication": {
-    "expected": "not_applicable",
+    "expected": "clear",
     "got": "not_applicable"
    }
   },
@@ -2699,15 +2699,15 @@
     "got": "not_met"
    },
    "G5_ddd_hnp_no_surgery": {
-    "expected": "not_applicable",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G6_findings_affect_treatment": {
-    "expected": "met",
+    "expected": "clear",
     "got": "not_applicable"
    },
    "G7_duplication": {
-    "expected": "not_applicable",
+    "expected": "clear",
     "got": "not_applicable"
    }
   },

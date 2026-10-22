@@ -109,3 +109,29 @@ def test_token_requested_once(cms_client):
 def test_find_lcds(cms_client):
     assert [r["document_display_id"] for r in cms_client.find_lcds("lumbar mri")] == ["L34220"]
     assert {r["document_display_id"] for r in cms_client.find_lcds("lumbar mri", include_retired=True)} == {"L34220", "L37281"}
+
+
+def test_list_falls_back_to_snapshot_when_api_down(cms_fixture, tmp_path, monkeypatch):
+    import time as _time
+
+    monkeypatch.setattr(_time, "sleep", lambda s: None)
+    ok = CmsCoverage(http=httpx.Client(base_url="https://x/v1", transport=httpx.MockTransport(
+        lambda r: httpx.Response(200, json={"data": cms_fixture["list"]}))), cache_dir=tmp_path)
+    assert len(ok.list_lcds()) == 3  # writes the snapshot
+    down = CmsCoverage(http=httpx.Client(base_url="https://x/v1", transport=httpx.MockTransport(
+        lambda r: httpx.Response(504))), cache_dir=tmp_path)
+    assert len(down.list_lcds()) == 3
+
+
+def test_retries_transient_errors(cms_fixture, tmp_path, monkeypatch):
+    import time as _time
+
+    monkeypatch.setattr(_time, "sleep", lambda s: None)
+    codes = iter([504, 502, 200])
+
+    def handler(r):
+        code = next(codes)
+        return httpx.Response(code, json={"data": cms_fixture["list"]} if code == 200 else {})
+
+    c = CmsCoverage(http=httpx.Client(base_url="https://x/v1", transport=httpx.MockTransport(handler)), cache_dir=tmp_path)
+    assert len(c.list_lcds()) == 3

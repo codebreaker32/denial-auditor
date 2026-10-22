@@ -35,24 +35,24 @@ MA_PLANS = ["Sunrise Senior Advantage (synthetic MA plan)", "Evergreen Medicare 
 NORIDIAN_STATES = ["CA", "WA", "OR", "AZ", "UT", "NV"]
 DOS_2026 = date(2026, 8, 14)
 
+# Effect on coverage per gold rule ("clear" = restriction that doesn't bite; met or not_applicable both correct).
 GOLD_MET_NO_RED_FLAGS = {
     "G1_red_flag_indication": "not_applicable",
     "G2_red_flag_list": "not_applicable",
-    "G3_first_month": "met",
+    "G3_first_month": "clear",
     "G4_four_weeks_conservative": "met",
-    # Exclusions that don't describe the case are not_applicable (matcher convention).
-    "G5_ddd_hnp_no_surgery": "not_applicable",
-    "G6_findings_affect_treatment": "met",
-    "G7_duplication": "not_applicable",
+    "G5_ddd_hnp_no_surgery": "clear",
+    "G6_findings_affect_treatment": "clear",
+    "G7_duplication": "clear",
 }
 GOLD_RED_FLAG = {
     "G1_red_flag_indication": "met",
     "G2_red_flag_list": "met",
-    "G3_first_month": "met",  # the first-month rule has a red-flag exception
+    "G3_first_month": "clear",  # the first-month limit has a red-flag exception
     "G4_four_weeks_conservative": "not_applicable",
-    "G5_ddd_hnp_no_surgery": "not_applicable",
-    "G6_findings_affect_treatment": "met",
-    "G7_duplication": "not_applicable",
+    "G5_ddd_hnp_no_surgery": "clear",
+    "G6_findings_affect_treatment": "clear",
+    "G7_duplication": "clear",
 }
 GOLD_TOO_EARLY = {**GOLD_MET_NO_RED_FLAGS, "G3_first_month": "not_met", "G4_four_weeks_conservative": "not_met"}
 

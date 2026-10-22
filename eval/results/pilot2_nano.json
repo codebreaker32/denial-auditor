@@ -1,0 +1,1319 @@
+[
+ {
+  "case": "case_001",
+  "group": "A_ma_met",
+  "error": "HTTPStatusError: Server error '504 Gateway Timeout' for url 'https://api.coverage.cms.gov/v1/reports/local-coverage-final-lcds/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504"
+ },
+ {
+  "case": "case_002",
+  "group": "A_ma_met",
+  "error": "HTTPStatusError: Server error '504 Gateway Timeout' for url 'https://api.coverage.cms.gov/v1/reports/local-coverage-final-lcds/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504"
+ },
+ {
+  "case": "case_015",
+  "group": "C_ma_xray_demand",
+  "error": "HTTPStatusError: Server error '504 Gateway Timeout' for url 'https://api.coverage.cms.gov/v1/reports/local-coverage-final-lcds/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504"
+ },
+ {
+  "case": "case_018",
+  "group": "D_red_flag_early",
+  "route_expected": "clinical_review",
+  "route_got": "clinical_review",
+  "verdict_expected": "appeal",
+  "verdict_got": "dont_appeal",
+  "gold": {
+   "G1_red_flag_indication": {
+    "expected": "met",
+    "got": "met"
+   },
+   "G2_red_flag_list": {
+    "expected": "met",
+    "got": "met"
+   },
+   "G3_first_month": {
+    "expected": "clear",
+    "got": "not_applicable"
+   },
+   "G4_four_weeks_conservative": {
+    "expected": "not_applicable",
+    "got": "not_applicable"
+   },
+   "G5_ddd_hnp_no_surgery": {
+    "expected": "clear",
+    "got": "not_applicable"
+   },
+   "G6_findings_affect_treatment": {
+    "expected": "clear",
+    "got": "not_applicable"
+   },
+   "G7_duplication": {
+    "expected": "clear",
+    "got": "not_applicable"
+   }
+  },
+  "cost_usd": 0.00886,
+  "latency_s": 130.7,
+  "unverified_facts": [],
+  "run": {
+   "case_id": "case_018",
+   "denial": {
+    "payer_name": "Sunrise Senior Advantage",
+    "plan_type": "MA",
+    "cpt": "72148",
+    "icd10": [
+     "M54.50"
+    ],
+    "dos": "2026-08-25",
+    "notice_date": "2026-08-25",
+    "carc": [
+     "50"
+    ],
+    "reason_text": "Not medically necessary: imaging within the first month of symptoms.",
+    "practice_state": "UT",
+    "extracted_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   },
+   "triage": {
+    "reason_class": "clinical",
+    "route": "clinical_review",
+    "method": "carc_table",
+    "checklist": [],
+    "explanation": "Medical necessity"
+   },
+   "policy": {
+    "source": "cms-lcd",
+    "policy_id": "L34220",
+    "version": "40",
+    "title": "Lumbar MRI",
+    "effective_from": "2025-10-23",
+    "effective_to": null,
+    "retired": false,
+    "version_basis": "api-versioned",
+    "url": "https://www.cms.gov/medicare-coverage-database/view/lcd.aspx?lcdid=34220&ver=40",
+    "fetched_at": "2026-10-21T18:41:25.616428",
+    "fetched_via": "cms-api",
+    "text": "Coverage Indications, Limitations, and/or Medical Necessity\n\nMagnetic Resonance Imaging (MRI) is a noninvasive method of imaging body structures based on the distribution of fixed water and other hydrogen-rich molecules in the human body. MRI uses a powerful magnet to align hydrogen atoms within the patient's soft tissues. As the nuclei return from excitation to equilibrium, the MRI receiver coil receives radio frequency wave signals that are transformed by the computer into diagnostic images. MRI produces cross sectional and 3-D images of soft tissues. Because bone contains little water (hydrogen nuclei), bone is relatively invisible to MRI. Blood is also relatively invisible because the hydrogen nuclei are moving in the blood stream.\n\nMRI contrast agents can improve the sensitivity and/or specificity of an image, by altering inherent tissue response to magnetic fields. The contrast agent most commonly used is gadolinium.\n\nMRI has proven useful in diagnosing cerebral infarctions, tumors, abscesses, edema, hemorrhage, nerve fiber demyelination (as in multiple sclerosis), and other disorders that increase fluid content of the affected tissues.\n\nMRI of the spinal canal has the advantage of noninvasive visualization of the spinal cord.\n\nMRI can:\n\n\u2022 Differentiate solid from cystic tumors,\n\n\u2022 Diagnose and localize spinal cord compression;\n\n\u2022 Diagnose syringomyelia (progressive, chronic sensory disturbance, atrophy and spasticity of the spinal cord), disc disease, and any altered relationship between vertebral bodies, discs, spinal cord and nerve roots;\n\n\u2022 Detect congenital spinal dysraphism (failure of fusion of parts along the dorsal midline of the spinal cord);\n\n\u2022 Provide early detection of osteomyelitis, and\n\n\u2022 Detect spinal cord abnormalities associated with osteomyelitis.\n\nCoverage is limited to MRI units that have received FDA pre-market approval. Such units must be operated within the parameters specified by the approval.\n\nContrast is indicated for studying the central nervous system for metastatic disease, inflammatory disease, recurrent tumor versus scar, differentiation of microvascular from macrovascular infarction, and selected cases of complex vascular disease. Within the study of the spine, contrast also is indicated to differentiate recurrent disc versus scar or granulation tissue, spinal cord neoplasm, any case of myelopathy, and inflammatory cord disease.\n\nHistory and clinical findings are critical factors to determine when a lumbar MRI is needed in order to efficiently manage low back pain and related disorders.\n\nLumbar MRI may be indicated for a patient with a \u201cred-flag\u201d condition , such as a suspected tumor, infection, herniated intervertebral disc with nerve compression, or a major neurological problem. The MRI test result may be needed to evaluate these conditions to determine the need for surgery or other aggressive therapy, such as a work-up for metastatic cancer.\n\n\"Red flags\" are identified through an appropriate history plus a physical examination that typically includes evaluating muscle strength, limb circumference, reflexes, sensation, straight leg raise, and sitting knee extension tests.\n\n\"Red flags\" include:\n\n\u2022 Major trauma\n\n\u2022 Minor trauma in a potentially osteoporotic patient\n\n\u2022 History of cancer\n\n\u2022 Fever\n\n\u2022 Chills\n\n\u2022 Unexplained weight loss\n\n\u2022 Recent bacterial infection\n\n\u2022 IV drug abuse\n\n\u2022 Immune suppression\n\n\u2022 Pain that worsens when supine or at night\n\n\u2022 Saddle anesthesia\n\n\u2022 Recent onset of bladder dysfunction\n\n\u2022 Clinically significant or progressive neurologic deficit in the lower extremity\n\n\u2022 Unexpected laxity of the anal sphincter\n\n\u2022 Perianal or perineal sensory loss,\n\n\u2022 Clinically significant motor weakness, or\n\n\u2022 Other nerve root compromise\n\nEighty (80) to ninety (90) percent of patients with low back pain improve one month after symptom onset even without treatment. Therefore, spinal imaging tests are not generally necessary during the first month of symptoms except when a \"red flag\" (suggesting a medically emergent condition) is noted on the medical history and physical examination. For a \"non-red flag\" condition, the MRI may be appropriate after 1 month of symptoms.\n\nFor example, for a patient with low back pain syndrome where there is no known injury, history of cancer, or septic disorder and there are no symptoms or signs suggesting nerve root disorder or spinal cord dysfunction (i.e. no \"red flags\"), MRI will be covered only if the patient has not responded to a reasonable trial of conservative management lasting at least four weeks.\n\nIf a patient's limitations due to low back symptoms do not improve within four weeks, findings on reassessment may reveal an indication for a MRI. However, since MRI changes are common in asymptomatic patients, MRI abnormalities alone do not retrospectively validate the need for the test without other supporting clinical rationale.\n\nA lumbar MRI used to evaluate uncomplicated degenerative disc disease or herniated nucleus pulposus is not considered medically necessary when a surgical intervention or other aggressive treatment (e.g. intervertebral joint injection) is not under consideration.\n\nWhen a lumbar MRI is ordered, Medicare expects that the information gained from the test will be used for medical decision-making. When the findings will not affect the treatment choices, the test is not reasonable or necessary.\n\nCertain uses of lumbar MRI are considered investigational and are therefore not covered by Medicare. These include the measurement of blood flow, spectroscopy, imaging of cortical bone and calcifications, and for procedures involving spatial resolution of bone or calcifications.\n\nA lumbar MRI that is a duplication of other imaging studies (such as a spinal CT scan) may be unreasonable or unnecessary. A lumbar MRI, however, could be complementary to a lumbar CT if there are inconclusive findings on a CT scan. Conversely, a lumbar CT may be warranted following an MRI study if the MRI study is found to be inconclusive. Documentation should support the medical necessity for the need for both studies.\n\nThe payment for a single lumbar MRI procedure includes two (2) and three (3) sequences.\n\nContraindications and limitations of lumbar MRI testing include:\n\n\u2022 Patients with an allergy to contrast media,\n\n\u2022 The effects upon a fetus are unknown at this time; therefore, pregnancy is to be handled at the discretion of the primary doctor,\n\n\u2022 When the technical component is performed without the professional component.\n\nPayment for more than one professional component (PC) of a single lumbar MRI:\n\nMedicare will not pay twice for service that is required only once to diagnose or treat an illness or injury. Typically, this A/B MAC will pay for only one PC. This A/B MAC may pay for a second PC when the additional physician's expertise is necessary and reasonable to diagnose or treat the patient, such as to clarify a questionable finding. The physician performing the initial PC must have a valid reason to require another physician's expertise, such as to interpret a confusing MRI. The second physician's knowledge and expertise must be significantly greater than that of the first reader, and it must contribute substantially to the interpretation.\n\nMultiple PCs of a single MRI in institutional settings:\n\nIn hospital settings, the physicians involved with MRI interpretations should reach an agreement among themselves as to who should bill Medicare for MRI interpretations and reports. If the physicians involved cannot resolve these issues among themselves, this A/B MAC will pay for the interpretation and report that directly contributes to the diagnosis and treatment of the individual patient. Typically, this will be the MRI interpretation and report that is performed simultaneously with the evaluation and management of the patient.\n\nEach payable interpretation must include a complete, written report similar to one that is prepared by a specialist in the field. The content of the written report must address the relevant clinical issues, available comparative data, and test findings. The format of the report must be separately identifiable. It may be included under a separate heading within the clinical record.\n\nMulti-position MRI (reclining, standing)\n\nMedicare does not provide additional payment for multiple MRI\u2019s such as in the reclining and upright positions. Bill for one unit of the MRI service.\n\nDocumentation Requirements\n\nDocumentation Requirements\n\nSupportive documentation evidencing the condition and treatment is expected to be documented in the medical record and be available upon request.\n\nThe patient\u2019s medical record must be legible and clearly indicate the necessity and reasonableness of the service.\n\nThe documentation must clearly support the ICD-10-CM code(s) reported on the claim.\n\nAn attending/treating physician\u2019s order is required for each test. The order must be properly signed and dated.\n\nLumbar MRI abnormalities alone do not validate the need for the test without other supporting clinical rationale. Radiologists and/or ordering physicians should include sufficient clinical information in the report to justify its necessity.\n\nThe clinical findings and relevant prior treatment that support the need for the MRI must be documented in the MRI report or clinical record and made available to the contractor upon request.\n\nThe medical record of the referring physician must support a contemplated diagnosis or treatment change derived from the MRI findings. The contractor may request medical records from the referring physician if the radiologist\u2019s documentation does not validate that the service is reasonable and necessary.\n\nAccording to national regulations, clinics which are (a) not physician owned and which are (b) billing Medicare primarily for diagnostic tests may be required to enroll as IDTFs. For example, a nonphysician owner who establishes a Magnetic Resonance Imaging clinic by leasing office space, equipment, and hiring technicians, and hires a retired ophthalmologist to provide off-site (general) supervision of diagnostic testing without treatment would be more appropriately enrolled as an IDTF rather than merely billing all services through the physician's PIN.\n\nUtilization Guidelines\n\nNormally only one lumbar MRI is sufficient to diagnose the patient's condition. However, a second lumbar MRI, for the same patient, may be allowed providing the documentation indicates that comparative test results were needed to make a more definitive treatment decision.\n\nPayment will be allowed for multiple scans of different areas of the body performed on the same day for the same patient when reasonable and necessary.",
+    "sha256": "a9a4fd4dfbde4c6c6f18819eeb08f44a63837b4a0193d44254b6a9472e495f96"
+   },
+   "criteria": [
+    {
+     "criterion_id": "C1",
+     "doc_id": "L34220v40",
+     "summary": "Lumbar MRI may be indicated for patients with red-flag conditions.",
+     "verbatim_span": "Lumbar MRI may be indicated for a patient with a \u201cred-flag\u201d condition , such as a suspected tumor, infection, herniated intervertebral disc with nerve compression, or a major neurological problem.",
+     "kind": "indication",
+     "applies_when": "patient has a red-flag condition (suspected tumor, infection, herniated disc with nerve compression, or major neurological problem)",
+     "span_start": 2572,
+     "span_end": 2768,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C2",
+     "doc_id": "L34220v40",
+     "summary": "For non-red-flag conditions, lumbar MRI may be appropriate after 1 month of symptoms.",
+     "verbatim_span": "For a \"non-red flag\" condition, the MRI may be appropriate after 1 month of symptoms.",
+     "kind": "indication",
+     "applies_when": "patient has a non-red-flag condition and symptoms have persisted for at least 1 month",
+     "span_start": 4094,
+     "span_end": 4179,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C3",
+     "doc_id": "L34220v40",
+     "summary": "Contrast is indicated for studying CNS for metastatic disease, inflammatory disease, recurrent tumor vs scar, microvascular vs macrovascular infarction, or selected complex vascular disease.",
+     "verbatim_span": "Contrast is indicated for studying the central nervous system for metastatic disease, inflammatory disease, recurrent tumor versus scar, differentiation of microvascular from macrovascular infarction, and selected cases of complex vascular disease.",
+     "kind": "indication",
+     "applies_when": "studying CNS for metastatic disease, inflammatory disease, recurrent tumor vs scar, differentiation of microvascular from macrovascular infarction, or selected complex vascular disease",
+     "span_start": 1959,
+     "span_end": 2207,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C4",
+     "doc_id": "L34220v40",
+     "summary": "Within spine study, contrast is indicated to differentiate recurrent disc vs scar/granulation tissue, spinal cord neoplasm, myelopathy, or inflammatory cord disease.",
+     "verbatim_span": "Within the study of the spine, contrast also is indicated to differentiate recurrent disc versus scar or granulation tissue, spinal cord neoplasm, any case of myelopathy, and inflammatory cord disease.",
+     "kind": "indication",
+     "applies_when": "evaluating spine to differentiate recurrent disc vs scar/granulation tissue, spinal cord neoplasm, any myelopathy, or inflammatory cord disease",
+     "span_start": 2208,
+     "span_end": 2409,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C5",
+     "doc_id": "L34220v40",
+     "summary": "List of red-flag conditions that indicate need for lumbar MRI.",
+     "verbatim_span": "\"Red flags\" include:\n\n\u2022 Major trauma\n\n\u2022 Minor trauma in a potentially osteoporotic patient\n\n\u2022 History of cancer\n\n\u2022 Fever\n\n\u2022 Chills\n\n\u2022 Unexplained weight loss\n\n\u2022 Recent bacterial infection\n\n\u2022 IV drug abuse\n\n\u2022 Immune suppression\n\n\u2022 Pain that worsens when supine or at night\n\n\u2022 Saddle anesthesia\n\n\u2022 Recent onset of bladder dysfunction\n\n\u2022 Clinically significant or progressive neurologic deficit in the lower extremity\n\n\u2022 Unexpected laxity of the anal sphincter\n\n\u2022 Perianal or perineal sensory loss,\n\n\u2022 Clinically significant motor weakness, or\n\n\u2022 Other nerve root compromise",
+     "kind": "red_flag",
+     "applies_when": null,
+     "span_start": 3171,
+     "span_end": 3742,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C6",
+     "doc_id": "L34220v40",
+     "summary": "Spinal imaging not generally necessary during first month of symptoms unless a red flag is present.",
+     "verbatim_span": "Therefore, spinal imaging tests are not generally necessary during the first month of symptoms except when a \"red flag\" (suggesting a medically emergent condition) is noted on the medical history and physical examination.",
+     "kind": "duration",
+     "applies_when": "first month of symptoms and no red flag",
+     "span_start": 3872,
+     "span_end": 4093,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C7",
+     "doc_id": "L34220v40",
+     "summary": "MRI covered only if patient has not responded to a reasonable trial of conservative management lasting at least four weeks (for non-red-flag low back pain).",
+     "verbatim_span": "For example, for a patient with low back pain syndrome where there is no known injury, history of cancer, or septic disorder and there are no symptoms or signs suggesting nerve root disorder or spinal cord dysfunction (i.e. no \"red flags\"), MRI will be covered only if the patient has not responded to a reasonable trial of conservative management lasting at least four weeks.",
+     "kind": "duration",
+     "applies_when": "patient with low back pain syndrome, no known injury, no cancer, no septic disorder, no red flags",
+     "span_start": 4181,
+     "span_end": 4557,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C8",
+     "doc_id": "L34220v40",
+     "summary": "If low back symptoms do not improve within four weeks, reassessment may indicate need for MRI.",
+     "verbatim_span": "If a patient's limitations due to low back symptoms do not improve within four weeks, findings on reassessment may reveal an indication for a MRI.",
+     "kind": "duration",
+     "applies_when": "limitations due to low back symptoms not improved within four weeks",
+     "span_start": 4559,
+     "span_end": 4705,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C9",
+     "doc_id": "L34220v40",
+     "summary": "Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.",
+     "verbatim_span": "Documentation should support the medical necessity for the need for both studies.",
+     "kind": "documentation",
+     "applies_when": null,
+     "span_start": 6012,
+     "span_end": 6093,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C10",
+     "doc_id": "L34220v40",
+     "summary": "Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.",
+     "verbatim_span": "Supportive documentation evidencing the condition and treatment is expected to be documented in the medical record and be available upon request.",
+     "kind": "documentation",
+     "applies_when": null,
+     "span_start": 8477,
+     "span_end": 8622,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C11",
+     "doc_id": "L34220v40",
+     "summary": "Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.",
+     "verbatim_span": "Lumbar MRI abnormalities alone do not validate the need for the test without other supporting clinical rationale. Radiologists and/or ordering physicians should include sufficient clinical information in the report to justify its necessity.\n\nThe clinical findings and relevant prior treatment that support the need for the MRI must be documented in the MRI report or clinical record and made available to the contractor upon request.\n\nThe medical record of the referring physician must support a contemplated diagnosis or treatment change derived from the MRI findings.",
+     "kind": "documentation",
+     "applies_when": null,
+     "span_start": 8938,
+     "span_end": 9507,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C12",
+     "doc_id": "L34220v40",
+     "summary": "Lumbar MRI not medically necessary for uncomplicated degenerative disc disease or herniated nucleus pulposus when surgery/aggressive treatment not under consideration.",
+     "verbatim_span": "A lumbar MRI used to evaluate uncomplicated degenerative disc disease or herniated nucleus pulposus is not considered medically necessary when a surgical intervention or other aggressive treatment (e.g. intervertebral joint injection) is not under consideration.",
+     "kind": "exclusion",
+     "applies_when": "evaluating uncomplicated degenerative disc disease or herniated nucleus pulposus without surgical/interventional treatment under consideration",
+     "span_start": 4894,
+     "span_end": 5156,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C13",
+     "doc_id": "L34220v40",
+     "summary": "MRI not reasonable or necessary if findings will not affect treatment choices.",
+     "verbatim_span": "When the findings will not affect the treatment choices, the test is not reasonable or necessary.",
+     "kind": "exclusion",
+     "applies_when": "findings will not affect treatment choices",
+     "span_start": 5289,
+     "span_end": 5386,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C14",
+     "doc_id": "L34220v40",
+     "summary": "Certain investigative MRI uses (blood flow measurement, spectroscopy, cortical bone imaging, spatial resolution of bone/calcifications) are not covered.",
+     "verbatim_span": "Certain uses of lumbar MRI are considered investigational and are therefore not covered by Medicare. These include the measurement of blood flow, spectroscopy, imaging of cortical bone and calcifications, and for procedures involving spatial resolution of bone or calcifications.",
+     "kind": "exclusion",
+     "applies_when": "MRI used for measurement of blood flow, spectroscopy, imaging of cortical bone/calcifications, or spatial resolution of bone/calcifications",
+     "span_start": 5388,
+     "span_end": 5667,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C15",
+     "doc_id": "L34220v40",
+     "summary": "MRI that duplicates other imaging studies (e.g., spinal CT) may be unreasonable or unnecessary.",
+     "verbatim_span": "A lumbar MRI that is a duplication of other imaging studies (such as a spinal CT scan) may be unreasonable or unnecessary.",
+     "kind": "exclusion",
+     "applies_when": "MRI duplicates other imaging studies (such as spinal CT)",
+     "span_start": 5669,
+     "span_end": 5791,
+     "span_verified": true
+    }
+   ],
+   "matches": [
+    {
+     "criterion_id": "C1",
+     "status": "met",
+     "evidence": [
+      {
+       "note_id": "case_018-n1",
+       "quote": "Assessment: Acute low back pain, likely mechanical, with red flags for malignancy given cancer history and nocturnal pain.",
+       "start": 539,
+       "end": 661,
+       "verified": true
+      },
+      {
+       "note_id": "case_018-n2",
+       "quote": "Assessment: Ongoing mechanical low back pain with red flags for malignancy.",
+       "start": 404,
+       "end": 479,
+       "verified": true
+      }
+     ],
+     "rationale": "The patient has a known cancer history and nocturnal pain, which meet the policy\u2019s red\u2011flag indication for lumbar MRI.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C2",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_018-n1",
+       "quote": "History of cancer.",
+       "start": 132,
+       "end": 150,
+       "verified": true
+      },
+      {
+       "note_id": "case_018-n1",
+       "quote": "Low back pain began on 07/19/2026.",
+       "start": 79,
+       "end": 113,
+       "verified": true
+      }
+     ],
+     "rationale": "The patient has a documented cancer history (a red flag), so the rule that applies only to non\u2011red\u2011flag conditions is not applicable.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C3",
+     "status": "met",
+     "evidence": [
+      {
+       "note_id": "case_018-n1",
+       "quote": "Assessment: Acute low back pain, likely mechanical, with red flags for malignancy given cancer history and nocturnal pain.",
+       "start": 539,
+       "end": 661,
+       "verified": true
+      },
+      {
+       "note_id": "case_018-n3",
+       "quote": "MRI to evaluate for spinal metastasis given cancer history.",
+       "start": 548,
+       "end": 607,
+       "verified": true
+      }
+     ],
+     "rationale": "The patient\u2019s cancer history and the ordered lumbar MRI to evaluate for spinal metastasis align with the rule\u2019s indication for CNS imaging of metastatic disease, supporting coverage.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C4",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The rule governs use of contrast for specific spinal pathologies that are not documented in this patient's presentation, so it does not apply to the ordered non\u2011contrast lumbar MRI. Evidence: case_018-n1 \u2013 \"Assessment: Acute low back pain, likely mechanical, with red flags for malignancy given cancer history and nocturnal pain.\" case_018-n2 \u2013 \"Assessment: Ongoing mechanical low back pain with red flags for malignancy.\" case_018-n3 \u2013 \"Assessment: Chronic low back pain, red flags present, prior lumbar imaging none.\"",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C5",
+     "status": "met",
+     "evidence": [
+      {
+       "note_id": "case_018-n1",
+       "quote": "History of cancer.",
+       "start": 132,
+       "end": 150,
+       "verified": true
+      },
+      {
+       "note_id": "case_018-n1",
+       "quote": "Pain that worsens when supine or at night.",
+       "start": 151,
+       "end": 193,
+       "verified": true
+      }
+     ],
+     "rationale": "The patient has documented red\u2011flag features (history of cancer and nocturnal pain) that satisfy the red\u2011flag coverage pathway.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C6",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_018-n1",
+       "quote": "Assessment: Acute low back pain, likely mechanical, with red flags for malignancy given cancer history and nocturnal pain.",
+       "start": 539,
+       "end": 661,
+       "verified": true
+      },
+      {
+       "note_id": "case_018-n2",
+       "quote": "Assessment: Ongoing mechanical low back pain with red flags for malignancy.",
+       "start": 404,
+       "end": 479,
+       "verified": true
+      },
+      {
+       "note_id": "case_018-n3",
+       "quote": "red flags present",
+       "start": 440,
+       "end": 457,
+       "verified": true
+      }
+     ],
+     "rationale": "The patient\u2019s symptom duration exceeds one month and red flags are present, so the first\u2011month/no\u2011red\u2011flag rule is not applicable.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C7",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_018-n1",
+       "quote": "History of cancer.",
+       "start": 132,
+       "end": 150,
+       "verified": true
+      },
+      {
+       "note_id": "case_018-n3",
+       "quote": "Assessment: Chronic low back pain, red flags present, prior lumbar imaging none.",
+       "start": 405,
+       "end": 485,
+       "verified": true
+      }
+     ],
+     "rationale": "The patient has a documented cancer history (a red flag), so the policy's 'no red flags' requirement is not met and the rule does not apply to this case.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C8",
+     "status": "met",
+     "evidence": [
+      {
+       "note_id": "case_018-n2",
+       "quote": "Low back pain began on 07/19/2026 and persists.",
+       "start": 96,
+       "end": 143,
+       "verified": true
+      },
+      {
+       "note_id": "case_018-n3",
+       "quote": "He reports ongoing discomfort worse at night.",
+       "start": 113,
+       "end": 158,
+       "verified": true
+      }
+     ],
+     "rationale": "The patient\u2019s low back pain has persisted for over four weeks without improvement, meeting the duration criterion that qualifies for MRI coverage.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C9",
+     "status": "met",
+     "evidence": [
+      {
+       "note_id": "case_018-n1",
+       "quote": "Assessment: Acute low back pain, likely mechanical, with red flags for malignancy given cancer history and nocturnal pain.",
+       "start": 539,
+       "end": 661,
+       "verified": true
+      }
+     ],
+     "rationale": "The documented cancer history and nocturnal pain constitute red flags that justify ordering the lumbar MRI to evaluate for spinal metastasis, meeting the documentation requirement for medical necessity.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C10",
+     "status": "not_met",
+     "evidence": [],
+     "rationale": "The chart does not document any documented conservative treatment, failing the policy's requirement for supportive documentation of condition and treatment.\\n\\nEVIDENCE:\\n\\n- note_id: case_018-n1\\n  quote: Plan: Continue conservative measures with activity modification, acetaminophen as needed.\\n\\n- note_id: case_018-n2\\n  quote: Plan: Continue current symptomatic management.\\n\\n- note_id: case_018-n3\\n  quote: No conservative treatments have been initiated to date.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C11",
+     "status": "met",
+     "evidence": [
+      {
+       "note_id": "case_018-n1",
+       "quote": "MRI to evaluate for spinal metastasis given cancer history.",
+       "start": 752,
+       "end": 811,
+       "verified": true
+      },
+      {
+       "note_id": "case_018-n2",
+       "quote": "MRI to evaluate for spinal metastasis given cancer history.",
+       "start": 527,
+       "end": 586,
+       "verified": true
+      },
+      {
+       "note_id": "case_018-n3",
+       "quote": "Order lumbar MRI today.",
+       "start": 608,
+       "end": 631,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart documents cancer history and nocturnal pain as red flags and explicitly plans MRI to assess for spinal metastasis, fulfilling the policy\u2019s documentation requirement for supporting clinical rationale.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C12",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The MRI is ordered to assess possible spinal metastasis, not to evaluate uncomplicated degenerative disc disease or a herniated nucleus pulposus without surgical consideration, so the exclusion does not govern coverage here. This is reflected in the order note that the MRI is intended to evaluate for spinal metastasis given the cancer history.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C13",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The chart indicates the MRI is ordered to evaluate for spinal metastasis, implying the findings would affect treatment decisions, so the exclusion condition is not met and the rule does not apply to coverage in this case. This is the finding relevant to coverage determination for billing purposes follows up on the initial assessment performed on 07/20/2026 and supports the ordering of imaging for suspected spinal metastasis, confirming the patient\u2019s red\u2011flag status and the need for further evaluation. Additionally, the ordered lumbar MRI today is documented as a single study with no documented repeat imaging, satisfying the non\u2011redundant study requirement of the policy for lumbar spine MRI without contrast. Furthermore, the chart confirms a symptom duration of 37 days, which meets the minimum duration threshold for consideration of chronic low back pain in the context of red\u2011flag evaluation, thereby reinforcing the appropriateness of immediate imaging given the cancer history and nocturnal pain pattern observed on 07/19/2026. Finally, the absence of documented conservative treatment prior to imaging further justifies the imaging order under the red\u2011flag pathway, aligning with policy expectations for patients with cancer history and concerning pain characteristics. No documentation exists indicating that the imaging findings will not influence treatment decisions, which would be required for the exclusion to apply.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C14",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_018-n3",
+       "quote": "MRI to evaluate for spinal metastasis given cancer history.",
+       "start": 548,
+       "end": 607,
+       "verified": true
+      }
+     ],
+     "rationale": "The exclusion applies only to measurement of blood flow, spectroscopy, imaging of cortical bone/calcifications, or spatial resolution of bone/calcifications, none of which are part of the ordered lumbar MRI for metastasis evaluation.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C15",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The exclusion for duplicate imaging does not apply because no prior lumbar imaging or spinal CT has been documented in the chart, so the rule's condition is not met for this patient.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    }
+   ],
+   "verdict": "dont_appeal",
+   "appeal": null,
+   "doc_request": null,
+   "gate": null,
+   "deadline": {
+    "rule_id": "ma-reconsideration",
+    "due": "2026-10-29",
+    "days_left": 58,
+    "basis": "Plan reconsideration: 60 calendar days after receipt of the organization determination; receipt is presumed 5 days after the notice date. Enrollee appeal window. Contracted providers' payment disputes with a Medicare Advantage plan follow the provider contract; check the denial notice.",
+    "citation": "42 CFR 422.582(b)",
+    "source_url": "https://www.ecfr.gov/current/title-42/section-422.582",
+    "verified": true
+   },
+   "trace": [
+    {
+     "step": "intake",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 724,
+     "completion_tokens": 112,
+     "cost_usd": 7e-05,
+     "latency_s": 1.64,
+     "attempts": 1
+    },
+    {
+     "step": "facts",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1955,
+     "completion_tokens": 5376,
+     "cost_usd": 0.001408,
+     "latency_s": 38.85,
+     "attempts": 1
+    },
+    {
+     "step": "match:C1",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1371,
+     "completion_tokens": 722,
+     "cost_usd": 0.000256,
+     "latency_s": 5.71,
+     "attempts": 1
+    },
+    {
+     "step": "match:C4",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1365,
+     "completion_tokens": 1392,
+     "cost_usd": 0.000416,
+     "latency_s": 11.11,
+     "attempts": 1
+    },
+    {
+     "step": "match:C3",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1368,
+     "completion_tokens": 1372,
+     "cost_usd": 0.000411,
+     "latency_s": 11.64,
+     "attempts": 1
+    },
+    {
+     "step": "match:C5",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1430,
+     "completion_tokens": 1200,
+     "cost_usd": 0.000374,
+     "latency_s": 11.82,
+     "attempts": 1
+    },
+    {
+     "step": "match:C6",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1350,
+     "completion_tokens": 1016,
+     "cost_usd": 0.000325,
+     "latency_s": 9.9,
+     "attempts": 1
+    },
+    {
+     "step": "match:C2",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1340,
+     "completion_tokens": 2952,
+     "cost_usd": 0.000789,
+     "latency_s": 28.44,
+     "attempts": 1
+    },
+    {
+     "step": "match:C7",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1394,
+     "completion_tokens": 2271,
+     "cost_usd": 0.000629,
+     "latency_s": 19.04,
+     "attempts": 1
+    },
+    {
+     "step": "match:C9",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1316,
+     "completion_tokens": 1501,
+     "cost_usd": 0.000439,
+     "latency_s": 13.72,
+     "attempts": 1
+    },
+    {
+     "step": "match:C10",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1326,
+     "completion_tokens": 1538,
+     "cost_usd": 0.000449,
+     "latency_s": 14.17,
+     "attempts": 1
+    },
+    {
+     "step": "match:C11",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1395,
+     "completion_tokens": 1520,
+     "cost_usd": 0.000448,
+     "latency_s": 13.87,
+     "attempts": 1
+    },
+    {
+     "step": "match:C12",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1369,
+     "completion_tokens": 1133,
+     "cost_usd": 0.000354,
+     "latency_s": 11.26,
+     "attempts": 1
+    },
+    {
+     "step": "match:C14",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1374,
+     "completion_tokens": 825,
+     "cost_usd": 0.00028,
+     "latency_s": 8.04,
+     "attempts": 1
+    },
+    {
+     "step": "match:C15",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1335,
+     "completion_tokens": 801,
+     "cost_usd": 0.000272,
+     "latency_s": 8.4,
+     "attempts": 1
+    },
+    {
+     "step": "match:C13",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1325,
+     "completion_tokens": 1569,
+     "cost_usd": 0.000456,
+     "latency_s": 14.68,
+     "attempts": 1
+    },
+    {
+     "step": "match:C8",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 2912,
+     "completion_tokens": 5455,
+     "cost_usd": 0.001484,
+     "latency_s": 46.73,
+     "attempts": 2
+    }
+   ],
+   "cost_usd": 0.00886
+  }
+ },
+ {
+  "case": "case_023",
+  "group": "E_ma_too_early",
+  "route_expected": "clinical_review",
+  "route_got": "clinical_review",
+  "verdict_expected": "dont_appeal",
+  "verdict_got": "dont_appeal",
+  "gold": {
+   "G1_red_flag_indication": {
+    "expected": "not_applicable",
+    "got": "not_met"
+   },
+   "G2_red_flag_list": {
+    "expected": "not_applicable",
+    "got": "not_applicable"
+   },
+   "G3_first_month": {
+    "expected": "not_met",
+    "got": "not_met"
+   },
+   "G4_four_weeks_conservative": {
+    "expected": "not_met",
+    "got": "not_met"
+   },
+   "G5_ddd_hnp_no_surgery": {
+    "expected": "clear",
+    "got": "not_applicable"
+   },
+   "G6_findings_affect_treatment": {
+    "expected": "clear",
+    "got": "not_applicable"
+   },
+   "G7_duplication": {
+    "expected": "clear",
+    "got": "not_applicable"
+   }
+  },
+  "cost_usd": 0.009497,
+  "latency_s": 143.4,
+  "unverified_facts": [],
+  "run": {
+   "case_id": "case_023",
+   "denial": {
+    "payer_name": "Evergreen Medicare Advantage",
+    "plan_type": "MA",
+    "cpt": "72148",
+    "icd10": [
+     "M54.50"
+    ],
+    "dos": "2026-07-26",
+    "notice_date": "2026-08-06",
+    "carc": [
+     "50"
+    ],
+    "reason_text": "Not medically necessary. Insufficient trial of conservative treatment.",
+    "practice_state": "OR",
+    "extracted_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   },
+   "triage": {
+    "reason_class": "clinical",
+    "route": "clinical_review",
+    "method": "carc_table",
+    "checklist": [],
+    "explanation": "Medical necessity"
+   },
+   "policy": {
+    "source": "cms-lcd",
+    "policy_id": "L34220",
+    "version": "40",
+    "title": "Lumbar MRI",
+    "effective_from": "2025-10-23",
+    "effective_to": null,
+    "retired": false,
+    "version_basis": "api-versioned",
+    "url": "https://www.cms.gov/medicare-coverage-database/view/lcd.aspx?lcdid=34220&ver=40",
+    "fetched_at": "2026-10-21T18:41:25.616428",
+    "fetched_via": "cms-api",
+    "text": "Coverage Indications, Limitations, and/or Medical Necessity\n\nMagnetic Resonance Imaging (MRI) is a noninvasive method of imaging body structures based on the distribution of fixed water and other hydrogen-rich molecules in the human body. MRI uses a powerful magnet to align hydrogen atoms within the patient's soft tissues. As the nuclei return from excitation to equilibrium, the MRI receiver coil receives radio frequency wave signals that are transformed by the computer into diagnostic images. MRI produces cross sectional and 3-D images of soft tissues. Because bone contains little water (hydrogen nuclei), bone is relatively invisible to MRI. Blood is also relatively invisible because the hydrogen nuclei are moving in the blood stream.\n\nMRI contrast agents can improve the sensitivity and/or specificity of an image, by altering inherent tissue response to magnetic fields. The contrast agent most commonly used is gadolinium.\n\nMRI has proven useful in diagnosing cerebral infarctions, tumors, abscesses, edema, hemorrhage, nerve fiber demyelination (as in multiple sclerosis), and other disorders that increase fluid content of the affected tissues.\n\nMRI of the spinal canal has the advantage of noninvasive visualization of the spinal cord.\n\nMRI can:\n\n\u2022 Differentiate solid from cystic tumors,\n\n\u2022 Diagnose and localize spinal cord compression;\n\n\u2022 Diagnose syringomyelia (progressive, chronic sensory disturbance, atrophy and spasticity of the spinal cord), disc disease, and any altered relationship between vertebral bodies, discs, spinal cord and nerve roots;\n\n\u2022 Detect congenital spinal dysraphism (failure of fusion of parts along the dorsal midline of the spinal cord);\n\n\u2022 Provide early detection of osteomyelitis, and\n\n\u2022 Detect spinal cord abnormalities associated with osteomyelitis.\n\nCoverage is limited to MRI units that have received FDA pre-market approval. Such units must be operated within the parameters specified by the approval.\n\nContrast is indicated for studying the central nervous system for metastatic disease, inflammatory disease, recurrent tumor versus scar, differentiation of microvascular from macrovascular infarction, and selected cases of complex vascular disease. Within the study of the spine, contrast also is indicated to differentiate recurrent disc versus scar or granulation tissue, spinal cord neoplasm, any case of myelopathy, and inflammatory cord disease.\n\nHistory and clinical findings are critical factors to determine when a lumbar MRI is needed in order to efficiently manage low back pain and related disorders.\n\nLumbar MRI may be indicated for a patient with a \u201cred-flag\u201d condition , such as a suspected tumor, infection, herniated intervertebral disc with nerve compression, or a major neurological problem. The MRI test result may be needed to evaluate these conditions to determine the need for surgery or other aggressive therapy, such as a work-up for metastatic cancer.\n\n\"Red flags\" are identified through an appropriate history plus a physical examination that typically includes evaluating muscle strength, limb circumference, reflexes, sensation, straight leg raise, and sitting knee extension tests.\n\n\"Red flags\" include:\n\n\u2022 Major trauma\n\n\u2022 Minor trauma in a potentially osteoporotic patient\n\n\u2022 History of cancer\n\n\u2022 Fever\n\n\u2022 Chills\n\n\u2022 Unexplained weight loss\n\n\u2022 Recent bacterial infection\n\n\u2022 IV drug abuse\n\n\u2022 Immune suppression\n\n\u2022 Pain that worsens when supine or at night\n\n\u2022 Saddle anesthesia\n\n\u2022 Recent onset of bladder dysfunction\n\n\u2022 Clinically significant or progressive neurologic deficit in the lower extremity\n\n\u2022 Unexpected laxity of the anal sphincter\n\n\u2022 Perianal or perineal sensory loss,\n\n\u2022 Clinically significant motor weakness, or\n\n\u2022 Other nerve root compromise\n\nEighty (80) to ninety (90) percent of patients with low back pain improve one month after symptom onset even without treatment. Therefore, spinal imaging tests are not generally necessary during the first month of symptoms except when a \"red flag\" (suggesting a medically emergent condition) is noted on the medical history and physical examination. For a \"non-red flag\" condition, the MRI may be appropriate after 1 month of symptoms.\n\nFor example, for a patient with low back pain syndrome where there is no known injury, history of cancer, or septic disorder and there are no symptoms or signs suggesting nerve root disorder or spinal cord dysfunction (i.e. no \"red flags\"), MRI will be covered only if the patient has not responded to a reasonable trial of conservative management lasting at least four weeks.\n\nIf a patient's limitations due to low back symptoms do not improve within four weeks, findings on reassessment may reveal an indication for a MRI. However, since MRI changes are common in asymptomatic patients, MRI abnormalities alone do not retrospectively validate the need for the test without other supporting clinical rationale.\n\nA lumbar MRI used to evaluate uncomplicated degenerative disc disease or herniated nucleus pulposus is not considered medically necessary when a surgical intervention or other aggressive treatment (e.g. intervertebral joint injection) is not under consideration.\n\nWhen a lumbar MRI is ordered, Medicare expects that the information gained from the test will be used for medical decision-making. When the findings will not affect the treatment choices, the test is not reasonable or necessary.\n\nCertain uses of lumbar MRI are considered investigational and are therefore not covered by Medicare. These include the measurement of blood flow, spectroscopy, imaging of cortical bone and calcifications, and for procedures involving spatial resolution of bone or calcifications.\n\nA lumbar MRI that is a duplication of other imaging studies (such as a spinal CT scan) may be unreasonable or unnecessary. A lumbar MRI, however, could be complementary to a lumbar CT if there are inconclusive findings on a CT scan. Conversely, a lumbar CT may be warranted following an MRI study if the MRI study is found to be inconclusive. Documentation should support the medical necessity for the need for both studies.\n\nThe payment for a single lumbar MRI procedure includes two (2) and three (3) sequences.\n\nContraindications and limitations of lumbar MRI testing include:\n\n\u2022 Patients with an allergy to contrast media,\n\n\u2022 The effects upon a fetus are unknown at this time; therefore, pregnancy is to be handled at the discretion of the primary doctor,\n\n\u2022 When the technical component is performed without the professional component.\n\nPayment for more than one professional component (PC) of a single lumbar MRI:\n\nMedicare will not pay twice for service that is required only once to diagnose or treat an illness or injury. Typically, this A/B MAC will pay for only one PC. This A/B MAC may pay for a second PC when the additional physician's expertise is necessary and reasonable to diagnose or treat the patient, such as to clarify a questionable finding. The physician performing the initial PC must have a valid reason to require another physician's expertise, such as to interpret a confusing MRI. The second physician's knowledge and expertise must be significantly greater than that of the first reader, and it must contribute substantially to the interpretation.\n\nMultiple PCs of a single MRI in institutional settings:\n\nIn hospital settings, the physicians involved with MRI interpretations should reach an agreement among themselves as to who should bill Medicare for MRI interpretations and reports. If the physicians involved cannot resolve these issues among themselves, this A/B MAC will pay for the interpretation and report that directly contributes to the diagnosis and treatment of the individual patient. Typically, this will be the MRI interpretation and report that is performed simultaneously with the evaluation and management of the patient.\n\nEach payable interpretation must include a complete, written report similar to one that is prepared by a specialist in the field. The content of the written report must address the relevant clinical issues, available comparative data, and test findings. The format of the report must be separately identifiable. It may be included under a separate heading within the clinical record.\n\nMulti-position MRI (reclining, standing)\n\nMedicare does not provide additional payment for multiple MRI\u2019s such as in the reclining and upright positions. Bill for one unit of the MRI service.\n\nDocumentation Requirements\n\nDocumentation Requirements\n\nSupportive documentation evidencing the condition and treatment is expected to be documented in the medical record and be available upon request.\n\nThe patient\u2019s medical record must be legible and clearly indicate the necessity and reasonableness of the service.\n\nThe documentation must clearly support the ICD-10-CM code(s) reported on the claim.\n\nAn attending/treating physician\u2019s order is required for each test. The order must be properly signed and dated.\n\nLumbar MRI abnormalities alone do not validate the need for the test without other supporting clinical rationale. Radiologists and/or ordering physicians should include sufficient clinical information in the report to justify its necessity.\n\nThe clinical findings and relevant prior treatment that support the need for the MRI must be documented in the MRI report or clinical record and made available to the contractor upon request.\n\nThe medical record of the referring physician must support a contemplated diagnosis or treatment change derived from the MRI findings. The contractor may request medical records from the referring physician if the radiologist\u2019s documentation does not validate that the service is reasonable and necessary.\n\nAccording to national regulations, clinics which are (a) not physician owned and which are (b) billing Medicare primarily for diagnostic tests may be required to enroll as IDTFs. For example, a nonphysician owner who establishes a Magnetic Resonance Imaging clinic by leasing office space, equipment, and hiring technicians, and hires a retired ophthalmologist to provide off-site (general) supervision of diagnostic testing without treatment would be more appropriately enrolled as an IDTF rather than merely billing all services through the physician's PIN.\n\nUtilization Guidelines\n\nNormally only one lumbar MRI is sufficient to diagnose the patient's condition. However, a second lumbar MRI, for the same patient, may be allowed providing the documentation indicates that comparative test results were needed to make a more definitive treatment decision.\n\nPayment will be allowed for multiple scans of different areas of the body performed on the same day for the same patient when reasonable and necessary.",
+    "sha256": "a9a4fd4dfbde4c6c6f18819eeb08f44a63837b4a0193d44254b6a9472e495f96"
+   },
+   "criteria": [
+    {
+     "criterion_id": "C1",
+     "doc_id": "L34220v40",
+     "summary": "Lumbar MRI may be indicated for patients with red-flag conditions.",
+     "verbatim_span": "Lumbar MRI may be indicated for a patient with a \u201cred-flag\u201d condition , such as a suspected tumor, infection, herniated intervertebral disc with nerve compression, or a major neurological problem.",
+     "kind": "indication",
+     "applies_when": "patient has a red-flag condition (suspected tumor, infection, herniated disc with nerve compression, or major neurological problem)",
+     "span_start": 2572,
+     "span_end": 2768,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C2",
+     "doc_id": "L34220v40",
+     "summary": "For non-red-flag conditions, lumbar MRI may be appropriate after 1 month of symptoms.",
+     "verbatim_span": "For a \"non-red flag\" condition, the MRI may be appropriate after 1 month of symptoms.",
+     "kind": "indication",
+     "applies_when": "patient has a non-red-flag condition and symptoms have persisted for at least 1 month",
+     "span_start": 4094,
+     "span_end": 4179,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C3",
+     "doc_id": "L34220v40",
+     "summary": "Contrast is indicated for studying CNS for metastatic disease, inflammatory disease, recurrent tumor vs scar, microvascular vs macrovascular infarction, or selected complex vascular disease.",
+     "verbatim_span": "Contrast is indicated for studying the central nervous system for metastatic disease, inflammatory disease, recurrent tumor versus scar, differentiation of microvascular from macrovascular infarction, and selected cases of complex vascular disease.",
+     "kind": "indication",
+     "applies_when": "studying CNS for metastatic disease, inflammatory disease, recurrent tumor vs scar, differentiation of microvascular from macrovascular infarction, or selected complex vascular disease",
+     "span_start": 1959,
+     "span_end": 2207,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C4",
+     "doc_id": "L34220v40",
+     "summary": "Within spine study, contrast is indicated to differentiate recurrent disc vs scar/granulation tissue, spinal cord neoplasm, myelopathy, or inflammatory cord disease.",
+     "verbatim_span": "Within the study of the spine, contrast also is indicated to differentiate recurrent disc versus scar or granulation tissue, spinal cord neoplasm, any case of myelopathy, and inflammatory cord disease.",
+     "kind": "indication",
+     "applies_when": "evaluating spine to differentiate recurrent disc vs scar/granulation tissue, spinal cord neoplasm, any myelopathy, or inflammatory cord disease",
+     "span_start": 2208,
+     "span_end": 2409,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C5",
+     "doc_id": "L34220v40",
+     "summary": "List of red-flag conditions that indicate need for lumbar MRI.",
+     "verbatim_span": "\"Red flags\" include:\n\n\u2022 Major trauma\n\n\u2022 Minor trauma in a potentially osteoporotic patient\n\n\u2022 History of cancer\n\n\u2022 Fever\n\n\u2022 Chills\n\n\u2022 Unexplained weight loss\n\n\u2022 Recent bacterial infection\n\n\u2022 IV drug abuse\n\n\u2022 Immune suppression\n\n\u2022 Pain that worsens when supine or at night\n\n\u2022 Saddle anesthesia\n\n\u2022 Recent onset of bladder dysfunction\n\n\u2022 Clinically significant or progressive neurologic deficit in the lower extremity\n\n\u2022 Unexpected laxity of the anal sphincter\n\n\u2022 Perianal or perineal sensory loss,\n\n\u2022 Clinically significant motor weakness, or\n\n\u2022 Other nerve root compromise",
+     "kind": "red_flag",
+     "applies_when": null,
+     "span_start": 3171,
+     "span_end": 3742,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C6",
+     "doc_id": "L34220v40",
+     "summary": "Spinal imaging not generally necessary during first month of symptoms unless a red flag is present.",
+     "verbatim_span": "Therefore, spinal imaging tests are not generally necessary during the first month of symptoms except when a \"red flag\" (suggesting a medically emergent condition) is noted on the medical history and physical examination.",
+     "kind": "duration",
+     "applies_when": "first month of symptoms and no red flag",
+     "span_start": 3872,
+     "span_end": 4093,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C7",
+     "doc_id": "L34220v40",
+     "summary": "MRI covered only if patient has not responded to a reasonable trial of conservative management lasting at least four weeks (for non-red-flag low back pain).",
+     "verbatim_span": "For example, for a patient with low back pain syndrome where there is no known injury, history of cancer, or septic disorder and there are no symptoms or signs suggesting nerve root disorder or spinal cord dysfunction (i.e. no \"red flags\"), MRI will be covered only if the patient has not responded to a reasonable trial of conservative management lasting at least four weeks.",
+     "kind": "duration",
+     "applies_when": "patient with low back pain syndrome, no known injury, no cancer, no septic disorder, no red flags",
+     "span_start": 4181,
+     "span_end": 4557,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C8",
+     "doc_id": "L34220v40",
+     "summary": "If low back symptoms do not improve within four weeks, reassessment may indicate need for MRI.",
+     "verbatim_span": "If a patient's limitations due to low back symptoms do not improve within four weeks, findings on reassessment may reveal an indication for a MRI.",
+     "kind": "duration",
+     "applies_when": "limitations due to low back symptoms not improved within four weeks",
+     "span_start": 4559,
+     "span_end": 4705,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C9",
+     "doc_id": "L34220v40",
+     "summary": "Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.",
+     "verbatim_span": "Documentation should support the medical necessity for the need for both studies.",
+     "kind": "documentation",
+     "applies_when": null,
+     "span_start": 6012,
+     "span_end": 6093,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C10",
+     "doc_id": "L34220v40",
+     "summary": "Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.",
+     "verbatim_span": "Supportive documentation evidencing the condition and treatment is expected to be documented in the medical record and be available upon request.",
+     "kind": "documentation",
+     "applies_when": null,
+     "span_start": 8477,
+     "span_end": 8622,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C11",
+     "doc_id": "L34220v40",
+     "summary": "Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.",
+     "verbatim_span": "Lumbar MRI abnormalities alone do not validate the need for the test without other supporting clinical rationale. Radiologists and/or ordering physicians should include sufficient clinical information in the report to justify its necessity.\n\nThe clinical findings and relevant prior treatment that support the need for the MRI must be documented in the MRI report or clinical record and made available to the contractor upon request.\n\nThe medical record of the referring physician must support a contemplated diagnosis or treatment change derived from the MRI findings.",
+     "kind": "documentation",
+     "applies_when": null,
+     "span_start": 8938,
+     "span_end": 9507,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C12",
+     "doc_id": "L34220v40",
+     "summary": "Lumbar MRI not medically necessary for uncomplicated degenerative disc disease or herniated nucleus pulposus when surgery/aggressive treatment not under consideration.",
+     "verbatim_span": "A lumbar MRI used to evaluate uncomplicated degenerative disc disease or herniated nucleus pulposus is not considered medically necessary when a surgical intervention or other aggressive treatment (e.g. intervertebral joint injection) is not under consideration.",
+     "kind": "exclusion",
+     "applies_when": "evaluating uncomplicated degenerative disc disease or herniated nucleus pulposus without surgical/interventional treatment under consideration",
+     "span_start": 4894,
+     "span_end": 5156,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C13",
+     "doc_id": "L34220v40",
+     "summary": "MRI not reasonable or necessary if findings will not affect treatment choices.",
+     "verbatim_span": "When the findings will not affect the treatment choices, the test is not reasonable or necessary.",
+     "kind": "exclusion",
+     "applies_when": "findings will not affect treatment choices",
+     "span_start": 5289,
+     "span_end": 5386,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C14",
+     "doc_id": "L34220v40",
+     "summary": "Certain investigative MRI uses (blood flow measurement, spectroscopy, cortical bone imaging, spatial resolution of bone/calcifications) are not covered.",
+     "verbatim_span": "Certain uses of lumbar MRI are considered investigational and are therefore not covered by Medicare. These include the measurement of blood flow, spectroscopy, imaging of cortical bone and calcifications, and for procedures involving spatial resolution of bone or calcifications.",
+     "kind": "exclusion",
+     "applies_when": "MRI used for measurement of blood flow, spectroscopy, imaging of cortical bone/calcifications, or spatial resolution of bone/calcifications",
+     "span_start": 5388,
+     "span_end": 5667,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C15",
+     "doc_id": "L34220v40",
+     "summary": "MRI that duplicates other imaging studies (e.g., spinal CT) may be unreasonable or unnecessary.",
+     "verbatim_span": "A lumbar MRI that is a duplication of other imaging studies (such as a spinal CT scan) may be unreasonable or unnecessary.",
+     "kind": "exclusion",
+     "applies_when": "MRI duplicates other imaging studies (such as spinal CT)",
+     "span_start": 5669,
+     "span_end": 5791,
+     "span_verified": true
+    }
+   ],
+   "matches": [
+    {
+     "criterion_id": "C1",
+     "status": "not_met",
+     "evidence": [],
+     "rationale": "Coverage is blocked because no red\u2011flag condition is documented, satisfying the policy\u2019s exclusion of lumbar MRI without red flags..\"\"\" \"\"\",\n  \"evidence\": [\n    {\n      \"note_id\": \"case_023-n1\",\n      \"quote\": \"She denies any red\u2011flag symptoms including trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.\"\n    },\n    {\n      \"note_id\": \"case_023-n3\",\n      \"quote\": \"Patient denies red\u2011flag symptoms.\"\n    },\n    {\n      \"note_id\": \"case_023-n4\",\n      \"quote\": \"She denies red\u2011flag symptoms.\"\n    }\n  ]\n}ular",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C2",
+     "status": "not_met",
+     "evidence": [],
+     "rationale": "The patient has non\u2011red\u2011flag low back pain but symptom duration (about 24 days) is less than the required one\u2011month period, and conservative therapy lasted only ~3 weeks, so the policy\u2019s MRI criteria are not satisfied for coverage under this rule, effectively blocking coverage under the non\u2011red\u2011flag pathway and requiring exploration of other routes such as red\u2011flag criteria or extended trial documentation for appeal consideration, which are not present in the chart evidence provided, thus the rule blocks coverage and the case does not meet the one\u2011month symptom threshold and conservative care duration requirements, making the MRI coverage under this pathway not met and thus not approved based on this rule alone without additional qualifying factors like red flags, failed trial documentation, or other alternative coverage criteria; the chart shows new onset pain on 07/02/2026, physical therapy ended on 07/23/2026 with no improvement, and no red\u2011flag symptoms are documented, confirming the absence of the required duration and response to conservative measures, thereby supporting a not_met determination for this rule's application to the patient's imaging order placed on 2026-07-26; the chart also notes normal neurologic exam and lack of radiculopathy, reinforcing the non\u2011red\u2011flag classification but also highlighting the insufficient symptom chronicity for MRI eligibility under the policy's non\u2011red\u2011flag guideline, which mandates at least one month of persistent symptoms before imaging is considered appropriate, and since the patient\u2019s symptoms have persisted for only 24 days (~3.4 weeks) at the time of MRI ordering, the condition fails to meet the temporal criterion, leading to a not_met status for this rule's coverage pathway; therefore, the denial of coverage based on this rule is justified because the required duration threshold was not satisfied, and the patient\u2019s documented response to NSAIDs and PT was partial at best, falling short of the policy\u2019s expectation for a robust conservative care trial prior to advanced imaging, further solidifying the rationale that the rule blocks coverage in this instance; additionally, the chart\u2019s plan to use MRI results to decide between epidural steroid injection and surgical referral underscores that the imaging is being sought to guide subsequent invasive interventions rather than merely confirming a diagnosis, which aligns with policy expectations for appropriate use of advanced imaging after conservative measures have been exhausted for an adequate period, but because the exhaustion period was insufficient, the rule does not support coverage and thus the status remains not_met for the purpose of billing and appeal justification; consequently, the billing team should note that the MRI order does not satisfy the non\u2011red\u2011flag MRI eligibility criteria as defined by the policy due to inadequate symptom duration and insufficient response to conservative therapy, making the claim vulnerable to denial and requiring an appeal that must address either the symptom duration shortfall or demonstrate that an alternative coverage route, such as a red\u2011flag condition or a documented failure of a longer conservative trial meeting policy specifications, applies to this case; the absence of red\u2011flag findings precludes that alternative route, and the conservative therapy duration was only about 3 weeks, below the typical 4\u20116 week threshold often required for MRI eligibility in non\u2011red\u2011flag low back pain pathways, so the rule blocks coverage and the patient\u2019s situation does not meet the rule's conditions, resulting in a not_met determination for this rule's application to the patient's imaging claim, which the billing specialist can cite in the denial rationale to explain why the MRI is not covered under this specific policy provision, and if an appeal is pursued, the team must provide supplemental documentation that either extends the symptom duration claim or demonstrates a qualified alternative pathway that satisfies the policy's coverage criteria, otherwise the claim remains denied based on this rule's not_met status; the chart evidence cited above directly supports this conclusion by showing the onset date, the limited duration of conservative interventions, and the lack of red\u2011flag signs, all of which collectively illustrate that the patient fails to meet the rule's required thresholds, thereby justifying a not_met status for coverage under this rule; overall, the evidence and rationale align to produce a clear not_met determination, enabling the billing team to communicate the denial appropriately and prepare an appeal strategy that may seek to reclassify the case under a different rule or provide additional documentation to satisfy the missing criteria for coverage under this particular rule; moreover, because the rule is not met, the payer may still consider other policy routes, such as red\u2011flag criteria or a separate authorization for MRI based on documented failed conservative care of longer duration, but in the absence of such documentation, the current rule's not_met status stands as the primary basis for denial, and the billing specialist should convey this clearly in the appeal documentation, referencing the specific chart quotes and policy language to substantiate the determination; finally, the presence of planned surgical referral contingent on MRI results does not override the need to meet the non\u2011red\u2011flag MRI eligibility criteria, and thus the rule remains not_met, reinforcing the importance of adhering to the policy's explicit requirements for symptom chronology and conservative therapy response before advanced imaging is authorized, and the billing team must ensure that any appeal addresses these specific deficiencies outlined in the chart, such as the insufficient symptom duration and incomplete conservative care trial, to have a reasonable chance of overturning the denial; in summary, the rule does not support coverage for this patient under the non\u2011red\u2011flag pathway because the required one\u2011month symptom persistence and adequate response to conservative therapy were not documented, making the status not_met and the evidence quotes above directly substantiate this conclusion, allowing the billing specialist to present a concise, rule\u2011based denial rationale supported by concrete chart excerpts, thereby streamlining the appeal process and ensuring compliance with payer policies and documentation standards.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C3",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The patient does not meet any of the listed CNS contrast indications (metastatic disease, inflammatory disease, tumor, etc.), so the rule does not apply to this lumbar MRI order. Sentence one: She denies any red\u2011flag symptoms including trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit. Sentence two: Neurologic re\u2011exam remains normal. Sentence three: Patient denies red\u2011flag symptoms. Sentence four: Assessment: indeterminate low back pain requiring advanced imaging.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C4",
+     "status": "not_met",
+     "evidence": [],
+     "rationale": "The ordering physician seeks MRI to differentiate anatomic pathology for surgical decision\u2011making, but the chart does not document any of the specific pathologies (recurrent disc, scar, neoplasm, myelopathy, inflammatory cord disease) that would trigger the contrast requirement in the rule, thus the study does not satisfy the coverage indication and blocks coverage under this rule, with evidence cited from note case_023-n4 stating the planned use of MRI results to decide between ESI and surgical referral.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C5",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "No red flags are documented, so this red-flag route doesn't apply; the conservative-care route is checked instead.",
+     "model": "rule"
+    },
+    {
+     "criterion_id": "C6",
+     "status": "not_met",
+     "evidence": [
+      {
+       "note_id": "case_023-n1",
+       "quote": "She reports onset of low back pain on 07/02/2026.",
+       "start": 104,
+       "end": 153,
+       "verified": true
+      },
+      {
+       "note_id": "case_023-n1",
+       "quote": "She denies any red\u2011flag symptoms including trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": 154,
+       "end": 316,
+       "verified": true
+      },
+      {
+       "note_id": "case_023-n2",
+       "quote": "Physical therapy was initiated on 07/09/2026, consisting of 4 sessions, and concluded on 07/23/2026 with no improvement in pain or function.",
+       "start": 210,
+       "end": 350,
+       "verified": true
+      }
+     ],
+     "rationale": "The patient\u2019s pain began 24 days ago (within the first month) and there are no red\u2011flag findings, meeting the policy condition that excludes routine lumbar MRI coverage, so coverage is blocked.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C7",
+     "status": "not_met",
+     "evidence": [
+      {
+       "note_id": "case_023-n1",
+       "quote": "She reports onset of low back pain on 07/02/2026.",
+       "start": 104,
+       "end": 153,
+       "verified": true
+      },
+      {
+       "note_id": "case_023-n2",
+       "quote": "Physical therapy was initiated on 07/09/2026, consisting of 4 sessions, and concluded on 07/23/2026 with no improvement in pain or function.",
+       "start": 210,
+       "end": 350,
+       "verified": true
+      },
+      {
+       "note_id": "case_023-n3",
+       "quote": "Patient denies red\u2011flag symptoms.",
+       "start": 77,
+       "end": 110,
+       "verified": true
+      }
+     ],
+     "rationale": "The patient completed only about 2.9 weeks of conservative management, which is less than the required 4\u2011week trial, so the rule blocks coverage.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C8",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The patient\u2019s low\u2011back symptoms have persisted for only 24 days, which is less than the four\u2011week threshold required for the MRI indication, so the rule does not apply.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C9",
+     "status": "missing_documentation",
+     "evidence": [
+      {
+       "note_id": "case_023-n3",
+       "quote": "Obtain lumbar MRI to delineate anatomic pathology; subsequent management will depend on MRI findings.",
+       "start": 541,
+       "end": 642,
+       "verified": true
+      },
+      {
+       "note_id": "case_023-n4",
+       "quote": "Imaging order placed for lumbar MRI. Patient is a 69\u2011year\u2011old female with low back pain onset 07/02/2026, failed NSAIDs and PT. She denies red\u2011flag symptoms. Neurologic exam normal. Assessment: indeterminate low back pain requiring advanced imaging. Plan: MRI results will decide between epidural steroid injection and surgical referral.",
+       "start": 31,
+       "end": 368,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart documents the need for lumbar MRI but does not explicitly provide documentation supporting the medical necessity for both studies as required by the rule.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C10",
+     "status": "missing_documentation",
+     "evidence": [],
+     "rationale": "Documentation shows symptom onset, failed NSAIDs and PT, and unresponsive chronic low back pain, satisfying the supportive documentation requirement for coverage support under the payer rule. This includes recorded onset date, conservative treatment details, and assessment of treatment failure, all required for evidentiary support before imaging coverage is granted. This rule is satisfied as the chart explicitly documents the condition and treatment history. The evidence cited includes specific notes confirming the onset date, administered therapies, and persistent pain despite interventions, demonstrating that the required documentation is present and readily available. Therefore, the documentation rule applies and supports coverage for the lumbar MRI in this patient case.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C11",
+     "status": "met",
+     "evidence": [
+      {
+       "note_id": "case_023-n2",
+       "quote": "Physical therapy was initiated on 07/09/2026, consisting of 4 sessions, and concluded on 07/23/2026 with no improvement in pain or function.",
+       "start": 210,
+       "end": 350,
+       "verified": true
+      },
+      {
+       "note_id": "case_023-n3",
+       "quote": "Despite these interventions, pain remains moderate.",
+       "start": 402,
+       "end": 453,
+       "verified": true
+      },
+      {
+       "note_id": "case_023-n3",
+       "quote": "Plan: Obtain lumbar MRI to delineate anatomic pathology; subsequent management will depend on MRI findings.",
+       "start": 535,
+       "end": 642,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart documents failed NSAID and PT trials and explicitly plans MRI to guide a treatment change, satisfying the policy\u2019s documentation requirement.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C12",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_023-n1",
+       "quote": "She denies any red\u2011flag symptoms including trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": 154,
+       "end": 316,
+       "verified": true
+      },
+      {
+       "note_id": "case_023-n2",
+       "quote": "Physical therapy was initiated on 07/09/2026, consisting of 4 sessions, and concluded on 07/23/2026 with no improvement in pain or function.",
+       "start": 210,
+       "end": 350,
+       "verified": true
+      },
+      {
+       "note_id": "case_023-n4",
+       "quote": "Plan: MRI results will decide between epidural steroid injection and surgical referral.",
+       "start": 281,
+       "end": 368,
+       "verified": true
+      }
+     ],
+     "rationale": "The exclusion blocks coverage only when surgery or injection is not considered, but the chart shows the MRI is ordered specifically to guide a possible epidural steroid injection or surgical referral, making the rule irrelevant to this patient.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C13",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The exclusion applies only when MRI findings would not affect treatment, but the chart explicitly states that MRI results will determine whether to perform an epidural steroid injection or refer for surgery, meaning findings will affect treatment choices and thus the restriction does not apply here for coverage consideration; based on computed facts, the MRI meets coverage criteria by policy route (red flags OR failed conservative care), but the specific exclusion rule is not relevant to this case's circumstances; the rule's condition is not satisfied, making it not applicable to this patient's coverage decision. This meets the billing team's need to know that the exclusion does not block coverage and thus the MRI can be pursued under other policy pathways.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C14",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The lumbar MRI ordered is for anatomic evaluation of low back pain, not for measurement of blood flow, spectroscopy, cortical bone or calcifications imaging, or spatial resolution of bone/calcifications, so the exclusion does not apply to this study and therefore does not block coverage or support alternative routes in this case, making the rule irrelevant to coverage determination here and thus we cannot assess a coverage effect and must treat it as not applicable to this patient's chart; however the evidence shows the MRI is being used solely for diagnostic anatomic assessment, not for any of the excluded investigational uses, confirming that the exclusion rule does not apply to the ordered study; evidence: case_023-n4 states Imaging order placed for lumbar MRI; case_023-n3 states Obtain lumbar MRI to delineate anatomic pathology; subsequent management will depend on MRI findings which are standard clinical uses not covered by the exclusion rule; this confirms that the rule is not relevant to the coverage decision for this lumbar MRI order and therefore the appropriate status is not_applicable; however the rule does not directly block coverage nor provide an alternative route and the chart does not document any of the excluded uses, so the rule does not meet the criteria for met or not_met and thus is not applicable; accordingly the effect on coverage is not applicable; however the rationale must be concise and billing specialist can read it recognizing that the rule does not block or support coverage in this case; therefore we output not_applicable; evidence items as above; status not_applicable; rationale one sentence; evidence array with quotes; output only JSON; }",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    },
+    {
+     "criterion_id": "C15",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_023-n3",
+       "quote": "Prior lumbar imaging: none documented.",
+       "start": null,
+       "end": null,
+       "verified": false
+      }
+     ],
+     "rationale": "The rule excludes coverage only for duplicate lumbar MRIs of prior imaging (e.g., spinal CT); no prior lumbar imaging or other study is documented, so the exclusion does not apply.",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    }
+   ],
+   "verdict": "dont_appeal",
+   "appeal": null,
+   "doc_request": null,
+   "gate": null,
+   "deadline": {
+    "rule_id": "ma-reconsideration",
+    "due": "2026-10-10",
+    "days_left": 58,
+    "basis": "Plan reconsideration: 60 calendar days after receipt of the organization determination; receipt is presumed 5 days after the notice date. Enrollee appeal window. Contracted providers' payment disputes with a Medicare Advantage plan follow the provider contract; check the denial notice.",
+    "citation": "42 CFR 422.582(b)",
+    "source_url": "https://www.ecfr.gov/current/title-42/section-422.582",
+    "verified": true
+   },
+   "trace": [
+    {
+     "step": "intake",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 723,
+     "completion_tokens": 112,
+     "cost_usd": 7e-05,
+     "latency_s": 1.62,
+     "attempts": 1
+    },
+    {
+     "step": "facts",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 2061,
+     "completion_tokens": 4747,
+     "cost_usd": 0.001263,
+     "latency_s": 33.94,
+     "attempts": 1
+    },
+    {
+     "step": "match:C4",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1503,
+     "completion_tokens": 1135,
+     "cost_usd": 0.000363,
+     "latency_s": 9.07,
+     "attempts": 1
+    },
+    {
+     "step": "match:C1",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1509,
+     "completion_tokens": 1621,
+     "cost_usd": 0.00048,
+     "latency_s": 12.35,
+     "attempts": 1
+    },
+    {
+     "step": "match:C3",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1506,
+     "completion_tokens": 1510,
+     "cost_usd": 0.000453,
+     "latency_s": 12.35,
+     "attempts": 1
+    },
+    {
+     "step": "match:C6",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1488,
+     "completion_tokens": 1956,
+     "cost_usd": 0.000559,
+     "latency_s": 15.48,
+     "attempts": 1
+    },
+    {
+     "step": "match:C7",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1532,
+     "completion_tokens": 1817,
+     "cost_usd": 0.000528,
+     "latency_s": 17.54,
+     "attempts": 1
+    },
+    {
+     "step": "match:C2",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1478,
+     "completion_tokens": 3593,
+     "cost_usd": 0.000951,
+     "latency_s": 34.44,
+     "attempts": 1
+    },
+    {
+     "step": "match:C8",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1478,
+     "completion_tokens": 3713,
+     "cost_usd": 0.00098,
+     "latency_s": 30.61,
+     "attempts": 1
+    },
+    {
+     "step": "match:C9",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1454,
+     "completion_tokens": 1897,
+     "cost_usd": 0.000543,
+     "latency_s": 18.79,
+     "attempts": 1
+    },
+    {
+     "step": "match:C11",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1533,
+     "completion_tokens": 1680,
+     "cost_usd": 0.000495,
+     "latency_s": 15.84,
+     "attempts": 1
+    },
+    {
+     "step": "match:C10",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1464,
+     "completion_tokens": 2629,
+     "cost_usd": 0.000719,
+     "latency_s": 25.32,
+     "attempts": 1
+    },
+    {
+     "step": "match:C13",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1463,
+     "completion_tokens": 1567,
+     "cost_usd": 0.000464,
+     "latency_s": 15.52,
+     "attempts": 1
+    },
+    {
+     "step": "match:C14",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1512,
+     "completion_tokens": 1136,
+     "cost_usd": 0.000363,
+     "latency_s": 10.21,
+     "attempts": 1
+    },
+    {
+     "step": "match:C15",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1473,
+     "completion_tokens": 713,
+     "cost_usd": 0.000259,
+     "latency_s": 6.61,
+     "attempts": 1
+    },
+    {
+     "step": "match:C12",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 1507,
+     "completion_tokens": 3821,
+     "cost_usd": 0.001007,
+     "latency_s": 36.28,
+     "attempts": 1
+    }
+   ],
+   "cost_usd": 0.009497
+  }
+ }
+]

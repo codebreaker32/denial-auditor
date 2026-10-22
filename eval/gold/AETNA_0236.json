@@ -1,0 +1,8 @@
+{
+  "policy": "Aetna CPB 0236",
+  "version": "snapshot",
+  "note": "Hand-labelled criterion in Aetna Clinical Policy Bulletin 0236 (MRI and CT of the Spine), last reviewed 04/09/2026. Each value is a phrase that must fall inside one extracted criterion's verified span.",
+  "anchors": {
+    "A1_radiculopathy_6_weeks": "no improvement after 6 weeks of conservative therapy"
+  }
+}

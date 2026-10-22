@@ -24,14 +24,15 @@ STUDY_LABELS = {
     "72158": "lumbar spine MRI without and then with contrast",
 }
 
-SYSTEM = """You check ONE coverage criterion from a payer policy against a patient's chart, for a medical-billing team.
+SYSTEM = """You check ONE rule from a payer coverage policy against a patient's chart, for a medical-billing team deciding whether to appeal a denied lumbar MRI.
 
-Decide the status:
-- not_applicable: the criterion doesn't apply to this patient. Examples: a rule for patients WITHOUT red flags when red flags are present; a rule for patients WITH red flags when none are present; a limitation or exclusion that doesn't describe this case (an investigational use that wasn't ordered, a repeat-MRI rule when there is no prior MRI, a duplicate-imaging rule when there was no other imaging).
-- met: the criterion applies and the chart affirmatively shows it is satisfied, with evidence. For a limitation that applies (e.g. findings must affect treatment), met means the chart shows the case satisfies it.
-- not_met: the criterion applies and the chart shows it is NOT satisfied (e.g. too short a trial of conservative care, or the case falls under an exclusion).
-- missing_documentation: the criterion applies but the chart doesn't document whether it is satisfied.
+Policies give alternative routes to coverage (e.g. red flags OR a failed trial of conservative care) plus restrictions. Decide this rule's EFFECT on coverage for this patient:
+- met: the rule SUPPORTS coverage here. The chart affirmatively shows the patient qualifies under it, with evidence.
+- not_met: the rule BLOCKS coverage here. It's a requirement this patient clearly fails (e.g. too short a trial of conservative care with no red flags), or a restriction whose condition this case falls under.
+- not_applicable: the rule is NOT RELEVANT to this patient. Examples: a red-flag route when the patient has no red flags (absence of red flags never blocks coverage by itself; the conservative-care route may apply instead); a no-red-flag route when red flags are present; a restriction whose condition doesn't describe this case (the first-month limit when symptoms are past one month or a red flag is present; "findings won't affect treatment" when the chart says they will; an exclusion for uncomplicated disease when surgery or injection is being considered; a duplicate- or repeat-imaging rule when there was no other imaging; an investigational use that wasn't ordered; contrast rules for a study without contrast).
+- missing_documentation: the rule matters here but the chart doesn't show whether it's satisfied.
 
+Documentation rules only require what this patient's applicable route needs (e.g. with red flags, no conservative treatment needs to be documented).
 Use the computed facts for durations; don't do date arithmetic yourself.
 Quote chart evidence exactly, one sentence per item, with its note_id. Give a one-sentence rationale a billing specialist can read."""
 
@@ -48,8 +49,13 @@ class MatchDraft(BaseModel):
 
 def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, dos: date, model: str = NANO,
               tracker=None, cpt: str | None = None) -> CriterionMatch:
+    if criterion.kind == "red_flag" and not facts.draft.red_flags:
+        # Decided in code: with no verified red flags, a red-flag route is not relevant.
+        return CriterionMatch(criterion_id=criterion.criterion_id, status="not_applicable", evidence=[],
+                              rationale="No red flags are documented, so this red-flag route doesn't apply; the conservative-care route is checked instead.",
+                              model="rule")
     prompt = (
-        f"CRITERION ({criterion.kind}; applies when: {criterion.applies_when or 'always'}):\n"
+        f"RULE ({criterion.kind}; applies when: {criterion.applies_when or 'always'}):\n"
         f"<policy_text>{criterion.verbatim_span}</policy_text>\n\n"
         f"ORDERED STUDY: {STUDY_LABELS.get(cpt or '', 'lumbar spine MRI')} (a single study; no repeat or second study unless the facts say so)\n"
         f"DATE OF SERVICE: {dos}\n\nCOMPUTED FACTS (from verified chart quotes):\n{facts.summary()}\n\n"
@@ -65,13 +71,22 @@ def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, d
     )
     evidence = [verify_quote(e, notes) for e in draft.evidence]
     status = draft.status
+    rationale = draft.rationale
     if status == "met" and not any(e.verified for e in evidence):
+        status = "missing_documentation"
+    elif status == "not_met" and criterion.kind == "indication":
+        # An indication is one route to coverage; not qualifying for it doesn't block
+        # coverage by itself (the verdict still needs some route to be met).
+        status = "not_applicable"
+        rationale = f"Route not available for this patient: {rationale}"
+    elif status == "not_met" and criterion.kind == "documentation":
+        # A documentation rule can only be satisfied by adding records, never fail outright.
         status = "missing_documentation"
     return CriterionMatch(
         criterion_id=criterion.criterion_id,
         status=status,
         evidence=evidence,
-        rationale=draft.rationale,
+        rationale=rationale,
         model=model,
     )
 

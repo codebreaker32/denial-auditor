@@ -12,6 +12,7 @@ shown as bare codes only.
 Fetched text is cached under .cache/policies/ (gitignored, never committed).
 """
 
+import json
 import time
 from datetime import date, datetime
 from functools import lru_cache
@@ -105,17 +106,39 @@ class CmsCoverage:
             self._token_at = time.time()
         return {"Authorization": f"Bearer {self._token}"}
 
-    def _get(self, path: str, params: dict | None = None, licensed: bool = False) -> list[dict]:
-        r = self._http.get(path, params=params, headers=self._auth() if licensed else None)
-        r.raise_for_status()
-        return r.json()["data"]
+    def _get(self, path: str, params: dict | None = None, licensed: bool = False, attempts: int = 3) -> list[dict]:
+        """GET with retries: the CMS API occasionally returns 502/504 under load."""
+        for attempt in range(attempts):
+            try:
+                r = self._http.get(path, params=params, headers=self._auth() if licensed else None)
+                if r.status_code in (429, 500, 502, 503, 504) and attempt < attempts - 1:
+                    time.sleep(2 * (attempt + 1))
+                    continue
+                r.raise_for_status()
+                return r.json()["data"]
+            except (httpx.TimeoutException, httpx.TransportError):
+                if attempt == attempts - 1:
+                    raise
+                time.sleep(2 * (attempt + 1))
+        raise RuntimeError("unreachable")
 
     # --- queries -------------------------------------------------------------
 
     def list_lcds(self) -> list[dict]:
         """Every final LCD at its current version (retired ones included). No token needed."""
         if self._lcds is None:
-            self._lcds = self._get("/reports/local-coverage-final-lcds/")
+            snapshot = self._cache / "lcd_list.json" if self._cache else None
+            try:
+                self._lcds = self._get("/reports/local-coverage-final-lcds/")
+                if snapshot:
+                    snapshot.parent.mkdir(parents=True, exist_ok=True)
+                    snapshot.write_text(json.dumps(self._lcds))
+            except (httpx.HTTPError, RuntimeError):
+                # The list only maps LCD ids to current versions; a recent snapshot is
+                # a safe fallback when the API is down (policy text is still fetched by version).
+                if not (snapshot and snapshot.exists()):
+                    raise
+                self._lcds = json.loads(snapshot.read_text())
         return self._lcds
 
     def find_lcds(self, keyword: str, include_retired: bool = False) -> list[dict]:

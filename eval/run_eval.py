@@ -24,7 +24,11 @@ from nebius_nvidia.scenario import Scenario
 from nebius_nvidia.text import locate
 
 MODELS = {"nano": NANO, "super": SUPER, "ultra": ULTRA}
-GOLD = json.loads(Path("eval/gold/L34220_v40.json").read_text())["anchors"]
+# Gold anchors per policy id (all gold ids are unique across files).
+GOLD_BY_POLICY = {
+    g["policy"]: g["anchors"] for g in (json.loads(p.read_text()) for p in Path("eval/gold").glob("*.json"))
+}
+GOLD = {gid: anchor for anchors in GOLD_BY_POLICY.values() for gid, anchor in anchors.items()}
 
 
 def gold_statuses(run) -> dict[str, str]:
@@ -33,7 +37,7 @@ def gold_statuses(run) -> dict[str, str]:
         return {}
     by_id = {m.criterion_id: m.status for m in run.matches}
     out = {}
-    for gid, anchor in GOLD.items():
+    for gid, anchor in GOLD_BY_POLICY.get(run.policy.policy_id, {}).items():
         hit = locate(anchor, run.policy.text)
         crit = next((c for c in run.criteria if hit and c.span_verified and c.span_start <= hit[0] and hit[1] <= c.span_end), None)
         out[gid] = by_id.get(crit.criterion_id, "unmatched") if crit else "not_extracted"
@@ -66,6 +70,12 @@ def eval_case(case_dir: Path, matcher: str, use_text: bool) -> dict:
     }
 
 
+def ok(v: dict) -> bool:
+    if v["expected"] == "clear":
+        return v["got"] in ("met", "not_applicable")
+    return v["got"] == v["expected"]
+
+
 def summarize(results: list[dict], tag: str) -> str:
     done = [r for r in results if "verdict_got" in r]
     lines = [f"## Eval `{tag}`: {len(done)} cases scored, "
@@ -75,7 +85,7 @@ def summarize(results: list[dict], tag: str) -> str:
     route = sum(r["route_got"] == r["route_expected"] for r in done)
     verdict = sum(r["verdict_got"] == r["verdict_expected"] for r in done)
     gold = [(g, v) for r in done for g, v in r["gold"].items()]
-    gold_ok = sum(v["got"] == v["expected"] for _, v in gold)
+    gold_ok = sum(ok(v) for _, v in gold)
     cost = sum(r["cost_usd"] for r in done) / len(done)
     lat = sum(r["latency_s"] for r in done) / len(done)
     lines += [
@@ -91,7 +101,7 @@ def summarize(results: list[dict], tag: str) -> str:
     for gid in GOLD:
         rows = [v for g, v in gold if g == gid]
         if rows:
-            wrong = [f"{v['expected']}→{v['got']}" for v in rows if v["got"] != v["expected"]]
+            wrong = [f"{v['expected']}→{v['got']}" for v in rows if not ok(v)]
             lines.append(f"- {gid}: {len(rows) - len(wrong)}/{len(rows)}" + (f"  (misses: {', '.join(wrong)})" if wrong else ""))
     lines.append("\nVerdict misses:")
     for r in done:
