@@ -1,0 +1,9 @@
+.venv
+.env
+.env.*
+.cache
+.git
+**/__pycache__
+.token_factory_spend.json
+.tavily_spend.json
+eval/results

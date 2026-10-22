@@ -20,13 +20,13 @@ for cid, r in runs.items():
     dl = r.get("deadline") or {}
     rows.append({
         "case": cid,
-        "Patient (synthetic)": s.patient_name,
-        "Payer": d["payer_name"],
-        "CPT": d["cpt"],
-        "Date of service": d["dos"],
-        "Denial reason": d["reason_text"],
         "Recommendation": VERDICT[r["verdict"]][0],
         "Days to deadline": dl.get("days_left"),
+        "Patient (synthetic)": s.patient_name,
+        "Payer": d["payer_name"].replace(" (synthetic MA plan)", "").replace(" (synthetic)", "").replace(" (synthetic member)", ""),
+        "Date of service": d["dos"],
+        "Denial reason": d["reason_text"],
+        "CPT": d["cpt"],
         "Cost": r.get("cost_usd", 0.0),
         "_order": order[r["verdict"]],
     })
@@ -50,7 +50,8 @@ event = st.dataframe(
     selection_mode="single-row",
     column_config={
         "case": None,
-        "Denial reason": st.column_config.TextColumn(width="large"),
+        "Recommendation": st.column_config.TextColumn(width="medium"),
+        "Denial reason": st.column_config.TextColumn(width="medium"),
         "Days to deadline": st.column_config.NumberColumn(format="%d days"),
         "Cost": st.column_config.NumberColumn("Model cost", format="$%.4f"),
     },

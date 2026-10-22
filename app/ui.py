@@ -32,7 +32,7 @@ STATUS = {
 
 CSS = """
 <style>
-.block-container {padding-top: 2.2rem; max-width: 1250px;}
+.block-container {padding-top: 3rem; max-width: 1280px;}
 .pill {display:inline-block; padding:2px 10px; border-radius:999px; font-size:0.78rem; font-weight:600; letter-spacing:.01em;}
 .pill.ok {background:#DDF2E7; color:#14532D;}
 .pill.bad {background:#FBE1DF; color:#7F1D1D;}
@@ -41,7 +41,7 @@ CSS = """
 .pill.mute {background:#E9ECE8; color:#4B5550;}
 .card {background:#FFFFFF; border:1px solid #E1E5DF; border-radius:12px; padding:14px 16px; margin-bottom:12px;}
 .card h4 {margin:0 0 6px 0; font-size:1rem;}
-.quote {border-left:3px solid #0F6E6E; background:#F3F7F6; padding:8px 12px; margin:6px 0; font-size:0.9rem; white-space:pre-wrap;}
+.quote {border-left:3px solid #0F6E6E; background:#F3F7F6; padding:8px 12px; margin:6px 0; font-size:0.9rem; white-space:pre-wrap; max-height:230px; overflow:auto;}
 .quote.chart {border-left-color:#7A6FB0; background:#F6F5FB;}
 .cite {color:#5B6660; font-size:0.78rem; margin-top:2px;}
 .muted {color:#5B6660; font-size:0.85rem;}
@@ -54,7 +54,7 @@ footer {visibility:hidden;}
 
 def setup(title: str) -> None:
     st.markdown(CSS, unsafe_allow_html=True)
-    st.markdown(f'<div class="banner">🧪 {DISCLAIMER}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="banner">{DISCLAIMER}</div>', unsafe_allow_html=True)
 
 
 def pill(label: str, kind: str) -> str:
@@ -63,6 +63,13 @@ def pill(label: str, kind: str) -> str:
 
 def esc(s: str) -> str:
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def quote_html(s: str) -> str:
+    """Display form of verbatim text: blank lines collapsed (the text itself is unchanged)."""
+    import re
+
+    return esc(re.sub(r"\n\s*\n", "\n", s.strip()))
 
 
 @st.cache_data

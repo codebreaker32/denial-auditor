@@ -2,7 +2,7 @@ import streamlit as st
 
 from nebius_nvidia.citations import check
 from nebius_nvidia.models import ChartNote
-from ui import CASES, STATUS, VERDICT, esc, footer, load_runs, notes_of, pill, run_of, scenario_of, session_for, setup
+from ui import CASES, STATUS, VERDICT, esc, footer, quote_html, load_runs, notes_of, pill, run_of, scenario_of, session_for, setup
 
 setup("Case")
 runs = load_runs()
@@ -65,10 +65,10 @@ with tab_board:
             c = crit[m.criterion_id]
             s_label, s_kind = STATUS[m.status]
             ev = "".join(
-                f'<div class="quote chart">{esc(e.quote)}</div><div class="cite">Chart: {e.note_id}{"" if e.verified else " · UNVERIFIED"}</div>'
+                f'<div class="quote chart">{quote_html(e.quote)}</div><div class="cite">Chart: {e.note_id}{"" if e.verified else " · UNVERIFIED"}</div>'
                 for e in m.evidence)
             st.markdown(f"""<div class="card"><h4>{pill(s_label, s_kind)} &nbsp; {esc(c.summary)}</h4>
-<div class="quote">{esc(c.verbatim_span)}</div><div class="cite">Policy text, verbatim · {esc(run.policy.citation() if run.policy else c.doc_id)}</div>
+<div class="quote">{quote_html(c.verbatim_span)}</div><div class="cite">Policy text, verbatim · {esc(run.policy.citation() if run.policy else c.doc_id)}</div>
 {ev}<div class="muted" style="margin-top:6px">→ {esc(m.rationale)}</div></div>""", unsafe_allow_html=True)
         if hidden:
             with st.expander(f"{len(hidden)} policy rules not applicable to this case"):
