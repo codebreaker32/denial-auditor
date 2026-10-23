@@ -22,7 +22,11 @@ state() { "${AWS[@]}" lightsail get-container-services --service-name "$SERVICE"
 
 case "${1:-}" in
   up)
-    docker build -q -t "$IMAGE" . >/dev/null
+    if ! command -v docker >/dev/null || ! docker info >/dev/null 2>&1; then
+      echo "ERROR: Docker isn't available. Start Docker Desktop (with WSL integration on) and retry." >&2
+      exit 1
+    fi
+    docker build -q -t "$IMAGE" . >/dev/null || { echo "ERROR: docker build failed" >&2; exit 1; }
     if [ "$(state)" = NONE ]; then
       echo "creating container service ($POWER)…"
       "${AWS[@]}" lightsail create-container-service --service-name "$SERVICE" --power "$POWER" --scale 1 \
