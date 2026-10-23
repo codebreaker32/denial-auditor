@@ -97,3 +97,9 @@ def test_heading_only_pick_dropped(cms_fixture):
     doc = lcd_from_row(cms_fixture["L34220_v40"][0])
     _, units = numbered(doc)
     assert build_criteria([CriterionPick(summary="x", kind="duration", sentence_ids=[1])], doc, units) == []
+
+
+def test_hyphen_variants_match_but_dashes_dont():
+    assert normalize("L4‑L5 injection") == normalize("L4-L5 injection")
+    assert normalize("L4‐L5") == normalize("L4-L5")
+    assert normalize("4–6 weeks") != normalize("4-6 weeks")  # en dash stays distinct

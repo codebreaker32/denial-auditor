@@ -14,7 +14,7 @@ from nebius_nvidia.appeal import documentation_request, draft_appeal
 from nebius_nvidia.cms import cms
 from nebius_nvidia.cost import CostTracker
 from nebius_nvidia.criteria import extract_criteria
-from nebius_nvidia.facts import ChartFacts, extract_facts
+from nebius_nvidia.facts import ChartFacts, extract_facts, facts_view
 from nebius_nvidia.intake import read_denial
 from nebius_nvidia.match import match_all, verdict
 from nebius_nvidia.models import CaseRun, ChartNote, Denial, PolicyDoc
@@ -55,7 +55,7 @@ def load_notes(case_dir: Path) -> list[ChartNote]:
 
 
 def run_case(case_dir: Path, use_text: bool = False, as_of: date | None = None, matcher: str | None = None,
-             with_appeal: bool = True, progress=None) -> tuple[CaseRun, ChartFacts | None]:
+             with_appeal: bool = True, progress=None, votes: int = 2) -> tuple[CaseRun, ChartFacts | None]:
     """Run one case. `progress(message)` is called before each step (used by the live UI)."""
     case_dir = Path(case_dir)
     scenario = Scenario.load(case_dir)
@@ -80,8 +80,9 @@ def run_case(case_dir: Path, use_text: bool = False, as_of: date | None = None, 
         say("Extracting chart facts with verified quotes (Nemotron 3 Nano)")
         facts = extract_facts(notes, denial.dos, tracker=tracker)
         run.policy, run.criteria = policy, criteria
-        say(f"Checking {len(criteria)} rules against the chart (Nemotron 3 Super)")
-        run.matches = match_all(criteria, notes, facts, denial.dos, tracker=tracker, cpt=denial.cpt,
+        run.facts = facts_view(facts, notes)
+        say(f"Checking {len(criteria)} rules against the chart (2 Nemotron 3 Super votes each; Ultra breaks ties)")
+        run.matches = match_all(criteria, notes, facts, denial.dos, tracker=tracker, cpt=denial.cpt, votes=votes,
                                 **({"model": matcher} if matcher else {}))
     run.verdict = verdict(tri, run.matches, run.criteria)
     if with_appeal and run.verdict == "appeal":

@@ -11,7 +11,7 @@ from datetime import date as Date
 from pydantic import BaseModel, Field
 
 from nebius_nvidia.llm import NANO, structured
-from nebius_nvidia.models import ChartNote, Evidence
+from nebius_nvidia.models import ChartNote, Evidence, FactsView, FlagMark, TreatmentSpan
 from nebius_nvidia.text import locate
 
 SYSTEM = """You extract clinical facts from outpatient chart notes for a medical-billing review of a lumbar MRI.
@@ -147,4 +147,29 @@ def extract_facts(notes: list[ChartNote], dos: Date, tracker=None) -> ChartFacts
         symptom_days=(dos - draft.onset.date).days if onset_ok else None,
         conservative_days=(max(t.end for t in treatments) - min(t.start for t in treatments)).days if treatments else None,
         unverified=[k for k, e in evidence.items() if not e.verified],
+    )
+
+
+def facts_view(facts: ChartFacts, notes: list[ChartNote]) -> FactsView:
+    """The verified facts in a compact, storable form (unverified quotes are dropped)."""
+    d, ev = facts.draft, facts.evidence
+    note_date = {n.note_id: n.date for n in notes}
+    treatments = [
+        TreatmentSpan(kind=t.kind, start=t.start, end=t.end, sessions=t.sessions, response=t.response,
+                      note_id=ev[f"treatment_{i}"].note_id)
+        for i, t in enumerate(d.treatments) if ev[f"treatment_{i}"].verified
+    ]
+    flags = [
+        FlagMark(flag=r.flag, note_id=ev[f"red_flag_{i}"].note_id, noted_on=note_date.get(ev[f"red_flag_{i}"].note_id))
+        for i, r in enumerate(d.red_flags) if ev[f"red_flag_{i}"].verified
+    ]
+    return FactsView(
+        onset=d.onset.date if d.onset and ev.get("onset") and ev["onset"].verified else None,
+        symptom_days=facts.symptom_days,
+        conservative_days=facts.conservative_days,
+        treatments=treatments,
+        red_flags=flags,
+        neuro_exam=d.neuro_exam.finding if d.neuro_exam else None,
+        radiculopathy=d.radiculopathy.finding if d.radiculopathy else None,
+        plan_after_mri=d.plan_after_mri.text if d.plan_after_mri and ev.get("plan_after_mri") and ev["plan_after_mri"].verified else None,
     )

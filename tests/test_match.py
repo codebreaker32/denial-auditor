@@ -54,3 +54,51 @@ def test_adjust_rules():
     assert adjust("exclusion", "missing_documentation") == "not_applicable"
     assert adjust("duration", "not_met") == "not_met"
     assert adjust("indication", "not_met") == "not_met"
+
+
+def _facts(red_flags=()):
+    from nebius_nvidia.facts import ChartFacts, FactsDraft, RedFlagFact
+
+    d = FactsDraft(red_flags=[RedFlagFact(note_id="n1", quote="q", flag=f) for f in red_flags])
+    return ChartFacts(draft=d, evidence={}, symptom_days=60, conservative_days=40, unverified=[])
+
+
+@pytest.mark.parametrize(
+    "first,second,referee,expected_status,confidence,calls",
+    [
+        ("met", "met", None, "met", "agreed", 2),
+        ("met", "not_met", "met", "met", "escalated", 3),
+        ("not_met", "met", "not_met", "not_met", "escalated", 3),
+    ],
+)
+def test_votes_and_referee(monkeypatch, first, second, referee, expected_status, confidence, calls):
+    import sys
+    from datetime import date
+
+    m = sys.modules["nebius_nvidia.match"]
+    seen = []
+    answers = iter([first, second, referee])
+
+    def fake(model, messages, schema, **kw):
+        seen.append((model, kw["step"]))
+        return schema(status=next(answers), evidence=[], rationale="r")
+
+    monkeypatch.setattr(m, "structured", fake)
+    crit = Criterion(criterion_id="C1", doc_id="d", summary="s", verbatim_span="x", kind="duration")
+    res = m.match_one(crit, [], _facts(), date(2026, 8, 1))
+    assert res.confidence == confidence and len(seen) == calls
+    # A "met" with no verified chart evidence is downgraded to missing_documentation.
+    assert res.status == ("missing_documentation" if expected_status == "met" else expected_status)
+    if confidence == "escalated":
+        assert seen[-1][0] == m.ULTRA and seen[-1][1].endswith(":referee")
+
+
+def test_red_flag_route_decided_in_code(monkeypatch):
+    import sys
+    from datetime import date
+
+    m = sys.modules["nebius_nvidia.match"]
+    monkeypatch.setattr(m, "structured", lambda *a, **k: (_ for _ in ()).throw(AssertionError("no model call")))
+    crit = Criterion(criterion_id="C1", doc_id="d", summary="s", verbatim_span="x", kind="red_flag")
+    res = m.match_one(crit, [], _facts(), date(2026, 8, 1))
+    assert res.status == "not_applicable" and res.confidence == "rule"

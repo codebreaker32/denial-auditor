@@ -10,6 +10,9 @@ import html
 import re
 
 _INVISIBLE = {"­", "​", "‌", "‍", "﻿"}
+# Hyphen variants render the same as "-" and mean the same (models often emit U+2011).
+# En and em dashes are NOT mapped: they are different punctuation.
+_HYPHENS = {"\u2010": "-", "\u2011": "-"}
 _QUOTE_MAP = {
     "‘": "'", "’": "'", "‚": "'", "‛": "'", "′": "'",
     "“": '"', "”": '"', "„": '"', "‟": '"', "″": '"',
@@ -38,7 +41,7 @@ def _normalize_with_map(s: str) -> tuple[str, list[int]]:
     for i, ch in enumerate(s):
         if ch in _INVISIBLE:
             continue
-        ch = _QUOTE_MAP.get(ch, ch)
+        ch = _QUOTE_MAP.get(ch, _HYPHENS.get(ch, ch))
         if ch in ",.;:)!?" and out and out[-1] == " ":
             # "condition , such" == "condition, such": a stray space before punctuation
             # (common in CMS text) doesn't change meaning.

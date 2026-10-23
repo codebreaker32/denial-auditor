@@ -14,7 +14,7 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 from nebius_nvidia.facts import ChartFacts, Quoted, notes_block, verify_quote
-from nebius_nvidia.llm import SUPER, structured
+from nebius_nvidia.llm import SUPER, ULTRA, structured
 from nebius_nvidia.models import ChartNote, Criterion, CriterionMatch, TriageResult, Verdict
 
 # Our own plain labels for the ordered study (not the AMA CPT descriptors).
@@ -48,13 +48,9 @@ class MatchDraft(BaseModel):
     rationale: str
 
 
-def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, dos: date, model: str = SUPER,
-              tracker=None, cpt: str | None = None) -> CriterionMatch:
-    if criterion.kind == "red_flag" and not facts.draft.red_flags:
-        # Decided in code: with no verified red flags, a red-flag route is not relevant.
-        return CriterionMatch(criterion_id=criterion.criterion_id, status="not_applicable", evidence=[],
-                              rationale="No red flags are documented, so this red-flag route doesn't apply; the conservative-care route is checked instead.",
-                              model="rule")
+def _judge(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, dos: date, model: str,
+           tracker, cpt: str | None, step: str) -> tuple[str, list, str]:
+    """One model judgment of one rule, with the code rules applied on top."""
     prompt = (
         f"RULE ({criterion.kind}; applies when: {criterion.applies_when or 'always'}):\n"
         f"<policy_text>{criterion.verbatim_span}</policy_text>\n\n"
@@ -67,7 +63,7 @@ def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, d
         [{"role": "system", "content": SYSTEM}, {"role": "user", "content": prompt}],
         MatchDraft,
         max_tokens=4096,
-        step=f"match:{criterion.criterion_id}",
+        step=step,
         tracker=tracker,
     )
     evidence = [verify_quote(e, notes) for e in draft.evidence]
@@ -76,24 +72,45 @@ def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, d
         status = "missing_documentation"
     status = adjust(criterion.kind, status)
     rationale = draft.rationale
-    if status == "not_met" and criterion.kind == "duration" and facts.draft.red_flags:
+    if status in ("not_met", "missing_documentation") and criterion.kind == "duration" and facts.draft.red_flags:
         # Waiting periods (first month, four weeks of conservative care) belong to the
         # no-red-flag route; with verified red flags documented they don't block.
         status = "not_applicable"
         rationale = f"Red flags are documented, so this waiting-period rule doesn't apply. ({rationale})"
-    return CriterionMatch(
-        criterion_id=criterion.criterion_id,
-        status=status,
-        evidence=evidence,
-        rationale=rationale,
-        model=model,
-    )
+    return status, evidence, rationale
+
+
+def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, dos: date, model: str = SUPER,
+              tracker=None, cpt: str | None = None, votes: int = 2, referee: str = ULTRA) -> CriterionMatch:
+    """Judge one rule. With votes=2, two independent judgments by `model`; if they
+    disagree, `referee` (Ultra) decides and the match is marked escalated."""
+    cid = criterion.criterion_id
+    if criterion.kind == "red_flag" and not facts.draft.red_flags:
+        # Decided in code: with no verified red flags, a red-flag route is not relevant.
+        return CriterionMatch(criterion_id=cid, status="not_applicable", evidence=[],
+                              rationale="No red flags are documented, so this red-flag route doesn't apply; the conservative-care route is checked instead.",
+                              model="rule", confidence="rule")
+    short = lambda m: "ultra" if m == ULTRA else "super" if m == SUPER else m.split("/")[-1].lower()
+    results = [_judge(criterion, notes, facts, dos, model, tracker, cpt, f"match:{cid}:v{i + 1}") for i in range(max(1, votes))]
+    ballot = [f"{short(model)}:{r[0]}" for r in results]
+    if votes < 2:
+        status, evidence, rationale = results[0]
+        return CriterionMatch(criterion_id=cid, status=status, evidence=evidence, rationale=rationale,
+                              model=model, votes=ballot, confidence="single")
+    if len({r[0] for r in results}) == 1:
+        # Agreed: keep the vote with the most verified evidence.
+        status, evidence, rationale = max(results, key=lambda r: sum(e.verified for e in r[1]))
+        return CriterionMatch(criterion_id=cid, status=status, evidence=evidence, rationale=rationale,
+                              model=model, votes=ballot, confidence="agreed")
+    status, evidence, rationale = _judge(criterion, notes, facts, dos, referee, tracker, cpt, f"match:{cid}:referee")
+    return CriterionMatch(criterion_id=cid, status=status, evidence=evidence, rationale=rationale,
+                          model=referee, votes=ballot + [f"{short(referee)}:{status}"], confidence="escalated")
 
 
 def match_all(criteria: list[Criterion], notes: list[ChartNote], facts: ChartFacts, dos: date,
-              model: str = SUPER, tracker=None, workers: int = 4, cpt: str | None = None) -> list[CriterionMatch]:
+              model: str = SUPER, tracker=None, workers: int = 4, cpt: str | None = None, votes: int = 2) -> list[CriterionMatch]:
     with ThreadPoolExecutor(workers) as pool:
-        return list(pool.map(lambda c: match_one(c, notes, facts, dos, model, tracker, cpt), criteria))
+        return list(pool.map(lambda c: match_one(c, notes, facts, dos, model, tracker, cpt, votes), criteria))
 
 
 ROUTE_KINDS = {"indication", "red_flag", "duration"}

@@ -119,6 +119,32 @@ def list_cases() -> dict:
             "live_enabled": bool(os.environ.get("DEMO_PASSCODE"))}
 
 
+# Duration thresholds the timeline draws, each tied to the policy sentence that states it.
+# "from" is the clock start: symptom onset, or the first conservative treatment.
+THRESHOLDS = {
+    "L34220": [
+        {"label": "1 month of symptoms", "from": "onset", "days": 30, "anchor": "the MRI may be appropriate after 1 month of symptoms"},
+        {"label": "4 weeks of conservative care", "from": "treatment", "days": 28, "anchor": "conservative management lasting at least four weeks"},
+    ],
+    "Aetna CPB 0236": [
+        {"label": "6 weeks of conservative therapy", "from": "treatment", "days": 42, "anchor": "no improvement after 6 weeks of conservative therapy"},
+    ],
+}
+
+
+def _thresholds(run: CaseRun, sentences: list[dict]) -> list[dict]:
+    if not run.policy:
+        return []
+    out = []
+    for t in THRESHOLDS.get(run.policy.policy_id, []):
+        hit = locate(t["anchor"], run.policy.text)
+        n = next((x["n"] for x in sentences if hit and x["start"] <= hit[0] < x["end"]), None)
+        if n:
+            out.append({**{k: v for k, v in t.items() if k != "anchor"}, "sentence": n,
+                        "address": f"{run.policy.policy_id} · S{n}"})
+    return out
+
+
 @app.get("/api/cases/{case_id}")
 def get_case(case_id: str) -> dict:
     case_id = _safe_id(case_id)
@@ -146,6 +172,7 @@ def get_case(case_id: str) -> dict:
         "as_of": (as_of := board_as_of()).isoformat(),
         "deadline": _deadline(run, as_of).model_dump(mode="json"),
         "policy_citation": run.policy.citation() if run.policy else None,
+        "thresholds": _thresholds(run, sentences),
         "live": case_id in _live,
     }
 

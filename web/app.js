@@ -136,6 +136,7 @@ async function caseView(id) {
       </div>
       <div class="band-actions">${primary}<a class="btn ghost" href="#/worklist">${icon.back}Worklist</a></div>
     </section>
+    ${overviewHtml(c, run, matches)}
     <div class="workspace">
       <aside class="ledger" aria-label="Policy rules for this case">
         <div class="facts">
@@ -156,11 +157,11 @@ async function caseView(id) {
           <button role="tab" data-tab="chart" aria-selected="${run.policy ? "false" : "true"}">Chart notes</button>
           <button role="tab" data-tab="letter" aria-selected="false">Denial letter</button>
           <button role="tab" data-tab="next" aria-selected="false">${run.appeal ? "Appeal letter" : run.doc_request ? "Documentation request" : "Next step"}</button>
-          <button role="tab" data-tab="cost" aria-selected="false">Models &amp; cost</button>
         </div>
         <div data-pane></div>
       </section>
-    </div>`;
+    </div>
+    ${auditHtml(run, matches)}`;
 
   const ctx = { c, run, matches, selected: null };
   const pane = $main.querySelector("[data-pane]");
@@ -169,12 +170,33 @@ async function caseView(id) {
     tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.tab === name)));
     ctx.tab = name;
     $main.querySelector(".workspace").classList.toggle("letter-focus", name === "next" && !!run.appeal);
-    pane.innerHTML = ({ policy: policyPane, chart: chartPane, letter: letterPane, next: nextPane, cost: costPane })[name](ctx);
+    pane.innerHTML = ({ policy: policyPane, chart: chartPane, letter: letterPane, next: nextPane })[name](ctx);
     if (name === "next") wireAppeal(ctx, pane);
     if (ctx.selected) focusRule(ctx, ctx.selected, false);
   };
   tabs.forEach((t) => t.addEventListener("click", () => show(t.dataset.tab)));
   ctx.expanded = new Set();
+  $main.querySelectorAll("[data-chip]").forEach((chip) => chip.addEventListener("click", () => {
+    const t = $main.querySelector(`.rule-toggle[data-rule="${chip.dataset.chip}"]`);
+    if (!t) return;
+    const naList = t.closest("[data-na-list]"); if (naList) naList.hidden = false;
+    t.closest(".rule").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    t.click();
+  }));
+  $main.querySelectorAll("[data-why]").forEach((b) => b.addEventListener("click", () => {
+    const box = b.closest(".rule").querySelector(".rule-more");
+    box.hidden = !box.hidden; b.setAttribute("aria-expanded", String(!box.hidden));
+    b.textContent = box.hidden ? "Why?" : "Hide why";
+  }));
+  // Linked hover: a rule card, its chips, its policy sentence and its chart quotes light up together.
+  const hot = (id, on) => {
+    $main.querySelectorAll(`[data-crit~="${id}"], .rule[data-rule="${id}"], [data-chip="${id}"]`).forEach((el) => el.classList.toggle("hot", on));
+  };
+  $main.addEventListener("mouseover", (e) => {
+    const el = e.target.closest(".rule[data-rule], [data-crit], [data-chip]");
+    const id = el && (el.dataset.rule || el.dataset.chip || el.dataset.crit.split(" ")[0]);
+    if (id !== ctx.hotId) { if (ctx.hotId) hot(ctx.hotId, false); ctx.hotId = id; if (id) hot(id, true); }
+  });
   $main.addEventListener("click", (e) => {
     const fold = e.target.closest("[data-fold]");
     if (fold) { ctx.expanded.add(fold.dataset.fold); show(ctx.tab); return; }
@@ -217,19 +239,129 @@ async function caseView(id) {
   show(run.policy ? "policy" : "chart");
 }
 
+const CONF = {
+  agreed: "2 of 2 Nemotron Super votes agree",
+  escalated: "Super votes split; Nemotron Ultra decided",
+  single: "One Nemotron judgment",
+  rule: "Decided by a fixed rule, no model",
+};
 function ruleHtml(m, [kind, word], policyAddr) {
-  const ev = m.evidence.filter((e) => e.verified).slice(0, 2);
+  const ev = m.evidence.filter((e) => e.verified);
   const a = `${policyAddr}${m.addr ? " · " + m.addr : ""}`;
+  const conf = m.confidence || "single";
+  const evHtml = (e) => `<span class="rule-ev">“${esc(e.quote)}”<a class="addr link" href="#" data-goto="note:${esc(e.note_id)}">${esc(noteAddr(e.note_id))}</a></span>`;
   return `<article class="rule" data-rule="${m.criterion_id}">
     <button type="button" class="rule-toggle" data-rule="${m.criterion_id}" aria-pressed="false">
-      <span class="rule-top">${mark(kind, word)}</span>
+      <span class="rule-top">${mark(kind, word)}${conf === "escalated" ? '<span class="conf">Ultra decided</span>' : ""}</span>
       <span class="rule-sum">${esc(m.crit.summary)}</span>
-      <span class="rule-why">${esc(m.rationale)}</span>
     </button>
     ${m.addr ? `<a class="addr link rule-addr" href="#" data-goto="${gotoFor(m.addr)}">${esc(a)}</a>` : `<span class="addr rule-addr">${esc(a)}</span>`}
-    ${ev.map((e) => `<span class="rule-ev">“${esc(e.quote)}”<a class="addr link" href="#" data-goto="note:${esc(e.note_id)}">${esc(noteAddr(e.note_id))}</a></span>`).join("")}
+    ${ev.slice(0, 1).map(evHtml).join("")}
+    <button type="button" class="why" data-why aria-expanded="false">Why?</button>
+    <div class="rule-more" hidden>
+      <span class="rule-why">${esc(m.rationale)}</span>
+      ${ev.slice(1).map(evHtml).join("")}
+      <span class="addr">${esc(CONF[conf])}${m.votes && m.votes.length ? " · " + esc(m.votes.join(", ")) : ""}</span>
+    </div>
   </article>`;
 }
+
+// ---------- Overview: decision map + chart timeline ----------
+const STAGES = [
+  { key: "routes", title: "Route to coverage", kinds: ["indication", "red_flag"] },
+  { key: "waits", title: "Waiting periods", kinds: ["duration"] },
+  { key: "limits", title: "Restrictions", kinds: ["exclusion"] },
+  { key: "docs", title: "Documentation", kinds: ["documentation"] },
+];
+function stageState(st, ms) {
+  const has = (s) => ms.some((m) => m.status === s);
+  if (st.key === "routes") return has("met") ? ["ok", "Qualifies"] : has("not_met") ? ["bad", "No route met"] : ["warn", "Not shown"];
+  if (st.key === "waits") return has("not_met") ? ["bad", "Not met"] : has("missing_documentation") ? ["warn", "Undocumented"] : has("met") ? ["ok", "Met"] : ["mute", "Waived or not relevant"];
+  if (st.key === "limits") return has("not_met") ? ["bad", "Applies"] : ["ok", "None apply"];
+  return has("missing_documentation") ? ["warn", "Gaps"] : ["ok", "Complete"];
+}
+function decisionMap(run, matches) {
+  const v = VERDICT[run.verdict];
+  if (run.triage.route !== "clinical_review") {
+    return `<section class="dmap" aria-label="How the recommendation was reached">
+      <ol class="dmap-flow short">
+        <li class="dm-stage ${run.triage.route === "fix_checklist" ? "warn" : "mute"}"><span class="stage-h">Reason code ${esc(run.denial.carc.join(", ") || "—")}</span><span class="stage-s">${esc(run.triage.explanation.split(".")[0])}</span><span class="stage-n">Reason-code table, no model</span></li>
+        <li class="dm-stage verdict v-${run.verdict}"><span class="stage-h">${esc(v.label)}</span></li>
+      </ol></section>`;
+  }
+  const cells = STAGES.map((st) => {
+    const all = matches.filter((m) => st.kinds.includes(m.crit.kind));
+    const shown = all.filter((m) => m.status !== "not_applicable" && m.show !== "route");
+    const [k, word] = stageState(st, all.filter((m) => m.show !== "route"));
+    const quiet = all.length - shown.length;
+    return `<li class="dm-stage ${k}">
+      <span class="stage-h">${st.title}</span>
+      <span class="stage-s">${mark({ ok: "met", bad: "not_met", warn: "missing_documentation", mute: "not_applicable" }[k], word)}</span>
+      <span class="chips">${shown.map((m) => `<button type="button" class="chip ${m.status}" data-chip="${m.criterion_id}" title="${esc(m.crit.summary)}">${esc(m.addr || m.criterion_id)}</button>`).join("")}${quiet ? `<span class="chip-quiet">+${quiet} not relevant</span>` : ""}</span>
+    </li>`;
+  }).join("");
+  return `<section class="dmap" aria-label="How the recommendation was reached">
+    <ol class="dmap-flow">${cells}<li class="dm-stage verdict v-${run.verdict}"><span class="stage-h">${esc(v.label)}</span><span class="stage-n">fixed rule, not a model</span></li></ol>
+  </section>`;
+}
+
+const day = 864e5;
+const toMs = (iso) => (iso ? Date.parse(iso + "T00:00:00Z") : null);
+function timelineHtml(c, run) {
+  const f = run.facts;
+  if (!f || (!f.onset && !f.treatments.length && !f.red_flags.length)) return "";
+  const dos = toMs(run.denial.dos), onset = toMs(f.onset);
+  const tStarts = f.treatments.map((t) => toMs(t.start)).filter(Boolean);
+  const firstTx = tStarts.length ? Math.min(...tStarts) : null;
+  const lines = (c.thresholds || []).map((t) => {
+    const base = t.from === "onset" ? onset : firstTx;  // no verified onset → that line isn't drawn
+    if (!base) return null;
+    const at = base + t.days * day;
+    const waived = f.red_flags.length > 0;
+    const met = t.from === "onset" ? dos >= at : (f.conservative_days || 0) >= t.days;
+    return { ...t, at, state: waived ? "waived" : met ? "met" : "not_met" };
+  }).filter(Boolean);
+  const lo = Math.min(...[onset, ...tStarts, ...f.red_flags.map((r) => toMs(r.noted_on))].filter(Boolean), dos) - 4 * day;
+  const hi = Math.max(dos, ...lines.map((l) => l.at)) + 6 * day;
+  const pct = (ms) => ((ms - lo) / (hi - lo)) * 100;
+  const x = (ms) => pct(ms).toFixed(2) + "%";
+  const rows = f.treatments.filter((t) => t.start && t.end);
+  const label = (k) => k.replace(/_/g, " ").replace(/^\w/, (m) => m.toUpperCase());
+  const days = (a, b) => Math.round((toMs(b) - toMs(a)) / day);
+  return `<section class="tl" aria-label="Chart timeline">
+    <div class="tl-head"><h2>Chart timeline</h2><span class="addr">${f.symptom_days != null ? `symptom onset to MRI: ${f.symptom_days} days · ` : ""}conservative care: ${f.conservative_days ?? 0} days</span></div>
+    <div class="tl-track" style="--rows:${rows.length}">
+      ${lines.map((l) => `<span class="tl-line ${l.state}${pct(l.at) > 62 ? " flip" : ""}" style="left:${x(l.at)}"><span class="tl-line-l">${esc(l.label)}</span></span>`).join("")}
+      ${rows.map((t, i) => `<span class="tl-bar" style="left:${x(toMs(t.start))};width:calc(${x(toMs(t.end))} - ${x(toMs(t.start))});top:calc(48px + ${i} * 30px)"><span>${esc(label(t.kind))}${t.sessions ? ` · ${t.sessions} sessions` : ""} · ${days(t.start, t.end)} days${t.response ? " · " + esc(t.response.replace(/_/g, " ")) : ""}</span></span>`).join("")}
+      ${Object.entries(f.red_flags.filter((r) => r.noted_on).reduce((g, r) => ((g[r.noted_on] ||= []).push(r.flag), g), {}))
+          .map(([on, flags]) => `<span class="tl-flag" style="left:${x(toMs(on))}" title="${esc(flags.join(", "))}"><span>Red flag${flags.length > 1 ? "s" : ""}: ${esc(flags.join(", "))}</span></span>`).join("")}
+      <span class="tl-axis"></span>
+      ${onset ? `<span class="tl-pt" style="left:${x(onset)}"><b>Onset</b> ${fmtDate(f.onset)}</span>` : `<span class="tl-pt start" style="left:0"><b>Onset</b> not verified</span>`}
+      <span class="tl-pt end" style="left:${x(dos)}"><b>MRI</b> ${fmtDate(run.denial.dos)}</span>
+    </div>
+    <ul class="tl-legend">${lines.map((l) => `<li>${mark(l.state === "met" ? "met" : l.state === "waived" ? "not_applicable" : "not_met", l.state === "met" ? "Met" : l.state === "waived" ? "Waived: red flags" : "Not met")} ${esc(l.label)} <a class="addr link" href="#" data-goto="policy:${l.sentence}">${esc(l.address)}</a></li>`).join("")}</ul>
+  </section>`;
+}
+function overviewHtml(c, run, matches) {
+  const tl = timelineHtml(c, run);
+  return `<div class="overview${tl ? "" : " solo"}">${decisionMap(run, matches)}${tl}</div>`;
+}
+
+function auditHtml(run, matches) {
+  const t = run.trace;
+  const model = (m) => m.split("/").pop();
+  const esc2 = matches.filter((m) => m.confidence === "escalated").length;
+  const agreed = matches.filter((m) => m.confidence === "agreed").length;
+  return `<details class="audit">
+    <summary>How this was decided <span class="muted">· ${t.length} model calls · $${run.cost_usd.toFixed(4)}${agreed + esc2 ? ` · ${agreed} rules agreed, ${esc2} escalated to Ultra` : ""}</span></summary>
+    <div class="board"><table>
+      <thead><tr><th>Step</th><th>Model</th><th class="num">Tokens in</th><th class="num">Tokens out</th><th class="num">Seconds</th><th class="num">Cost</th></tr></thead>
+      <tbody>${t.map((s) => `<tr><td>${esc(s.step)}</td><td>${esc(model(s.model))}</td><td class="num">${s.prompt_tokens.toLocaleString()}</td><td class="num">${s.completion_tokens.toLocaleString()}</td><td class="num">${s.latency_s}</td><td class="num">$${s.cost_usd.toFixed(4)}</td></tr>`).join("")}
+      <tr><td colspan="5"><b>Total for this case</b> <span class="muted">· NVIDIA Nemotron on Nebius Token Factory</span></td><td class="num"><b>$${run.cost_usd.toFixed(4)}</b></td></tr></tbody>
+    </table></div>
+  </details>`;
+}
+
 const trim = (s, n) => (s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s);
 
 // Policy: the fetched text as a photocopied sheet. Rule sentences are highlighted; runs of
@@ -332,16 +464,6 @@ function nextPane(ctx) {
   </article>`;
 }
 
-function costPane(ctx) {
-  const t = ctx.run.trace;
-  const model = (m) => m.split("/").pop();
-  return `<div class="board"><table>
-    <thead><tr><th>Step</th><th>Model</th><th class="num">Tokens in</th><th class="num">Tokens out</th><th class="num">Seconds</th><th class="num">Cost</th></tr></thead>
-    <tbody>${t.map((s) => `<tr><td>${esc(s.step)}</td><td>${esc(model(s.model))}</td><td class="num">${s.prompt_tokens.toLocaleString()}</td><td class="num">${s.completion_tokens.toLocaleString()}</td><td class="num">${s.latency_s}</td><td class="num">$${s.cost_usd.toFixed(4)}</td></tr>`).join("")}
-    <tr><td colspan="5"><b>Total for this case</b> <span class="muted">· NVIDIA Nemotron on Nebius Token Factory</span></td><td class="num"><b>$${ctx.run.cost_usd.toFixed(4)}</b></td></tr></tbody>
-  </table></div>`;
-}
-
 function focusRule(ctx, id, scroll) {
   const pane = $main.querySelector("[data-pane]");
   pane.innerHTML = ({ policy: policyPane, chart: chartPane })[ctx.tab]?.(ctx) ?? pane.innerHTML;
@@ -438,6 +560,16 @@ function wireAppeal(ctx, pane) {
 }
 
 // ---------------- Live ----------------
+const LIVE_STAGES = [
+  { match: "Reading the denial", title: "Read the faxed denial" },
+  { match: "Triage", title: "Triage by reason code" },
+  { match: "Finding the policy", title: "Find the policy in force on the service date" },
+  { match: "Splitting the policy", title: "Split the policy into rules" },
+  { match: "Extracting chart facts", title: "Pull verified facts from the chart" },
+  { match: "Checking", title: "Check every rule against the chart" },
+  { match: "Drafting", title: "Draft, critique and verify the appeal" },
+  { match: "Done", title: "Recommendation" },
+];
 async function liveView() {
   setNav("live");
   document.title = "Run live · Denial Auditor";
@@ -465,13 +597,22 @@ async function liveView() {
     let job;
     try { job = (await api("/api/live", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ case_id, passcode: state.passcode }) })).job; }
     catch (err) { prog.innerHTML = `<p class="err">${esc(err.message)}</p>`; btn.disabled = false; return; }
+    const t0 = Date.now();
     const poll = async () => {
       const s = await api(`/api/live/${job}`);
-      prog.innerHTML = `<h2 class="side-h">${s.state === "done" ? "Finished" : s.state === "error" ? "Stopped" : "Running…"}</h2>
-        <ol class="steps">${s.steps.map((m, i) => `<li class="${s.state === "running" && i === s.steps.length - 1 ? "now" : ""}">${esc(m)}</li>`).join("")}</ol>
+      // Map progress messages onto the fixed pipeline stages.
+      const reached = LIVE_STAGES.map((st) => s.steps.findIndex((m) => m.startsWith(st.match)));
+      const lastIdx = Math.max(-1, ...reached.map((r, i) => (r >= 0 ? i : -1)));
+      const secs = Math.round((Date.now() - t0) / 1000);
+      prog.innerHTML = `<div class="gate-head"><h2 class="side-h" style="margin:0">${s.state === "done" ? "Finished" : s.state === "error" ? "Stopped" : "Running"}</h2><span class="addr">${secs}s</span></div>
+        <ol class="pipeline">${LIVE_STAGES.map((st, i) => {
+          const msg = reached[i] >= 0 ? s.steps[reached[i]] : "";
+          const cls = reached[i] < 0 ? (i < lastIdx ? "pl-skip" : "pl-todo") : (i === lastIdx && s.state === "running" ? "pl-now" : "pl-done");
+          return `<li class="${cls}"><span class="pl-dot" aria-hidden="true"></span><span class="pl-t">${esc(st.title)}</span>${msg ? `<span class="pl-m">${esc(msg)}</span>` : cls === "pl-skip" ? `<span class="pl-m">Not needed for this denial</span>` : ""}</li>`;
+        }).join("")}</ol>
         ${s.error ? `<p class="err">${esc(s.error)}</p>` : ""}
         ${s.state === "done" ? `<a class="btn" href="#/case/${case_id}">Open the evidence board</a>` : ""}`;
-      if (s.state === "running") setTimeout(poll, 1200);
+      if (s.state === "running") setTimeout(poll, 1000);
       else { btn.disabled = false; state.cases = null; }
     };
     poll();

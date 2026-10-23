@@ -44,11 +44,11 @@ def gold_statuses(run) -> dict[str, str]:
     return out
 
 
-def eval_case(case_dir: Path, matcher: str, use_text: bool) -> dict:
+def eval_case(case_dir: Path, matcher: str, use_text: bool, votes: int = 2) -> dict:
     s = Scenario.load(case_dir)
     t0 = time.time()
     try:
-        run, facts = run_case(case_dir, use_text=use_text, matcher=matcher, with_appeal=False)
+        run, facts = run_case(case_dir, use_text=use_text, matcher=matcher, with_appeal=False, votes=votes)
     except UnsupportedPolicy as e:
         return {"case": s.case_id, "group": s.group, "skipped": str(e)}
     except Exception as e:  # noqa: BLE001 - keep the eval going; record the failure
@@ -151,6 +151,7 @@ def main() -> None:
     ap.add_argument("--text", action="store_true", help="read letter.txt (Nano) instead of the scan (Super-VL)")
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--tag", default="")
+    ap.add_argument("--votes", type=int, default=2, help="independent matcher votes per rule (2 = Ultra breaks ties)")
     ap.add_argument("--rescore", help="re-score a saved eval/results/<tag>.json against current scenarios ($0)")
     ap.add_argument("--rules", action="store_true", help="with --rescore: re-apply current code rules and verdict")
     args = ap.parse_args()
@@ -166,7 +167,7 @@ def main() -> None:
         dirs = [d for d in dirs if d.name in args.only.split(",")]
     tag = args.tag or f"{args.matcher}{'_text' if args.text else ''}"
     with ThreadPoolExecutor(args.workers) as pool:
-        results = list(pool.map(lambda d: eval_case(d, MODELS[args.matcher], args.text), dirs))
+        results = list(pool.map(lambda d: eval_case(d, MODELS[args.matcher], args.text, args.votes), dirs))
     out = Path("eval/results")
     out.mkdir(parents=True, exist_ok=True)
     (out / f"{tag}.json").write_text(json.dumps(results, indent=1, default=str))

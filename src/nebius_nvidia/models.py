@@ -91,6 +91,39 @@ class CriterionMatch(BaseModel):
     evidence: list[Evidence] = Field(default_factory=list)
     rationale: str
     model: str = ""
+    # Independent judgments behind the status, e.g. ["super:met", "super:met"].
+    votes: list[str] = Field(default_factory=list)
+    # agreed: both votes matched; escalated: they split and Ultra decided;
+    # single: one vote; rule: decided in code, no model.
+    confidence: Literal["agreed", "escalated", "single", "rule"] = "single"
+
+
+class TreatmentSpan(BaseModel):
+    kind: str
+    start: date | None
+    end: date | None
+    sessions: int | None = None
+    response: str | None = None
+    note_id: str | None = None
+
+
+class FlagMark(BaseModel):
+    flag: str
+    note_id: str
+    noted_on: date | None = None
+
+
+class FactsView(BaseModel):
+    """Chart facts as stored on a case run (verified quotes only), for the UI timeline."""
+
+    onset: date | None = None
+    symptom_days: int | None = None
+    conservative_days: int | None = None
+    treatments: list[TreatmentSpan] = Field(default_factory=list)
+    red_flags: list[FlagMark] = Field(default_factory=list)
+    neuro_exam: str | None = None
+    radiculopathy: str | None = None
+    plan_after_mri: str | None = None
 
 
 class Denial(BaseModel):
@@ -193,6 +226,7 @@ class CaseRun(BaseModel):
     doc_request: str | None = None
     gate: GateResult | None = None
     deadline: Deadline | None = None
+    facts: FactsView | None = None
     trace: list[StepTrace] = Field(default_factory=list)
 
     @computed_field
