@@ -88,3 +88,26 @@ def test_schema_in_system_prompt_and_thinking_flag():
 
 def test_extract_json_ignores_braces_in_strings():
     assert _extract_json('note: {"city": "a}b", "weeks": 1} end') == '{"city": "a}b", "weeks": 1}'
+
+
+def test_transient_errors_retry(monkeypatch):
+    import httpx
+    import openai
+
+    import sys
+
+    llm_mod = sys.modules["nebius_nvidia.llm"]
+
+    monkeypatch.setattr(llm_mod.time, "sleep", lambda s: None)
+    fc = FakeClient(['{"city": "Paris", "weeks": 4}'])
+    real = fc.chat.completions.create
+    fails = iter([True, True, False])
+
+    def flaky(**kw):
+        if next(fails):
+            raise openai.InternalServerError("worker overloaded", response=httpx.Response(529, request=httpx.Request("POST", "http://x")), body=None)
+        return real(**kw)
+
+    fc.chat.completions.create = flaky
+    out = structured("m", [], Out, max_tokens=10, step="s", client=fc)
+    assert out.weeks == 4

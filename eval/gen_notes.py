@@ -120,8 +120,12 @@ def schedule(s: Scenario) -> list[tuple[date, str]]:
     return out
 
 
-def check(ns: NoteSet, need: dict[str, list[str]], expected_dates: list[str] | None = None) -> list[str]:
+def check(ns: NoteSet, need: dict[str, list[str]], expected_dates: list[str] | None = None,
+          forbidden: tuple[str, ...] = ()) -> list[str]:
     problems = []
+    for term in forbidden:
+        if any(term in n.text.lower() for n in ns.notes):
+            problems.append(f"notes mention '{term}', which is not on the fact sheet; remove it")
     if expected_dates is not None and [n.date for n in ns.notes] != expected_dates:
         problems.append(f"note dates {[n.date for n in ns.notes]} must be exactly {expected_dates}")
     texts = [n.text for n in ns.notes]
@@ -154,7 +158,10 @@ def generate(s: Scenario, case_dir: Path, tracker: CostTracker) -> dict:
         except LLMFormatError as e:
             problems = [str(e)[:200]]
             continue
-        problems = check(ns, need, [fmt(d) for d, _ in schedule(s)])
+        # Plans the fact sheet doesn't include must not appear (they open other policy routes).
+        plan = (s.facts.plan_after_mri or "").lower()
+        forbidden = tuple(t for t in ("injection", "epidural") if t not in plan)
+        problems = check(ns, need, [fmt(d) for d, _ in schedule(s)], forbidden)
         if not problems:
             notes = [
                 ChartNote(

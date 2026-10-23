@@ -128,6 +128,26 @@ def _extract_json(content: str) -> str:
     return last or s
 
 
+TRANSIENT_RETRIES = 3
+
+
+def _create_with_retry(client, **kwargs):
+    """Retry transient Token Factory errors (529 overloaded, 5xx, 429, connection drops).
+
+    These responses bill no tokens, so retrying can't overspend; every attempt still
+    passes through the budget guard.
+    """
+    import openai
+
+    for attempt in range(TRANSIENT_RETRIES + 1):
+        try:
+            return client.chat.completions.create(**kwargs)
+        except (openai.InternalServerError, openai.RateLimitError, openai.APIConnectionError, openai.APITimeoutError):
+            if attempt == TRANSIENT_RETRIES:
+                raise
+            time.sleep(min(20, 3 * 2**attempt))
+
+
 def _schema_prompt(schema: type[BaseModel]) -> str:
     return (
         "Respond with a single JSON object that conforms to this JSON Schema. "
@@ -177,7 +197,7 @@ def structured(
     try:
         while True:
             trace.attempts += 1
-            r = client.chat.completions.create(model=model, messages=msgs, max_tokens=tokens, **kwargs)
+            r = _create_with_retry(client, model=model, messages=msgs, max_tokens=tokens, **kwargs)
             if r.usage:
                 trace.prompt_tokens += r.usage.prompt_tokens or 0
                 trace.completion_tokens += r.usage.completion_tokens or 0

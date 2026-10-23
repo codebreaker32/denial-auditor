@@ -2,7 +2,7 @@
 
 ## Context
 
-Team **Fine Print** (Aman Bihari, Bhawna) is entering the Nebius x NVIDIA Global AI Hackathon, **Best Apps & Agents** track (deadline Fri Oct 30, 10:00 am PT).
+Team **Road House** (Aman Bihari, Bhawna) is entering the Nebius x NVIDIA Global AI Hackathon, **Best Apps & Agents** track (deadline Fri Oct 30, 10:00 am PT).
 
 **Product:** Denial Auditor helps billing staff at small practices win health-insurance denials for outpatient MRI/CT. It:
 - finds the payer policy version in effect on the date of service (DOS);
@@ -291,6 +291,6 @@ Estimated cost per routed case is ~$0.05 (NANO_ONLY ~$0.01). Check against the T
 1. Regenerate notes for **case_009 and case_010** (scenario changed, notes still describe an injection): `./.venv/bin/python eval/gen_notes.py --only case_009,case_010 --force`, then re-run group B.
 2. Build the custom frontend per the direction contract (read `~/.claude/skills/impeccable/reference/craft-floor.md` first), FastAPI API over `pipeline.run_case` and `demo/runs/`; then finish review + DESIGN.md.
 3. Precompute showcase runs (`scripts/precompute.py`), deploy, full 30-case eval + Nano ablation.
-4. Update README/CLAUDE.md/brief for team name Road House (still says Fine Print).
+4. Update README/CLAUDE.md/brief for team name Road House (still says Road House).
 
 **Shutdown check (wrap-up rule):** Lightsail container service deleted (`scripts/deploy.sh status` empty); no local servers or background jobs running.

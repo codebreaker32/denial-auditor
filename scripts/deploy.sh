@@ -52,7 +52,7 @@ print(json.dumps({"app": {
 PY
     "${AWS[@]}" lightsail create-container-service-deployment --service-name "$SERVICE" \
       --containers "file://$TMP" \
-      --public-endpoint '{"containerName":"app","containerPort":8501,"healthCheck":{"path":"/_stcore/health","successCodes":"200"}}' >/dev/null
+      --public-endpoint '{"containerName":"app","containerPort":8501,"healthCheck":{"path":"/healthz","successCodes":"200"}}' >/dev/null
     echo "deploying…"
     until [ "$(state)" = RUNNING ] && [ "$("${AWS[@]}" lightsail get-container-services --service-name "$SERVICE" \
             --query 'containerServices[0].currentDeployment.state' --output text)" = ACTIVE ]; do

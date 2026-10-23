@@ -32,6 +32,7 @@ Policies give alternative routes to coverage (e.g. red flags OR a failed trial o
 - not_applicable: the rule is NOT RELEVANT to this patient. Examples: a red-flag route when the patient has no red flags (absence of red flags never blocks coverage by itself; the conservative-care route may apply instead); a no-red-flag route when red flags are present; a restriction whose condition doesn't describe this case (the first-month limit when symptoms are past one month or a red flag is present; "findings won't affect treatment" when the chart says they will; an exclusion for uncomplicated disease when surgery or injection is being considered; a duplicate- or repeat-imaging rule when there was no other imaging; an investigational use that wasn't ordered; contrast rules for a study without contrast).
 - missing_documentation: the rule matters here but the chart doesn't show whether it's satisfied.
 
+Read each rule literally, as the payer's medical reviewer would: it is met only when the chart states the specific finding the rule names. "Progressively severe" needs documented worsening, not just persistence; "major motor weakness" needs weakness described as major or severe, not mild (e.g. 4/5); a diagnosis-specific route needs that diagnosis documented. Never stretch a rule to fit; when the chart is borderline, use missing_documentation.
 Documentation rules only require what this patient's applicable route needs (e.g. with red flags, no conservative treatment needs to be documented).
 Use the computed facts for durations; don't do date arithmetic yourself.
 Quote chart evidence exactly, one sentence per item, with its note_id. Give a one-sentence rationale a billing specialist can read."""
@@ -75,6 +76,11 @@ def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, d
         status = "missing_documentation"
     status = adjust(criterion.kind, status)
     rationale = draft.rationale
+    if status == "not_met" and criterion.kind == "duration" and facts.draft.red_flags:
+        # Waiting periods (first month, four weeks of conservative care) belong to the
+        # no-red-flag route; with verified red flags documented they don't block.
+        status = "not_applicable"
+        rationale = f"Red flags are documented, so this waiting-period rule doesn't apply. ({rationale})"
     return CriterionMatch(
         criterion_id=criterion.criterion_id,
         status=status,

@@ -3,28 +3,28 @@
   "note_id": "case_009-n1",
   "date": "2026-06-19",
   "note_type": "initial_visit",
-  "author_role": "clinician",
-  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: The patient reports onset of low back pain on 06/18/2026. She describes diffuse lumbar discomfort worsening with flexion.\nExam: Lumbar spine shows tenderness paraspinally, limited forward flexion. Neurologic exam reveals diminished ankle reflex bilaterally; strength is 5/5 elsewhere.\nAssessment: Acute lumbar radiculopathy, likely L5/S1.\nPlan: Start NSAIDs today (06/19/2026) for pain control. Initiate physical therapy beginning 06/22/2026. Advise activity modification. Return in 2 weeks."
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Ms. Emerson Specimen is a 47-year-old female who reports onset of low back pain on 06/18/2026. She describes the pain as aching, localized to the lumbar region, worsened with prolonged sitting and forward flexion. Low back pain began on 06/18/2026. She denies any trauma or neurologic symptoms.\nShe reports trying over-the-counter acetaminophen with minimal relief.\nExam: Vital signs normal. Inspection shows no deformity. Palpation reveals tenderness over paraspinal muscles L3-L5. Range of motion: forward flexion limited to 60 degrees due to pain, lateral bending and rotation mildly restricted. Straight leg raise negative bilaterally. Neurologic exam: strength 5/5 bilaterally in hip flexion, knee extension, and ankle dorsiflexion; reflexes 2+ at patella and Achilles; sensation intact to light touch in lower extremities.\nAssessment: Acute lumbar strain, likely muscular.\nPlan: Start NSAID therapy; ibuprofen 600 mg PO q6h PRN, started today 06/19/2026. Prescribe a course of physical therapy to begin in 3 days focusing on core stabilization and lumbar flexion exercises. Advise activity modification, ice/heat as needed. Return in 2 weeks or sooner if worsening."
  },
  {
   "note_id": "case_009-n2",
   "date": "2026-07-27",
   "note_type": "pt_note",
-  "author_role": "clinician",
-  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns for follow\u2011up after completing prescribed therapies. She reports ongoing low back pain.\nExam: Lumbar paraspinal tenderness persists. Neurologic exam shows diminished ankle reflex; strength 5/5.\nAssessment: Chronic lumbar radiculopathy with incomplete response to conservative care.\nPlan: NSAIDs were started on 06/19/2026 and continued through 07/27/2026 with partial relief. Physical therapy was initiated on 06/22/2026, consisting of 10 sessions, and concluded on 07/27/2026 without improvement. She denies fever, weight loss, trauma, or bowel/bladder symptoms. Objective neurologic examination reveals diminished ankle reflex consistent with L5/S1 radiculopathy. MRI to localize the level before a planned L4-L5 epidural steroid injection."
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns for follow-up after 3 weeks of conservative management. She reports low back pain persisting, unchanged in character. NSAID therapy was started on 06/19/2026 and ended on 07/27/2026 with partial response. Physical therapy was initiated on 06/22/2026, completed 10 sessions by 07/27/2026, and showed no improvement.\nExam: Vital signs stable. Lumbar paraspinal tenderness persists. Range of motion: forward flexion 50 degrees, lateral bending 20 degrees each side. Straight leg raise negative. Neurologic exam: strength 5/5 hip flexion bilaterally, 4/5 left great toe extension (motor weakness consistent with L5 radiculopathy). Reflexes: diminished left ankle jerk, otherwise 2+ patellar. Sensation decreased to light touch over left lateral foot.\nAssessment: Objective radiculopathy findings include diminished ankle reflex and L5/S1 weakness.\nPlan: Continue NSAIDs as needed for symptom control. Recommend home exercise program. Spine surgery referral is under consideration pending MRI findings. She denies fever, weight loss, trauma, cancer history, bladder or bowel incontinence, saddle anesthesia, or progressive neurologic deficits."
  },
  {
   "note_id": "case_009-n3",
   "date": "2026-08-01",
   "note_type": "follow_up",
-  "author_role": "clinician",
-  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient presents for routine follow\u2011up after completing NSAID course and physical therapy.\nExam: Lumbar tenderness; neurologic exam unchanged with diminished ankle reflex.\nAssessment: Persistent lumbar radiculopathy despite completed conservative therapy.\nPlan: NSAIDs were started on 06/19/2026 and continued through 07/27/2026 with partial relief. Physical therapy was initiated on 06/22/2026, consisting of 10 sessions, and concluded on 07/27/2026 without improvement. She denies fever, weight loss, trauma, or bowel/bladder symptoms. Objective neurologic examination reveals diminished ankle reflex consistent with L5/S1 radiculopathy. MRI to localize the level before a planned L4-L5 epidural steroid injection."
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns for follow-up prior to scheduled lumbar MRI. She reports low back pain unchanged; analgesic use continues.\nExam: Similar to prior; neurologic exam shows 4/5 left great toe extension and diminished left ankle jerk.\nAssessment: Ongoing lumbar radiculopathy L5/S1.\nPlan: NSAID therapy was started on 06/19/2026 and ended on 07/27/2026 with partial response. Physical therapy was initiated on 06/22/2026, completed 10 sessions by 07/27/2026, and showed no improvement. Spine surgery referral is under consideration pending MRI findings. She denies fever, weight loss, trauma, cancer history, bladder or bowel incontinence, saddle anesthesia, or progressive neurologic deficits."
  },
  {
   "note_id": "case_009-n4",
   "date": "2026-08-03",
   "note_type": "imaging_order",
-  "author_role": "clinician",
-  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns with continued low back pain after failed conservative management.\nExam: Lumbar paraspinal tenderness; neurologic exam shows diminished ankle reflex.\nAssessment: Lumbar radiculopathy, likely L5/S1, refractory to NSAIDs and PT.\nPlan: MRI to localize the level before a planned L4-L5 epidural steroid injection."
+  "author_role": "Attending Physician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nHPI: Patient returns for pre-surgical evaluation; low back pain persists despite NSAID and PT.\nExam: Unchanged; neurologic exam shows 4/5 left great toe extension and diminished left ankle reflex.\nAssessment: Lumbar radiculopathy L5/S1 with objective findings.\nPlan: Lumbar MRI ordered today 08/03/2026 to further evaluate disc pathology. Spine surgery referral is under consideration pending MRI findings. She denies fever, weight loss, trauma, cancer history, bladder or bowel incontinence, saddle anesthesia, or progressive neurologic deficits."
  }
 ]

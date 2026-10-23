@@ -9,7 +9,7 @@ WORKDIR /srv
 COPY pyproject.toml README.md LICENSE ./
 COPY src ./src
 RUN pip install ".[app]"
-COPY app ./app
+COPY web ./web
 COPY cases ./cases
 COPY demo ./demo
 COPY eval/gold ./eval/gold
@@ -21,6 +21,6 @@ ENV TOKEN_FACTORY_LEDGER=/state/tf_spend.json \
     TAVILY_CREDIT_CAP=1200
 VOLUME ["/state"]
 
+ENV DA_ROOT=/srv
 EXPOSE 8501
-WORKDIR /srv/app
-CMD ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["uvicorn", "nebius_nvidia.api:app", "--host", "0.0.0.0", "--port", "8501"]

@@ -67,7 +67,7 @@ Mostly NVIDIA engineers (Jetson, Physical AI, software), Nebius Token Factory / 
 
 ## Team & constraints
 
-- Team: **Fine Print**: Aman Bihari, Bhawna. Strengths: Python backend, ML/data. No dedicated frontend skills, so prefer a simple, polished UI (e.g. Streamlit/Gradio or a minimal template).
+- Team: **Road House**: Aman Bihari, Bhawna. Strengths: Python backend, ML/data. No dedicated frontend skills, so prefer a simple, polished UI (e.g. Streamlit/Gradio or a minimal template).
 - Hardware: phone/webcam, plus access to an **NVIDIA A100 container** (JupyterLab on the local network; the credentials are not stored here). Good for self-hosting open NVIDIA models that aren't on Token Factory (e.g. Cosmos Reason 2), fine-tuning and evals. It **does not satisfy the "runs on Nebius" rule**, so the shipped app must still call Token Factory. A100s also can't run Isaac Sim (no RT cores).
 - Decision: the user picks from the top 3 finalists.
 - Budget caps (enforced in code): Token Factory $27 total; Tavily 4,125 credits total.

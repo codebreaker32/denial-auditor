@@ -17,3 +17,6 @@ venv/
 
 # Fetched policy text (CMS licence: personal, non-commercial)
 .cache/
+
+# impeccable review captures
+.impeccable/review/

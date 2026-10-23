@@ -12,7 +12,7 @@ Denial Auditor helps billing staff at small medical practices work health-insura
 
 A second mode runs the same checks on a prior-authorization request **before** it's submitted.
 
-Built for the [Nebius x NVIDIA Global AI Hackathon](https://nebiusglobalaihackathon.devpost.com/), **Best Apps & Agents** track, by team **Fine Print**: Aman Bihari and Bhawna.
+Built for the [Nebius x NVIDIA Global AI Hackathon](https://nebiusglobalaihackathon.devpost.com/), **Best Apps & Agents** track, by team **Road House**: Aman Bihari and Bhawna.
 
 > 🚧 In active development (Oct 20–30, 2026). See [docs/plan.md](docs/plan.md) for the build plan.
 

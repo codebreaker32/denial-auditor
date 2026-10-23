@@ -1,0 +1,406 @@
+// Denial Auditor frontend. No framework: hash routes, one render per view.
+const $main = document.getElementById("main");
+const state = { cases: null, filter: "all", lastCase: null, passcode: "" };
+
+const VERDICT = {
+  appeal:        { label: "Appeal", line: "The chart meets the policy in effect on the date of service. Review the drafted letter and send it." },
+  doc_request:   { label: "Ask the physician", line: "Winnable once the missing documentation is added to the chart." },
+  dont_appeal:   { label: "Don't appeal yet", line: "The chart doesn't meet the policy yet. Appealing now would likely fail." },
+  fix_checklist: { label: "Fix & resubmit", line: "Administrative denial: correct the claim. No clinical appeal is needed." },
+  not_winnable:  { label: "Not winnable", line: "The plan excludes this service. Medical-necessity evidence won't change the outcome." },
+};
+const ORDER = ["appeal", "doc_request", "fix_checklist", "dont_appeal", "not_winnable"];
+const STATUS = {
+  met: "Supports", not_met: "Blocks", missing_documentation: "Missing docs", not_applicable: "Not applicable",
+};
+const KIND = { indication: "Route to coverage", red_flag: "Red-flag route", duration: "Duration rule", documentation: "Documentation", exclusion: "Restriction" };
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const fmtDate = (iso) => { if (!iso) return "—"; const [y, m, d] = iso.split("-"); return `${m}/${d}/${y}`; };
+const payerShort = (p) => p.replace(/ \((synthetic[^)]*)\)/i, "");
+const icon = {
+  download: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>',
+  copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>',
+  play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>',
+  back: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>',
+};
+
+async function api(path, opts) {
+  const r = await fetch(path, opts);
+  if (!r.ok) {
+    let msg = `${r.status}`;
+    try { msg = (await r.json()).detail || msg; } catch {}
+    throw new Error(msg);
+  }
+  return r.json();
+}
+
+function setNav(name) {
+  document.querySelectorAll("[data-nav]").forEach((a) => {
+    if (a.dataset.nav === name) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+  });
+}
+
+function mark(kind, label) { return `<span class="mark ${kind}">${esc(label)}</span>`; }
+
+// ---------------- Worklist ----------------
+async function worklist() {
+  setNav("worklist");
+  document.title = "Worklist · Denial Auditor";
+  $main.innerHTML = `<div class="skeleton" style="width:40%;height:28px;margin-bottom:18px"></div><div class="skeleton" style="height:320px"></div>`;
+  const data = state.cases || (state.cases = await api("/api/cases"));
+  const rows = [...data.cases].sort((a, b) => ORDER.indexOf(a.verdict) - ORDER.indexOf(b.verdict) || (a.days_left ?? 999) - (b.days_left ?? 999));
+  const count = (v) => rows.filter((r) => v === "all" || r.verdict === v).length;
+  const shown = rows.filter((r) => state.filter === "all" || r.verdict === state.filter);
+  const seg = ["all", ...ORDER].filter((v) => v === "all" || count(v))
+    .map((v) => `<button type="button" data-f="${v}" aria-pressed="${state.filter === v}">${v === "all" ? "All" : VERDICT[v].label}<span class="n">${count(v)}</span></button>`).join("");
+
+  $main.innerHTML = `
+    <header class="page-head">
+      <div>
+        <h1 class="page-title">Denials to work</h1>
+        <p class="lede">Ranked by what to do and how soon it's due. Every recommendation traces back to the payer's own policy sentences and the chart.</p>
+      </div>
+    </header>
+    <div class="board-tools">
+      <div class="seg" role="group" aria-label="Filter by recommendation">${seg}</div>
+      <span class="muted" style="font-size:13px">Deadlines counted from each notice date</span>
+    </div>
+    <div class="board">
+      ${shown.length ? `<table>
+        <thead><tr><th scope="col">Due</th><th scope="col">Recommendation</th><th scope="col">Patient</th><th scope="col" class="hide-sm">Payer</th><th scope="col" class="hide-sm">Service date</th><th scope="col" class="reason">Denial reason</th><th scope="col" class="num hide-sm">Model cost</th></tr></thead>
+        <tbody>${shown.map(rowHtml).join("")}</tbody>
+      </table>` : `<p class="empty">No denials match this filter.</p>`}
+    </div>`;
+  $main.querySelectorAll("[data-f]").forEach((b) => b.addEventListener("click", () => { state.filter = b.dataset.f; worklist(); }));
+}
+
+function rowHtml(r) {
+  const soon = r.days_left != null && r.days_left < 21;
+  const due = r.days_left == null ? `<span class="muted">Check notice</span>` : `${r.days_left}<small>days left<br>${fmtDate(r.due)}</small>`;
+  return `<tr>
+    <td><span class="due${soon ? " soon" : ""}">${due}</span></td>
+    <td>${mark("v-" + r.verdict, VERDICT[r.verdict].label)}${r.live ? ' <span class="addr">live run</span>' : ""}</td>
+    <td class="who"><a href="#/case/${r.id}">${esc(r.patient)}</a><div class="addr">${esc(r.id.replace("case_", "Case "))} · CPT ${esc(r.cpt)}</div></td>
+    <td class="hide-sm">${esc(payerShort(r.payer))}</td>
+    <td class="hide-sm">${fmtDate(r.dos)}</td>
+    <td class="reason">${esc(r.reason)}</td>
+    <td class="num hide-sm">$${r.cost_usd.toFixed(3)}</td>
+  </tr>`;
+}
+
+// ---------------- Case ----------------
+async function caseView(id) {
+  setNav("case");
+  if (!id) {
+    const data = state.cases || (state.cases = await api("/api/cases"));
+    id = state.lastCase || (data.cases[0] && data.cases[0].id);
+    if (!id) { $main.innerHTML = `<p class="empty">No cases yet.</p>`; return; }
+    history.replaceState(null, "", `#/case/${id}`);
+  }
+  state.lastCase = id;
+  $main.innerHTML = `<div class="skeleton" style="width:55%;height:34px;margin-bottom:22px"></div><div class="skeleton" style="height:480px"></div>`;
+  let c;
+  try { c = await api(`/api/cases/${encodeURIComponent(id)}`); }
+  catch (e) { $main.innerHTML = `<p class="empty">${esc(e.message)}</p>`; return; }
+  const run = c.run, d = run.denial, v = VERDICT[run.verdict];
+  document.title = `${c.patient} · Denial Auditor`;
+  const byId = Object.fromEntries(run.criteria.map((x) => [x.criterion_id, x]));
+  const matches = run.matches.map((m) => ({ ...m, crit: byId[m.criterion_id], addr: c.addresses[m.criterion_id] }));
+  const label = (m) => (m.status === "not_met" && m.crit.kind === "indication" && run.verdict === "appeal") ? ["route", "Route not used"] : [m.status, STATUS[m.status]];
+  const rank = { not_met: 0, missing_documentation: 1, met: 2, route: 3, not_applicable: 4 };
+  matches.forEach((m) => { m.show = label(m)[0]; });
+  const live = matches.filter((m) => m.status !== "not_applicable").sort((a, b) => rank[a.show] - rank[b.show]);
+  const na = matches.filter((m) => m.status === "not_applicable");
+  const dl = run.deadline;
+  const soon = dl && dl.days_left != null && dl.days_left < 21;
+  const policyAddr = run.policy ? run.policy.policy_id : "";
+  const primary = run.appeal ? `<button class="btn" data-tab-go="next">Review appeal</button>`
+    : run.doc_request ? `<button class="btn" data-copy-docreq>${icon.copy}Copy documentation request</button>` : "";
+
+  $main.innerHTML = `
+    <section class="case-band">
+      <div>
+        <div class="case-who"><span><b>${esc(c.patient)}</b> (synthetic)</span><span>${esc(payerShort(d.payer_name))} · ${esc(d.plan_type.replace(/_/g, " "))}</span><span>Lumbar MRI · CPT ${esc(d.cpt)}</span><span>Service ${fmtDate(d.dos)} · Notice ${fmtDate(d.notice_date)}</span></div>
+        <div class="decision">
+          <h1><span class="hl ${run.verdict === "appeal" ? "met" : run.verdict === "dont_appeal" ? "not_met" : run.verdict === "doc_request" ? "missing_documentation" : run.verdict === "fix_checklist" ? "quote" : "not_applicable"} sweep">${esc(v.label)}</span></h1>
+          ${dl && dl.due ? `<span class="deadline${soon ? " soon" : ""}"><b>${dl.days_left}</b> days left · due ${fmtDate(dl.due)}</span>` : `<span class="deadline">Deadline: check the notice</span>`}
+        </div>
+        <p class="decision-why">${esc(v.line)} ${dl ? `<span class="muted">${esc(dl.citation)}${dl.verified ? "" : " · unverified"}.</span>` : ""}</p>
+      </div>
+      <div class="band-actions">${primary}<a class="btn ghost" href="#/worklist">${icon.back}Worklist</a></div>
+    </section>
+    <div class="workspace">
+      <aside class="ledger" aria-label="Policy rules for this case">
+        <div class="facts">
+          <dl style="margin:0">
+            <dt>Denial reason</dt><dd>${esc(d.reason_text)}${d.carc.length ? ` <span class="addr">reason code ${esc(d.carc.join(", "))}</span>` : ""}</dd>
+            <dt>Triage</dt><dd>${esc(run.triage.explanation || run.triage.reason_class)} <span class="addr">${run.triage.method === "carc_table" ? "reason-code table, no model" : "Nemotron Nano"}</span></dd>
+            ${run.policy ? `<dt>Policy in effect on ${fmtDate(d.dos)}</dt><dd>${esc(run.policy.title)} <span class="addr">${esc(c.policy_citation)}</span></dd>` : ""}
+          </dl>
+        </div>
+        ${run.triage.checklist.length ? `<div class="facts"><dt>Fix checklist</dt>${run.triage.checklist.map((i) => `<dd>· ${esc(i)}</dd>`).join("")}</div>` : ""}
+        ${matches.length ? `<h2>Rules that decide this case</h2>` : ""}
+        ${live.map((m) => ruleHtml(m, label(m), policyAddr)).join("")}
+        ${na.length ? `<button class="na-toggle" type="button" data-na>${na.length} more rules don't apply to this case</button><div data-na-list hidden>${na.map((m) => ruleHtml(m, label(m), policyAddr)).join("")}</div>` : ""}
+      </aside>
+      <section aria-label="Documents">
+        <div class="tabs" role="tablist">
+          ${run.policy ? `<button role="tab" data-tab="policy" aria-selected="true">Policy</button>` : ""}
+          <button role="tab" data-tab="chart" aria-selected="${run.policy ? "false" : "true"}">Chart notes</button>
+          <button role="tab" data-tab="letter" aria-selected="false">Denial letter</button>
+          <button role="tab" data-tab="next" aria-selected="false">${run.appeal ? "Appeal letter" : run.doc_request ? "Documentation request" : "Next step"}</button>
+          <button role="tab" data-tab="cost" aria-selected="false">Models &amp; cost</button>
+        </div>
+        <div data-pane></div>
+      </section>
+    </div>`;
+
+  const ctx = { c, run, matches, selected: null };
+  const pane = $main.querySelector("[data-pane]");
+  const tabs = [...$main.querySelectorAll("[data-tab]")];
+  const show = (name) => {
+    tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.tab === name)));
+    ctx.tab = name;
+    pane.innerHTML = ({ policy: policyPane, chart: chartPane, letter: letterPane, next: nextPane, cost: costPane })[name](ctx);
+    if (name === "next") wireAppeal(ctx, pane);
+    if (ctx.selected) focusRule(ctx, ctx.selected, false);
+  };
+  tabs.forEach((t) => t.addEventListener("click", () => show(t.dataset.tab)));
+  $main.querySelectorAll("[data-tab-go]").forEach((b) => b.addEventListener("click", () => show(b.dataset.tabGo)));
+  $main.querySelector("[data-copy-docreq]")?.addEventListener("click", async (e) => {
+    await navigator.clipboard?.writeText(run.doc_request); e.currentTarget.lastChild.textContent = "Copied"; });
+  $main.querySelector("[data-na]")?.addEventListener("click", (e) => {
+    const l = $main.querySelector("[data-na-list]"); l.hidden = !l.hidden;
+    e.currentTarget.textContent = l.hidden ? `${na.length} more rules don't apply to this case` : "Hide rules that don't apply"; });
+  $main.querySelectorAll(".rule").forEach((b) => {
+    b.addEventListener("click", () => {
+      const id = b.dataset.rule;
+      ctx.selected = ctx.selected === id ? null : id;
+      $main.querySelectorAll(".rule").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.rule === ctx.selected)));
+      if (ctx.selected) {
+        const m = matches.find((x) => x.criterion_id === id);
+        if (ctx.tab !== "policy" && ctx.tab !== "chart") show(run.policy ? "policy" : "chart");
+        else if (ctx.tab === "chart" && !m.evidence.some((e) => e.verified) && run.policy) show("policy");
+        focusRule(ctx, id, true);
+      } else show(ctx.tab);
+    });
+  });
+  show(run.policy ? "policy" : "chart");
+}
+
+function ruleHtml(m, [kind, word], policyAddr) {
+  const ev = m.evidence.filter((e) => e.verified).slice(0, 2);
+  return `<button type="button" class="rule" data-rule="${m.criterion_id}" aria-pressed="false">
+    <span class="rule-top">${mark(kind, word)}<span class="addr">${esc(policyAddr)}${m.addr ? " · " + esc(m.addr) : ""}</span></span>
+    <span class="rule-sum">${esc(m.crit.summary)}</span>
+    <span class="rule-why">${esc(m.rationale)}</span>
+    ${ev.map((e) => `<span class="rule-ev">“${esc(trim(e.quote, 170))}”<span class="addr">chart ${esc(e.note_id.split("-").pop())}</span></span>`).join("")}
+  </button>`;
+}
+const trim = (s, n) => (s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s);
+
+// Policy: the fetched text as a photocopied sheet, numbered sentences, rule sentences highlighted.
+function policyPane(ctx) {
+  const { run, c, matches } = ctx;
+  const status = Object.fromEntries(matches.map((m) => [m.criterion_id, m.show === "route" ? "not_applicable" : m.status]));
+  const sel = ctx.selected;
+  let html = "", para = [];
+  const flush = () => { if (para.length) { html += `<p>${para.join(" ")}</p>`; para = []; } };
+  const text = run.policy.text;
+  c.sentences.forEach((s, i) => {
+    const gap = i ? text.slice(c.sentences[i - 1].end, s.start) : "";
+    if (/\n\s*\n/.test(gap)) flush();
+    const t = s.text;
+    const isHeading = !/[.:;)”"]$/.test(t.trim()) && t.length < 70 && !t.startsWith("•");
+    if (isHeading) { flush(); html += `<div class="heading">${esc(t)}</div>`; return; }
+    const crits = s.criteria.filter((cid) => status[cid] && (status[cid] !== "not_applicable" || cid === sel));
+    const pick = crits.includes(sel) ? sel : crits[0];
+    const cls = pick ? `hl ${status[pick]}${pick === sel ? " sweep" : ""}` : "";
+    const body = cls ? `<span class="${cls}" data-crit="${s.criteria.join(" ")}">${esc(t)}</span>` : esc(t);
+    const li = t.startsWith("•") ? " li" : "";
+    if (li) { flush(); html += `<p class="sent li" data-s="${s.n}"><span class="n">S${s.n}</span>${body}</p>`; }
+    else para.push(`<span class="sent" data-s="${s.n}">${para.length ? `<sup class="ns">S${s.n}</sup>` : `<span class="n">S${s.n}</span>`}${body}</span>`);
+  });
+  flush();
+  return `<article class="sheet">
+    <header class="sheet-head"><h2>${esc(run.policy.title)}</h2><span class="addr">${esc(c.policy_citation)} · <a href="${esc(run.policy.url)}" target="_blank" rel="noopener">source</a></span></header>
+    ${html}
+  </article>`;
+}
+
+function chartPane(ctx) {
+  const { c, matches } = ctx;
+  const sel = ctx.selected;
+  return `<article class="sheet notes">
+    <header class="sheet-head"><h2>Chart notes</h2><span class="addr">${c.notes.length} notes · synthetic</span></header>
+    ${c.notes.map((n) => {
+      const marks = [];
+      matches.forEach((m) => m.evidence.forEach((e) => {
+        if (e.verified && e.note_id === n.note_id && e.start != null && (m.status !== "not_applicable" || m.criterion_id === sel))
+          marks.push({ a: e.start, b: e.end, cls: (m.show === "route" ? "not_applicable" : m.status) + (m.criterion_id === sel ? " sweep" : ""), rule: m.criterion_id });
+      }));
+      marks.sort((x, y) => x.a - y.a || (y.rule === sel) - (x.rule === sel));
+      let out = "", at = 0;
+      for (const mk of marks) { if (mk.a < at) continue; out += esc(n.text.slice(at, mk.a)) + `<span class="hl ${mk.cls}" data-crit="${mk.rule}">${esc(n.text.slice(mk.a, mk.b))}</span>`; at = mk.b; }
+      out += esc(n.text.slice(at));
+      return `<section class="note" data-note="${n.note_id}"><div class="note-h">${fmtDate(n.date)} · ${esc(n.note_type.replace(/_/g, " "))} · ${esc(n.author_role)} <span class="addr">${esc(n.note_id.split("-").pop())}</span></div>${out}</section>`;
+    }).join("")}
+  </article>`;
+}
+
+function letterPane(ctx) {
+  const d = ctx.run.denial;
+  return `<figure style="margin:0"><img class="letter-img" src="/api/cases/${ctx.c.id}/letter" alt="Synthetic faxed denial notice for ${esc(ctx.c.patient)}">
+    <figcaption class="addr" style="margin-top:8px;white-space:normal">Read by ${esc((d.extracted_by || "").split("/").pop() || "model")}. Fictional test notice, not issued by any insurer.</figcaption></figure>`;
+}
+
+function nextPane(ctx) {
+  const { run, matches } = ctx;
+  if (run.appeal) {
+    return `<div class="appeal">
+      <div>
+        <label class="side-h" for="letter">Reconsideration request (editable)</label>
+        <textarea id="letter" class="editor" spellcheck="true">${esc(run.appeal.rendered)}</textarea>
+        ${run.appeal.critique.length ? `<details class="critique"><summary>Payer-reviewer critique addressed in revision ${run.appeal.revision}</summary><ul>${run.appeal.critique.map((x) => `<li><b>${esc(x.severity)}</b>: ${esc(x.issue)} <span class="muted">→ ${esc(x.suggestion)}</span></li>`).join("")}</ul></details>` : ""}
+      </div>
+      <aside class="gate" aria-live="polite" data-gate><p class="muted">Checking quotes…</p></aside>
+    </div>`;
+  }
+  if (run.doc_request) return `<article class="sheet notes"><header class="sheet-head"><h2>Documentation request to the physician</h2><button class="btn ghost" data-copy2>${icon.copy}Copy</button></header><pre class="docreq">${esc(run.doc_request)}</pre></article>`;
+  const blockers = matches.filter((m) => m.status === "not_met");
+  return `<article class="sheet notes"><header class="sheet-head"><h2>${esc(VERDICT[run.verdict].label)}</h2></header>
+    <p>${esc(VERDICT[run.verdict].line)}</p>
+    ${blockers.length ? `<p class="heading">What the chart doesn't meet yet</p>${blockers.map((m) => `<p><span class="hl not_met">${esc(m.crit.verbatim_span.slice(0, 260))}</span><br><span class="muted">${esc(m.rationale)}</span></p>`).join("")}` : ""}
+    ${run.triage.checklist.length ? `<p class="heading">Checklist</p>${run.triage.checklist.map((i) => `<p>· ${esc(i)}</p>`).join("")}` : ""}
+  </article>`;
+}
+
+function costPane(ctx) {
+  const t = ctx.run.trace;
+  const model = (m) => m.split("/").pop();
+  return `<div class="board"><table>
+    <thead><tr><th>Step</th><th>Model</th><th class="num">Tokens in</th><th class="num">Tokens out</th><th class="num">Seconds</th><th class="num">Cost</th></tr></thead>
+    <tbody>${t.map((s) => `<tr><td>${esc(s.step)}</td><td>${esc(model(s.model))}</td><td class="num">${s.prompt_tokens.toLocaleString()}</td><td class="num">${s.completion_tokens.toLocaleString()}</td><td class="num">${s.latency_s}</td><td class="num">$${s.cost_usd.toFixed(4)}</td></tr>`).join("")}
+    <tr><td colspan="5"><b>Total for this case</b> <span class="muted">· NVIDIA Nemotron on Nebius Token Factory</span></td><td class="num"><b>$${ctx.run.cost_usd.toFixed(4)}</b></td></tr></tbody>
+  </table></div>`;
+}
+
+function focusRule(ctx, id, scroll) {
+  const pane = $main.querySelector("[data-pane]");
+  pane.innerHTML = ({ policy: policyPane, chart: chartPane })[ctx.tab]?.(ctx) ?? pane.innerHTML;
+  if (!scroll) return;
+  const el = [...pane.querySelectorAll("[data-crit]")].find((x) => x.dataset.crit.split(" ").includes(id));
+  el?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+}
+
+function wireAppeal(ctx, pane) {
+  const ta = pane.querySelector("#letter");
+  pane.querySelector("[data-copy2]")?.addEventListener("click", () => navigator.clipboard?.writeText(ctx.run.doc_request));
+  if (!ta) return;
+  const box = pane.querySelector("[data-gate]");
+  let t, seq = 0;
+  const run = async () => {
+    const mine = ++seq;
+    let g;
+    try { g = await api("/api/gate", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ case_id: ctx.c.id, text: ta.value }) }); }
+    catch (e) { box.innerHTML = `<p class="err">Couldn't check quotes: ${esc(e.message)}</p>`; return; }
+    if (mine !== seq) return;
+    const bad = g.checks.filter((x) => x.status !== "verified").length;
+    box.innerHTML = `
+      <div class="gate-head"><h3>Citation gate</h3>${mark(g.ok ? "met" : "not_met", g.ok ? "Every quote verified" : `${bad} quote${bad === 1 ? "" : "s"} don't match`)}</div>
+      <p class="verdict-line">${g.ok ? "Each quoted line matches the policy fetched for this case or the chart, word for word." : esc(g.reason || "Fix the quotes marked below.")}</p>
+      <ol>${g.checks.map((x) => `<li class="${x.status === "verified" ? "" : "bad"}"><span class="q ${x.status === "verified" ? "hl quote" : ""}">${esc(trim(x.text.replace(/\n/g, " "), 220))}</span>
+        <span class="src">${x.status === "verified" ? "matches " + esc(x.source_id.includes("-n") ? "chart " + x.source_id.split("-").pop() : x.source_id) : "not found in any fetched source"}</span>
+        ${x.closest ? `<span class="closest">Source says: <span class="hl quote">${esc(trim(x.closest.text, 220))}</span></span>` : ""}</li>`).join("")}</ol>
+      <button class="btn" data-export ${g.ok ? "" : "disabled"}>${icon.download}Export letter</button>
+      <p class="muted" style="font-size:12.5px;margin:0">A person reviews and sends this letter. Denial Auditor never submits anything.</p>`;
+    box.querySelector("[data-export]").addEventListener("click", () => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([ta.value], { type: "text/markdown" }));
+      a.download = `${ctx.c.id}_reconsideration.md`; a.click(); URL.revokeObjectURL(a.href);
+    });
+  };
+  ta.addEventListener("input", () => { clearTimeout(t); t = setTimeout(run, 350); });
+  run();
+}
+
+// ---------------- Live ----------------
+async function liveView() {
+  setNav("live");
+  document.title = "Run live · Denial Auditor";
+  const data = state.cases || (state.cases = await api("/api/cases"));
+  $main.innerHTML = `
+    <header class="page-head"><div><h1 class="page-title">Run a case live</h1>
+      <p class="lede">Runs the whole pipeline on a synthetic case: Nemotron models on Nebius Token Factory read the letter, split the policy into rules and check each one; commercial policies are located with Tavily search. A run takes one to three minutes and costs a few cents.</p></div></header>
+    <div class="live">
+      <form class="panel" data-live>
+        ${data.live_enabled ? "" : `<p class="err">Live runs are switched off on this deployment. The precomputed cases in the worklist are free to explore.</p>`}
+        <div class="field"><label for="pc">Passcode</label><input id="pc" class="input" type="password" autocomplete="off" value="${esc(state.passcode)}" placeholder="From the Devpost testing instructions"></div>
+        <div class="field"><label for="cs">Synthetic case</label><select id="cs" class="input">${data.available.map((id) => `<option value="${id}">${id.replace("case_", "Case ")}</option>`).join("")}</select></div>
+        <button class="btn" type="submit" ${data.live_enabled ? "" : "disabled"}>${icon.play}Run live</button>
+        <p class="muted" style="font-size:12.5px;margin:0">Limited to 30 live runs per day across all visitors; a spending cap stops any run that would exceed this demo's budget.</p>
+      </form>
+      <section class="panel" aria-live="polite" data-progress><p class="muted">Progress appears here, step by step.</p></section>
+    </div>`;
+  $main.querySelector("[data-live]").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = e.currentTarget.querySelector("button[type=submit]");
+    const prog = $main.querySelector("[data-progress]");
+    state.passcode = $main.querySelector("#pc").value;
+    const case_id = $main.querySelector("#cs").value;
+    btn.disabled = true;
+    let job;
+    try { job = (await api("/api/live", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ case_id, passcode: state.passcode }) })).job; }
+    catch (err) { prog.innerHTML = `<p class="err">${esc(err.message)}</p>`; btn.disabled = false; return; }
+    const poll = async () => {
+      const s = await api(`/api/live/${job}`);
+      prog.innerHTML = `<h2 class="side-h">${s.state === "done" ? "Finished" : s.state === "error" ? "Stopped" : "Running…"}</h2>
+        <ol class="steps">${s.steps.map((m, i) => `<li class="${s.state === "running" && i === s.steps.length - 1 ? "now" : ""}">${esc(m)}</li>`).join("")}</ol>
+        ${s.error ? `<p class="err">${esc(s.error)}</p>` : ""}
+        ${s.state === "done" ? `<a class="btn" href="#/case/${case_id}">Open the evidence board</a>` : ""}`;
+      if (s.state === "running") setTimeout(poll, 1200);
+      else { btn.disabled = false; state.cases = null; }
+    };
+    poll();
+  });
+}
+
+// ---------------- How it works ----------------
+function howView() {
+  setNav("how");
+  document.title = "How it works · Denial Auditor";
+  $main.innerHTML = `<article class="read">
+    <h1 class="page-title">How Denial Auditor works</h1>
+    <p class="lede">Payers check an MRI order criterion by criterion. Denial Auditor lets a three-doctor practice do the same, and shows its working.</p>
+    <h2>From a faxed denial to a decision</h2>
+    <ol>
+      <li><b>Read the denial.</b> Nemotron 3.5 Super-VL reads the scanned notice into structured fields: payer, codes, dates, the stated reason.</li>
+      <li><b>Triage.</b> Reason codes route administrative denials to a fix checklist and plan exclusions to “not winnable”, using a fixed table and no model.</li>
+      <li><b>Find the policy in force on the date of service.</b> Medicare coverage policies come from the CMS Coverage API, which keeps every version with its effective dates. Commercial bulletins such as Aetna's are located at runtime with Tavily search.</li>
+      <li><b>Split the policy into rules.</b> Code numbers every sentence of the fetched policy; Nemotron 3 Super only picks sentence numbers. Each rule is therefore the payer's own wording, cut from the source.</li>
+      <li><b>Check each rule against the chart.</b> Nemotron judges whether each rule supports coverage, blocks it, doesn't apply, or isn't documented, and quotes the chart. Code verifies every quote and computes every duration from dates.</li>
+      <li><b>Decide.</b> A fixed rule, not a model, turns those judgments into one recommendation: appeal, ask the physician, don't appeal yet, fix and resubmit, or not winnable.</li>
+      <li><b>Write the appeal.</b> Nemotron 3 Ultra drafts the letter using only pre-verified quotes, Super critiques it as the payer's medical reviewer, and Ultra revises. The citation gate blocks export unless every quote matches its source word for word.</li>
+    </ol>
+    <h2>What it never does</h2>
+    <p>It never submits anything; a person reviews and sends every letter. Deadlines come from a fixed table checked against federal regulations, never from a model. CPT codes are shown bare, without AMA descriptions. All patients and notices in this demo are synthetic.</p>
+  </article>`;
+}
+
+// ---------------- Router ----------------
+async function route() {
+  const [, view, id] = location.hash.split("/");
+  try {
+    if (view === "case") await caseView(id);
+    else if (view === "live") await liveView();
+    else if (view === "how") howView();
+    else await worklist();
+  } catch (e) {
+    $main.innerHTML = `<p class="empty err">Something went wrong loading this page: ${esc(e.message)}</p>`;
+  }
+  $main.focus({ preventScroll: true });
+  window.scrollTo(0, 0);
+}
+addEventListener("hashchange", route);
+route();
