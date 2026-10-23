@@ -28,7 +28,8 @@ from nebius_nvidia.budget import BudgetExceeded, _locked_json
 from nebius_nvidia.citations import check, extract_quotes
 from nebius_nvidia.models import CaseRun, ChartNote
 from nebius_nvidia.scenario import Scenario
-from nebius_nvidia.text import normalize, segment
+from nebius_nvidia.rules import deadline as deadline_for
+from nebius_nvidia.text import locate, normalize, segment
 
 ROOT = Path(os.environ.get("DA_ROOT", Path(__file__).resolve().parents[2]))
 CASES = ROOT / "cases"
@@ -65,7 +66,30 @@ def _notes(case_id: str) -> list[ChartNote]:
     return [ChartNote.model_validate(n) for n in json.loads((CASES / case_id / "notes.json").read_text())]
 
 
-def _row(case_id: str, run: CaseRun, live: bool) -> dict:
+def _all_runs() -> dict[str, CaseRun]:
+    runs = {p.stem: CaseRun.model_validate_json(p.read_text()) for p in sorted(RUNS.glob("case_*.json"))}
+    runs.update(_live)
+    return runs
+
+
+def board_as_of(runs: dict[str, CaseRun] | None = None) -> date:
+    """One review date for the whole board, so every deadline is counted the same way.
+
+    The synthetic notices are dated in 2026, so the board is reviewed as of a week after
+    the latest notice (stated in the UI), never against each case's own date.
+    """
+    from datetime import timedelta
+
+    runs = runs if runs is not None else _all_runs()
+    notices = [r.denial.notice_date for r in runs.values()]
+    return (max(notices) if notices else date.today()) + timedelta(days=7)
+
+
+def _deadline(run: CaseRun, as_of: date):
+    return deadline_for(run.denial.plan_type, run.denial.notice_date, today=as_of)
+
+
+def _row(case_id: str, run: CaseRun, live: bool, as_of: date) -> dict:
     s = Scenario.load(CASES / case_id)
     d = run.denial
     return {
@@ -77,8 +101,8 @@ def _row(case_id: str, run: CaseRun, live: bool) -> dict:
         "dos": d.dos.isoformat(),
         "reason": d.reason_text,
         "verdict": run.verdict,
-        "days_left": run.deadline.days_left if run.deadline else None,
-        "due": run.deadline.due.isoformat() if run.deadline and run.deadline.due else None,
+        "days_left": (dl := _deadline(run, as_of)).days_left,
+        "due": dl.due.isoformat() if dl.due else None,
         "policy": run.policy.citation() if run.policy else None,
         "cost_usd": run.cost_usd,
         "live": live,
@@ -87,11 +111,12 @@ def _row(case_id: str, run: CaseRun, live: bool) -> dict:
 
 @app.get("/api/cases")
 def list_cases() -> dict:
-    rows = {p.stem: _row(p.stem, CaseRun.model_validate_json(p.read_text()), False) for p in sorted(RUNS.glob("case_*.json"))}
-    for cid, run in _live.items():
-        rows[cid] = _row(cid, run, True)
+    runs = _all_runs()
+    as_of = board_as_of(runs)
+    rows = [_row(cid, run, cid in _live, as_of) for cid, run in runs.items()]
     available = sorted(p.name for p in CASES.iterdir() if (p / "notes.json").exists())
-    return {"cases": list(rows.values()), "available": available, "live_enabled": bool(os.environ.get("DEMO_PASSCODE"))}
+    return {"cases": rows, "as_of": as_of.isoformat(), "available": available,
+            "live_enabled": bool(os.environ.get("DEMO_PASSCODE"))}
 
 
 @app.get("/api/cases/{case_id}")
@@ -118,6 +143,8 @@ def get_case(case_id: str) -> dict:
         "notes": [n.model_dump(mode="json") for n in notes],
         "sentences": sentences,
         "addresses": addr,
+        "as_of": (as_of := board_as_of()).isoformat(),
+        "deadline": _deadline(run, as_of).model_dump(mode="json"),
         "policy_citation": run.policy.citation() if run.policy else None,
         "live": case_id in _live,
     }
@@ -144,13 +171,29 @@ def gate(body: GateIn) -> dict:
     units = []
     for sid, text in session.sources.items():
         units += [(sid, text[a:b]) for a, b in segment(text)]
+    notes = {n.note_id: n for n in _notes(case_id)}
+    policy_id = f"{run.policy.policy_id}v{run.policy.version}" if run.policy else None
+    pol_units = segment(run.policy.text) if run.policy else []
+
+    def address(sid: str | None, quote: str) -> str | None:
+        if not sid:
+            return None
+        if sid == policy_id:
+            hit = locate(quote, run.policy.text)
+            ns = [i for i, (a, b) in enumerate(pol_units, 1) if hit and a < hit[1] and b > hit[0]]
+            return f"{run.policy.policy_id} · S{ns[0]}" + (f"–{ns[-1]}" if len(ns) > 1 else "") if ns else run.policy.policy_id
+        if sid in notes:
+            return f"note {sid.split('-')[-1]} · {notes[sid].date:%m/%d/%Y}"
+        return sid
+
     out = []
     for c in result.checks:
         item = c.model_dump()
+        item["address"] = address(c.source_id, c.text)
         if c.status != "verified" and units:
             q = normalize(c.text)
             best = max(units, key=lambda u: difflib.SequenceMatcher(None, q, normalize(u[1])).ratio())
-            item["closest"] = {"source_id": best[0], "text": best[1]}
+            item["closest"] = {"source_id": best[0], "text": best[1], "address": address(best[0], best[1])}
         out.append(item)
     return {"ok": result.ok, "reason": result.reason, "checks": out, "quotes": len(extract_quotes(body.text))}
 

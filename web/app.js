@@ -18,6 +18,11 @@ const KIND = { indication: "Route to coverage", red_flag: "Red-flag route", dura
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const fmtDate = (iso) => { if (!iso) return "—"; const [y, m, d] = iso.split("-"); return `${m}/${d}/${y}`; };
 const payerShort = (p) => p.replace(/ \((synthetic[^)]*)\)/i, "");
+const VCLASS = { appeal: "met", dont_appeal: "not_met", doc_request: "missing_documentation", fix_checklist: "quote", not_winnable: "not_applicable" };
+let NOTE_DATES = {};
+const noteShort = (id) => id.split("-").pop();
+const noteAddr = (id) => `note ${noteShort(id)}${NOTE_DATES[id] ? " · " + fmtDate(NOTE_DATES[id]) : ""}`;
+const gotoFor = (addr) => { const m = /S(\d+)/.exec(addr || ""); return m ? `policy:${m[1]}` : null; };
 const icon = {
   download: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>',
   copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>',
@@ -64,11 +69,11 @@ async function worklist() {
     </header>
     <div class="board-tools">
       <div class="seg" role="group" aria-label="Filter by recommendation">${seg}</div>
-      <span class="muted" style="font-size:13px">Deadlines counted from each notice date</span>
+      <span class="muted" style="font-size:13px">Deadlines as of ${fmtDate(data.as_of)} (synthetic review date)</span>
     </div>
     <div class="board">
       ${shown.length ? `<table>
-        <thead><tr><th scope="col">Due</th><th scope="col">Recommendation</th><th scope="col">Patient</th><th scope="col" class="hide-sm">Payer</th><th scope="col" class="hide-sm">Service date</th><th scope="col" class="reason">Denial reason</th><th scope="col" class="num hide-sm">Model cost</th></tr></thead>
+        <thead><tr><th scope="col">Due</th><th scope="col" class="hide-sm">Recommendation</th><th scope="col">Patient</th><th scope="col" class="hide-sm">Payer</th><th scope="col" class="hide-sm">Service date</th><th scope="col" class="reason">Denial reason</th><th scope="col" class="num hide-sm">Model cost</th></tr></thead>
         <tbody>${shown.map(rowHtml).join("")}</tbody>
       </table>` : `<p class="empty">No denials match this filter.</p>`}
     </div>`;
@@ -79,9 +84,9 @@ function rowHtml(r) {
   const soon = r.days_left != null && r.days_left < 21;
   const due = r.days_left == null ? `<span class="muted">Check notice</span>` : `${r.days_left}<small>days left<br>${fmtDate(r.due)}</small>`;
   return `<tr>
-    <td><span class="due${soon ? " soon" : ""}">${due}</span></td>
-    <td>${mark("v-" + r.verdict, VERDICT[r.verdict].label)}${r.live ? ' <span class="addr">live run</span>' : ""}</td>
-    <td class="who"><a href="#/case/${r.id}">${esc(r.patient)}</a><div class="addr">${esc(r.id.replace("case_", "Case "))} · CPT ${esc(r.cpt)}</div></td>
+    <td class="due-cell" style="--c: var(--hl-${{appeal:"green",doc_request:"orange",dont_appeal:"pink",fix_checklist:"yellow",not_winnable:"grey"}[r.verdict]})"><span class="due${soon ? " soon" : ""}">${due}</span></td>
+    <td class="hide-sm">${mark("v-" + r.verdict, VERDICT[r.verdict].label)}${r.live ? ' <span class="addr">live run</span>' : ""}</td>
+    <td class="who"><a href="#/case/${r.id}">${esc(r.patient)}</a><div class="addr">${esc(r.id.replace("case_", "Case "))} · CPT ${esc(r.cpt)}</div><div class="stack-sm">${mark("v-" + r.verdict, VERDICT[r.verdict].label)}</div></td>
     <td class="hide-sm">${esc(payerShort(r.payer))}</td>
     <td class="hide-sm">${fmtDate(r.dos)}</td>
     <td class="reason">${esc(r.reason)}</td>
@@ -112,7 +117,8 @@ async function caseView(id) {
   matches.forEach((m) => { m.show = label(m)[0]; });
   const live = matches.filter((m) => m.status !== "not_applicable").sort((a, b) => rank[a.show] - rank[b.show]);
   const na = matches.filter((m) => m.status === "not_applicable");
-  const dl = run.deadline;
+  const dl = c.deadline;
+  NOTE_DATES = Object.fromEntries(c.notes.map((n) => [n.note_id, n.date]));
   const soon = dl && dl.days_left != null && dl.days_left < 21;
   const policyAddr = run.policy ? run.policy.policy_id : "";
   const primary = run.appeal ? `<button class="btn" data-tab-go="next">Review appeal</button>`
@@ -123,8 +129,8 @@ async function caseView(id) {
       <div>
         <div class="case-who"><span><b>${esc(c.patient)}</b> (synthetic)</span><span>${esc(payerShort(d.payer_name))} · ${esc(d.plan_type.replace(/_/g, " "))}</span><span>Lumbar MRI · CPT ${esc(d.cpt)}</span><span>Service ${fmtDate(d.dos)} · Notice ${fmtDate(d.notice_date)}</span></div>
         <div class="decision">
-          <h1><span class="hl ${run.verdict === "appeal" ? "met" : run.verdict === "dont_appeal" ? "not_met" : run.verdict === "doc_request" ? "missing_documentation" : run.verdict === "fix_checklist" ? "quote" : "not_applicable"} sweep">${esc(v.label)}</span></h1>
-          ${dl && dl.due ? `<span class="deadline${soon ? " soon" : ""}"><b>${dl.days_left}</b> days left · due ${fmtDate(dl.due)}</span>` : `<span class="deadline">Deadline: check the notice</span>`}
+          <h1><span class="hl ${VCLASS[run.verdict]} sweep">${esc(v.label)}</span></h1>
+          ${dl && dl.due ? `<span class="deadline${soon ? " soon" : ""}"><b>${dl.days_left}</b> days left · due ${fmtDate(dl.due)} <span class="muted">(as of ${fmtDate(c.as_of)})</span></span>` : `<span class="deadline">Deadline: check the notice</span>`}
         </div>
         <p class="decision-why">${esc(v.line)} ${dl ? `<span class="muted">${esc(dl.citation)}${dl.verified ? "" : " · unverified"}.</span>` : ""}</p>
       </div>
@@ -162,22 +168,44 @@ async function caseView(id) {
   const show = (name) => {
     tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.tab === name)));
     ctx.tab = name;
+    $main.querySelector(".workspace").classList.toggle("letter-focus", name === "next" && !!run.appeal);
     pane.innerHTML = ({ policy: policyPane, chart: chartPane, letter: letterPane, next: nextPane, cost: costPane })[name](ctx);
     if (name === "next") wireAppeal(ctx, pane);
     if (ctx.selected) focusRule(ctx, ctx.selected, false);
   };
   tabs.forEach((t) => t.addEventListener("click", () => show(t.dataset.tab)));
+  ctx.expanded = new Set();
+  $main.addEventListener("click", (e) => {
+    const fold = e.target.closest("[data-fold]");
+    if (fold) { ctx.expanded.add(fold.dataset.fold); show(ctx.tab); return; }
+    const g = e.target.closest("[data-goto]");
+    if (!g || g.dataset.goto === "null") return;
+    e.preventDefault();
+    const [kind, ref] = g.dataset.goto.split(":");
+    if (kind === "policy" && run.policy) {
+      const n = Number(ref);
+      const k = [...(ctx.foldIndex || [])].find(([, lo, hi]) => n >= lo && n <= hi);
+      if (k) ctx.expanded.add(k[0]);
+      show("policy");
+      const el = pane.querySelector(`[data-s="${n}"]`);
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      el?.querySelector(".hl")?.classList.add("sweep");
+    } else if (kind === "note") {
+      show("chart");
+      pane.querySelector(`[data-note="${CSS.escape(ref)}"]`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
   $main.querySelectorAll("[data-tab-go]").forEach((b) => b.addEventListener("click", () => show(b.dataset.tabGo)));
   $main.querySelector("[data-copy-docreq]")?.addEventListener("click", async (e) => {
     await navigator.clipboard?.writeText(run.doc_request); e.currentTarget.lastChild.textContent = "Copied"; });
   $main.querySelector("[data-na]")?.addEventListener("click", (e) => {
     const l = $main.querySelector("[data-na-list]"); l.hidden = !l.hidden;
     e.currentTarget.textContent = l.hidden ? `${na.length} more rules don't apply to this case` : "Hide rules that don't apply"; });
-  $main.querySelectorAll(".rule").forEach((b) => {
+  $main.querySelectorAll(".rule-toggle").forEach((b) => {
     b.addEventListener("click", () => {
       const id = b.dataset.rule;
       ctx.selected = ctx.selected === id ? null : id;
-      $main.querySelectorAll(".rule").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.rule === ctx.selected)));
+      $main.querySelectorAll(".rule-toggle").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.rule === ctx.selected)));
       if (ctx.selected) {
         const m = matches.find((x) => x.criterion_id === id);
         if (ctx.tab !== "policy" && ctx.tab !== "chart") show(run.policy ? "policy" : "chart");
@@ -191,39 +219,60 @@ async function caseView(id) {
 
 function ruleHtml(m, [kind, word], policyAddr) {
   const ev = m.evidence.filter((e) => e.verified).slice(0, 2);
-  return `<button type="button" class="rule" data-rule="${m.criterion_id}" aria-pressed="false">
-    <span class="rule-top">${mark(kind, word)}<span class="addr">${esc(policyAddr)}${m.addr ? " · " + esc(m.addr) : ""}</span></span>
-    <span class="rule-sum">${esc(m.crit.summary)}</span>
-    <span class="rule-why">${esc(m.rationale)}</span>
-    ${ev.map((e) => `<span class="rule-ev">“${esc(trim(e.quote, 170))}”<span class="addr">chart ${esc(e.note_id.split("-").pop())}</span></span>`).join("")}
-  </button>`;
+  const a = `${policyAddr}${m.addr ? " · " + m.addr : ""}`;
+  return `<article class="rule" data-rule="${m.criterion_id}">
+    <button type="button" class="rule-toggle" data-rule="${m.criterion_id}" aria-pressed="false">
+      <span class="rule-top">${mark(kind, word)}</span>
+      <span class="rule-sum">${esc(m.crit.summary)}</span>
+      <span class="rule-why">${esc(m.rationale)}</span>
+    </button>
+    ${m.addr ? `<a class="addr link rule-addr" href="#" data-goto="${gotoFor(m.addr)}">${esc(a)}</a>` : `<span class="addr rule-addr">${esc(a)}</span>`}
+    ${ev.map((e) => `<span class="rule-ev">“${esc(e.quote)}”<a class="addr link" href="#" data-goto="note:${esc(e.note_id)}">${esc(noteAddr(e.note_id))}</a></span>`).join("")}
+  </article>`;
 }
 const trim = (s, n) => (s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s);
 
-// Policy: the fetched text as a photocopied sheet, numbered sentences, rule sentences highlighted.
+// Policy: the fetched text as a photocopied sheet. Rule sentences are highlighted; runs of
+// background sentences fold into one line carrying their address range.
 function policyPane(ctx) {
   const { run, c, matches } = ctx;
   const status = Object.fromEntries(matches.map((m) => [m.criterion_id, m.show === "route" ? "not_applicable" : m.status]));
   const sel = ctx.selected;
-  let html = "", para = [];
-  const flush = () => { if (para.length) { html += `<p>${para.join(" ")}</p>`; para = []; } };
   const text = run.policy.text;
-  c.sentences.forEach((s, i) => {
-    const gap = i ? text.slice(c.sentences[i - 1].end, s.start) : "";
+  const isHeading = (t) => !/[.:;)”"]$/.test(t.trim()) && t.length < 70 && !t.startsWith("•");
+  const crits = (s) => s.criteria.filter((cid) => status[cid] && (status[cid] !== "not_applicable" || cid === sel));
+  const marked = (s) => crits(s).length > 0;
+  let html = "", para = [];
+  ctx.foldIndex = [];
+  const flush = () => { if (para.length) { html += `<p>${para.join(" ")}</p>`; para = []; } };
+  const S = c.sentences;
+  for (let i = 0; i < S.length; i++) {
+    const s = S[i], t = s.text;
+    if (isHeading(t)) { flush(); html += `<div class="heading">${esc(t)}</div>`; continue; }
+    if (!marked(s)) {
+      let j = i;
+      while (j + 1 < S.length && !marked(S[j + 1]) && !isHeading(S[j + 1].text)) j++;
+      const key = `f${s.n}`;
+      ctx.foldIndex.push([key, s.n, S[j].n]);
+      if (j - i >= 2 && !ctx.expanded.has(key)) {
+        flush();
+        html += `<button type="button" class="fold" data-fold="${key}"><span class="addr">S${s.n}–S${S[j].n}</span> ${j - i + 1} sentences of background, not a rule <span class="fold-show">Show</span></button>`;
+        i = j; continue;
+      }
+    }
+    const gap = i ? text.slice(S[i - 1].end, s.start) : "";
     if (/\n\s*\n/.test(gap)) flush();
-    const t = s.text;
-    const isHeading = !/[.:;)”"]$/.test(t.trim()) && t.length < 70 && !t.startsWith("•");
-    if (isHeading) { flush(); html += `<div class="heading">${esc(t)}</div>`; return; }
-    const crits = s.criteria.filter((cid) => status[cid] && (status[cid] !== "not_applicable" || cid === sel));
-    const pick = crits.includes(sel) ? sel : crits[0];
+    const cs = crits(s);
+    const pick = cs.includes(sel) ? sel : cs[0];
     const cls = pick ? `hl ${status[pick]}${pick === sel ? " sweep" : ""}` : "";
     const body = cls ? `<span class="${cls}" data-crit="${s.criteria.join(" ")}">${esc(t)}</span>` : esc(t);
-    const li = t.startsWith("•") ? " li" : "";
-    if (li) { flush(); html += `<p class="sent li" data-s="${s.n}"><span class="n">S${s.n}</span>${body}</p>`; }
+    if (t.startsWith("•")) { flush(); html += `<p class="sent li" data-s="${s.n}"><span class="n">S${s.n}</span>${body}</p>`; }
     else para.push(`<span class="sent" data-s="${s.n}">${para.length ? `<sup class="ns">S${s.n}</sup>` : `<span class="n">S${s.n}</span>`}${body}</span>`);
-  });
+  }
   flush();
+  const fetched = (run.policy.fetched_at || "").slice(0, 10);
   return `<article class="sheet">
+    <div class="copyline"><span>Copy of fetched source — ${esc(run.policy.fetched_via === "cms-api" ? "CMS Coverage API" : "aetna.com")}</span><span>fetched ${fmtDate(fetched)} · ${S.length} sentences</span></div>
     <header class="sheet-head"><h2>${esc(run.policy.title)}</h2><span class="addr">${esc(c.policy_citation)} · <a href="${esc(run.policy.url)}" target="_blank" rel="noopener">source</a></span></header>
     ${html}
   </article>`;
@@ -233,6 +282,7 @@ function chartPane(ctx) {
   const { c, matches } = ctx;
   const sel = ctx.selected;
   return `<article class="sheet notes">
+    <div class="copyline"><span>Copy of chart notes — synthetic patient</span><span>${c.notes.length} notes</span></div>
     <header class="sheet-head"><h2>Chart notes</h2><span class="addr">${c.notes.length} notes · synthetic</span></header>
     ${c.notes.map((n) => {
       const marks = [];
@@ -244,7 +294,7 @@ function chartPane(ctx) {
       let out = "", at = 0;
       for (const mk of marks) { if (mk.a < at) continue; out += esc(n.text.slice(at, mk.a)) + `<span class="hl ${mk.cls}" data-crit="${mk.rule}">${esc(n.text.slice(mk.a, mk.b))}</span>`; at = mk.b; }
       out += esc(n.text.slice(at));
-      return `<section class="note" data-note="${n.note_id}"><div class="note-h">${fmtDate(n.date)} · ${esc(n.note_type.replace(/_/g, " "))} · ${esc(n.author_role)} <span class="addr">${esc(n.note_id.split("-").pop())}</span></div>${out}</section>`;
+      return `<section class="note" data-note="${n.note_id}"><div class="note-h">${fmtDate(n.date)} · ${esc(n.note_type.replace(/_/g, " "))} · ${esc(n.author_role)} <span class="addr">${esc(noteAddr(n.note_id))}</span></div>${out}</section>`;
     }).join("")}
   </article>`;
 }
@@ -260,8 +310,14 @@ function nextPane(ctx) {
   if (run.appeal) {
     return `<div class="appeal">
       <div>
-        <label class="side-h" for="letter">Reconsideration request (editable)</label>
-        <textarea id="letter" class="editor" spellcheck="true">${esc(run.appeal.rendered)}</textarea>
+        <div class="letter-tools">
+          <div class="seg" role="group" aria-label="Letter view"><button type="button" data-mode="read" aria-pressed="true">Letter</button><button type="button" data-mode="edit" aria-pressed="false">Edit text</button></div>
+          <span class="muted" style="font-size:13px">Reconsideration request · drafted by Nemotron 3 Ultra, reviewed by Super</span>
+        </div>
+        <p class="muted" style="font-size:13px;margin:0 0 10px">The rules and their evidence are on the Policy and Chart notes tabs.</p>
+        <article class="sheet letter" data-letter aria-live="polite"></article>
+        <label class="sr" for="letter">Letter text</label>
+        <textarea id="letter" class="editor" spellcheck="true" hidden>${esc(run.appeal.rendered)}</textarea>
         ${run.appeal.critique.length ? `<details class="critique"><summary>Payer-reviewer critique addressed in revision ${run.appeal.revision}</summary><ul>${run.appeal.critique.map((x) => `<li><b>${esc(x.severity)}</b>: ${esc(x.issue)} <span class="muted">→ ${esc(x.suggestion)}</span></li>`).join("")}</ul></details>` : ""}
       </div>
       <aside class="gate" aria-live="polite" data-gate><p class="muted">Checking quotes…</p></aside>
@@ -294,25 +350,80 @@ function focusRule(ctx, id, scroll) {
   el?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
 }
 
+const squash = (t) => t.replace(/\s+/g, " ").trim();
+
+// Typeset the letter: headings, quotes as highlighted blocks with their addresses,
+// tampered quotes struck in pink with the source sentence beside them.
+function renderLetter(text, gate) {
+  const checks = gate ? gate.checks : [];
+  const find = (q) => checks.find((c) => squash(c.text) === squash(q));
+  const lines = text.split("\n");
+  let out = "", para = [], quote = [], cite = "";
+  const flushPara = () => {
+    if (!para.length) return;
+    let h = esc(para.join(" "));
+    checks.filter((c) => c.status !== "verified" && !c.text.includes("\n")).forEach((c) => {
+      const e = esc(c.text);
+      if (h.includes(e)) h = h.replace(e, `<span class="struck">${e}</span>`);
+    });
+    out += `<p>${h}</p>`; para = [];
+  };
+  const flushQuote = () => {
+    if (!quote.length) return;
+    const q = quote.join("\n"), c = find(q);
+    if (!c || c.status === "verified") {
+      out += `<blockquote class="lq"><span class="hl quote">${esc(squash(q))}</span><cite>${esc(cite)}${c && c.address ? ` · <a class="link" href="#" data-goto="${gotoFor(c.address) || "note:" + esc(c.source_id || "")}">${esc(c.address)}</a>` : ""}</cite></blockquote>`;
+    } else {
+      out += `<blockquote class="lq bad"><span class="struck">${esc(squash(q))}</span><cite>Not found in any fetched source${cite ? " · claimed: " + esc(cite) : ""}</cite>${c.closest ? `<span class="closest">Source says: <span class="hl quote">${esc(c.closest.text)}</span> <span class="addr">${esc(c.closest.address || "")}</span></span>` : ""}</blockquote>`;
+    }
+    quote = []; cite = "";
+  };
+  for (const raw of lines) {
+    const l = raw.trimEnd();
+    if (l.startsWith(">")) {
+      flushPara();
+      const body = l.replace(/^>\s?/, "");
+      if (/^(—|--)/.test(body)) { cite = body.replace(/^(—|--)\s*/, ""); flushQuote(); }
+      else if (body) quote.push(body);
+      continue;
+    }
+    flushQuote();
+    if (/^#{1,6}\s/.test(l)) { flushPara(); out += `<h3>${esc(l.replace(/^#+\s*/, ""))}</h3>`; }
+    else if (!l.trim()) flushPara();
+    else para.push(l.trim());
+  }
+  flushQuote(); flushPara();
+  return out;
+}
+
 function wireAppeal(ctx, pane) {
   const ta = pane.querySelector("#letter");
   pane.querySelector("[data-copy2]")?.addEventListener("click", () => navigator.clipboard?.writeText(ctx.run.doc_request));
   if (!ta) return;
   const box = pane.querySelector("[data-gate]");
-  let t, seq = 0;
+  const sheet = pane.querySelector("[data-letter]");
+  let t, seq = 0, last = null;
+  pane.querySelectorAll("[data-mode]").forEach((b) => b.addEventListener("click", () => {
+    const edit = b.dataset.mode === "edit";
+    pane.querySelectorAll("[data-mode]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    ta.hidden = !edit; sheet.hidden = edit;
+    if (edit) ta.focus(); else sheet.innerHTML = renderLetter(ta.value, last);
+  }));
   const run = async () => {
     const mine = ++seq;
     let g;
     try { g = await api("/api/gate", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ case_id: ctx.c.id, text: ta.value }) }); }
     catch (e) { box.innerHTML = `<p class="err">Couldn't check quotes: ${esc(e.message)}</p>`; return; }
     if (mine !== seq) return;
+    last = g;
+    if (!sheet.hidden) sheet.innerHTML = renderLetter(ta.value, g);
     const bad = g.checks.filter((x) => x.status !== "verified").length;
     box.innerHTML = `
-      <div class="gate-head"><h3>Citation gate</h3>${mark(g.ok ? "met" : "not_met", g.ok ? "Every quote verified" : `${bad} quote${bad === 1 ? "" : "s"} don't match`)}</div>
+      <div class="gate-head"><h3>Citation gate</h3>${mark(g.ok ? "met" : "not_met", g.ok ? "Every quote verified" : bad === 1 ? "1 quote doesn't match" : `${bad} quotes don't match`)}</div>
       <p class="verdict-line">${g.ok ? "Each quoted line matches the policy fetched for this case or the chart, word for word." : esc(g.reason || "Fix the quotes marked below.")}</p>
-      <ol>${g.checks.map((x) => `<li class="${x.status === "verified" ? "" : "bad"}"><span class="q ${x.status === "verified" ? "hl quote" : ""}">${esc(trim(x.text.replace(/\n/g, " "), 220))}</span>
-        <span class="src">${x.status === "verified" ? "matches " + esc(x.source_id.includes("-n") ? "chart " + x.source_id.split("-").pop() : x.source_id) : "not found in any fetched source"}</span>
-        ${x.closest ? `<span class="closest">Source says: <span class="hl quote">${esc(trim(x.closest.text, 220))}</span></span>` : ""}</li>`).join("")}</ol>
+      <ol>${g.checks.map((x) => `<li class="${x.status === "verified" ? "" : "bad"}"><span class="q ${x.status === "verified" ? "hl quote" : ""}">${esc(squash(x.text))}</span>
+        <span class="src">${x.status === "verified" ? `matches <a class="link" href="#" data-goto="${gotoFor(x.address) || "note:" + esc(x.source_id)}">${esc(x.address || x.source_id)}</a>` : "not found in any fetched source"}</span>
+        ${x.closest ? `<span class="closest">Source says: <span class="hl quote">${esc(x.closest.text)}</span> <span class="addr">${esc(x.closest.address || "")}</span></span>` : ""}</li>`).join("")}</ol>
       <button class="btn" data-export ${g.ok ? "" : "disabled"}>${icon.download}Export letter</button>
       <p class="muted" style="font-size:12.5px;margin:0">A person reviews and sends this letter. Denial Auditor never submits anything.</p>`;
     box.querySelector("[data-export]").addEventListener("click", () => {
@@ -321,6 +432,7 @@ function wireAppeal(ctx, pane) {
       a.download = `${ctx.c.id}_reconsideration.md`; a.click(); URL.revokeObjectURL(a.href);
     });
   };
+  sheet.innerHTML = renderLetter(ta.value, null);
   ta.addEventListener("input", () => { clearTimeout(t); t = setTimeout(run, 350); });
   run();
 }

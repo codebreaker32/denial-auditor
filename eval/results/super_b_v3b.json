@@ -1,0 +1,1910 @@
+[
+ {
+  "case": "case_011",
+  "group": "B_aetna_5_of_6_weeks",
+  "route_expected": "clinical_review",
+  "route_got": "clinical_review",
+  "verdict_expected": "dont_appeal",
+  "verdict_got": "doc_request",
+  "gold": {
+   "A1_radiculopathy_6_weeks": {
+    "expected": "not_met",
+    "got": "missing_documentation"
+   }
+  },
+  "cost_usd": 0.032568,
+  "latency_s": 75.5,
+  "unverified_facts": [],
+  "run": {
+   "case_id": "case_011",
+   "denial": {
+    "payer_name": "Aetna",
+    "plan_type": "COMMERCIAL_ACA",
+    "cpt": "72148",
+    "icd10": [
+     "M54.16"
+    ],
+    "dos": "2026-08-09",
+    "notice_date": "2026-08-24",
+    "carc": [
+     "50"
+    ],
+    "reason_text": "Not medically necessary per Clinical Policy Bulletin 0236.",
+    "practice_state": "UT",
+    "extracted_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   },
+   "triage": {
+    "reason_class": "clinical",
+    "route": "clinical_review",
+    "method": "carc_table",
+    "checklist": [],
+    "explanation": "Medical necessity"
+   },
+   "policy": {
+    "source": "aetna-cpb",
+    "policy_id": "Aetna CPB 0236",
+    "version": "2026-10-23",
+    "title": "Magnetic Resonance Imaging (MRI) and Computed Tomography (CT) of the Spine",
+    "effective_from": "2026-04-09",
+    "effective_to": null,
+    "retired": false,
+    "version_basis": "snapshot-at-fetch",
+    "url": "https://www.aetna.com/cpb/medical/data/200_299/0236.html",
+    "fetched_at": "2026-10-23T12:47:22.803602",
+    "fetched_via": "http",
+    "text": "Scope of Policy\n\nThis Clinical Policy Bulletin addresses magnetic resonance imaging (MRI) and computed tomography (CT) of the spine.\n\nNote: Precertification may be required for select procedures and interventions. Use the CPT code search tool to see if precertification is required.\n\nMedical Necessity\n\nAetna considers magnetic resonance imaging (MRI) and computed tomography (CT) of the spine medically necessary when any of the following criteria is met:\n\n\u2022 Clinical evidence of spinal stenosis; or\n\n\u2022 Clinical suspicion of a spinal cord or cauda equina compression syndrome; or\n\n\u2022 Congenital anomalies or deformities of the spine; or\n\n\u2022 Diagnosis and evaluation of lumbar epidural lipomatosis; or\n\n\u2022 Evaluation of recurrent symptoms after spinal surgery; or\n\n\u2022 Evaluation prior to epidural injection to rule out tumor or infection and to delineate the optimal anatomical location for performing the injection; or\n\n\u2022 Follow-up of evaluation for spinal malignancy or spinal infection; or\n\n\u2022 Known or suspected myelopathy (e.g., multiple sclerosis) for initial diagnosis when MRI of the brain is negative or symptoms mimic those of other spinal or brainstem lesions; or\n\n\u2022 Known or suspected primary spinal cord tumors (malignant or non-malignant); or\n\n\u2022 Persistent back or neck pain with radiculopathy as evidenced by pain plus objective findings of motor or reflex changes in the specific nerve root distribution, and no improvement after 6 weeks of conservative therapy*; or\n\n\u2022 Primary spinal bone tumors or suspected vertebral, paraspinal, or intraspinal metastases; or\n\n\u2022 Progressively severe symptoms despite conservative management; or\n\n\u2022 Rapidly progressing neurological deficit, or major motor weakness; or\n\n\u2022 Severe back pain (e.g., requiring hospitalization); or\n\n\u2022 Spondylolisthesis and degenerative disease of the spine that has not responded to 4 weeks of conservative therapy*; or\n\n\u2022 Suspected infectious process (e.g., osteomyelitis epidural abscess of the spine or soft tissue); or\n\n\u2022 Suspected spinal cord injury secondary to trauma; or\n\n\u2022 Suspected spinal fracture and/or dislocation secondary to trauma (if plain films are not conclusive); or\n\n\u2022 Suspected transverse myelitis.\n\n* Conservative therapy = moderate activity, analgesics, non-steroidal anti-inflammatory drugs, muscle relaxants.\n\nExperimental, Investigational, or Unproven\n\n\u2022 Aetna considers BoneMRI (MRI-based synthetic CT) experimental, investigational, or unproven for pre-operative assessments and surgical planning of the spine and the pelvis; and for diagnosing or monitoring of tumors (primary or metastatic).\n\n\u2022 Aetna considers MRI and CT of the spine experimental, investigational, or unproven for all other indications because their clinical value for indications other than the ones listed above has not been established. Clinical guidelines, including those from the Agency for Healthcare Policy and Research, have consistently recommended against routine imaging studies for acute low back pain.\n\n\u2022 Aetna considers the use of MRI for further evaluation of unstable injury in neurologically intact individuals with blunt trauma after a negative cervical spine CT result not medically necessary.\n\n\u2022 Aetna considers dynamic-kinetic MRI experimental, investigational, or unproven for evaluation of the cervical spine because its effectiveness has not been established.\n\n\u2022 Aetna considers the use of routine MRI after a normal CT of the cervical spine in obtunded or comatose individuals experimental, investigational, or unproven because the clinical value of this approach has not been established.\n\n\u2022 Aetna considers dual-energy CT experimental, investigational, or unrpoven for the evaluation of bone marrow edema and fracture lines in acute vertebral fractures because the clinical value of this approach has not been established.",
+    "sha256": "e12e0d1266c89ce7c172d9061e6523e12c755003a0e6798ee2b66c4a53078389"
+   },
+   "criteria": [
+    {
+     "criterion_id": "C1",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Clinical evidence of spinal stenosis indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Clinical evidence of spinal stenosis; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 458,
+     "span_end": 500,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C2",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Clinical suspicion of spinal cord or cauda equina compression syndrome indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Clinical suspicion of a spinal cord or cauda equina compression syndrome; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 502,
+     "span_end": 580,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C3",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Congenital anomalies or deformities of the spine indicate medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Congenital anomalies or deformities of the spine; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 582,
+     "span_end": 636,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C4",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Diagnosis and evaluation of lumbar epidural lipomatosis indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Diagnosis and evaluation of lumbar epidural lipomatosis; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 638,
+     "span_end": 699,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C5",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Evaluation of recurrent symptoms after spinal surgery indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Evaluation of recurrent symptoms after spinal surgery; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 701,
+     "span_end": 760,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C6",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Evaluation prior to epidural injection to rule out tumor or infection and to delineate optimal injection site indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Evaluation prior to epidural injection to rule out tumor or infection and to delineate the optimal anatomical location for performing the injection; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 762,
+     "span_end": 915,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C7",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Follow-up evaluation for spinal malignancy or infection indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Follow-up of evaluation for spinal malignancy or spinal infection; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 917,
+     "span_end": 988,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C8",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Known or suspected myelopathy (e.g., multiple sclerosis) for initial diagnosis when brain MRI negative or symptoms mimic other spinal/brainstem lesions indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Known or suspected myelopathy (e.g., multiple sclerosis) for initial diagnosis when MRI of the brain is negative or symptoms mimic those of other spinal or brainstem lesions; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 990,
+     "span_end": 1169,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C9",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Known or suspected primary spinal cord tumors (malignant or non-malignant) indicate medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Known or suspected primary spinal cord tumors (malignant or non-malignant); or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1171,
+     "span_end": 1251,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C10",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Persistent back or neck pain with radiculopathy and objective findings, no improvement after 6 weeks conservative therapy, indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Persistent back or neck pain with radiculopathy as evidenced by pain plus objective findings of motor or reflex changes in the specific nerve root distribution, and no improvement after 6 weeks of conservative therapy*; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1253,
+     "span_end": 1477,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C11",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Primary spinal bone tumors or suspected vertebral, paraspinal, or intraspinal metastases indicate medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Primary spinal bone tumors or suspected vertebral, paraspinal, or intraspinal metastases; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1479,
+     "span_end": 1573,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C12",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Progressively severe symptoms despite conservative management indicate medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Progressively severe symptoms despite conservative management; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1575,
+     "span_end": 1642,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C13",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Rapidly progressing neurological deficit or major motor weakness indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Rapidly progressing neurological deficit, or major motor weakness; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1644,
+     "span_end": 1715,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C14",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Severe back pain requiring hospitalization indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Severe back pain (e.g., requiring hospitalization); or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1717,
+     "span_end": 1773,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C15",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Spondylolisthesis and degenerative disease of spine unresponsive to 4 weeks conservative therapy indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Spondylolisthesis and degenerative disease of the spine that has not responded to 4 weeks of conservative therapy*; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1775,
+     "span_end": 1895,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C16",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Suspected infectious process (e.g., osteomyelitis, epidural abscess) of spine indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Suspected infectious process (e.g., osteomyelitis epidural abscess of the spine or soft tissue); or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1897,
+     "span_end": 1998,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C17",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Suspected spinal cord injury secondary to trauma indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Suspected spinal cord injury secondary to trauma; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 2000,
+     "span_end": 2054,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C18",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Suspected spinal fracture and/or dislocation secondary to trauma (if plain films inconclusive) indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Suspected spinal fracture and/or dislocation secondary to trauma (if plain films are not conclusive); or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 2056,
+     "span_end": 2162,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C19",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Suspected transverse myelitis indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Suspected transverse myelitis.",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 2164,
+     "span_end": 2196,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C20",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "BoneMRI (MRI-based synthetic CT) is considered experimental/investigational/unproven for pre-operative assessment, surgical planning, and tumor diagnosis/monitoring of spine/pelvis.",
+     "verbatim_span": "\u2022 Aetna considers BoneMRI (MRI-based synthetic CT) experimental, investigational, or unproven for pre-operative assessments and surgical planning of the spine and the pelvis; and for diagnosing or monitoring of tumors (primary or metastatic).",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 2356,
+     "span_end": 2598,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C21",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "MRI and CT of spine are considered experimental/investigational/unproven for all other indications; routine imaging for acute low back pain not recommended.",
+     "verbatim_span": "\u2022 Aetna considers MRI and CT of the spine experimental, investigational, or unproven for all other indications because their clinical value for indications other than the ones listed above has not been established. Clinical guidelines, including those from the Agency for Healthcare Policy and Research, have consistently recommended against routine imaging studies for acute low back pain.",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 2600,
+     "span_end": 2990,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C22",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Use of MRI for further evaluation of unstable injury in neurologically intact individuals with blunt trauma after negative cervical CT is not medically necessary.",
+     "verbatim_span": "\u2022 Aetna considers the use of MRI for further evaluation of unstable injury in neurologically intact individuals with blunt trauma after a negative cervical spine CT result not medically necessary.",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 2992,
+     "span_end": 3188,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C23",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Dynamic-kinetic MRI is considered experimental/investigational/unproven for evaluation of cervical spine.",
+     "verbatim_span": "\u2022 Aetna considers dynamic-kinetic MRI experimental, investigational, or unproven for evaluation of the cervical spine because its effectiveness has not been established.",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 3190,
+     "span_end": 3359,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C24",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Routine MRI after normal cervical CT in obtunded/comatose individuals is considered experimental/investigational/unproven.",
+     "verbatim_span": "\u2022 Aetna considers the use of routine MRI after a normal CT of the cervical spine in obtunded or comatose individuals experimental, investigational, or unproven because the clinical value of this approach has not been established.",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 3361,
+     "span_end": 3590,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C25",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Dual-energy CT is considered experimental/investigational/unproven for evaluation of bone marrow edema and fracture lines in acute vertebral fractures.",
+     "verbatim_span": "\u2022 Aetna considers dual-energy CT experimental, investigational, or unrpoven for the evaluation of bone marrow edema and fracture lines in acute vertebral fractures because the clinical value of this approach has not been established.",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 3592,
+     "span_end": 3825,
+     "span_verified": true
+    }
+   ],
+   "matches": [
+    {
+     "criterion_id": "C1",
+     "status": "missing_documentation",
+     "evidence": [],
+     "rationale": "The chart notes describe lumbar radiculopathy and neurologic deficits but contain no mention of clinical evidence of spinal stenosis.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C2",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "Patient denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": null,
+       "end": null,
+       "verified": false
+      },
+      {
+       "note_id": "case_011-n3",
+       "quote": "She reports no signs of trauma, cancer, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic weakness.",
+       "start": 169,
+       "end": 314,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart documents denial of symptoms suggestive of spinal cord or cauda equina compression, so the rule does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C3",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n1",
+       "quote": "Lumbar spine inspection shows no deformity.",
+       "start": 259,
+       "end": 302,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart documents no spinal deformity, so the congenital anomaly indication does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C4",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The chart does not document lumbar epidural lipomatosis, so this indication rule does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C5",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The chart contains no documentation of prior spinal surgery, so the indication for evaluation of recurrent symptoms after spinal surgery does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C6",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n4",
+       "quote": "Spine surgery referral is under consideration pending the MRI findings.",
+       "start": 621,
+       "end": 692,
+       "verified": true
+      },
+      {
+       "note_id": "case_011-n4",
+       "quote": "A referral for spine surgery will be discussed after the MRI results are reviewed.",
+       "start": 693,
+       "end": 775,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart indicates the MRI is ordered for surgery referral, not for epidural injection, so the epidural\u2011injection indication does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C7",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "The patient denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": 315,
+       "end": 483,
+       "verified": true
+      },
+      {
+       "note_id": "case_011-n3",
+       "quote": "She reports no signs of trauma, cancer, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic weakness.",
+       "start": 169,
+       "end": 314,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart documents no suspicion of spinal malignancy or infection, so the follow\u2011up for malignancy/infection indication does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C8",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The chart contains no documentation of known or suspected myelopathy (e.g., multiple sclerosis), so this rule does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C9",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "Patient denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": null,
+       "end": null,
+       "verified": false
+      }
+     ],
+     "rationale": "The chart explicitly denies cancer and other red\u2011flag symptoms, indicating no known or suspected primary spinal cord tumor, so the tumor indication rule does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C10",
+     "status": "missing_documentation",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "A course of physical therapy consisting of 10 sessions was conducted from 06/23/2026 to 07/28/2026, showing no improvement.",
+       "start": 757,
+       "end": 880,
+       "verified": true
+      },
+      {
+       "note_id": "case_011-n3",
+       "quote": "The physical therapy program of 10 sessions from 06/23/2026 to 07/28/2026 yielded no improvement.",
+       "start": null,
+       "end": null,
+       "verified": false
+      }
+     ],
+     "rationale": "The chart confirms radiculopathy with objective motor/reflex changes but lacks documentation that conservative therapy continued for at least 6 weeks without improvement, so the rule\u2019s condition is not verifiable.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C11",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "The patient denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": 315,
+       "end": 483,
+       "verified": true
+      },
+      {
+       "note_id": "case_011-n3",
+       "quote": "She reports no signs of trauma, cancer, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic weakness.",
+       "start": 169,
+       "end": 314,
+       "verified": true
+      },
+      {
+       "note_id": "case_011-n4",
+       "quote": "She reports no signs of trauma, cancer, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic weakness.",
+       "start": 195,
+       "end": 340,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart contains no documentation of suspected spinal tumor or metastasis, so the tumor/metastasis indication rule does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C12",
+     "status": "missing_documentation",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "Patient denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": null,
+       "end": null,
+       "verified": false
+      },
+      {
+       "note_id": "case_011-n3",
+       "quote": "She reports no signs of trauma, cancer, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic weakness.",
+       "start": 169,
+       "end": 314,
+       "verified": true
+      }
+     ],
+     "rationale": "The rule requires documented progressively severe symptoms despite conservative management; the chart only notes persistent symptoms and denies progressive neurologic worsening, without any statement of increasing symptom severity, so documentation is insufficient.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C13",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "The patient denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": 315,
+       "end": 483,
+       "verified": true
+      },
+      {
+       "note_id": "case_011-n3",
+       "quote": "She reports no signs of trauma, cancer, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic weakness.",
+       "start": 169,
+       "end": 314,
+       "verified": true
+      }
+     ],
+     "rationale": "The rule requires rapidly progressing neurological deficit or major motor weakness, but the chart denies progressive neurologic deficit/weakness and does not document major motor weakness, so the indication does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C14",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The chart lacks documentation of severe back pain requiring hospitalization; without this indication, the rule does not apply and does not block coverage.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C15",
+     "status": "missing_documentation",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "A course of physical therapy consisting of 10 sessions was conducted from 06/23/2026 to 07/28/2026, showing no improvement.",
+       "start": 757,
+       "end": 880,
+       "verified": true
+      },
+      {
+       "note_id": "case_011-n3",
+       "quote": "Conservative management included NSAID therapy from 06/18/2026 to 07/28/2026 with partial response and a physical therapy program of 10 sessions from 06/23/2026 to 07/28/2026 that yielded no improvement.",
+       "start": 554,
+       "end": 757,
+       "verified": true
+      },
+      {
+       "note_id": "case_011-n3",
+       "quote": "Ongoing lumbar radiculopathy after failed conservative therapy.",
+       "start": 483,
+       "end": 546,
+       "verified": true
+      },
+      {
+       "note_id": "case_011-n4",
+       "quote": "Lumbar radiculopathy, likely L5/S1, unresponsive to conservative care.",
+       "start": 450,
+       "end": 520,
+       "verified": true
+      }
+     ],
+     "rationale": "The rule requires documented spondylolisthesis and degenerative disease of the spine unresponsive to \u22654 weeks conservative therapy; while conservative therapy duration is sufficient, the chart does not document the required spinal conditions, so coverage cannot be confirmed.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C16",
+     "status": "missing_documentation",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "She denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": null,
+       "end": null,
+       "verified": false
+      }
+     ],
+     "rationale": "The rule requires documented suspicion of an infectious process; the chart does not mention such suspicion, only denies certain systemic signs, so documentation is insufficient to determine if the rule is met.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C17",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "The patient denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": 315,
+       "end": 483,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart documents denial of trauma, so suspected spinal cord injury secondary to trauma is not present, making this indication route irrelevant.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C18",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "The patient denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": 315,
+       "end": 483,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart contains no suspicion of spinal fracture or dislocation secondary to trauma, so this trauma-based indication does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C19",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n2",
+       "quote": "She denies any red-flag symptoms such as trauma, cancer, fever, weight loss, bladder or bowel dysfunction, saddle anesthesia, or progressive neurologic deficit.",
+       "start": null,
+       "end": null,
+       "verified": false
+      }
+     ],
+     "rationale": "The chart contains no documentation of suspected transverse myelitis, so this indication rule is not relevant to the patient.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C20",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The ordered study is a standard lumbar MRI without contrast, not BoneMRI (MRI-based synthetic CT), so the exclusion does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C21",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The chart does not specify whether lumbar MRI for radiculopathy with surgical consideration is among Aetna's listed covered indications, so we cannot determine if the exclusion applies.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C22",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n3",
+       "quote": "She reports no signs of trauma, cancer, fever, weight loss, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic weakness.",
+       "start": 169,
+       "end": 314,
+       "verified": true
+      }
+     ],
+     "rationale": "The exclusion applies only to patients with blunt trauma and a negative cervical spine CT; the chart documents no trauma, so the rule does not affect coverage.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C23",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n4",
+       "quote": "Lumbar MRI of the spine is ordered today, 08/09/2026, to evaluate for structural correlates.",
+       "start": 528,
+       "end": 620,
+       "verified": true
+      }
+     ],
+     "rationale": "The rule applies only to dynamic-kinetic MRI of the cervical spine, whereas the ordered study is a lumbar spine MRI without contrast, making the rule irrelevant.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C24",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The rule addresses cervical spine MRI after a normal CT in obtunded/comatose patients; the ordered study is a lumbar MRI and the patient is alert, so the rule does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C25",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_011-n4",
+       "quote": "Lumbar MRI of the spine is ordered today, 08/09/2026, to evaluate for structural correlates.",
+       "start": 528,
+       "end": 620,
+       "verified": true
+      }
+     ],
+     "rationale": "The rule addresses dual-energy CT, but the ordered study is a lumbar MRI, so the rule is not relevant to this patient.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    }
+   ],
+   "verdict": "doc_request",
+   "appeal": null,
+   "doc_request": "Documentation request: Parker Prototype (synthetic), lumbar MRI, date of service 08/09/2026\nPayer: Aetna. Policy in effect: Aetna CPB 0236 snapshot 2026-10-23, eff 04/09/2026, fetched.\n\nThe claim was denied. Before we appeal, please check the chart for the items below and add an addendum if they were done:\n\n1. Clinical evidence of spinal stenosis indicates medically necessary MRI/CT spine.\n   Policy wording: \"\u2022 Clinical evidence of spinal stenosis; or\"\n\n2. Persistent back or neck pain with radiculopathy and objective findings, no improvement after 6 weeks conservative therapy, indicates medically necessary MRI/CT spine.\n   Policy wording: \"\u2022 Persistent back or neck pain with radiculopathy as evidenced by pain plus objective findings of motor or reflex changes in the specific nerve root distribution, and no improvement after 6 weeks of conservative therapy*; or\"\n\n3. Progressively severe symptoms despite conservative management indicate medically necessary MRI/CT spine.\n   Policy wording: \"\u2022 Progressively severe symptoms despite conservative management; or\"\n\n4. Spondylolisthesis and degenerative disease of spine unresponsive to 4 weeks conservative therapy indicates medically necessary MRI/CT spine.\n   Policy wording: \"\u2022 Spondylolisthesis and degenerative disease of the spine that has not responded to 4 weeks of conservative therapy*; or\"\n\n5. Suspected infectious process (e.g., osteomyelitis, epidural abscess) of spine indicates medically necessary MRI/CT spine.\n   Policy wording: \"\u2022 Suspected infectious process (e.g., osteomyelitis epidural abscess of the spine or soft tissue); or\"\n\nPlease don't add anything that didn't happen; only document care that was actually provided.",
+   "gate": null,
+   "deadline": {
+    "rule_id": "aca-internal-appeal",
+    "due": "2027-02-20",
+    "days_left": 173,
+    "basis": "Internal appeal: At least 180 days after receipt of the adverse determination; counted from the notice date to be safe. The plan may allow longer. Enrollee appeal window. Contracted providers' payment disputes with a Medicare Advantage plan follow the provider contract; check the denial notice.",
+    "citation": "45 CFR 147.136(b); 29 CFR 2560.503-1(h)(3)(i)",
+    "source_url": "https://www.ecfr.gov/current/title-45/section-147.136",
+    "verified": true
+   },
+   "trace": [
+    {
+     "step": "intake",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 722,
+     "completion_tokens": 115,
+     "cost_usd": 7.1e-05,
+     "latency_s": 2.69,
+     "attempts": 1
+    },
+    {
+     "step": "facts",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 2432,
+     "completion_tokens": 4943,
+     "cost_usd": 0.001332,
+     "latency_s": 37.16,
+     "attempts": 1
+    },
+    {
+     "step": "match:C1",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1892,
+     "completion_tokens": 277,
+     "cost_usd": 0.000817,
+     "latency_s": 3.18,
+     "attempts": 1
+    },
+    {
+     "step": "match:C3",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1897,
+     "completion_tokens": 418,
+     "cost_usd": 0.000945,
+     "latency_s": 4.14,
+     "attempts": 1
+    },
+    {
+     "step": "match:C5",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1894,
+     "completion_tokens": 361,
+     "cost_usd": 0.000893,
+     "latency_s": 3.16,
+     "attempts": 1
+    },
+    {
+     "step": "match:C4",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1897,
+     "completion_tokens": 757,
+     "cost_usd": 0.00125,
+     "latency_s": 6.45,
+     "attempts": 1
+    },
+    {
+     "step": "match:C2",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1900,
+     "completion_tokens": 1073,
+     "cost_usd": 0.001536,
+     "latency_s": 7.82,
+     "attempts": 1
+    },
+    {
+     "step": "match:C6",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1911,
+     "completion_tokens": 594,
+     "cost_usd": 0.001108,
+     "latency_s": 4.11,
+     "attempts": 1
+    },
+    {
+     "step": "match:C8",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1920,
+     "completion_tokens": 471,
+     "cost_usd": 0.001,
+     "latency_s": 3.6,
+     "attempts": 1
+    },
+    {
+     "step": "match:C9",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1901,
+     "completion_tokens": 461,
+     "cost_usd": 0.000985,
+     "latency_s": 3.96,
+     "attempts": 1
+    },
+    {
+     "step": "match:C7",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1897,
+     "completion_tokens": 1137,
+     "cost_usd": 0.001592,
+     "latency_s": 6.51,
+     "attempts": 1
+    },
+    {
+     "step": "match:C11",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1905,
+     "completion_tokens": 627,
+     "cost_usd": 0.001136,
+     "latency_s": 3.54,
+     "attempts": 1
+    },
+    {
+     "step": "match:C10",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1926,
+     "completion_tokens": 1776,
+     "cost_usd": 0.002176,
+     "latency_s": 10.27,
+     "attempts": 1
+    },
+    {
+     "step": "match:C14",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1896,
+     "completion_tokens": 881,
+     "cost_usd": 0.001362,
+     "latency_s": 7.15,
+     "attempts": 1
+    },
+    {
+     "step": "match:C12",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1894,
+     "completion_tokens": 1111,
+     "cost_usd": 0.001568,
+     "latency_s": 9.1,
+     "attempts": 1
+    },
+    {
+     "step": "match:C13",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1897,
+     "completion_tokens": 1661,
+     "cost_usd": 0.002064,
+     "latency_s": 11.44,
+     "attempts": 1
+    },
+    {
+     "step": "match:C17",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1895,
+     "completion_tokens": 724,
+     "cost_usd": 0.00122,
+     "latency_s": 5.09,
+     "attempts": 1
+    },
+    {
+     "step": "match:C16",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1908,
+     "completion_tokens": 752,
+     "cost_usd": 0.001249,
+     "latency_s": 6.65,
+     "attempts": 1
+    },
+    {
+     "step": "match:C18",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1905,
+     "completion_tokens": 459,
+     "cost_usd": 0.000985,
+     "latency_s": 3.49,
+     "attempts": 1
+    },
+    {
+     "step": "match:C15",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1910,
+     "completion_tokens": 1499,
+     "cost_usd": 0.001922,
+     "latency_s": 10.41,
+     "attempts": 1
+    },
+    {
+     "step": "match:C20",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1932,
+     "completion_tokens": 221,
+     "cost_usd": 0.000779,
+     "latency_s": 4.2,
+     "attempts": 1
+    },
+    {
+     "step": "match:C19",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1890,
+     "completion_tokens": 860,
+     "cost_usd": 0.001341,
+     "latency_s": 5.83,
+     "attempts": 1
+    },
+    {
+     "step": "match:C22",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1918,
+     "completion_tokens": 597,
+     "cost_usd": 0.001113,
+     "latency_s": 3.96,
+     "attempts": 1
+    },
+    {
+     "step": "match:C21",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1951,
+     "completion_tokens": 865,
+     "cost_usd": 0.001364,
+     "latency_s": 6.07,
+     "attempts": 1
+    },
+    {
+     "step": "match:C24",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1931,
+     "completion_tokens": 289,
+     "cost_usd": 0.000839,
+     "latency_s": 2.66,
+     "attempts": 1
+    },
+    {
+     "step": "match:C23",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1916,
+     "completion_tokens": 524,
+     "cost_usd": 0.001046,
+     "latency_s": 3.88,
+     "attempts": 1
+    },
+    {
+     "step": "match:C25",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1926,
+     "completion_tokens": 330,
+     "cost_usd": 0.000875,
+     "latency_s": 2.64,
+     "attempts": 1
+    }
+   ],
+   "cost_usd": 0.032568
+  }
+ },
+ {
+  "case": "case_013",
+  "group": "B_aetna_5_of_6_weeks",
+  "route_expected": "clinical_review",
+  "route_got": "clinical_review",
+  "verdict_expected": "dont_appeal",
+  "verdict_got": "dont_appeal",
+  "gold": {
+   "A1_radiculopathy_6_weeks": {
+    "expected": "not_met",
+    "got": "not_met"
+   }
+  },
+  "cost_usd": 0.028478,
+  "latency_s": 64.1,
+  "unverified_facts": [],
+  "run": {
+   "case_id": "case_013",
+   "denial": {
+    "payer_name": "Aetna",
+    "plan_type": "COMMERCIAL_ACA",
+    "cpt": "72148",
+    "icd10": [
+     "M54.16"
+    ],
+    "dos": "2026-07-31",
+    "notice_date": "2026-08-13",
+    "carc": [
+     "50"
+    ],
+    "reason_text": "Not medically necessary per Clinical Policy Bulletin 0236.",
+    "practice_state": "NV",
+    "extracted_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   },
+   "triage": {
+    "reason_class": "clinical",
+    "route": "clinical_review",
+    "method": "carc_table",
+    "checklist": [],
+    "explanation": "Medical necessity"
+   },
+   "policy": {
+    "source": "aetna-cpb",
+    "policy_id": "Aetna CPB 0236",
+    "version": "2026-10-23",
+    "title": "Magnetic Resonance Imaging (MRI) and Computed Tomography (CT) of the Spine",
+    "effective_from": "2026-04-09",
+    "effective_to": null,
+    "retired": false,
+    "version_basis": "snapshot-at-fetch",
+    "url": "https://www.aetna.com/cpb/medical/data/200_299/0236.html",
+    "fetched_at": "2026-10-23T12:47:22.803602",
+    "fetched_via": "http",
+    "text": "Scope of Policy\n\nThis Clinical Policy Bulletin addresses magnetic resonance imaging (MRI) and computed tomography (CT) of the spine.\n\nNote: Precertification may be required for select procedures and interventions. Use the CPT code search tool to see if precertification is required.\n\nMedical Necessity\n\nAetna considers magnetic resonance imaging (MRI) and computed tomography (CT) of the spine medically necessary when any of the following criteria is met:\n\n\u2022 Clinical evidence of spinal stenosis; or\n\n\u2022 Clinical suspicion of a spinal cord or cauda equina compression syndrome; or\n\n\u2022 Congenital anomalies or deformities of the spine; or\n\n\u2022 Diagnosis and evaluation of lumbar epidural lipomatosis; or\n\n\u2022 Evaluation of recurrent symptoms after spinal surgery; or\n\n\u2022 Evaluation prior to epidural injection to rule out tumor or infection and to delineate the optimal anatomical location for performing the injection; or\n\n\u2022 Follow-up of evaluation for spinal malignancy or spinal infection; or\n\n\u2022 Known or suspected myelopathy (e.g., multiple sclerosis) for initial diagnosis when MRI of the brain is negative or symptoms mimic those of other spinal or brainstem lesions; or\n\n\u2022 Known or suspected primary spinal cord tumors (malignant or non-malignant); or\n\n\u2022 Persistent back or neck pain with radiculopathy as evidenced by pain plus objective findings of motor or reflex changes in the specific nerve root distribution, and no improvement after 6 weeks of conservative therapy*; or\n\n\u2022 Primary spinal bone tumors or suspected vertebral, paraspinal, or intraspinal metastases; or\n\n\u2022 Progressively severe symptoms despite conservative management; or\n\n\u2022 Rapidly progressing neurological deficit, or major motor weakness; or\n\n\u2022 Severe back pain (e.g., requiring hospitalization); or\n\n\u2022 Spondylolisthesis and degenerative disease of the spine that has not responded to 4 weeks of conservative therapy*; or\n\n\u2022 Suspected infectious process (e.g., osteomyelitis epidural abscess of the spine or soft tissue); or\n\n\u2022 Suspected spinal cord injury secondary to trauma; or\n\n\u2022 Suspected spinal fracture and/or dislocation secondary to trauma (if plain films are not conclusive); or\n\n\u2022 Suspected transverse myelitis.\n\n* Conservative therapy = moderate activity, analgesics, non-steroidal anti-inflammatory drugs, muscle relaxants.\n\nExperimental, Investigational, or Unproven\n\n\u2022 Aetna considers BoneMRI (MRI-based synthetic CT) experimental, investigational, or unproven for pre-operative assessments and surgical planning of the spine and the pelvis; and for diagnosing or monitoring of tumors (primary or metastatic).\n\n\u2022 Aetna considers MRI and CT of the spine experimental, investigational, or unproven for all other indications because their clinical value for indications other than the ones listed above has not been established. Clinical guidelines, including those from the Agency for Healthcare Policy and Research, have consistently recommended against routine imaging studies for acute low back pain.\n\n\u2022 Aetna considers the use of MRI for further evaluation of unstable injury in neurologically intact individuals with blunt trauma after a negative cervical spine CT result not medically necessary.\n\n\u2022 Aetna considers dynamic-kinetic MRI experimental, investigational, or unproven for evaluation of the cervical spine because its effectiveness has not been established.\n\n\u2022 Aetna considers the use of routine MRI after a normal CT of the cervical spine in obtunded or comatose individuals experimental, investigational, or unproven because the clinical value of this approach has not been established.\n\n\u2022 Aetna considers dual-energy CT experimental, investigational, or unrpoven for the evaluation of bone marrow edema and fracture lines in acute vertebral fractures because the clinical value of this approach has not been established.",
+    "sha256": "e12e0d1266c89ce7c172d9061e6523e12c755003a0e6798ee2b66c4a53078389"
+   },
+   "criteria": [
+    {
+     "criterion_id": "C1",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Clinical evidence of spinal stenosis indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Clinical evidence of spinal stenosis; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 458,
+     "span_end": 500,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C2",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Clinical suspicion of spinal cord or cauda equina compression syndrome indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Clinical suspicion of a spinal cord or cauda equina compression syndrome; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 502,
+     "span_end": 580,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C3",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Congenital anomalies or deformities of the spine indicate medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Congenital anomalies or deformities of the spine; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 582,
+     "span_end": 636,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C4",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Diagnosis and evaluation of lumbar epidural lipomatosis indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Diagnosis and evaluation of lumbar epidural lipomatosis; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 638,
+     "span_end": 699,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C5",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Evaluation of recurrent symptoms after spinal surgery indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Evaluation of recurrent symptoms after spinal surgery; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 701,
+     "span_end": 760,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C6",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Evaluation prior to epidural injection to rule out tumor or infection and to delineate optimal injection site indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Evaluation prior to epidural injection to rule out tumor or infection and to delineate the optimal anatomical location for performing the injection; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 762,
+     "span_end": 915,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C7",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Follow-up evaluation for spinal malignancy or infection indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Follow-up of evaluation for spinal malignancy or spinal infection; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 917,
+     "span_end": 988,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C8",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Known or suspected myelopathy (e.g., multiple sclerosis) for initial diagnosis when brain MRI negative or symptoms mimic other spinal/brainstem lesions indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Known or suspected myelopathy (e.g., multiple sclerosis) for initial diagnosis when MRI of the brain is negative or symptoms mimic those of other spinal or brainstem lesions; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 990,
+     "span_end": 1169,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C9",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Known or suspected primary spinal cord tumors (malignant or non-malignant) indicate medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Known or suspected primary spinal cord tumors (malignant or non-malignant); or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1171,
+     "span_end": 1251,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C10",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Persistent back or neck pain with radiculopathy and objective findings, no improvement after 6 weeks conservative therapy, indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Persistent back or neck pain with radiculopathy as evidenced by pain plus objective findings of motor or reflex changes in the specific nerve root distribution, and no improvement after 6 weeks of conservative therapy*; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1253,
+     "span_end": 1477,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C11",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Primary spinal bone tumors or suspected vertebral, paraspinal, or intraspinal metastases indicate medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Primary spinal bone tumors or suspected vertebral, paraspinal, or intraspinal metastases; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1479,
+     "span_end": 1573,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C12",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Progressively severe symptoms despite conservative management indicate medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Progressively severe symptoms despite conservative management; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1575,
+     "span_end": 1642,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C13",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Rapidly progressing neurological deficit or major motor weakness indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Rapidly progressing neurological deficit, or major motor weakness; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1644,
+     "span_end": 1715,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C14",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Severe back pain requiring hospitalization indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Severe back pain (e.g., requiring hospitalization); or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1717,
+     "span_end": 1773,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C15",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Spondylolisthesis and degenerative disease of spine unresponsive to 4 weeks conservative therapy indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Spondylolisthesis and degenerative disease of the spine that has not responded to 4 weeks of conservative therapy*; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1775,
+     "span_end": 1895,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C16",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Suspected infectious process (e.g., osteomyelitis, epidural abscess) of spine indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Suspected infectious process (e.g., osteomyelitis epidural abscess of the spine or soft tissue); or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 1897,
+     "span_end": 1998,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C17",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Suspected spinal cord injury secondary to trauma indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Suspected spinal cord injury secondary to trauma; or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 2000,
+     "span_end": 2054,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C18",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Suspected spinal fracture and/or dislocation secondary to trauma (if plain films inconclusive) indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Suspected spinal fracture and/or dislocation secondary to trauma (if plain films are not conclusive); or",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 2056,
+     "span_end": 2162,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C19",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Suspected transverse myelitis indicates medically necessary MRI/CT spine.",
+     "verbatim_span": "\u2022 Suspected transverse myelitis.",
+     "kind": "indication",
+     "applies_when": null,
+     "span_start": 2164,
+     "span_end": 2196,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C20",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "BoneMRI (MRI-based synthetic CT) is considered experimental/investigational/unproven for pre-operative assessment, surgical planning, and tumor diagnosis/monitoring of spine/pelvis.",
+     "verbatim_span": "\u2022 Aetna considers BoneMRI (MRI-based synthetic CT) experimental, investigational, or unproven for pre-operative assessments and surgical planning of the spine and the pelvis; and for diagnosing or monitoring of tumors (primary or metastatic).",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 2356,
+     "span_end": 2598,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C21",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "MRI and CT of spine are considered experimental/investigational/unproven for all other indications; routine imaging for acute low back pain not recommended.",
+     "verbatim_span": "\u2022 Aetna considers MRI and CT of the spine experimental, investigational, or unproven for all other indications because their clinical value for indications other than the ones listed above has not been established. Clinical guidelines, including those from the Agency for Healthcare Policy and Research, have consistently recommended against routine imaging studies for acute low back pain.",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 2600,
+     "span_end": 2990,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C22",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Use of MRI for further evaluation of unstable injury in neurologically intact individuals with blunt trauma after negative cervical CT is not medically necessary.",
+     "verbatim_span": "\u2022 Aetna considers the use of MRI for further evaluation of unstable injury in neurologically intact individuals with blunt trauma after a negative cervical spine CT result not medically necessary.",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 2992,
+     "span_end": 3188,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C23",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Dynamic-kinetic MRI is considered experimental/investigational/unproven for evaluation of cervical spine.",
+     "verbatim_span": "\u2022 Aetna considers dynamic-kinetic MRI experimental, investigational, or unproven for evaluation of the cervical spine because its effectiveness has not been established.",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 3190,
+     "span_end": 3359,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C24",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Routine MRI after normal cervical CT in obtunded/comatose individuals is considered experimental/investigational/unproven.",
+     "verbatim_span": "\u2022 Aetna considers the use of routine MRI after a normal CT of the cervical spine in obtunded or comatose individuals experimental, investigational, or unproven because the clinical value of this approach has not been established.",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 3361,
+     "span_end": 3590,
+     "span_verified": true
+    },
+    {
+     "criterion_id": "C25",
+     "doc_id": "Aetna CPB 0236v2026-10-22",
+     "summary": "Dual-energy CT is considered experimental/investigational/unproven for evaluation of bone marrow edema and fracture lines in acute vertebral fractures.",
+     "verbatim_span": "\u2022 Aetna considers dual-energy CT experimental, investigational, or unrpoven for the evaluation of bone marrow edema and fracture lines in acute vertebral fractures because the clinical value of this approach has not been established.",
+     "kind": "exclusion",
+     "applies_when": null,
+     "span_start": 3592,
+     "span_end": 3825,
+     "span_verified": true
+    }
+   ],
+   "matches": [
+    {
+     "criterion_id": "C1",
+     "status": "missing_documentation",
+     "evidence": [
+      {
+       "note_id": "case_013-n1",
+       "quote": "Assessment: Acute lumbar radiculopathy, likely L5/S1, M54.16.",
+       "start": 584,
+       "end": 645,
+       "verified": true
+      }
+     ],
+     "rationale": "The rule requires documented clinical evidence of spinal stenosis, which is not mentioned in any chart note, so we cannot determine if the indication is satisfied.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C2",
+     "status": "not_met",
+     "evidence": [
+      {
+       "note_id": "case_013-n1",
+       "quote": "He denies fever, weight loss, trauma, cancer history, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits.",
+       "start": 197,
+       "end": 336,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart documents denial of symptoms suggestive of spinal cord or cauda equina compression, indicating lack of clinical suspicion for that syndrome.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C3",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The chart contains no mention of congenital anomalies or deformities of the spine, so this indication does not apply to the patient.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C4",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The chart contains no documentation of lumbar epidural lipomatosis, so this indication is not present and the rule does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C5",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The rule applies to evaluation of recurrent symptoms after spinal surgery, but the chart contains no documentation of prior spinal surgery.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C6",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_013-n4",
+       "quote": "Results will guide further management, including possible spine surgery referral.",
+       "start": 338,
+       "end": 419,
+       "verified": true
+      },
+      {
+       "note_id": "case_013-n3",
+       "quote": "Spine surgery referral is under consideration pending MRI findings.",
+       "start": 579,
+       "end": 646,
+       "verified": true
+      }
+     ],
+     "rationale": "The rule applies only when MRI is done prior to an epidural injection to rule out tumor/infection and guide injection; the chart documents consideration of spine surgery referral, not epidural injection, so the rule is not relevant.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C7",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The chart contains no mention of evaluating for spinal malignancy or infection, so this indication rule is not relevant to this patient.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C8",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The chart contains no documentation of known or suspected myelopathy (e.g., multiple sclerosis) or a negative brain MRI, so this myelopathy indication does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C9",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_013-n1",
+       "quote": "He denies fever, weight loss, trauma, cancer history, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits.",
+       "start": 197,
+       "end": 336,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart documents no suspicion of a primary spinal cord tumor, so the tumor indication rule does not apply to this patient.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C10",
+     "status": "not_met",
+     "evidence": [
+      {
+       "note_id": "case_013-n1",
+       "quote": "Plan: Start NSAIDs today (06/07/2026). Initiate physical therapy starting 06/11/2026 for core strengthening and lumbar stabilization. Continue activity as tolerated. Follow up in 2 weeks.",
+       "start": 646,
+       "end": 833,
+       "verified": true
+      },
+      {
+       "note_id": "case_013-n2",
+       "quote": "He was prescribed NSAIDs from 06/07/2026 to 07/16/2026, which provided partial relief. He completed a course of physical therapy from 06/11/2026 to 07/16/2026 for 10 sessions without improvement.",
+       "start": 411,
+       "end": 606,
+       "verified": true
+      },
+      {
+       "note_id": "case_013-n2",
+       "quote": "Assessment: Lumbar radiculopathy with partial response to NSAIDs and no improvement after physical therapy.",
+       "start": 297,
+       "end": 404,
+       "verified": true
+      },
+      {
+       "note_id": "case_013-n1",
+       "quote": "Exam: Lumbar spine inspection normal, palpation reveals paraspinal tenderness left L4-L5. Straight leg raise positive at 40 degrees left. Exam shows diminished ankle reflex and L5/S1 weakness consistent with radiculopathy.",
+       "start": 337,
+       "end": 559,
+       "verified": true
+      }
+     ],
+     "rationale": "The patient received less than 6 weeks of conservative therapy (approximately 5.6 weeks) and therefore did not meet the requirement of no improvement after 6 weeks of conservative therapy.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C11",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The chart documents no suspicion of primary spinal bone tumors or vertebral, paraspinal, or intraspinal metastases, so this indication rule does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C12",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_013-n2",
+       "quote": "ongoing low back pain with left leg radiculopathy, unchanged since last visit.",
+       "start": 134,
+       "end": 212,
+       "verified": true
+      },
+      {
+       "note_id": "case_013-n3",
+       "quote": "continued low back pain and left leg radiculopathy despite completion... He notes no new symptoms.",
+       "start": null,
+       "end": null,
+       "verified": false
+      }
+     ],
+     "rationale": "The chart documents stable, unchanging symptoms without progressive worsening, so the progressively severe symptoms indication does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C13",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_013-n1",
+       "quote": "He denies fever, weight loss, trauma, cancer history, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits.",
+       "start": 197,
+       "end": 336,
+       "verified": true
+      },
+      {
+       "note_id": "case_013-n1",
+       "quote": "Exam shows diminished ankle reflex and L5/S1 weakness consistent with radiculopathy.",
+       "start": 475,
+       "end": 559,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart denies progressive neurologic deficits and only documents non\u2011specific L5/S1 weakness without describing it as major, so the indication of rapidly progressing deficit or major motor weakness is not applicable.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C14",
+     "status": "missing_documentation",
+     "evidence": [],
+     "rationale": "The chart does not document severe back pain requiring hospitalization, so we cannot confirm this indication criterion.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C15",
+     "status": "missing_documentation",
+     "evidence": [],
+     "rationale": "The chart does not document spondylolisthesis or degenerative disease of the spine, so the indication cannot be confirmed.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C16",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "No documentation of suspected infectious process (e.g., osteomyelitis or epidural abscess) is present in the chart.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C17",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_013-n1",
+       "quote": "He denies fever, weight loss, trauma, cancer history, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits.",
+       "start": 197,
+       "end": 336,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart explicitly denies trauma, so there is no suspicion of spinal cord injury secondary to trauma, making this indication route not applicable.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C18",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_013-n1",
+       "quote": "He denies fever, weight loss, trauma, cancer history, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits.",
+       "start": 197,
+       "end": 336,
+       "verified": true
+      }
+     ],
+     "rationale": "The rule applies only when spinal fracture/dislocation secondary to trauma is suspected; the chart explicitly denies trauma, so the rule is not relevant to this case.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C19",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_013-n1",
+       "quote": "He denies fever, weight loss, trauma, cancer history, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits.",
+       "start": 197,
+       "end": 336,
+       "verified": true
+      }
+     ],
+     "rationale": "The chart contains no suspicion of transverse myelitis, so this indication rule does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C20",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_013-n4",
+       "quote": "Lumbar MRI ordered today (07/31/2026).",
+       "start": 299,
+       "end": 337,
+       "verified": true
+      }
+     ],
+     "rationale": "The ordered study is a standard lumbar MRI without contrast, not BoneMRI (MRI-based synthetic CT), so the exclusion does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C21",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_013-n4",
+       "quote": "Results will guide further management, including possible spine surgery referral.",
+       "start": 338,
+       "end": 419,
+       "verified": true
+      },
+      {
+       "note_id": "case_013-n3",
+       "quote": "Persistent lumbar radiculopathy refractory to conservative management.",
+       "start": 258,
+       "end": 328,
+       "verified": true
+      }
+     ],
+     "rationale": "The exclusion applies only to indications not listed as covered; the patient\u2019s MRI is ordered for persistent radiculopathy with neurologic deficit and possible surgery referral, which is a covered indication, so the rule is not relevant.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C22",
+     "status": "not_applicable",
+     "evidence": [
+      {
+       "note_id": "case_013-n1",
+       "quote": "He denies fever, weight loss, trauma, cancer history, bowel or bladder incontinence, saddle anesthesia, or progressive neurologic deficits.",
+       "start": 197,
+       "end": 336,
+       "verified": true
+      }
+     ],
+     "rationale": "The rule excludes MRI only for blunt trauma patients with a negative cervical CT; the chart shows no trauma, so the exclusion does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C23",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The rule concerns dynamic-kinetic MRI of the cervical spine, while the ordered study is a lumbar spine MRI without contrast, making the rule irrelevant.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C24",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The rule concerns cervical spine CT in obtunded/comatose patients, which is not documented in this case.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    {
+     "criterion_id": "C25",
+     "status": "not_applicable",
+     "evidence": [],
+     "rationale": "The rule addresses dual\u2011energy CT for bone marrow edema/fracture lines, while the ordered study is a lumbar spine MRI without contrast, so the rule does not apply.",
+     "model": "nvidia/nemotron-3-super-120b-a12b"
+    }
+   ],
+   "verdict": "dont_appeal",
+   "appeal": null,
+   "doc_request": null,
+   "gate": null,
+   "deadline": {
+    "rule_id": "aca-internal-appeal",
+    "due": "2027-02-09",
+    "days_left": 173,
+    "basis": "Internal appeal: At least 180 days after receipt of the adverse determination; counted from the notice date to be safe. The plan may allow longer. Enrollee appeal window. Contracted providers' payment disputes with a Medicare Advantage plan follow the provider contract; check the denial notice.",
+    "citation": "45 CFR 147.136(b); 29 CFR 2560.503-1(h)(3)(i)",
+    "source_url": "https://www.ecfr.gov/current/title-45/section-147.136",
+    "verified": true
+   },
+   "trace": [
+    {
+     "step": "intake",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 723,
+     "completion_tokens": 123,
+     "cost_usd": 7.3e-05,
+     "latency_s": 2.96,
+     "attempts": 1
+    },
+    {
+     "step": "facts",
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "prompt_tokens": 2219,
+     "completion_tokens": 3734,
+     "cost_usd": 0.001029,
+     "latency_s": 29.21,
+     "attempts": 1
+    },
+    {
+     "step": "match:C4",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1682,
+     "completion_tokens": 399,
+     "cost_usd": 0.000864,
+     "latency_s": 3.7,
+     "attempts": 1
+    },
+    {
+     "step": "match:C3",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1682,
+     "completion_tokens": 497,
+     "cost_usd": 0.000952,
+     "latency_s": 3.82,
+     "attempts": 1
+    },
+    {
+     "step": "match:C1",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1677,
+     "completion_tokens": 639,
+     "cost_usd": 0.001078,
+     "latency_s": 5.1,
+     "attempts": 1
+    },
+    {
+     "step": "match:C5",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1679,
+     "completion_tokens": 366,
+     "cost_usd": 0.000833,
+     "latency_s": 3.26,
+     "attempts": 1
+    },
+    {
+     "step": "match:C2",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1685,
+     "completion_tokens": 1015,
+     "cost_usd": 0.001419,
+     "latency_s": 7.33,
+     "attempts": 1
+    },
+    {
+     "step": "match:C6",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1696,
+     "completion_tokens": 590,
+     "cost_usd": 0.00104,
+     "latency_s": 5.29,
+     "attempts": 1
+    },
+    {
+     "step": "match:C7",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1682,
+     "completion_tokens": 607,
+     "cost_usd": 0.001051,
+     "latency_s": 4.26,
+     "attempts": 1
+    },
+    {
+     "step": "match:C8",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1705,
+     "completion_tokens": 340,
+     "cost_usd": 0.000818,
+     "latency_s": 3.77,
+     "attempts": 1
+    },
+    {
+     "step": "match:C11",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1690,
+     "completion_tokens": 211,
+     "cost_usd": 0.000697,
+     "latency_s": 2.73,
+     "attempts": 1
+    },
+    {
+     "step": "match:C9",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1686,
+     "completion_tokens": 781,
+     "cost_usd": 0.001209,
+     "latency_s": 5.31,
+     "attempts": 1
+    },
+    {
+     "step": "match:C14",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1681,
+     "completion_tokens": 461,
+     "cost_usd": 0.000919,
+     "latency_s": 3.88,
+     "attempts": 1
+    },
+    {
+     "step": "match:C12",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1679,
+     "completion_tokens": 1277,
+     "cost_usd": 0.001653,
+     "latency_s": 8.73,
+     "attempts": 1
+    },
+    {
+     "step": "match:C15",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1695,
+     "completion_tokens": 361,
+     "cost_usd": 0.000833,
+     "latency_s": 3.14,
+     "attempts": 1
+    },
+    {
+     "step": "match:C10",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1711,
+     "completion_tokens": 2138,
+     "cost_usd": 0.002437,
+     "latency_s": 12.08,
+     "attempts": 1
+    },
+    {
+     "step": "match:C13",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1682,
+     "completion_tokens": 1574,
+     "cost_usd": 0.001921,
+     "latency_s": 9.39,
+     "attempts": 1
+    },
+    {
+     "step": "match:C17",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1680,
+     "completion_tokens": 603,
+     "cost_usd": 0.001047,
+     "latency_s": 4.49,
+     "attempts": 1
+    },
+    {
+     "step": "match:C16",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1693,
+     "completion_tokens": 630,
+     "cost_usd": 0.001075,
+     "latency_s": 5.02,
+     "attempts": 1
+    },
+    {
+     "step": "match:C18",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1690,
+     "completion_tokens": 426,
+     "cost_usd": 0.00089,
+     "latency_s": 3.54,
+     "attempts": 1
+    },
+    {
+     "step": "match:C19",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1675,
+     "completion_tokens": 785,
+     "cost_usd": 0.001209,
+     "latency_s": 5.64,
+     "attempts": 1
+    },
+    {
+     "step": "match:C20",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1717,
+     "completion_tokens": 424,
+     "cost_usd": 0.000897,
+     "latency_s": 3.34,
+     "attempts": 1
+    },
+    {
+     "step": "match:C22",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1703,
+     "completion_tokens": 432,
+     "cost_usd": 0.0009,
+     "latency_s": 3.75,
+     "attempts": 1
+    },
+    {
+     "step": "match:C23",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1701,
+     "completion_tokens": 257,
+     "cost_usd": 0.000742,
+     "latency_s": 3.36,
+     "attempts": 1
+    },
+    {
+     "step": "match:C21",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1736,
+     "completion_tokens": 900,
+     "cost_usd": 0.001331,
+     "latency_s": 7.01,
+     "attempts": 1
+    },
+    {
+     "step": "match:C25",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1711,
+     "completion_tokens": 273,
+     "cost_usd": 0.000759,
+     "latency_s": 3.1,
+     "attempts": 1
+    },
+    {
+     "step": "match:C24",
+     "model": "nvidia/nemotron-3-super-120b-a12b",
+     "prompt_tokens": 1716,
+     "completion_tokens": 319,
+     "cost_usd": 0.000802,
+     "latency_s": 4.31,
+     "attempts": 1
+    }
+   ],
+   "cost_usd": 0.028478
+  }
+ }
+]
