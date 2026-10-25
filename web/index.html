@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Denial Auditor</title>
 <meta name="description" content="Denial Auditor: criterion-by-criterion evidence and verified appeals for MRI and CT insurance denials.">
-<link rel="preload" href="fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Cpath fill='%238ED462' d='M18.6 2.5c7.9.4 14.6 5.7 14.9 13.6.3 8.4-5.2 17.4-14.4 17.4C9.6 33.5 2.4 27.6 2.5 18.9 2.6 9.4 9.9 2.1 18.6 2.5z'/%3E%3Cpath d='M11 18.5l4.6 4.6 9.4-10' fill='none' stroke='%231B1D1A' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<meta name="theme-color" content="#111410">
+<link rel="preload" href="fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23171719'/%3E%3Cpath d='M4 12.5l3.5 3.5L14 9.5M15.5 16h4.5' fill='none' stroke='%238EC5E8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#171719">
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -15,20 +16,22 @@
 <div class="shell">
   <nav class="rail" aria-label="Primary">
     <a class="brand" href="#/worklist" aria-label="Denial Auditor, worklist">
-      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36"><path class="lobe" d="M18.6 2.5c7.9.4 14.6 5.7 14.9 13.6.3 8.4-5.2 17.4-14.4 17.4C9.6 33.5 2.4 27.6 2.5 18.9 2.6 9.4 9.9 2.1 18.6 2.5z"/><path class="mk" d="M11 18.5l4.6 4.6 9.4-10"/></svg></span>
-      <span class="brand-name">Denial<br>Auditor</span>
+      <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l3.5 3.5L14 9.5M15.5 16h4.5"/></svg>
+      <span class="brand-text"><b>Denial Auditor</b><small>Demo practice · synthetic data</small></span>
     </a>
-    <ul>
-      <li><a href="#/worklist" data-nav="worklist" aria-label="Worklist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Worklist</span></a></li>
-      <li><a href="#/case" data-nav="case" aria-label="Case"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/></svg><span>Case</span></a></li>
-      <li><a href="#/check" data-nav="check" aria-label="Before you submit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M9 5.5H6v15h12v-15h-3"/><path d="M9 14l2 2 4-4.5"/></svg><span>Before you submit</span></a></li>
-      <li><a href="#/live" data-nav="live" aria-label="Run live"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></svg><span>Run live</span></a></li>
-      <li><a href="#/how" data-nav="how" aria-label="How it works"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v6M12 7.5v.5"/></svg><span>How it works</span></a></li>
+    <ul class="nav">
+      <li><a href="#/worklist" data-nav="worklist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Worklist</span><span class="n" data-count></span></a></li>
+      <li><a href="#/check" data-nav="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M9 5.5H6v15h12v-15h-3"/><path d="M9 14l2 2 4-4.5"/></svg><span>Before you submit</span></a></li>
+      <li class="utility"><a href="#/live" data-nav="live"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></svg><span>Run live</span></a></li>
+      <li><a href="#/how" data-nav="how"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v6M12 7.5v.5"/></svg><span>How it works</span></a></li>
     </ul>
-    <p class="rail-foot">Road House<br><span>Nemotron on Nebius Token Factory</span></p>
+    <p class="rail-foot">Road House · Nemotron on Nebius Token Factory</p>
   </nav>
   <div class="stage">
-    <p class="synthetic" role="note">Synthetic data only. Decision support for billing staff, not legal or medical advice. A person reviews and sends every appeal.</p>
+    <div class="context" role="note">
+      <span><b>Synthetic data only.</b> <span class="long">Decision support for billing staff, not legal or medical advice. A person reviews and sends every appeal.</span><span class="short">Not legal or medical advice. A person reviews and sends every appeal.</span></span>
+      <span class="watch" data-watch></span>
+    </div>
     <main id="main" tabindex="-1"></main>
     <footer class="legal">CPT® codes are shown as bare codes only. CPT is a registered trademark of the American Medical Association. All rights reserved. Policy text quoted briefly with attribution; Aetna content © Aetna Inc.</footer>
   </div>

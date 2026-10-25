@@ -313,3 +313,9 @@ Estimated cost per routed case is ~$0.05 (NANO_ONLY ~$0.01). Check against the T
 4. **Oct 28: remind the user the repo must be public** (their decision).
 
 **UI redesign (Oct 25, user request "didn't like it at all"):** replaced "Highlighter on photocopy" with a dark guide-map world the user picked in the direction round (zoo/gardens guide map, translated to dark; Stripe/Mercury quality bar). Flat land colours as verdicts (green appeal, coral don't appeal yet, sun ask the physician, pond fix and resubmit, lilac not winnable), a verdict field with a seeded coastline that morphs between cases and tabs, capsule controls, Hanken Grotesk. Contract: `.impeccable/surfaces/web-index-html.md`.
+
+**UI pass 2 (Oct 25 evening, user: "Remove AI slop using taste-skill-v2 and improve color choice"; standing rule: /impeccable for UI, taste-skill-v2 for anti-slop, /demo-video in /hackathon-submission):**
+- A judge panel workflow (4 proposals × 3 judges, then a synthesis) picked taste-skill-v2's data-terminal app style: "Blue pencil on the claims desk". It is neutral graphite, with colour only on status, and one accent (#8EC5E8) that means only "verified against fetched text". Public Sans with IBM Plex Mono for IDs, six sizes, an inverted-ink primary, and feedback-only motion.
+- Taste-skill gate before: 4 FAILs and colour on 18–26% of the first screen. After: `inspect.mjs --app` 0 FAIL / 0 WARN on nine screens at 1440, 768 and 390.
+- Impeccable finish review: two rounds, with all 8 material fixes plus 2 ceiling notes resolved. The one regression (inline quote boundaries) was fixed. DESIGN.md was rewritten by the documenter.
+- The worklist now sorts by days left (it was sorted by verdict). The model cost column moved to the case's "Model calls and cost" disclosure. Case left the nav.

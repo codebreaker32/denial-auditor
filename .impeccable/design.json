@@ -1,559 +1,780 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-25T17:25:07+00:00",
+  "generatedAt": "2026-10-25T19:12:46+00:00",
   "title": "Design System: Denial Auditor",
   "extensions": {
     "colorMeta": {
       "ground": {
         "role": "neutral",
-        "displayName": "Night Ground",
-        "canonical": "oklch(18.6% 0.009 138)",
+        "displayName": "Graphite Ground",
+        "canonical": "#171719",
+        "purpose": "Page, sidebar, tables and the rules ledger.",
         "tonalRamp": [
-          "#090C08",
-          "#232622",
-          "#40433E",
-          "#5F625D",
-          "#80847E",
-          "#A2A6A1",
-          "#C6CBC5",
-          "#EBF0EA"
+          "#0B0B0D",
+          "#252527",
+          "#424244",
+          "#616163",
+          "#828285",
+          "#A5A5A7",
+          "#C9C9CC",
+          "#EEEEF1"
         ]
       },
       "surface": {
         "role": "neutral",
-        "displayName": "Night Surface",
-        "canonical": "oklch(22.4% 0.013 135)",
+        "displayName": "Card Graphite",
+        "canonical": "#131217",
+        "purpose": "Cards, sheets, gate and panels; one step darker than the ground, always with a 1px border.",
         "tonalRamp": [
-          "#090C07",
-          "#222720",
-          "#3F443D",
-          "#5E635C",
-          "#7F847C",
-          "#A2A79F",
-          "#C6CBC3",
-          "#EBF1E8"
+          "#0B0A0F",
+          "#25242A",
+          "#424147",
+          "#616067",
+          "#828188",
+          "#A5A4AB",
+          "#C9C8CF",
+          "#EFEDF5"
         ]
       },
-      "surface-2": {
+      "raised": {
         "role": "neutral",
-        "displayName": "Raised Night",
-        "canonical": "oklch(26.5% 0.016 134)",
+        "displayName": "Raised",
+        "canonical": "#212023",
+        "purpose": "Selected rule row, fold rows, secondary hover, disabled and locked buttons, skeletons.",
         "tonalRamp": [
-          "#080D06",
-          "#22271F",
-          "#3F443B",
-          "#5E635A",
-          "#7E857B",
-          "#A1A79D",
-          "#C5CCC1",
-          "#EAF1E6"
+          "#0B0B0D",
+          "#252427",
+          "#424145",
+          "#626064",
+          "#838185",
+          "#A5A4A8",
+          "#CAC8CC",
+          "#EFEEF2"
         ]
       },
-      "stone": {
+      "raised-2": {
         "role": "neutral",
-        "displayName": "Stone",
-        "canonical": "oklch(32.0% 0.019 133)",
+        "displayName": "Raised 2",
+        "canonical": "#2A2A2E",
+        "purpose": "Filled-neutral pill, runway track, timeline grid, not-applicable span fill.",
         "tonalRamp": [
-          "#080D05",
-          "#21271E",
-          "#3E443A",
-          "#5D6459",
-          "#7E8579",
-          "#A0A89C",
-          "#C4CCBF",
-          "#EAF1E4"
+          "#0B0B0E",
+          "#252528",
+          "#414146",
+          "#616165",
+          "#828287",
+          "#A4A4A9",
+          "#C8C8CE",
+          "#EEEEF3"
         ]
       },
-      "line": {
+      "rule": {
         "role": "neutral",
-        "displayName": "Hairline",
-        "canonical": "oklch(30.8% 0.019 133)",
+        "displayName": "Rule",
+        "canonical": "#222224",
+        "purpose": "1px row, tab and section rules.",
         "tonalRamp": [
-          "#080D05",
-          "#21271E",
-          "#3E443A",
-          "#5D6459",
-          "#7E8579",
-          "#A0A89C",
-          "#C4CCBF",
-          "#E9F1E4"
+          "#0B0B0D",
+          "#252527",
+          "#424244",
+          "#616163",
+          "#828284",
+          "#A5A5A7",
+          "#C9C9CB",
+          "#EEEEF1"
         ]
       },
-      "line-2": {
+      "border": {
         "role": "neutral",
-        "displayName": "Strong Hairline",
-        "canonical": "oklch(36.9% 0.022 132)",
+        "displayName": "Card Edge",
+        "canonical": "#28282C",
+        "purpose": "1px card and sheet edges.",
         "tonalRamp": [
-          "#090C07",
-          "#22271F",
-          "#3E443A",
-          "#5D6458",
-          "#7D8578",
-          "#A0A89B",
-          "#C5CCC0",
-          "#EBF1E6"
+          "#0B0B0E",
+          "#252529",
+          "#414146",
+          "#616165",
+          "#828287",
+          "#A4A4A9",
+          "#C8C8CE",
+          "#EEEEF3"
+        ]
+      },
+      "control": {
+        "role": "neutral",
+        "displayName": "Control Line",
+        "canonical": "#3A3A3E",
+        "purpose": "Secondary outline, hover outline, outlined-pill edge, text-selection ground.",
+        "tonalRamp": [
+          "#0B0B0E",
+          "#252528",
+          "#414146",
+          "#616165",
+          "#828286",
+          "#A4A4A9",
+          "#C8C8CD",
+          "#EEEEF3"
+        ]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Field Edge",
+        "canonical": "#6A6A72",
+        "purpose": "Input edges, held to 3:1.",
+        "tonalRamp": [
+          "#0B0A10",
+          "#24242B",
+          "#414148",
+          "#606068",
+          "#81818A",
+          "#A4A4AD",
+          "#C8C8D1",
+          "#EDEDF7"
         ]
       },
       "text": {
         "role": "neutral",
-        "displayName": "Cream",
-        "canonical": "oklch(95.8% 0.018 93)",
+        "displayName": "Soft Ink",
+        "canonical": "#EDEDEF",
+        "purpose": "Body text, figures, the only text on -hl tints; also focus and selection lines.",
         "tonalRamp": [
-          "#0E0B04",
-          "#28251B",
-          "#454237",
-          "#656156",
-          "#868277",
-          "#A9A599",
-          "#CDC9BC",
-          "#F2EEE1"
+          "#0B0B0C",
+          "#252526",
+          "#424243",
+          "#616163",
+          "#828284",
+          "#A5A5A7",
+          "#C9C9CB",
+          "#EEEEF0"
         ]
       },
-      "text-2": {
+      "muted": {
         "role": "neutral",
-        "displayName": "Cream 2",
-        "canonical": "oklch(82.4% 0.019 100)",
+        "displayName": "Muted",
+        "canonical": "#B4B4BA",
+        "purpose": "Background prose, cells, sublines of rank two.",
         "tonalRamp": [
-          "#0D0B03",
-          "#27251B",
-          "#444237",
-          "#636255",
-          "#858376",
-          "#A7A698",
-          "#CCCABC",
-          "#F1EFE1"
+          "#0B0B0F",
+          "#252429",
+          "#414146",
+          "#616166",
+          "#828287",
+          "#A4A4AA",
+          "#C8C8CE",
+          "#EEEEF4"
         ]
       },
-      "text-3": {
+      "faint": {
         "role": "neutral",
-        "displayName": "Cream 3",
-        "canonical": "oklch(68.4% 0.020 100)",
+        "displayName": "Faint",
+        "canonical": "#94949B",
+        "purpose": "Labels, IDs, captions, table headers; never on anything lighter than #2A2A2E.",
         "tonalRamp": [
-          "#0C0B06",
-          "#26251E",
-          "#444239",
-          "#636256",
-          "#858375",
-          "#A7A699",
-          "#CBCABE",
-          "#F0EFE5"
+          "#0B0B0F",
+          "#24242A",
+          "#414147",
+          "#606067",
+          "#828188",
+          "#A4A4AB",
+          "#C8C8D0",
+          "#EEEEF5"
         ]
       },
-      "land": {
+      "primary": {
         "role": "primary",
-        "displayName": "Land Green",
-        "canonical": "oklch(79.9% 0.164 135)",
+        "displayName": "Soft Ink Primary",
+        "canonical": "#EDEDEF",
+        "purpose": "The one inverted-ink primary button per screen.",
         "tonalRamp": [
-          "#001200",
-          "#042F00",
-          "#1E5000",
-          "#387200",
-          "#54961F",
-          "#7CB956",
-          "#A5DC85",
-          "#CEFFB3"
+          "#0B0B0C",
+          "#252526",
+          "#424243",
+          "#616163",
+          "#828284",
+          "#A5A5A7",
+          "#C9C9CB",
+          "#EEEEF0"
         ]
       },
-      "coral": {
+      "primary-ink": {
         "role": "primary",
-        "displayName": "Coral",
-        "canonical": "oklch(70.9% 0.184 29)",
+        "displayName": "Primary Label",
+        "canonical": "#171719",
+        "purpose": "Label on the primary button.",
         "tonalRamp": [
-          "#2B0000",
-          "#530000",
-          "#7E0B07",
-          "#AC2C21",
-          "#DA4A3C",
-          "#FB7767",
-          "#FFA392",
-          "#FFCEBE"
+          "#0B0B0D",
+          "#252527",
+          "#424244",
+          "#616163",
+          "#828285",
+          "#A5A5A7",
+          "#C9C9CC",
+          "#EEEEF1"
         ]
       },
-      "sun": {
+      "primary-hover": {
         "role": "primary",
-        "displayName": "Sun",
-        "canonical": "oklch(87.9% 0.162 91)",
+        "displayName": "Primary Hover",
+        "canonical": "#FFFFFF",
+        "purpose": "Primary hover fill (never a text colour).",
         "tonalRamp": [
-          "#1A0500",
-          "#391F00",
-          "#5C3C00",
-          "#805B00",
-          "#A67C00",
-          "#C7A012",
-          "#E8C65F",
-          "#FFEC96"
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
         ]
       },
-      "pond": {
+      "primary-press": {
         "role": "primary",
-        "displayName": "Pond",
-        "canonical": "oklch(69.7% 0.123 242)",
+        "displayName": "Primary Press",
+        "canonical": "#D6D6DA",
+        "purpose": "Primary active fill.",
         "tonalRamp": [
-          "#000B26",
-          "#00284A",
-          "#004671",
-          "#11679A",
-          "#318AC5",
-          "#62ADE4",
-          "#90D1FF",
-          "#BDF6FF"
+          "#0B0B0D",
+          "#252528",
+          "#424245",
+          "#616164",
+          "#828285",
+          "#A4A4A8",
+          "#C9C9CD",
+          "#EEEEF2"
         ]
       },
-      "lilac": {
+      "verified": {
         "role": "primary",
-        "displayName": "Lilac",
-        "canonical": "oklch(86.7% 0.095 315)",
+        "displayName": "Blue Pencil",
+        "canonical": "#8EC5E8",
+        "purpose": "Verified against fetched text only: tick-and-tie, brand mark, gate pass pill, letter quote rule and underline, timeline bars.",
         "tonalRamp": [
-          "#14031B",
-          "#311A3B",
-          "#51355E",
-          "#735283",
-          "#9771A9",
-          "#B995CA",
-          "#DCBBEB",
-          "#FFE2FF"
+          "#000D17",
+          "#02283C",
+          "#0D4765",
+          "#326787",
+          "#5489AA",
+          "#76ADCF",
+          "#9AD1F5",
+          "#DFF2FE"
         ]
       },
-      "ink": {
-        "role": "neutral",
-        "displayName": "Ink",
-        "canonical": "oklch(22.7% 0.006 135)",
+      "verified-tint": {
+        "role": "primary",
+        "displayName": "Blue Pencil Tint",
+        "canonical": "#172430",
+        "purpose": "Ground of the gate pass pill.",
         "tonalRamp": [
-          "#0A0C09",
-          "#242623",
-          "#40433F",
-          "#60625E",
-          "#81837F",
-          "#A3A6A2",
-          "#C7CAC6",
-          "#EDEFEB"
+          "#030C17",
+          "#192633",
+          "#364451",
+          "#546371",
+          "#758493",
+          "#97A7B7",
+          "#BBCBDC",
+          "#E2F0FE"
         ]
       },
-      "ink-2": {
-        "role": "neutral",
-        "displayName": "Ink 2",
-        "canonical": "oklch(29.8% 0.008 129)",
+      "positive": {
+        "role": "status",
+        "displayName": "Ledger Green",
+        "canonical": "#44A282",
+        "purpose": "Ledger Green hue: glyphs and chart lines.",
         "tonalRamp": [
-          "#0A0C08",
-          "#242622",
-          "#41433F",
-          "#60625E",
-          "#81837E",
-          "#A3A6A1",
-          "#C7CAC5",
-          "#EDEFEA"
+          "#010F09",
+          "#052C20",
+          "#054E3A",
+          "#187257",
+          "#369676",
+          "#5DBA99",
+          "#83DFBC",
+          "#C4FEE6"
         ]
       },
-      "land-deep": {
-        "role": "secondary",
-        "displayName": "Deep Land",
-        "canonical": "oklch(37.3% 0.078 138)",
+      "positive-ink": {
+        "role": "status",
+        "displayName": "Ledger Green Ink",
+        "canonical": "#5FC39C",
+        "purpose": "Ledger Green words: pill labels, answer word, gutter status words.",
         "tonalRamp": [
-          "#030F00",
-          "#172B10",
-          "#314A28",
-          "#4D6B43",
-          "#6C8E60",
-          "#90B085",
-          "#B6D3AC",
-          "#DEF8D5"
+          "#000F08",
+          "#022D1F",
+          "#0D4E39",
+          "#0B7353",
+          "#2D9772",
+          "#57BB94",
+          "#7DE0B8",
+          "#C1FFE3"
         ]
       },
-      "coral-deep": {
-        "role": "secondary",
-        "displayName": "Deep Coral",
-        "canonical": "oklch(34.1% 0.078 29)",
+      "positive-tint": {
+        "role": "status",
+        "displayName": "Ledger Green Tint",
+        "canonical": "#1B2828",
+        "purpose": "Ledger Green pill ground.",
         "tonalRamp": [
-          "#1B0302",
-          "#3B1A15",
-          "#5F342F",
-          "#85514A",
-          "#AC7068",
-          "#CD958C",
-          "#EFBBB3",
-          "#FFE2DA"
+          "#030D0E",
+          "#1B2828",
+          "#374545",
+          "#566564",
+          "#778686",
+          "#99A9A9",
+          "#BDCDCD",
+          "#E2F2F2"
         ]
       },
-      "sun-deep": {
-        "role": "secondary",
-        "displayName": "Deep Sun",
-        "canonical": "oklch(37.5% 0.065 93)",
+      "positive-hl": {
+        "role": "status",
+        "displayName": "Ledger Green Highlight",
+        "canonical": "#204139",
+        "purpose": "Evidence span fill on the selected rule only; text on it is always --text.",
+        "tonalRamp": [
+          "#000F0B",
+          "#092C24",
+          "#284941",
+          "#476960",
+          "#688B81",
+          "#8AAEA4",
+          "#AED3C8",
+          "#D2F8ED"
+        ]
+      },
+      "warning": {
+        "role": "status",
+        "displayName": "Docket Amber",
+        "canonical": "#D9A441",
+        "purpose": "Docket Amber hue: glyphs and chart lines.",
+        "tonalRamp": [
+          "#120900",
+          "#322204",
+          "#573D03",
+          "#7D5A13",
+          "#A7791C",
+          "#CF9B36",
+          "#F5BF5F",
+          "#FFECCD"
+        ]
+      },
+      "warning-ink": {
+        "role": "status",
+        "displayName": "Docket Amber Ink",
+        "canonical": "#D9A441",
+        "purpose": "Docket Amber words: pill labels, answer word, gutter status words.",
+        "tonalRamp": [
+          "#120900",
+          "#322204",
+          "#573D03",
+          "#7D5A13",
+          "#A7791C",
+          "#CF9B36",
+          "#F5BF5F",
+          "#FFECCD"
+        ]
+      },
+      "warning-tint": {
+        "role": "status",
+        "displayName": "Docket Amber Tint",
+        "canonical": "#2A2416",
+        "purpose": "Docket Amber pill ground.",
+        "tonalRamp": [
+          "#100A01",
+          "#2A2416",
+          "#484132",
+          "#676151",
+          "#898271",
+          "#ACA493",
+          "#D0C8B7",
+          "#F6EEDB"
+        ]
+      },
+      "warning-hl": {
+        "role": "status",
+        "displayName": "Docket Amber Highlight",
+        "canonical": "#413720",
+        "purpose": "Evidence span fill on the selected rule only; text on it is always --text.",
         "tonalRamp": [
           "#110A00",
-          "#2D2407",
-          "#4B4120",
-          "#6D6139",
-          "#908255",
-          "#B1A57C",
-          "#D4C9A4",
-          "#F9EECD"
+          "#2D240D",
+          "#4B4129",
+          "#6B6048",
+          "#8C8168",
+          "#B0A48A",
+          "#D4C8AD",
+          "#FAEDD1"
         ]
       },
-      "pond-deep": {
-        "role": "secondary",
-        "displayName": "Deep Pond",
-        "canonical": "oklch(33.5% 0.059 241)",
+      "negative": {
+        "role": "status",
+        "displayName": "Denial Red",
+        "canonical": "#E5566F",
+        "purpose": "Red glyphs, chart lines, the VOID edge and strike, the late tick.",
         "tonalRamp": [
-          "#000D18",
-          "#112737",
-          "#2B4559",
-          "#46657D",
-          "#6387A2",
-          "#89AAC3",
-          "#AFCEE5",
-          "#D8F3FF"
+          "#1D0105",
+          "#4B0116",
+          "#7C0A2B",
+          "#AE1E43",
+          "#D74963",
+          "#F87588",
+          "#FBB3B9",
+          "#FEE8EA"
+        ]
+      },
+      "negative-ink": {
+        "role": "status",
+        "displayName": "Denial Red Ink",
+        "canonical": "#E5566F",
+        "purpose": "Denial Red words: pill labels, answer word, gutter status words.",
+        "tonalRamp": [
+          "#1D0105",
+          "#4B0116",
+          "#7C0A2B",
+          "#AE1E43",
+          "#D74963",
+          "#F87588",
+          "#FBB3B9",
+          "#FEE8EA"
+        ]
+      },
+      "negative-tint": {
+        "role": "status",
+        "displayName": "Denial Red Tint",
+        "canonical": "#2C1A20",
+        "purpose": "Denial Red pill ground.",
+        "tonalRamp": [
+          "#15060B",
+          "#311F25",
+          "#503B42",
+          "#705A61",
+          "#927B82",
+          "#B69EA5",
+          "#DBC1C9",
+          "#FFE7EE"
+        ]
+      },
+      "negative-hl": {
+        "role": "status",
+        "displayName": "Denial Red Highlight",
+        "canonical": "#48232C",
+        "purpose": "Evidence span fill on the selected rule only; text on it is always --text.",
+        "tonalRamp": [
+          "#1D0108",
+          "#3B1821",
+          "#5C353E",
+          "#7D545C",
+          "#A1747D",
+          "#C597A0",
+          "#EBBAC4",
+          "#FEE8EC"
         ]
       }
     },
     "typographyMeta": {
-      "display": {
-        "displayName": "Display",
-        "purpose": "The verdict word on the verdict field only; 50px below 760px."
+      "answer": {
+        "displayName": "Answer",
+        "purpose": "The coloured case and check answer word with its 24px glyph; a paragraph, not the h1. 24/32 on phone."
       },
-      "display-figure": {
-        "displayName": "Display figure",
-        "purpose": "Days left on the verdict field; same voice at 48px for worklist counts and 28px in due lobes. Underlined when the deadline is soon."
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Deadline and earliest-date figures. 24/32 on phone."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Page titles; 34px below 760px."
+        "purpose": "List-page h1."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Sheet heads and section heads."
+        "purpose": "Case h1 (breadcrumb current item), card and sheet titles, gate title, letter h3."
+      },
+      "reading": {
+        "displayName": "Reading",
+        "purpose": "Policy sentences, chart notes, the letter; 72ch measure."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Interface text and tables, tabular figures on."
-      },
-      "body-reading": {
-        "displayName": "Body reading",
-        "purpose": "Source sheets, 72ch per paragraph."
+        "purpose": "Body, cells, nav, why-line."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Field labels and column heads, sentence case, normal tracking."
+        "purpose": "Buttons, tabs, form labels, rule summaries, patient names."
       },
-      "status": {
-        "displayName": "Status",
-        "purpose": "Status capsules and counts."
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Sublines, table headers, context and meta lines, coverage labels."
+      },
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "Pills, gutter IDs and status words, timeline labels, legal footer; VOID at 600. The floor."
+      },
+      "id": {
+        "displayName": "Mono ID",
+        "purpose": "Sentence addresses, policy IDs, claim codes, case/chart/note IDs only; inherits its line size."
       }
     },
-    "shadows": [
-      {
-        "name": "hairline-outline",
-        "value": "inset 0 0 0 1px var(--line)",
-        "purpose": "Outline for cards, sheets, board, tab track, strip and resting filters; replaces borders."
-      },
-      {
-        "name": "strong-outline",
-        "value": "inset 0 0 0 1.5px var(--line-2)",
-        "purpose": "Ghost capsules; inputs use 1px line-2."
-      },
-      {
-        "name": "focus-field",
-        "value": "inset 0 0 0 2px var(--land)",
-        "purpose": "Focused input and appeal editor."
-      },
-      {
-        "name": "selected-ring",
-        "value": "inset 0 0 0 2px var(--text)",
-        "purpose": "Selected rule card."
-      },
-      {
-        "name": "highlight-hot",
-        "value": "0 0 0 2px var(--cb)",
-        "purpose": "Ring in a highlight's own bright colour when its rule is hovered."
-      },
-      {
-        "name": "row-focus",
-        "value": "inset 0 0 0 2px var(--pond)",
-        "purpose": "Board row whose patient link has keyboard focus."
-      },
-      {
-        "name": "focus-ring",
-        "value": "outline: 2px solid var(--pond); outline-offset: 2px",
-        "purpose": "Global :focus-visible."
-      }
-    ],
+    "shadows": [],
+    "elevation": "Flat: tone step plus 1px border; no shadows anywhere.",
     "motion": [
       {
-        "name": "overshoot",
-        "value": "cubic-bezier(.34, 1.56, .64, 1)",
-        "purpose": "0.4s, small transforms only: button chip slide, press scale, filter chip crossing, area and chip lifts, disclosure chevron; and the coastline path morph."
+        "name": "ease",
+        "value": "cubic-bezier(.2, 0, 0, 1)",
+        "purpose": "The one curve, feedback only."
       },
       {
-        "name": "ease-out",
-        "value": "cubic-bezier(.16, 1, .3, 1)",
-        "purpose": "0.4s for the verdict field recolour and the highlight sweep; 0.25s for the tab fill."
+        "name": "t",
+        "value": "120ms",
+        "purpose": "Colour, background, outline and text-decoration-colour transitions; the chevron rotation."
       },
       {
-        "name": "hover-fade",
-        "value": "0.2s (default ease)",
-        "purpose": "Colour, background, outline and opacity changes on hover."
+        "name": "chevron",
+        "value": "transform: rotate(90deg)",
+        "purpose": "Disclosure open state; the only animated transform."
       },
       {
-        "name": "reduced-motion",
-        "value": "@media (prefers-reduced-motion: reduce) { animation: none; transition: none }",
-        "purpose": "Everything stops; highlights render in their final swept state; scroll-to-rule uses behavior auto."
+        "name": "reduced",
+        "value": "prefers-reduced-motion: reduce -> transition/animation none, scroll-behavior auto",
+        "purpose": "Turns all motion off."
       }
     ],
+    "focus": {
+      "value": "outline: 2px solid var(--focus); outline-offset: 2px",
+      "note": "--focus and --select are ink (--text); text selection is ink on --control."
+    },
     "breakpoints": [
       {
-        "name": "stack",
+        "name": "tablet",
         "value": "1100px",
-        "purpose": "max-width: workspace and appeal grids become one column; gate unsticks."
+        "note": "Sidebar becomes a 48px top bar; grids to one column."
       },
       {
-        "name": "compact",
+        "name": "narrow",
         "value": "760px",
-        "purpose": "max-width: rail becomes an icon-only top bar, verdict field one column with 50px monuments, areas two per row, strip 2 by 2, board hides reason."
+        "note": "Verdict line stacks; coverage 2x2; gutter 64px."
+      },
+      {
+        "name": "phone",
+        "value": "640px",
+        "note": "Bottom bar, 16px gutters, tables become items."
+      }
+    ],
+    "glyphs": {
+      "grid": "24px, fill none, round caps/joins; stroke 2 at 12-16px, 2.25 at 24px, 1.5 nav",
+      "set": [
+        "check",
+        "cross",
+        "half",
+        "pause",
+        "return",
+        "slash",
+        "dash",
+        "tick-and-tie",
+        "lock",
+        "chevron",
+        "download",
+        "copy",
+        "play"
+      ],
+      "status": {
+        "met": "pos/check/Supports",
+        "not_met": "neg/cross/Blocks",
+        "missing_documentation": "warn/half/Missing docs",
+        "not_applicable": "quiet/dash/Not applicable",
+        "route": "quiet/dash/Route not used"
+      },
+      "verdict": {
+        "appeal": "pos/check",
+        "doc_request": "warn/half",
+        "dont_appeal": "neg/pause",
+        "fix_checklist": "fill/return",
+        "not_winnable": "quiet/slash"
+      },
+      "ready": {
+        "ready": "pos/check",
+        "add_documentation": "warn/half",
+        "not_yet": "neg/pause",
+        "doesnt_qualify": "quiet/slash"
+      },
+      "gate": {
+        "pass": "ver/tick-and-tie",
+        "fail": "neg/cross"
+      }
+    },
+    "lint": {
+      "avoid": [
+        "The only text on any `-hl` tint is `--text`.",
+        "`--negative` text goes only on `--ground`, `--surface` or `--negative-tint`.",
+        "`--faint` never goes on anything lighter than #2A2A2E.",
+        "#8A8C92 and #FFF are never used for text.",
+        "No hue doubles as focus, selection or text selection."
+      ],
+      "gate": "inspect.mjs --app 0 FAIL / 0 WARN on nine screens; lint.mjs --app 0 FAIL, warnings for mono IDs and missing-value dashes only (reported at handoff)."
+    },
+    "fonts": [
+      {
+        "family": "Public Sans",
+        "file": "web/fonts/public-sans-latin-wght-normal.woff2",
+        "weights": "100 900 (used 400/500/600)",
+        "license": "OFL"
+      },
+      {
+        "family": "IBM Plex Mono",
+        "file": "web/fonts/ibm-plex-mono-latin-400-normal.woff2",
+        "weights": "400",
+        "license": "OFL"
       }
     ]
   },
   "components": [
     {
-      "name": "Primary Capsule",
+      "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Primary action: land capsule with a round ink chip on the trailing edge carrying the action's icon.",
-      "html": "<button class=\"ds-btn\">Export letter<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 4v11M7 10l5 5 5-5M5 20h14\"/></svg></button> <button class=\"ds-btn\" disabled>Export letter<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 4v11M7 10l5 5 5-5M5 20h14\"/></svg></button>",
-      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 12px; border: 0; background: var(--land, #8ED462); color: var(--ink, #1B1D1A); border-radius: 999px; padding: 6px 6px 6px 20px; min-height: 44px; font: 650 15px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; cursor: pointer; transition: transform .4s cubic-bezier(.34, 1.56, .64, 1), opacity .2s; } .ds-btn svg { order: 2; width: 32px; height: 32px; padding: 8px; box-sizing: border-box; border-radius: 50%; background: var(--ink, #1B1D1A); fill: none; stroke: var(--text, #F5F1E4); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .4s cubic-bezier(.34, 1.56, .64, 1); } .ds-btn:hover:not([disabled]) svg { transform: translateX(3px); } .ds-btn:active:not([disabled]) { transform: scale(.97); } .ds-btn:focus-visible { outline: 2px solid var(--pond, #4FA6E3); outline-offset: 2px; } .ds-btn[disabled] { opacity: .38; cursor: not-allowed; }"
+      "description": "The one inverted-ink action per screen.",
+      "html": "<button class=\"ds-btn ds-btn-primary\"><svg class=\"ds-g\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 4v11M7 10l5 5 5-5M5 20h14\"/></svg>Export letter</button>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; gap:8px; min-height:36px; padding:8px 16px; border:0; border-radius:999px; font:500 14px/20px var(--font, \"Public Sans\", Inter, system-ui, sans-serif); cursor:pointer; transition: background-color 120ms cubic-bezier(.2,0,0,1), color 120ms cubic-bezier(.2,0,0,1), outline-color 120ms cubic-bezier(.2,0,0,1); } .ds-btn-primary { background:var(--primary, #EDEDEF); color:var(--primary-ink, #171719); } .ds-btn-primary:hover { background:var(--primary-hover, #FFFFFF); } .ds-btn-primary:active { background:var(--primary-press, #D6D6DA); } .ds-btn:focus-visible { outline: 2px solid var(--focus, #EDEDEF); outline-offset: 2px; }"
     },
     {
-      "name": "Ghost Capsule",
+      "name": "Secondary Button",
       "kind": "button",
-      "refersTo": "button-ghost",
-      "description": "Secondary action: outlined capsule with a leading icon and no chip.",
-      "html": "<button class=\"ds-ghost\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M15 6l-6 6 6 6\"/></svg>Worklist</button>",
-      "css": ".ds-ghost { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; color: var(--text, #F5F1E4); border-radius: 999px; padding: 6px 18px 6px 12px; min-height: 40px; box-shadow: inset 0 0 0 1.5px var(--line-2, #3B4236); font: 650 15px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; cursor: pointer; transition: box-shadow .2s; } .ds-ghost svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .4s cubic-bezier(.34, 1.56, .64, 1); } .ds-ghost:hover { box-shadow: inset 0 0 0 1.5px var(--text-2, #C8C6B8); } .ds-ghost:hover svg { transform: translateX(-2px); } .ds-ghost:focus-visible { outline: 2px solid var(--pond, #4FA6E3); outline-offset: 2px; }"
+      "refersTo": "button-secondary",
+      "description": "Every other action: transparent with a 1px inset outline.",
+      "html": "<button class=\"ds-btn ds-btn-secondary\">Open the fix checklist</button>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; gap:8px; min-height:36px; padding:8px 16px; border:0; border-radius:999px; font:500 14px/20px var(--font, \"Public Sans\", Inter, system-ui, sans-serif); cursor:pointer; transition: background-color 120ms cubic-bezier(.2,0,0,1), color 120ms cubic-bezier(.2,0,0,1), outline-color 120ms cubic-bezier(.2,0,0,1); } .ds-btn-secondary { background:transparent; color:var(--text, #EDEDEF); outline:1px solid var(--control, #3A3A3E); outline-offset:-1px; } .ds-btn-secondary:hover { background:var(--raised, #212023); } .ds-btn:focus-visible { outline: 2px solid var(--focus, #EDEDEF); outline-offset: 2px; }"
     },
     {
-      "name": "Status Capsules",
+      "name": "Export Locked",
+      "kind": "button",
+      "refersTo": "button-locked",
+      "description": "A locked action: aria-disabled, focusable, with its reason beneath.",
+      "html": "<div class=\"ds-export\"><button class=\"ds-btn ds-btn-locked\" aria-disabled=\"true\" aria-describedby=\"ds-why\"><svg class=\"ds-g\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"9\" rx=\"2\"/><path d=\"M8.5 11V8a3.5 3.5 0 0 1 7 0v3\"/></svg>Export locked</button><p id=\"ds-why\" class=\"ds-why\">Fix or remove the 1 quote marked VOID, then export opens.</p></div>",
+      "css": ".ds-export { display:grid; gap:8px; justify-items:start; font-family: var(--font, \"Public Sans\", Inter, system-ui, sans-serif); } .ds-btn { display:inline-flex; align-items:center; gap:8px; min-height:36px; padding:8px 16px; border:0; border-radius:999px; font:500 14px/20px var(--font, \"Public Sans\", Inter, system-ui, sans-serif); } .ds-btn-locked { background:var(--raised, #212023); color:var(--faint, #94949B); cursor:not-allowed; } .ds-btn:focus-visible { outline: 2px solid var(--focus, #EDEDEF); outline-offset: 2px; } .ds-why { margin:0; font-size:13px; line-height:18px; color:var(--text, #EDEDEF); }"
+    },
+    {
+      "name": "Status Pills",
       "kind": "chip",
-      "refersTo": "status-capsule-supports",
-      "description": "Colour plus word, never colour alone; VOID marks a quote not found in any fetched source.",
-      "html": "<span class=\"ds-mark ds-met\">Supports</span> <span class=\"ds-mark ds-not\">Blocks</span> <span class=\"ds-mark ds-miss\">Missing docs</span> <span class=\"ds-mark ds-na\">Not applicable</span> <span class=\"ds-mark ds-pond\">Fix &amp; resubmit</span> <span class=\"ds-mark ds-lilac\">Not winnable</span> <span class=\"ds-void\">VOID</span>",
-      "css": ".ds-mark { --c: var(--stone, #2F352B); display: inline-flex; align-items: center; gap: 7px; padding: 3px 11px 3px 9px; border-radius: 999px; background: var(--c); color: var(--ink, #1B1D1A); font: 650 12.5px/1.35 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; white-space: nowrap; } .ds-mark::before { content: \"\"; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .75; } .ds-met { --c: var(--land, #8ED462); } .ds-not { --c: var(--coral, #FF6B5A); } .ds-miss { --c: var(--sun, #FFD23F); } .ds-pond { --c: var(--pond, #4FA6E3); } .ds-lilac { --c: var(--lilac, #EBC1FF); } .ds-na { color: var(--text-2, #C8C6B8); } .ds-void { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--coral, #FF6B5A); color: var(--ink, #1B1D1A); font: 800 11px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; letter-spacing: .04em; }"
-    },
-    {
-      "name": "Filter Capsules",
-      "kind": "chip",
-      "refersTo": "filter-capsule",
-      "description": "Filters: the round chip rides the trailing edge and crosses to the leading edge when the filter is live.",
-      "html": "<div class=\"ds-seg\"><button aria-pressed=\"true\" style=\"--c: #8ED462\">Appeal <span class=\"n\">4</span></button><button aria-pressed=\"false\" style=\"--c: #FFD23F\">Ask the physician <span class=\"n\">2</span></button></div>",
-      "css": ".ds-seg { display: inline-flex; gap: 6px; flex-wrap: wrap; } .ds-seg button { --c: var(--text-2, #C8C6B8); position: relative; border: 0; background: var(--surface, #191D17); box-shadow: inset 0 0 0 1px var(--line, #2C3228); color: var(--text-2, #C8C6B8); padding: 8px 32px; border-radius: 999px; cursor: pointer; font: 600 15px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; transition: background .2s, color .2s, box-shadow .2s; } .ds-seg button::after { content: \"\"; position: absolute; top: 50%; left: calc(100% - 21px); width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%; background: var(--c); transition: left .4s cubic-bezier(.34, 1.56, .64, 1), background .2s; } .ds-seg .n { font-size: 12.5px; color: var(--text-3, #9C9A8C); } .ds-seg button:hover { color: var(--text, #F5F1E4); box-shadow: inset 0 0 0 1px var(--line-2, #3B4236); } .ds-seg button:focus-visible { outline: 2px solid var(--pond, #4FA6E3); outline-offset: 2px; } .ds-seg button[aria-pressed=\"true\"] { background: var(--c); color: var(--ink, #1B1D1A); box-shadow: none; } .ds-seg button[aria-pressed=\"true\"]::after { left: 13px; background: var(--ink, #1B1D1A); } .ds-seg button[aria-pressed=\"true\"] .n { color: var(--ink-2, #2C2E2A); }"
-    },
-    {
-      "name": "Tab Track",
-      "kind": "nav",
-      "refersTo": "tab-track",
-      "description": "Source tabs as a capsule track; the selected tab fills cream.",
-      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button role=\"tab\" aria-selected=\"true\">Policy</button><button role=\"tab\" aria-selected=\"false\">Chart notes</button><button role=\"tab\" aria-selected=\"false\">Letter</button><button role=\"tab\" aria-selected=\"false\">Next step</button></div>",
-      "css": ".ds-tabs { display: inline-flex; gap: 2px; padding: 4px; background: var(--surface, #191D17); border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line, #2C3228); } .ds-tabs button { background: none; border: 0; padding: 8px 16px; border-radius: 999px; font: 600 15px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; color: var(--text-3, #9C9A8C); cursor: pointer; transition: background .25s cubic-bezier(.16, 1, .3, 1), color .2s; } .ds-tabs button:hover { color: var(--text, #F5F1E4); } .ds-tabs button:focus-visible { outline: 2px solid var(--pond, #4FA6E3); outline-offset: 2px; } .ds-tabs button[aria-selected=\"true\"] { color: var(--ink, #1B1D1A); background: var(--text, #F5F1E4); }"
+      "refersTo": "pill-positive",
+      "description": "Hue on its own dark tint, always with a glyph and a word; two neutrals, filled and outlined; the blue pill is the gate pass only.",
+      "html": "<div class=\"ds-row\"><span class=\"ds-mark ds-pos\"><svg class=\"ds-g\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12.5l4.5 4.5L19 7.5\"/></svg>Supports</span><span class=\"ds-mark ds-warn\"><svg class=\"ds-g\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"7.5\"/><path d=\"M12 4.5a7.5 7.5 0 0 0 0 15z\" fill=\"currentColor\" stroke=\"none\"/></svg>Missing docs</span><span class=\"ds-mark ds-neg\"><svg class=\"ds-g\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 7l10 10M17 7L7 17\"/></svg>Blocks</span><span class=\"ds-mark ds-fill\"><svg class=\"ds-g\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 7l-5 5 5 5M5 12h9.5a4.5 4.5 0 0 0 0-9H12\"/></svg>Fix &amp; resubmit</span><span class=\"ds-mark ds-quiet\"><svg class=\"ds-g\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"7.5\"/><path d=\"M6.7 17.3L17.3 6.7\"/></svg>Not winnable</span><span class=\"ds-mark ds-ver\"><svg class=\"ds-g\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 12.5l3.5 3.5L14 9.5M15.5 16h4.5\"/></svg>6 of 6 match their source</span></div>",
+      "css": ".ds-row { display:flex; flex-wrap:wrap; gap:8px; } .ds-mark { display:inline-flex; align-items:center; gap:6px; height:22px; padding:0 10px 0 8px; border-radius:999px; font:500 12px/1 var(--font, \"Public Sans\", Inter, system-ui, sans-serif); white-space:nowrap; } .ds-pos { background:var(--positive-tint, #1B2828); color:var(--positive-ink, #5FC39C); } .ds-warn { background:var(--warning-tint, #2A2416); color:var(--warning-ink, #D9A441); } .ds-neg { background:var(--negative-tint, #2C1A20); color:var(--negative-ink, #E5566F); } .ds-fill { background:var(--raised-2, #2A2A2E); color:var(--text, #EDEDEF); } .ds-quiet { background:transparent; color:var(--muted, #B4B4BA); border:1px solid var(--control, #3A3A3E); padding:0 9px 0 7px; } .ds-ver { background:var(--verified-tint, #172430); color:var(--verified, #8EC5E8); }"
     },
     {
       "name": "Text Field",
       "kind": "input",
       "refersTo": "input",
-      "description": "Ground well with a hairline outline that turns 2px land on focus.",
-      "html": "<label class=\"ds-field\"><span>Passcode</span><input class=\"ds-input\" placeholder=\"Enter passcode\"></label>",
-      "css": ".ds-field { display: grid; gap: 7px; font: 600 13px/1.4 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; color: var(--text-2, #C8C6B8); } .ds-input { border: 0; box-shadow: inset 0 0 0 1px var(--line-2, #3B4236); background: var(--ground, #111410); color: var(--text, #F5F1E4); border-radius: 12px; padding: 11px 14px; font: 400 15px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; caret-color: var(--land, #8ED462); transition: box-shadow .2s; } .ds-input::placeholder { color: var(--text-3, #9C9A8C); } .ds-input:focus { outline: none; box-shadow: inset 0 0 0 2px var(--land, #8ED462); }"
+      "description": "40px field with a 3:1 edge and the ink focus ring.",
+      "html": "<label class=\"ds-field\"><span>Passcode</span><input class=\"ds-input\" placeholder=\"Enter the demo passcode\"></label>",
+      "css": ".ds-field { display:grid; gap:8px; font-family: var(--font, \"Public Sans\", Inter, system-ui, sans-serif); font-size:14px; line-height:20px; color:var(--text, #EDEDEF); } .ds-field span { font-weight:500; } .ds-input { height:40px; padding:0 12px; border:1px solid var(--field, #6A6A72); border-radius:6px; background:var(--ground, #171719); color:var(--text, #EDEDEF); font:inherit; } .ds-input::placeholder { color:var(--faint, #94949B); } .ds-input:focus-visible { outline: 2px solid var(--focus, #EDEDEF); outline-offset: 2px; }"
     },
     {
-      "name": "Evidence Highlight",
+      "name": "Sidebar Nav",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Labelled 224px rail; current item in ink with a 2px ink segment on the right rule.",
+      "html": "<nav class=\"ds-rail\"><a class=\"ds-brand\" href=\"#\"><svg class=\"ds-bm\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 12.5l3.5 3.5L14 9.5M15.5 16h4.5\"/></svg><b>Denial Auditor</b></a><a class=\"ds-nav\" aria-current=\"page\" href=\"#\">Worklist<span class=\"ds-n\">28</span></a><a class=\"ds-nav\" href=\"#\">Before you submit</a><a class=\"ds-nav\" href=\"#\">How it works</a></nav>",
+      "css": ".ds-rail { width:224px; display:flex; flex-direction:column; gap:2px; padding:20px 12px; background:var(--ground, #171719); border-right:1px solid var(--rule, #222224); font-family: var(--font, \"Public Sans\", Inter, system-ui, sans-serif); font-size:14px; line-height:20px; } .ds-brand { display:flex; gap:10px; align-items:center; padding:0 8px 22px; color:var(--text, #EDEDEF); text-decoration:none; } .ds-bm { color:var(--verified, #8EC5E8); } .ds-nav { position:relative; display:flex; align-items:center; height:32px; padding:0 8px; border-radius:6px; color:var(--muted, #B4B4BA); text-decoration:none; transition:color 120ms cubic-bezier(.2,0,0,1); } .ds-nav:hover, .ds-nav[aria-current=\"page\"] { color:var(--text, #EDEDEF); } .ds-nav[aria-current=\"page\"]::after { content:\"\"; position:absolute; right:-13px; top:6px; bottom:6px; width:2px; background:var(--text, #EDEDEF); } .ds-nav:focus-visible { outline: 2px solid var(--focus, #EDEDEF); outline-offset: 2px; } .ds-n { margin-left:auto; font-size:12px; line-height:16px; color:var(--faint, #94949B); }"
+    },
+    {
+      "name": "Worklist Table",
       "kind": "custom",
-      "refersTo": "sheet",
-      "description": "Two-tone flat highlight: deep land with cream text at rest; bright land sweeps left to right with ink text for the selected rule.",
-      "html": "<p class=\"ds-sheet\">The patient has <span class=\"ds-hl ds-hl-met\">six weeks of conservative therapy</span> and <span class=\"ds-hl ds-hl-miss ds-sweep\">no documented neurological deficit</span>.</p>",
-      "css": ".ds-sheet { background: var(--surface, #191D17); color: var(--text, #F5F1E4); border-radius: 22px; box-shadow: inset 0 0 0 1px var(--line, #2C3228); padding: 26px 40px; font: 400 16px/1.7 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; max-width: 72ch; } .ds-hl { --c: var(--stone, #2F352B); --cb: var(--line-2, #3B4236); padding: .04em .22em; border-radius: 5px; color: var(--text, #F5F1E4); background: linear-gradient(var(--cb), var(--cb)) 0 0 / 0% 100% no-repeat, linear-gradient(var(--c), var(--c)); -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: box-shadow .2s; } .ds-hl-met { --c: var(--land-deep, #2B4A1F); --cb: var(--land, #8ED462); } .ds-hl-miss { --c: var(--sun-deep, #4D4012); --cb: var(--sun, #FFD23F); } .ds-hl:hover { box-shadow: 0 0 0 2px var(--cb); } .ds-sweep { color: var(--ink, #1B1D1A); background-size: 100% 100%, 100% 100%; animation: ds-sweep .4s cubic-bezier(.16, 1, .3, 1) both; } @keyframes ds-sweep { from { background-size: 0% 100%, 100% 100%; color: var(--text, #F5F1E4); } 55% { color: var(--ink, #1B1D1A); } to { background-size: 100% 100%, 100% 100%; } } @media (prefers-reduced-motion: reduce) { .ds-sweep { animation: none; } }"
+      "refersTo": "table-row",
+      "description": "Rows on the ground with no card; hover is a 1px outline.",
+      "html": "<table class=\"ds-list\"><thead><tr><th>Patient</th><th>Recommendation</th><th>Due</th></tr></thead><tbody><tr><td><span class=\"ds-l1\">Maria Alvarez</span><span class=\"ds-l2\">Case <span class=\"ds-id\">015</span> · <span class=\"ds-id\">CPT 72148</span></span></td><td><span class=\"ds-mark ds-pos\"><svg class=\"ds-g\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12.5l4.5 4.5L19 7.5\"/></svg>Appeal</span></td><td class=\"ds-fig\"><b>40</b> <small>days</small></td></tr></tbody></table>",
+      "css": ".ds-list { width:100%; border-collapse:collapse; font-family: var(--font, \"Public Sans\", Inter, system-ui, sans-serif); font-size:14px; line-height:20px; font-variant-numeric:tabular-nums; } .ds-list th { padding:0 12px 8px; font-size:13px; line-height:18px; font-weight:400; color:var(--faint, #94949B); text-align:left; } .ds-list td { height:60px; padding:0 12px; border-top:1px solid var(--rule, #222224); color:var(--muted, #B4B4BA); } .ds-list tbody tr { outline:1px solid transparent; outline-offset:-1px; border-radius:6px; transition:outline-color 120ms cubic-bezier(.2,0,0,1); } .ds-list tbody tr:hover { outline-color:var(--control, #3A3A3E); } .ds-l1 { display:block; color:var(--text, #EDEDEF); font-weight:500; } .ds-l2 { display:block; font-size:13px; line-height:18px; color:var(--faint, #94949B); } .ds-id { font-family:var(--mono, \"IBM Plex Mono\", ui-monospace, monospace); font-size:inherit; } .ds-fig b { font-size:16px; font-weight:500; color:var(--text, #EDEDEF); } .ds-fig small { font-size:13px; color:var(--faint, #94949B); } .ds-mark { display:inline-flex; align-items:center; gap:6px; height:22px; padding:0 10px 0 8px; border-radius:999px; font:500 12px/1 inherit; background:var(--positive-tint, #1B2828); color:var(--positive-ink, #5FC39C); }"
     },
     {
-      "name": "Verdict Field",
+      "name": "Coverage Path",
       "kind": "custom",
-      "refersTo": "verdict-field-appeal",
-      "description": "Signature: a flat field in the verdict's land colour, verdict word and days-left figure in ink, lower edge a seeded SVG coastline in the ground colour that morphs between cases and tabs.",
-      "html": "<section class=\"ds-band\"><div class=\"ds-who\"><b>Synthetic patient</b> · Medicare Advantage (synthetic)</div><div class=\"ds-dec\"><h1>Appeal</h1><span class=\"ds-dl\"><b>23</b> days left</span></div><svg class=\"ds-coast\" viewBox=\"0 0 1200 72\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M0 22.0 C100 30.0 200 52.0 300 48.0 C400 44.0 500 12.0 600 14.0 C700 16.0 800 50.0 900 58.0 C1000 66.0 1100 30.0 1200 26.0 L1200 72 L0 72 Z\"/></svg></section>",
-      "css": ".ds-band { position: relative; background: var(--land, #8ED462); color: var(--ink, #1B1D1A); border-radius: 22px 22px 0 0; padding: 26px 30px 86px; font-family: \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; transition: background-color .4s cubic-bezier(.16, 1, .3, 1); } .ds-who { font-size: 13.5px; color: var(--ink-2, #2C2E2A); } .ds-who b { color: var(--ink, #1B1D1A); } .ds-dec { display: flex; align-items: flex-end; gap: 14px 34px; flex-wrap: wrap; margin-top: 14px; } .ds-dec h1 { margin: 0; font-size: 76px; font-weight: 800; letter-spacing: -.035em; line-height: .92; } .ds-dl { display: inline-flex; align-items: baseline; gap: 10px; color: var(--ink-2, #2C2E2A); font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; } .ds-dl b { font-size: 76px; font-weight: 800; letter-spacing: -.04em; line-height: .8; color: var(--ink, #1B1D1A); } .ds-coast { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 72px; display: block; } .ds-coast path { fill: var(--ground, #111410); transition: d .4s cubic-bezier(.34, 1.56, .64, 1); }"
+      "description": "Signature: the payer decision order as one ruled row of four stages with deciding addresses.",
+      "html": "<section class=\"ds-cov\"><div class=\"ds-cov-h\"><span>Coverage path</span><span>Decided by a fixed rule, not a model</span></div><ol><li><div class=\"ds-lab\">Route to coverage</div><div class=\"ds-res ds-ok\"><svg class=\"ds-g\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12.5l4.5 4.5L19 7.5\"/></svg>Met</div><div class=\"ds-refs\"><span class=\"ds-id\">S47</span></div></li><li><div class=\"ds-lab\">Waiting periods</div><div class=\"ds-res\"><span class=\"ds-mark\"><svg class=\"ds-g\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 6.5v11M15 6.5v11\"/></svg>Not yet</span></div><div class=\"ds-refs\"><span class=\"ds-id\">S52</span></div></li><li><div class=\"ds-lab\">Restrictions</div><div class=\"ds-res ds-ok\"><svg class=\"ds-g\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12.5l4.5 4.5L19 7.5\"/></svg>Clear</div><div class=\"ds-refs\"><span class=\"ds-id\">S89–92</span></div></li><li><div class=\"ds-lab\">Documentation</div><div class=\"ds-res ds-ok\"><svg class=\"ds-g\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12.5l4.5 4.5L19 7.5\"/></svg>Complete</div><div class=\"ds-refs\"><span class=\"ds-id\">S2–S46</span></div></li></ol></section>",
+      "css": ".ds-cov { font-family: var(--font, \"Public Sans\", Inter, system-ui, sans-serif); font-size:14px; line-height:20px; color:var(--text, #EDEDEF); } .ds-cov-h { display:flex; justify-content:space-between; font-size:13px; line-height:18px; color:var(--faint, #94949B); } .ds-cov ol { list-style:none; margin:8px 0 0; padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0 24px; border-top:1px solid var(--rule, #222224); border-bottom:1px solid var(--rule, #222224); } .ds-cov li { padding:12px 0; } .ds-lab { font-size:13px; line-height:18px; color:var(--faint, #94949B); } .ds-res { margin-top:6px; display:flex; align-items:center; gap:8px; font-weight:500; } .ds-cov li:not(:last-child) .ds-res::after { content:\"\"; flex:1; min-width:12px; height:1px; background:var(--control, #3A3A3E); } .ds-ok .ds-g { color:var(--positive, #44A282); } .ds-refs { margin-top:4px; font-size:13px; line-height:18px; color:var(--faint, #94949B); } .ds-id { font-family:var(--mono, \"IBM Plex Mono\", ui-monospace, monospace); font-size:inherit; } .ds-mark { display:inline-flex; align-items:center; gap:6px; height:22px; padding:0 10px 0 8px; border-radius:999px; font-size:12px; line-height:1; font-weight:500; background:var(--negative-tint, #2C1A20); color:var(--negative-ink, #E5566F); }"
     },
     {
-      "name": "Worklist Areas",
+      "name": "Policy Sentence and Evidence Span",
       "kind": "custom",
-      "refersTo": "worklist-area",
-      "description": "One organic lobe per verdict, width grown by its count; pressing one filters the board and the rest recede to night.",
-      "html": "<div class=\"ds-areas ds-filtered\"><button class=\"ds-area\" aria-pressed=\"true\" style=\"--c: #8ED462; flex-grow: 4\"><b>4</b><span>Appeal</span></button><button class=\"ds-area\" aria-pressed=\"false\" style=\"--c: #FFD23F; flex-grow: 2\"><b>2</b><span>Ask the physician</span></button><button class=\"ds-area\" aria-pressed=\"false\" style=\"--c: #FF6B5A; flex-grow: 1\"><b>1</b><span>Don't appeal yet</span></button></div>",
-      "css": ".ds-areas { display: flex; gap: 8px; flex-wrap: wrap; font-family: \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; } .ds-area { --c: var(--stone, #2F352B); flex: 1 1 0; min-width: 150px; min-height: 112px; border: 0; background: var(--c); color: var(--ink, #1B1D1A); text-align: left; padding: 16px 20px; display: grid; align-content: space-between; gap: 10px; cursor: pointer; border-radius: 30px 44px 34px 52px / 40px 30px 48px 32px; transition: transform .4s cubic-bezier(.34, 1.56, .64, 1), background .2s, color .2s; } .ds-area:nth-child(2) { border-radius: 48px 28px 54px 32px / 32px 46px 30px 50px; } .ds-area:nth-child(3) { border-radius: 36px 56px 30px 44px / 50px 32px 44px 30px; } .ds-area b { font-size: 48px; font-weight: 800; letter-spacing: -.04em; line-height: .85; } .ds-area span { font-weight: 650; font-size: 14.5px; } .ds-area:hover { transform: translateY(-3px); } .ds-area:active { transform: scale(.98); } .ds-area:focus-visible { outline: 2px solid var(--pond, #4FA6E3); outline-offset: 2px; } .ds-filtered .ds-area[aria-pressed=\"false\"] { background: var(--surface, #191D17); color: var(--text-2, #C8C6B8); box-shadow: inset 0 0 0 1px var(--line, #2C3228); } .ds-filtered .ds-area[aria-pressed=\"false\"] b { color: var(--c); }"
+      "refersTo": "evidence-supports",
+      "description": "Rule sentences rest in ink with a gutter status word; the -hl fill lands only on the selected rule.",
+      "html": "<div class=\"ds-sheet\"><p class=\"ds-sent\"><span class=\"ds-gut\"><span class=\"ds-id\">S47</span><b class=\"ds-w\">Supports</b></span><span><span class=\"ds-hl ds-on\">Six weeks of conservative therapy within the past six months</span> is required before advanced imaging.</span></p><p class=\"ds-sent ds-prose\"><span class=\"ds-gut\"><span class=\"ds-id\">S48</span></span><span>Background prose stays muted.</span></p></div>",
+      "css": ".ds-sheet { background:var(--surface, #131217); border:1px solid var(--border, #28282C); border-radius:6px; padding:24px 32px 24px 0; font-family: var(--font, \"Public Sans\", Inter, system-ui, sans-serif); } .ds-sent { display:grid; grid-template-columns:88px minmax(0,72ch); margin:0 0 8px; font-size:16px; line-height:26px; color:var(--text, #EDEDEF); } .ds-prose { color:var(--muted, #B4B4BA); } .ds-gut { display:grid; justify-items:end; align-content:start; gap:2px; padding:4px 16px 0 0; font-size:12px; line-height:16px; } .ds-gut .ds-id { color:var(--faint, #94949B); } .ds-w { font-weight:500; color:var(--positive-ink, #5FC39C); } .ds-id { font-family:var(--mono, \"IBM Plex Mono\", ui-monospace, monospace); font-size:inherit; } .ds-hl { color:var(--text, #EDEDEF); border-radius:3px; padding:2px; margin:0 -2px; text-underline-offset:5px; text-decoration-skip-ink:none; } .ds-hl.ds-on { background:var(--positive-hl, #204139); text-decoration:underline 2px var(--text, #EDEDEF); }"
     },
     {
-      "name": "Decision Strip",
-      "kind": "card",
-      "refersTo": "rule-card",
-      "description": "How it was decided: one flat strip split into stages by 1px hairlines, with a due lobe for the deadline.",
-      "html": "<ol class=\"ds-strip\"><li><span class=\"ds-h\">Triage</span><span class=\"ds-cap\">Supports</span><span class=\"ds-n\">CARC 50, clinical</span></li><li><span class=\"ds-h\">Policy</span><span class=\"ds-cap\">Supports</span><span class=\"ds-n\">L34220 in effect on the date of service</span></li><li><span class=\"ds-h\">Deadline</span><span class=\"ds-due\"><b>23</b><small>due 11/17/2026</small></span></li></ol>",
-      "css": ".ds-strip { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--surface, #191D17); border-radius: 22px; box-shadow: inset 0 0 0 1px var(--line, #2C3228); font-family: \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; color: var(--text, #F5F1E4); } .ds-strip li { padding: 14px 18px 16px; display: grid; gap: 8px; align-content: start; } .ds-strip li + li { border-left: 1px solid var(--line, #2C3228); } .ds-h { font-weight: 700; font-size: 13.5px; } .ds-n { font-size: 12px; color: var(--text-3, #9C9A8C); } .ds-cap { justify-self: start; padding: 3px 11px; border-radius: 999px; background: var(--land, #8ED462); color: var(--ink, #1B1D1A); font-weight: 650; font-size: 12px; } .ds-due { justify-self: start; display: inline-grid; gap: 4px; padding: 9px 13px; background: var(--land, #8ED462); color: var(--ink, #1B1D1A); border-radius: 20px 26px 22px 28px / 24px 20px 26px 22px; } .ds-due b { font-size: 28px; font-weight: 800; letter-spacing: -.04em; line-height: .9; } .ds-due small { font-size: 11.5px; font-weight: 600; color: var(--ink-2, #2C2E2A); }"
+      "name": "Verified Quote and VOID",
+      "kind": "custom",
+      "refersTo": "void-tag",
+      "description": "Letter quotes: a 1px blue rule and tick when verified; a tampered quote becomes VOID on a red tint pair, with Source says.",
+      "html": "<div class=\"ds-letter\"><figure class=\"ds-lq\"><blockquote>Imaging is reasonable after six weeks of conservative care.</blockquote><figcaption><svg class=\"ds-g\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 12.5l3.5 3.5L14 9.5M15.5 16h4.5\"/></svg><b>Verified</b> · matches <span class=\"ds-id\">L34220 v40 · S47</span></figcaption></figure><figure class=\"ds-lq ds-bad\"><blockquote><span class=\"ds-void\">VOID</span><span class=\"ds-struck\">Imaging is always covered.</span></blockquote><figcaption>not found in any fetched source</figcaption></figure></div>",
+      "css": ".ds-letter { font-family: var(--font, \"Public Sans\", Inter, system-ui, sans-serif); font-size:16px; line-height:26px; color:var(--text, #EDEDEF); } .ds-lq { margin:0 0 20px; } .ds-lq blockquote { margin:0; padding:2px 0 2px 15px; border-left:1px solid var(--verified, #8EC5E8); } .ds-lq figcaption { margin-top:6px; padding-left:16px; display:flex; align-items:center; gap:6px; font-size:12px; line-height:16px; color:var(--faint, #94949B); } .ds-lq figcaption svg, .ds-lq figcaption b { color:var(--verified, #8EC5E8); font-weight:500; } .ds-id { font-family:var(--mono, \"IBM Plex Mono\", ui-monospace, monospace); font-size:inherit; } .ds-bad blockquote { padding:12px 16px; border-left:0; border-radius:6px; background:var(--negative-tint, #2C1A20); } .ds-bad figcaption { padding-left:0; } .ds-void { display:inline-flex; align-items:center; height:20px; padding:0 7px; margin-right:8px; border-radius:999px; background:var(--negative-tint, #2C1A20); border:1px solid var(--negative, #E5566F); color:var(--negative-ink, #E5566F); font:600 12px/1 inherit; vertical-align:2px; } .ds-struck { color:var(--muted, #B4B4BA); text-decoration:line-through 1.5px var(--negative, #E5566F); }"
     }
   ],
   "narrative": {
-    "northStar": "The Guide Map, at Night",
-    "overview": "Every denial is an area on one map, and its verdict is the colour of the land. The system is a zoo-and-gardens guide map translated to dark: the map's cream water becomes a near-black ink-green ground, cream becomes the text, and the land keeps its flat, saturated colours. A biller reads the answer from the colour of a field before reading a word, then checks the evidence rule by rule against source documents set in the same single grotesk.\n\nColour is flat and unmodulated. There is no glow, grain or drop shadow; surfaces separate by tone and by 1px hairlines, and the big verdict field is divided from the dark ground by a drawn coastline rather than a border. Controls are capsules, and the primary capsule carries a round chip on its trailing edge. Small things that move take 0.4s and overshoot before they settle; colour changes ease out without overshoot.\n\nDensity is a working tool's density: a 232px rail, a rules column beside tabbed source sheets, and tables at 15px. The monumental type is reserved for two things only: the verdict word and the days-left figure.",
+    "northStar": "Blue pencil on the claims desk",
+    "overview": "A claims desk read in eight-hour sessions. The ground is neutral graphite, text is a soft ink rather than white, and two greys sit far apart so prose, sublines and labels separate without colour. Colour appears only where a rule has decided something: a status hue on its own dark tint, always paired with a glyph and a word. One more hue, the blue pencil, is the auditor's non-photo-blue tick: it appears on every line the code has checked against text fetched for this case, and nowhere else.\n\nThe system is a taste-skill-v2 data-terminal app style (seed 1818343043), redrawn for legibility: a labelled sidebar instead of an icon rail, 14/20 body instead of 13, a 1px border on cards instead of a shadow, and ink (not the hue) for selection and focus. Density is a working tool's density: 60px table rows, ruled groups rather than boxes, one primary action per screen in inverted ink.\n\nIt refuses the generated dashboard: no KPI tiles, saturated chips, neon on black, hero headers or large status-tint areas. Motion is feedback only.",
     "keyCharacteristics": [
-      "Five flat land colours, each bound to one verdict or status, on a near-black ink-green night ground.",
-      "Two tones per land: deep land with cream text at rest, bright land with ink text when selected or when the colour is the answer.",
-      "Colour always travels with its word (status capsules), never alone.",
-      "One grotesk (Hanken Grotesk, variable 100 to 900), tabular figures everywhere.",
-      "Coastlines and organic lobes divide; rectangles with borders do not.",
-      "Capsule controls with a round chip; 0.4s overshoot on small transforms only."
+      "Graphite ground, cards one tone step darker, every line 1px.",
+      "One hue, one meaning: blue pencil means \"verified against fetched text\".",
+      "Status is hue + glyph + word, on its own dark tint; never colour alone.",
+      "Public Sans for every word and figure; IBM Plex Mono for IDs only, at the size of its line.",
+      "Six type sizes, weights 400/500/600, sentence case, no tracked capitals.",
+      "Full-round controls and pills, 6px cards, one inverted-ink primary."
     ],
     "rules": [
       {
-        "name": "The One Meaning Rule",
-        "body": "Each land colour means one verdict and its matching rule status; never use a land colour as decoration or as a generic accent.",
+        "name": "The One Hue, One Meaning Rule",
+        "body": "Blue Pencil means \"checked by code against text fetched for this case\" and nothing else. It never marks selection, focus, buttons, tabs, nav, headings, links or the text-selection highlight. Selection lines and focus rings are ink; text selection is ink on Control grey (#3A3A3E).",
         "section": "colors"
       },
       {
-        "name": "The Colour-Plus-Word Rule",
-        "body": "A status colour always appears with its word (Supports, Blocks, Missing docs, Not applicable, Appeal, Don't appeal yet, Ask the physician, Fix & resubmit, Not winnable, VOID). Colour alone never carries a status.",
+        "name": "The Hue Plus Glyph Plus Word Rule",
+        "body": "A status is never a colour alone. Every pill, answer word, gutter status word and coverage stage carries its glyph and its word. The five verdicts differ by glyph, and the two neutrals differ by filled versus outlined.",
         "section": "colors"
       },
       {
-        "name": "The Ink-on-Land Rule",
-        "body": "Text on a bright land colour is ink; text on deep land or night is cream. Never put cream on bright land or ink on night.",
+        "name": "The Colour Only Where A Rule Decides Rule",
+        "body": "Colour sits only on the answer word and its glyph, pills, coverage glyphs and the holding stage's pill, gutter status words, evidence spans, the VOID block, chart marks, timeline bars, due-soon and overdue figures, the brand mark and verified ticks. Never on the ground, sidebar, nav, tabs, headings, buttons, links, borders, filters or table headers. Strongly coloured pixels stay under 3% of any first screen.",
         "section": "colors"
       },
       {
-        "name": "The Two Monuments Rule",
-        "body": "Only the verdict word and the days-left figure are set at display size; everything else stays at working size.",
+        "name": "The One Red Per Object Rule",
+        "body": "On a worklist row whose pill is red, the due figure stays ink. Due-soon and overdue colour applies only to actionable verdicts (Appeal, Ask the physician, Fix & resubmit); Not winnable figures are always Muted.",
+        "section": "colors"
+      },
+      {
+        "name": "The Six Sizes Rule",
+        "body": "28, 24, 16, 14, 13 and 12px, at weights 400, 500 and 600. Nothing at 700 or above, nothing under 12px.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono Is For IDs Rule",
+        "body": "IBM Plex Mono sets sentence addresses (S47), policy IDs (L34220 v40, CPB 0236), claim codes (CPT 72148, CARC 50) and case, chart and note IDs, always at `font-size: inherit` with tracking 0, so it takes the size of its line. Dates, days, money, citations, captions and prose are never mono. Mono stays under 15% of text.",
         "section": "typography"
       },
       {
         "name": "The Sentence Case Rule",
-        "body": "Labels and headings are sentence case at normal tracking. The only all-caps word in the system is the VOID capsule.",
+        "body": "Sentence case and zero tracking everywhere, apart from the two negative values above. VOID is the only uppercase word.",
         "section": "typography"
       },
       {
-        "name": "The Flat Land Rule",
-        "body": "Colour fills are flat: no gradients, glow, grain or drop shadow. Layered backgrounds exist only to drive the highlight sweep, and each layer is a single flat colour.",
+        "name": "The Border Or Nothing Rule",
+        "body": "A card gets a 1px border, never a shadow, and never both.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "Do bind every land colour to its verdict and status (land Appeal and Supports, coral Don't appeal yet and Blocks, sun Ask the physician and Missing docs, pond Fix & resubmit and verified quotes, lilac Not winnable).",
-      "Do pair every status colour with its word in a capsule.",
-      "Do keep findings on deep land with cream text and reserve the bright land with ink text for the selected rule and for fields where the colour is the answer.",
-      "Do divide the verdict field from the ground with a coastline, and divide strips and tables with 1px hairlines.",
-      "Do make controls capsules; give the primary a round chip on its trailing edge.",
-      "Do use the 0.4s overshoot (cubic-bezier(.34, 1.56, .64, 1)) only for small transforms and the coast morph, and ease-out (cubic-bezier(.16, 1, .3, 1)) for colour changes and the highlight sweep.",
-      "Do honour reduced motion: every animation and transition is switched off, the highlight lands in its final state, and scrolling to a rule jumps instead of smooth-scrolling.",
-      "Do lock export and mark VOID in coral whenever a quote does not match fetched text."
+      "**Do** put the Blue Pencil (#8EC5E8) tick-and-tie on every quote the code has verified against fetched text, and only there.",
+      "**Do** pair every status hue with its glyph and its word, on its own dark tint.",
+      "**Do** keep text on any `-hl` tint in `--text`, and fill a rule's spans only while that rule is selected.",
+      "**Do** keep exactly one inverted-ink primary per screen; locked actions use `aria-disabled` with the reason beside them.",
+      "**Do** set IDs in IBM Plex Mono at the inherited size, and everything else, figures included, in Public Sans with tabular numerals.",
+      "**Do** separate surfaces with a tone step and a 1px line; draw hover as a 1px Control outline.",
+      "**Do** keep motion at 120ms on `cubic-bezier(.2, 0, 0, 1)`, and off under reduced motion."
     ],
     "donts": [
-      "Don't use gradients, glow, grain or drop shadows on fills.",
-      "Don't put cream text on bright land, or ink text on night.",
-      "Don't let colour carry a status without its word.",
-      "Don't add a second typeface; the hierarchy is weight and size within Hanken Grotesk.",
-      "Don't set anything but the verdict word and days figure at display size.",
-      "Don't use uppercase letter-spaced labels; VOID is the only all-caps word.",
-      "Don't overshoot colour, layout or large surfaces; overshoot is for chips, lifts, presses and the coast."
+      "**Don't** use the blue for selection, focus, buttons, tabs, nav, headings, links or the text-selection highlight.",
+      "**Don't** put `--negative` text on anything but `--ground`, `--surface` or `--negative-tint`, or `--faint` on anything lighter than #2A2A2E.",
+      "**Don't** use #8A8C92 or #FFF for text.",
+      "**Don't** add shadows, left accent bars, large status-tint areas, KPI tiles, saturated chips or hero headers.",
+      "**Don't** colour headings, the h1, buttons, links, borders, nav, filters or table headers.",
+      "**Don't** use a sixth size outside 28/24/16/14/13/12, a weight above 600, tracked capitals or text under 12px.",
+      "**Don't** set dates, days, money, captions or prose in mono.",
+      "**Don't** animate position, scale or entrance; the chevron rotation is the only moving transform."
     ]
   }
 }

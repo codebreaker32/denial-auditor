@@ -5,26 +5,32 @@ primary_target: "web/index.html"
 related_targets: []
 ---
 
-# Surface brief: Denial Auditor web app (worklist, case, before you submit, live run)
+# Surface brief: Denial Auditor web app (worklist, case, before you submit, live run, how it works)
 
-Scope: the whole working app (worklist → case → appeal / next step; before you submit; live run; how it works). Visitor mode: **Operate**.
-Audience/job: a billing specialist at a small practice working a queue of imaging denials against deadlines; decide, gather evidence, act. Secondary: judges watching a sub-3-minute video.
-User answers (2026-10-25): disliked the photocopy look entirely; too much text; felt like a prototype; flow hard to follow; "looks like AI slop". Quality bar **Stripe / Mercury**. Theme **dark**.
-Constraints: synthetic data banner; CPT bare codes + AMA line; export locked until every quote verifies; a human sends.
-Build path: code-led (no image generation available).
+Scope: the whole working app. Visitor mode: **Operate**.
+Audience/job: a billing specialist at a small practice working a queue of imaging denials against deadlines, in long sessions; decide, gather evidence, act. Secondary: judges watching a sub-3-minute video.
+User asks (2026-10-25): "Remove AI slop using taste-skill-v2 and improve color choice"; earlier pins: dark, Stripe/Mercury quality bar, less text, a flow that is easy to follow. Standing rule: /impeccable for UI, taste-skill-v2 for anti-slop (app-screen rules, `lint.mjs --app`, `inspect.mjs --app`).
+Constraints: synthetic data banner; CPT bare codes + AMA line; export locked until every quote verifies; a person sends; status never by colour alone.
+Build path: code-led (no image generation). Critique reference: the panel's mock captures (scratchpad/mock-out/{case,worklist,appeal}/desktop-fold.jpg).
+Full spec: scratchpad/impeccable/final-spec.md (judge panel, 2026-10-25).
 
 ## Direction contract
 
-THESIS: Every denial is an area on one map, and its verdict is the colour of the land. The case opens on a single flat field of colour (green appeal, coral don't appeal yet, sun ask the physician, pond fix and resubmit, lilac not winnable) whose coastline does the dividing, so the answer is read before a word is. Refuses the category default: grey dashboard, KPI cards, a neon accent, and text-heavy cards.
+THESIS: A claims desk read in long sessions: neutral graphite, colour only where a rule decides, and one blue-pencil mark on every line the code has checked against its source. It refuses the generated dashboard (KPI tiles, saturated chips, neon on black, hero headers) and the previous guide-map field.
 
-OWN-WORLD: The guide-map palette translated to night (named translation: the map's cream water becomes a near-black ink-green ground, and cream becomes the text colour). Flat, unmodulated colour only, with no gradients, glow or grain: land #8ED462, coral #FF6B5A, sun #FFD23F, pond #4FA6E3, lilac #EBC1FF, ink #1B1D1A on colour. One grotesk (Hanken Grotesk); display bold at 0.95 leading and -0.05em; tabular figures. Controls are capsules; the primary capsule carries a round ink chip with an arrow on its trailing edge, and a selected filter's chip crosses to the leading edge. Everything that moves takes 0.4s and overshoots before settling.
+OWN-WORLD: The taste-skill data-terminal neutrals: #171719 ground, #131217 cards one step darker, #222224 rules, soft ink #EDEDEF, and two greys far apart (#B4B4BA, #94949B). Status is a hue on its own dark tint, always with a glyph and a word: green #5FC39C, amber #D9A441, red #E5566F, neutral filled, neutral outlined. The face is the blue pencil #8EC5E8, used only for "verified against fetched text". Public Sans throughout, IBM Plex Mono for IDs only, six sizes, weights up to 600. Full-round controls, 6px cards, and an inverted ink primary.
 
-STORY: The biller sees the board as coloured areas (counts per verdict that double as filters) and a table ranked by days left. They open a case and know the answer from the colour field. They check each rule (a capsule, one line, one quote) against the source, and export only when every quote verifies.
+STORY: The biller opens the worklist sorted by days left and reads the finding sentence. They open a case and read the coloured answer word, the deadline with its appeal-window runway, and the one primary action. They check the coverage path and the rules beside the policy (rule sentences bright, background prose grey). They export only when every quote carries the blue verified mark.
 
-FIRST VIEWPORT: Case view. A standard left sidebar (brand lobe, Worklist, Case, Before you submit, Run live, How it works). The top is the verdict field: a flat colour lobe across the main column, its lower edge a drawn coastline. On it, in ink: patient and payer on one line, the verdict word at about 64px, days left as a monumental figure, and the primary capsule (Review appeal / Copy request) at right. Below, on the dark ground, the rules column (capsule status + one-line summary + first quote) beside tabbed source documents (Policy, Chart notes, Letter, Next step), with verified sentences filled flat in their status colour.
+FIRST VIEWPORT: Case view. A labelled 224px sidebar (brand mark, Worklist with count, Before you submit; Run live and How it works at the foot) and a context line (synthetic note, policy watch stamp). The main column holds:
+- the breadcrumb (Worklist / patient h1 / Case id);
+- the verdict line: a coloured 28px answer word with its glyph, the deadline cell (figure, runway, Notice/Due, CFR source), and the one primary on the right;
+- the why-line and meta line;
+- the coverage path (four stages, "Decided by a fixed rule, not a model");
+- the rules column (400px) beside the tabbed policy sheet with its sentence gutter.
 
-FORM: Zoo and gardens guide map, a catalog challenger (aww2-zoo-gardens-guide-map) the user adopted over the assigned Exhibit Binder, seed key 00066ded. Translated to dark per the user's pin.
+FORM: Taste-skill-v2 app style data-terminal, seed 1818343043, pinned by the user's request and chosen by a judge panel (mercury "Blue pencil" proposal, 23.9/30). No impeccable concept roll; the direction is pinned.
 
-SIGNATURE MOVE: The verdict coastline. One SVG path, seeded by the case id, draws the verdict field's coast. Moving between cases or tabs morphs it (0.4s, overshoot) and recolours it. A tampered quote in the appeal turns its fill coral, gets a VOID capsule, and locks export.
+SIGNATURE MOVE: The blue pencil. A tick-and-tie mark sits on every chart quote and appeal quote the code has verified against its source, so it is the only hue that states a fact. The coverage path shows the payer's decision order with the addresses that decided each stage. A tampered quote becomes VOID (a red-edged tint pair, struck text, "Source says"), and Export locked states its reason.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
