@@ -18,7 +18,7 @@ from nebius_nvidia.pipeline import run_case
 from nebius_nvidia.prevention import check_request
 from nebius_nvidia.scenario import Scenario
 
-SHOWCASE = ["case_001", "case_007", "case_015", "case_018", "case_009", "case_023", "case_027", "case_028"]  # 007: DOS before v40 → v37
+SHOWCASE = ["case_001", "case_015", "case_018", "case_009", "case_023", "case_027", "case_028"]
 CHECK_SHOWCASE = ["case_001", "case_018", "case_009", "case_023"]  # ready, red flag, two "not yet"
 OUT = Path("demo/runs")
 CHECKS = Path("demo/checks")

@@ -1,293 +1,367 @@
 ---
 name: Denial Auditor
-description: Imaging denials, marked up. Policy and chart shown as photocopies, evidence highlighted on them.
+description: The guide map, at night. Every denial is an area on one map, and its verdict is the colour of the land.
 colors:
-  copier-ground: "#DFE1DE"
-  photocopy-paper: "#F3F4F1"
-  paper-edge: "#CDD0CC"
-  toner-ink: "#161817"
-  graphite: "#3E433F"
-  pencil: "#5E645F"
-  rule-grey: "#C5C9C4"
-  rail-ink: "#E9EAE7"
-  rail-dim: "#9EA49F"
-  highlighter-yellow: "#F5E62E"
-  highlighter-green: "#8BEA7B"
-  highlighter-pink: "#FF7FB6"
-  highlighter-orange: "#FFB44D"
-  highlighter-grey: "#C9CCC7"
-  deadline-magenta: "#A1004A"
-  strike-magenta: "#C2185B"
-  focus-blue: "#1F4FFF"
+  ground: "#111410"
+  surface: "#191D17"
+  surface-2: "#22271F"
+  stone: "#2F352B"
+  line: "#2C3228"
+  line-2: "#3B4236"
+  text: "#F5F1E4"
+  text-2: "#C8C6B8"
+  text-3: "#9C9A8C"
+  land: "#8ED462"
+  coral: "#FF6B5A"
+  sun: "#FFD23F"
+  pond: "#4FA6E3"
+  lilac: "#EBC1FF"
+  ink: "#1B1D1A"
+  ink-2: "#2C2E2A"
+  land-deep: "#2B4A1F"
+  coral-deep: "#5A2620"
+  sun-deep: "#4D4012"
+  pond-deep: "#173A52"
 typography:
   display:
-    fontFamily: "Public Sans, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "34px"
-    fontWeight: 700
-    lineHeight: 1.05
-    letterSpacing: "-0.025em"
-    fontFeature: "tnum"
+    fontFamily: "Hanken Grotesk, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "76px"
+    fontWeight: 800
+    lineHeight: 0.92
+    letterSpacing: "-0.035em"
+    fontFeature: "\"tnum\", \"ss01\""
+  display-figure:
+    fontFamily: "Hanken Grotesk, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "76px"
+    fontWeight: 800
+    lineHeight: 0.8
+    letterSpacing: "-0.04em"
+    fontFeature: "\"tnum\", \"ss01\""
   headline:
-    fontFamily: "Public Sans, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "30px"
-    fontWeight: 700
-    lineHeight: 1.1
-    letterSpacing: "-0.02em"
-    fontFeature: "tnum"
+    fontFamily: "Hanken Grotesk, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "48px"
+    fontWeight: 800
+    lineHeight: 0.95
+    letterSpacing: "-0.04em"
   title:
-    fontFamily: "Public Sans, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "18px"
-    fontWeight: 700
-    lineHeight: 1.3
-    fontFeature: "tnum"
+    fontFamily: "Hanken Grotesk, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "22px"
+    fontWeight: 750
+    lineHeight: 1.15
+    letterSpacing: "-0.025em"
   body:
-    fontFamily: "Public Sans, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontFamily: "Hanken Grotesk, system-ui, -apple-system, Segoe UI, sans-serif"
     fontSize: "15px"
     fontWeight: 400
     lineHeight: 1.5
-    fontFeature: "tnum"
-  document:
-    fontFamily: "Source Serif 4, Georgia, serif"
+    fontFeature: "\"tnum\", \"ss01\""
+  body-reading:
+    fontFamily: "Hanken Grotesk, system-ui, -apple-system, Segoe UI, sans-serif"
     fontSize: "16px"
     fontWeight: 400
-    lineHeight: 1.62
-    fontFeature: "tnum"
+    lineHeight: 1.7
   label:
-    fontFamily: "Public Sans, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontFamily: "Hanken Grotesk, system-ui, -apple-system, Segoe UI, sans-serif"
     fontSize: "13px"
     fontWeight: 600
     lineHeight: 1.4
-    fontFeature: "tnum"
-  address:
-    fontFamily: "Public Sans, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "12px"
-    fontWeight: 500
-    lineHeight: 1.4
-    letterSpacing: "0.01em"
-    fontFeature: "tnum"
+  status:
+    fontFamily: "Hanken Grotesk, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "12.5px"
+    fontWeight: 650
+    lineHeight: 1.35
 rounded:
-  sheet: "3px"
-  inner: "4px"
-  control: "6px"
+  mark: "5px"
+  field: "12px"
+  surface: "14px"
+  sheet: "22px"
+  capsule: "999px"
+  area-lobe: "30px 44px 34px 52px / 40px 30px 48px 32px"
+  due-lobe: "20px 26px 22px 28px / 24px 20px 26px 22px"
 spacing:
-  xs: "6px"
-  sm: "10px"
-  md: "14px"
-  lg: "18px"
-  xl: "22px"
-  stage: "34px"
+  hairline-gap: "2px"
+  area-gap: "8px"
+  card: "14px 16px"
+  gutter: "24px"
+  stage: "18px 36px 30px"
+  verdict-field: "26px 30px 86px"
+  sheet: "26px 40px 40px 76px"
 components:
   button-primary:
-    backgroundColor: "{colors.toner-ink}"
-    textColor: "{colors.photocopy-paper}"
-    typography: "{typography.label}"
-    rounded: "{rounded.control}"
-    padding: "9px 15px"
+    backgroundColor: "{colors.land}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.capsule}"
+    padding: "6px 6px 6px 20px"
+    height: "44px"
+  button-primary-on-field:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.capsule}"
+    padding: "6px 6px 6px 20px"
+    height: "44px"
   button-ghost:
     backgroundColor: "transparent"
-    textColor: "{colors.toner-ink}"
-    typography: "{typography.label}"
-    rounded: "{rounded.control}"
-    padding: "9px 15px"
-  button-ghost-hover:
-    backgroundColor: "{colors.photocopy-paper}"
-  segmented-option:
-    backgroundColor: "transparent"
-    textColor: "{colors.graphite}"
-    rounded: "{rounded.inner}"
-    padding: "6px 11px"
-  segmented-option-active:
-    backgroundColor: "{colors.toner-ink}"
-    textColor: "{colors.photocopy-paper}"
-  input:
-    backgroundColor: "{colors.photocopy-paper}"
-    textColor: "{colors.toner-ink}"
-    rounded: "{rounded.control}"
-    padding: "9px 11px"
+    textColor: "{colors.text}"
+    rounded: "{rounded.capsule}"
+    padding: "6px 18px 6px 12px"
+    height: "40px"
+  status-capsule-supports:
+    backgroundColor: "{colors.land}"
+    textColor: "{colors.ink}"
+    typography: "{typography.status}"
+    rounded: "{rounded.capsule}"
+    padding: "3px 11px 3px 9px"
+  status-capsule-blocks:
+    backgroundColor: "{colors.coral}"
+    textColor: "{colors.ink}"
+    typography: "{typography.status}"
+    rounded: "{rounded.capsule}"
+    padding: "3px 11px 3px 9px"
+  status-capsule-missing:
+    backgroundColor: "{colors.sun}"
+    textColor: "{colors.ink}"
+    typography: "{typography.status}"
+    rounded: "{rounded.capsule}"
+    padding: "3px 11px 3px 9px"
+  status-capsule-quiet:
+    backgroundColor: "{colors.stone}"
+    textColor: "{colors.text-2}"
+    typography: "{typography.status}"
+    rounded: "{rounded.capsule}"
+    padding: "3px 11px 3px 9px"
+  void-capsule:
+    backgroundColor: "{colors.coral}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.capsule}"
+    padding: "1px 8px"
+  filter-capsule:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text-2}"
+    rounded: "{rounded.capsule}"
+    padding: "8px 32px"
+  filter-capsule-active:
+    backgroundColor: "{colors.land}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.capsule}"
+    padding: "8px 32px"
+  tab-track:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.capsule}"
+    padding: "4px"
+  tab-selected:
+    backgroundColor: "{colors.text}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.capsule}"
+    padding: "8px 16px"
   nav-item:
-    backgroundColor: "transparent"
-    textColor: "{colors.rail-dim}"
-    rounded: "{rounded.control}"
-    padding: "9px 10px"
-  nav-item-active:
-    backgroundColor: "{colors.highlighter-yellow}"
-    textColor: "{colors.toner-ink}"
+    textColor: "{colors.text-2}"
+    rounded: "{rounded.capsule}"
+    padding: "9px 12px"
+  nav-item-current:
+    backgroundColor: "{colors.text}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.capsule}"
+    padding: "9px 12px"
+  input:
+    backgroundColor: "{colors.ground}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.field}"
+    padding: "11px 14px"
   rule-card:
-    backgroundColor: "{colors.photocopy-paper}"
-    textColor: "{colors.toner-ink}"
-    rounded: "{rounded.control}"
-    padding: "12px 14px"
-  document-sheet:
-    backgroundColor: "{colors.photocopy-paper}"
-    textColor: "{colors.toner-ink}"
-    typography: "{typography.document}"
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.surface}"
+    padding: "{spacing.card}"
+  sheet:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    typography: "{typography.body-reading}"
     rounded: "{rounded.sheet}"
-    padding: "26px 40px 40px 72px"
+    padding: "{spacing.sheet}"
+  verdict-field-appeal:
+    backgroundColor: "{colors.land}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.sheet}"
+    padding: "{spacing.verdict-field}"
+  worklist-area:
+    backgroundColor: "{colors.land}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.area-lobe}"
+    padding: "16px 20px"
+    height: "112px"
+  due-lobe:
+    backgroundColor: "{colors.land}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.due-lobe}"
+    padding: "9px 13px"
 ---
 
 # Design System: Denial Auditor
 
 ## Overview
 
-**Creative North Star: "Highlighter on Photocopy"**
+**Creative North Star: "The Guide Map, at Night"**
 
-The denial file, marked up. The app is a copier-grey desk with a toner-black rail down the left; on it sit photocopied sheets (the payer's policy, the chart notes, the denial letter, the appeal) and every verdict is a fluorescent highlighter stroke laid over the exact sentence that decides it. The highlighter is not decoration: it is the entire state system. Green supports, pink blocks, orange is missing documentation, yellow is a quoted policy line (and "you are here"), grey is not applicable.
+Every denial is an area on one map, and its verdict is the colour of the land. The system is a zoo-and-gardens guide map translated to dark: the map's cream water becomes a near-black ink-green ground, cream becomes the text, and the land keeps its flat, saturated colours. A biller reads the answer from the colour of a field before reading a word, then checks the evidence rule by rule against source documents set in the same single grotesk.
 
-Density is that of a working desk, not a dashboard: a deadline board ranked by days left, a rule ledger beside a document sheet, a citation gate beside an editor. Type splits by material: Public Sans (a US federal-forms face) for the application, Source Serif 4 for anything that is a document. Figures are tabular everywhere, because deadlines, dates and costs are read in columns. Every quote carries a catalogue address (`L34220 · S47`, `note n1 · 07/20/2026`) and those addresses are links, so addresses are the navigation between rule, policy and chart.
+Colour is flat and unmodulated. There is no glow, grain or drop shadow; surfaces separate by tone and by 1px hairlines, and the big verdict field is divided from the dark ground by a drawn coastline rather than a border. Controls are capsules, and the primary capsule carries a round chip on its trailing edge. Small things that move take 0.4s and overshoot before they settle; colour changes ease out without overshoot.
 
-The ground is cool, never cream. Depth is a sheet resting on a desk: one soft paper shadow, toner grain, a faint fax strip across the top edge. Motion is a single gesture, the highlighter sweep.
+Density is a working tool's density: a 232px rail, a rules column beside tabbed source sheets, and tables at 15px. The monumental type is reserved for two things only: the verdict word and the days-left figure.
 
 **Key Characteristics:**
-- Cool copier-grey ground with faint toner speckle; toner-black rail.
-- Fluorescent highlighter strokes, multiply-blended, as the only status colour.
-- Marker shapes with ragged, asymmetric ends; never bordered pills.
-- Public Sans for the app, Source Serif 4 for documents; tabular figures throughout.
-- Catalogue addresses on every quote, and they link.
-- One paper shadow; documents get grain, edge darkening and a copier strip.
+- Five flat land colours, each bound to one verdict or status, on a near-black ink-green night ground.
+- Two tones per land: deep land with cream text at rest, bright land with ink text when selected or when the colour is the answer.
+- Colour always travels with its word (status capsules), never alone.
+- One grotesk (Hanken Grotesk, variable 100 to 900), tabular figures everywhere.
+- Coastlines and organic lobes divide; rectangles with borders do not.
+- Capsule controls with a round chip; 0.4s overshoot on small transforms only.
 
 ## Colors
 
-A near-neutral, slightly green-grey copier palette carrying five fluorescent highlighters and almost nothing else.
+A night map: dark tonal ground, cream text, and five flat land colours that each mean exactly one thing.
 
 ### Primary
-- **Toner Ink** (toner-ink): body text, the left rail background, primary buttons, the active segmented option, the active tab underline, the selected rule's border. It is both ink and furniture.
+- **Land Green** (land): Appeal, and Supports for a rule. The default primary capsule, the brand lobe, input focus, the caret, timeline bars, completed pipeline steps.
+- **Coral** (coral): Don't appeal yet, and Blocks for a rule. Also the tamper colour: VOID capsules, strike-through on quotes not found in a source, error text, red-flag timeline marks.
+- **Sun** (sun): Ask the physician, and Missing docs. Also the selection colour, the skip link, the synthetic-data dot and the in-progress pipeline pulse.
+- **Pond** (pond): Fix and resubmit, and verified policy quotes. Also the focus ring.
+- **Lilac** (lilac): Not winnable, and the confidence capsule.
 
 ### Secondary
-- **Highlighter Yellow** (highlighter-yellow): quoted policy text in letters and the gate, the active nav item, the brand mark stroke, text selection, the "in progress" step, the fix-and-resubmit verdict.
-- **Highlighter Green** (highlighter-green): criterion met / supports; the appeal verdict; completed live-run steps.
-- **Highlighter Pink** (highlighter-pink): not met / blocks; don't-appeal-yet verdict; failing gate status; the wash behind a struck quote (35% mix).
-- **Highlighter Orange** (highlighter-orange): missing documentation; ask-the-physician verdict; the synthetic-data banner swatch.
-- **Highlighter Grey** (highlighter-grey): not applicable, route-only rules, not-winnable verdict.
-
-### Tertiary
-- **Deadline Magenta** (deadline-magenta): the deadline number when a case is due soon, on the board and in the case band. Text colour only.
-- **Strike Magenta** (strike-magenta): the 2px line-through on a quote that failed verification.
-- **Focus Blue** (focus-blue): 2px focus outline, offset 2px. The only cool hue in the system, reserved for keyboard focus.
+- **Deep Land, Deep Coral, Deep Sun, Deep Pond** (land-deep, coral-deep, sun-deep, pond-deep): the same areas at rest. Evidence highlights in policy and chart sheets sit on these with cream text, so a page of findings stays calm and legible on the night ground.
 
 ### Neutral
-- **Copier Ground** (copier-ground): the page behind everything, overlaid with a 5% fractal-noise speckle.
-- **Photocopy Paper** (photocopy-paper): every surface that holds content: sheets, rule cards, the board, panels, inputs, the segmented control.
-- **Paper Edge** (paper-edge): hover border on rule cards.
-- **Graphite** (graphite): secondary text, ledes, rationale lines.
-- **Pencil** (pencil): tertiary text, addresses, table headers, sentence numbers; holds 4.5:1 on paper.
-- **Rule Grey** (rule-grey): hairlines, input and ghost-button borders, dashed evidence dividers.
-- **Rail Ink / Rail Dim** (rail-ink, rail-dim): text on the black rail, active-hover and resting.
+- **Night Ground** (ground): page, rail, input wells, and the water the coastline cuts out of the verdict field.
+- **Night Surface** (surface) and **Raised Night** (surface-2): sheets, cards, the board, the tab track; surface-2 is the hover and active row tone.
+- **Stone** (stone): Not applicable, quiet fills, and the area colour for any unmapped verdict.
+- **Hairline** (line) and **Strong Hairline** (line-2): 1px dividers and inset outlines; line-2 for input and ghost-button outlines and scrollbar thumbs.
+- **Cream** (text), **Cream 2** (text-2), **Cream 3** (text-3): primary, secondary and tertiary text. Cream 3 holds at least 5.4:1 on every night surface. Cream is also the selected fill for tabs and the current nav item.
+- **Ink** (ink) and **Ink 2** (ink-2): text on any bright land colour; ink-2 for secondary lines on a field (at least 4.9:1 on coral, the lowest land).
 
 ### Named Rules
-**The Highlighter Is The State Rule.** Status is shown only by the five highlighters, laid as a stroke with `mix-blend-mode: multiply` over paper. No other hue carries meaning except deadline magenta (urgency), strike magenta (failed quote) and focus blue (keyboard).
+**The One Meaning Rule.** Each land colour means one verdict and its matching rule status; never use a land colour as decoration or as a generic accent.
 
-**The Never Colour Alone Rule.** Every highlighter swatch sits beside a word ("Supports", "Missing documentation", "Every quote verified"). A colour without its word is a defect.
+**The Colour-Plus-Word Rule.** A status colour always appears with its word (Supports, Blocks, Missing docs, Not applicable, Appeal, Don't appeal yet, Ask the physician, Fix & resubmit, Not winnable, VOID). Colour alone never carries a status.
 
-**The Cool Paper Rule.** Ground and paper stay cool green-grey. Cream, beige or warm paper breaks the photocopy.
+**The Ink-on-Land Rule.** Text on a bright land colour is ink; text on deep land or night is cream. Never put cream on bright land or ink on night.
 
 ## Typography
 
-**Display Font:** Public Sans (with system-ui, -apple-system, Segoe UI, sans-serif)
-**Body Font:** Public Sans for the application; Source Serif 4 (with Georgia, serif) for documents
-**Label/Mono Font:** none; addresses are Public Sans at label size with tabular figures
+**Display Font:** Hanken Grotesk (with system-ui, -apple-system, Segoe UI, sans-serif), self-hosted variable woff2, OFL.
+**Body Font:** Hanken Grotesk, the same family.
 
-**Character:** A plain federal-forms sans that reads like an administrative instrument, against a book serif that reads like the paper being audited. The split is by material, not by hierarchy.
+**Character:** One friendly grotesk does everything, from the 76px verdict to the 11px sentence numbers; hierarchy comes from weight (400 to 800, including 650 and 750) and tight negative tracking at display sizes. Tabular figures and stylistic set 1 are on globally, so counts and dates align.
 
 ### Hierarchy
-- **Display** (700, 34px, 1.05, -0.025em): the case decision line ("Appeal") and its deadline number. 27px under 760px.
-- **Headline** (700, 30px, 1.1, -0.02em): page titles ("Denials to work").
-- **Title** (700, 18px): sheet headers and section heads in "How it works"; 15px for gate and letter sub-heads.
-- **Body** (400, 15px, 1.5): application text; ledes capped at 70ch, decision rationale at 75ch.
-- **Document** (400, 16px, 1.62, Source Serif 4): policy sheets, chart notes, letters, evidence quotes on rule cards (14px), gate quotes (13.5px), editor (15.5px). Paragraphs capped at 72ch.
-- **Label** (600, 13px): status marks, field labels, side headings, tabs (600 at body size). Sentence case, never uppercase.
-- **Address** (500, 12px, 0.01em): catalogue addresses, table headers, copier strip, legal line. Sentence numbers in the sheet margin drop to 11px.
-- **Board figure** (700, 22px, -0.02em, line-height 1): days-left on the worklist, with an 11.5px date beneath.
+- **Display** (800, 76px, 0.92): the verdict word on the verdict field. 50px below 760px.
+- **Display figure** (800, 76px, 0.8, -0.04em): days left on the verdict field; underlined 5px when the deadline is soon. Worklist areas use the same voice at 48px, due lobes at 28px.
+- **Headline** (800, 48px, 0.95, -0.04em): page titles. 34px below 760px.
+- **Title** (750, 22px, 1.15): sheet heads and How-it-works section heads; 17px for the citation gate head.
+- **Body** (400, 15px, 1.5): interface text and tables. Ledes at 16px in cream 2, capped at 62ch.
+- **Body reading** (400, 16px, 1.7): source sheets, capped at 72ch per paragraph; the appeal editor at 15.5px / 1.65.
+- **Label** (600, 13px): field labels and column heads in sentence case, in cream 2 or cream 3. Never uppercase, never letter-spaced.
+- **Status** (650, 12.5px): status capsules, filter counts, area captions (14.5px).
 
 ### Named Rules
-**The Two Materials Rule.** If it was fetched, written, or will be sent (policy, chart, letter, quote), it is set in Source Serif 4. Everything the app says about it is Public Sans.
+**The Two Monuments Rule.** Only the verdict word and the days-left figure are set at display size; everything else stays at working size.
 
-**The Tabular Rule.** `font-variant-numeric: tabular-nums` is set at the root and never turned off. Dates, days-left, costs and sentence numbers align in columns.
-
-**The No Shouting Rule.** No uppercase labels, no letter-spaced small caps. Hierarchy comes from weight and size.
+**The Sentence Case Rule.** Labels and headings are sentence case at normal tracking. The only all-caps word in the system is the VOID capsule.
 
 ## Layout
 
-A two-column shell: a 208px sticky toner rail and a stage padded 18px / 34px / 28px. A thin synthetic-data note sits at the top of every stage; the AMA/attribution legal line closes it.
+A two-column shell: a sticky 232px rail and a fluid stage (padding 18px 36px 30px). The case view stacks the verdict field across the stage, the decision strip, then a workspace of a rules column (330 to 400px) beside the tabbed source sheet, 24px apart. The appeal view pairs the editor with a 360px sticky citation gate; the live view pairs a 280 to 420px form panel with progress.
 
-- **Worklist:** a filter segmented control and an "as of" address over one full-width paper board (table). Rows are fixed columns; the due cell carries a horizontal wash of the row's highlighter (30% fading to transparent), so rows restyle by state without breaking the grid.
-- **Case:** a band (patient, payer, codes, dates; decision line; rationale) with primary actions right-aligned, then a workspace of a sticky rule ledger (330 to 410px) beside tabbed document sheets (gap 22px).
-- **Appeal:** editor or rendered letter beside a 340px sticky citation gate (gap 18px).
-- **Live:** form panel (280 to 420px) beside progress (gap 24px).
-- **Rhythm:** 6 / 10 / 14 / 18 / 22px steps; cards pad 12px 14px; panels 18px 20px; sheets 26px 40px 40px 72px, the 72px left margin holding sentence addresses.
-- **Responsive:** at 1100px the workspace and appeal collapse to one column and stickiness drops. At 760px the rail becomes a sticky top bar of icon-only nav (labels kept for screen readers), the board hides the reason column and stacks secondary data inside cells, the decision line stacks, and sheets pad 22px 18px 26px 44px.
+Spacing is a working rhythm rather than a strict scale: 2px between nav items and tabs, 8px between worklist areas and rule cards, 14px by 16px inside cards, 24px gutters, 26px by 30px inside the verdict field with 86px at the bottom for the coastline.
+
+**Breakpoints.**
+- **At 1100px and below**, the workspace and appeal grids collapse to one column and the citation gate stops being sticky.
+- **At 760px and below**, the rail becomes a sticky top bar with icon-only nav (labels kept for screen readers), the stage padding drops to 14px, page titles go to 34px, the verdict field becomes one column (padding 20px 18px 66px, coast 52px tall) with the verdict and days figure at 50px, worklist areas pair two per row (92px tall, 38px counts), the decision strip becomes a 2 by 2 grid, and the board hides the reason column and stacks the verdict capsule under the patient.
 
 ## Elevation & Depth
 
-Flat paper on a desk. One shadow, the sheet shadow, is used for every resting surface (board, rule cards, facts, panels, gate, sheets, editor, letter image); nothing lifts on hover. Document sheets add material rather than height: an inset vignette, a 16% toner-grain noise, a faint left/right edge darkening, and a copier strip across the top.
+The system is flat. There are no drop shadows. Depth comes from tone (ground, surface, surface-2) and from inset hairlines drawn with `box-shadow: inset 0 0 0 1px` in place of borders, so outlines never change a box's size. Rings appear only as state: a 2px cream ring on the selected rule card, a 2px ring in a highlight's own bright colour when its rule is hovered, a 2px pond ring on a focused board row, and a 3px surface halo that lifts timeline dots off the axis.
 
 ### Shadow Vocabulary
-- **Sheet** (`box-shadow: 0 1px 1px rgba(22,24,23,.06), 0 6px 18px -8px rgba(22,24,23,.22)`): every paper surface at rest.
-- **Photocopy vignette** (`inset 0 0 46px rgba(22,24,23,.07)`, layered with Sheet): document sheets only.
+- **Hairline outline** (`box-shadow: inset 0 0 0 1px var(--line)`): cards, sheets, board, tab track, decision strip, filter capsules at rest.
+- **Strong outline** (`box-shadow: inset 0 0 0 1.5px var(--line-2)`): ghost capsules; inputs use 1px line-2 and 2px land when focused.
+- **Selected ring** (`box-shadow: inset 0 0 0 2px var(--text)`): the selected rule card.
 
 ### Named Rules
-**The One Sheet Rule.** There is one elevation. Selection and hover change borders or fills, never shadow depth.
+**The Flat Land Rule.** Colour fills are flat: no gradients, glow, grain or drop shadow. Layered backgrounds exist only to drive the highlight sweep, and each layer is a single flat colour.
 
 ## Shapes
 
-Two corner families. Documents (sheets, editor, letter image) use a tight 3px, like trimmed paper. Application surfaces and controls (buttons, inputs, cards, board, panels, nav items) use 6px; nested options in the segmented control use 4px.
+Three families. Capsules (999px) for every control and status: buttons, filters, tabs, nav items, status marks, chips, the fold control. Gently rounded rectangles for containers: 14px for rule and fact cards, 22px for sheets, the board, the gate, panels, and the top of the verdict field; 12px for inputs; 5px for inline highlights. Organic lobes for things that are land: worklist areas and due figures use asymmetric elliptical radii (each of the five areas has its own), and the brand mark is a hand-drawn lobe with an ink check.
 
-Highlighter marks use deliberately uneven radii so they read as hand-drawn strokes: inline highlights `3px 8px 4px 9px / 8px 4px 9px 3px` with a 100-degree gradient that thins at both ends; status swatches 22 by 11px at `2px 6px 3px 7px / 6px 3px 7px 2px`, skewed -8deg; small swatches (banner, steps) `2px 5px 3px 6px`. Inline highlights clone across line breaks.
-
-Dashed lines mean "secondary or folded": evidence dividers on rule cards, separators between chart notes, and the folded-background button in a sheet.
+The verdict field has no bottom corners; its lower edge is a coastline, one SVG path in the ground colour biting up into the field (72px tall, 52px on small screens).
 
 ## Components
 
 ### Buttons
-Toner-black and unadorned; a working instrument.
-- **Shape:** gently squared (6px).
-- **Primary:** toner ink fill and 1px ink border, paper text, 600 weight, 9px 15px, optional 16px stroke icon at 2px.
-- **Hover / Active:** fill lifts to #2B302D; press nudges down 1px on the out-expo ease (120ms).
-- **Ghost:** transparent with a rule-grey border; hover fills paper and darkens the border to pencil.
-- **Disabled:** 45% opacity, not-allowed cursor. Export stays disabled until the citation gate passes.
+Capsules that carry a round chip on the trailing edge.
+- **Shape:** full capsule (999px), at least 44px tall.
+- **Primary:** land fill, ink label at 650, padding 6px 6px 6px 20px, then a 32px round ink chip holding the button's own inline SVG icon (download, copy, play) in cream, or a cream arrow when the button has none.
+- **On the verdict field:** the colours invert, with an ink capsule, cream label and cream chip with an ink icon, so the primary reads against any land.
+- **Hover / Active:** the chip slides 3px toward the trailing edge (0.4s overshoot); press scales the capsule to 0.97. Disabled drops to 38% opacity with a not-allowed cursor.
+- **Ghost:** transparent with a 1.5px line-2 inset outline, 40px tall, an 18px leading icon with no chip; the outline brightens to cream 2 on hover and a back icon nudges 2px left. On the verdict field the outline and label become ink.
 
-### Status Mark (signature)
-- **Style:** a short skewed highlighter swatch followed by a 600 13px word. The swatch is multiply-blended; the word stays ink (pencil for not-applicable and route).
-- **Variants:** one per criterion status and one per verdict, mapped to the highlighters as in Colors.
+### Status capsules
+- **Style:** flat land fill, ink word at 12.5px / 650, padding 3px 11px 3px 9px, led by a 6px dot in the text colour at 75% opacity.
+- **Vocabulary:** Supports (land), Blocks (coral), Missing docs (sun), Not applicable and Route not used (stone with cream 2); verdict capsules Appeal (land), Don't appeal yet (coral), Ask the physician (sun), Fix & resubmit (pond), Not winnable (lilac).
+- **VOID:** a coral capsule (11px, 800, 0.04em tracking) set before any quote the citation gate could not find in a fetched source. The quote is struck through in 2px coral, the closest real source text is shown beside it as a pond highlight, and the Export letter capsule is disabled until every quote verifies.
 
-### Highlighter Stroke (signature)
-Inline highlight over a sentence, quote or verdict word, coloured by status. **Sweep:** when a rule is selected, its sentence and evidence strokes draw left to right by animating background-size from 0 to 100% (320ms, `cubic-bezier(.16,1,.3,1)`). Disabled under reduced motion.
+### Chips (filters)
+- **Style:** night-surface capsules with a 1px hairline, cream 2 label at 600, padding 8px 32px, and a 9px round chip in the filter's colour riding the trailing edge.
+- **State:** when a filter is live the capsule fills with its colour, the label turns ink, and the chip crosses to the leading edge and turns ink (0.4s overshoot). Mode toggles drop the chip and fill cream when pressed. Small evidence chips in the decision strip (11.5px / 650, land, coral or sun) lift 2px and scale to 1.04 on hover.
 
 ### Cards / Containers
-- **Rule card:** paper, 6px, 12px 14px, Sheet shadow, 1px transparent border; hover border paper-edge; selected border toner ink. Status mark and address on the top row, a 500 summary, a 13px graphite rationale, then serif evidence quotes under dashed dividers, each with a linked address.
-- **Facts / Panel / Gate:** paper, 6px, Sheet shadow; facts list labels in pencil 12px above values.
-- **Board:** paper table, 6px, header in pencil 12px 600 over a rule-grey hairline; row hover #EAECE8; whole row is the link.
-
-### Document Sheet (signature)
-Paper with 3px corners, Sheet plus vignette, toner grain, serif 16/1.62. A copier strip runs across the top edge, including the margin ("Copy of fetched source — CMS Coverage API" left, fetch date and sentence count right, 12px pencil on a 4.5% ink wash). A sans header carries the title and a catalogue address. Sentence numbers (`S24`) sit in the 72px left margin. Runs of non-rule sentences collapse into a dashed fold button with "Show".
-
-### Citation Gate and Struck Quote
-Sticky gate panel: title with a pass/fail status mark, a count line, a list of serif quotes with their source address. A failed quote loses its highlight and takes a 2px strike-magenta line-through over a 35% pink wash; "Source says:" follows with the closest real sentence in yellow and its address.
+- **Corner Style:** 14px for rule and fact cards, 22px for sheets, board, gate, panels and strips.
+- **Background:** night surface; surface-2 on hover.
+- **Shadow Strategy:** hairline insets only (see Elevation & Depth).
+- **Internal Padding:** 14px by 16px for cards; sheets 26px 40px 40px 76px, with sentence numbers hung in the left margin.
+- **Rule card:** a status capsule and the rule's address on one line, a one-line summary at 600, then the first quote clamped to two lines behind a 1px line-2 rule. Selecting it adds the 2px cream ring and unclamps the quote.
 
 ### Inputs / Fields
-- **Style:** paper fill, 1px rule-grey border, 6px, 9px 11px. Labels 600 13px above, 6px gap.
-- **Focus:** border darkens to graphite; the global 2px focus-blue outline applies on keyboard focus. The appeal editor is a serif paper sheet (3px) with a focus-blue outline.
-
-### Segmented Control and Tabs
-- **Segmented:** paper track, 1px rule-grey border, 6px, 3px inset; options 4px, 500 weight, graphite; pressed option toner fill with paper text. Counts sit beside labels in 12px pencil.
-- **Tabs:** 600 pencil text over a rule-grey baseline; selected tab is ink with a 3px inset ink underline.
+- **Style:** ground well, 1px line-2 inset outline, 12px radius, padding 11px 14px; labels above at 13px / 600 in cream 2.
+- **Focus:** the outline becomes 2px land. The appeal editor uses the same treatment at 22px radius.
 
 ### Navigation
-Toner rail, 208px, sticky. Brand mark is a rail-ink line over a thick yellow highlighter stroke. Items are 19px stroke icons (1.7px) with 500 labels in rail-dim; hover lifts to rail-ink on #242826; the current page is a yellow highlighter fill with ink text. Rail foot carries the team line. Under 760px the rail becomes a top bar of icon-only items.
+- **Rail:** 232px, ground colour with a 1px hairline on its right, brand lobe and two-line name at 800 above capsule nav items (19px stroked inline SVG icons, 500 cream 2). Hover fills night surface; the current page fills cream with ink text at 600.
+- **Tabs:** a capsule track (night surface, 4px padding, hairline) of capsule buttons in cream 3; the selected tab fills cream with ink text (0.25s ease-out).
+- **Mobile:** at 760px the rail becomes a top bar of icon-only capsules.
+
+### Evidence highlights
+Two-tone flat fills on source text. At rest a found span sits on its deep land with cream text (deep land for Supports, deep coral for Blocks, deep sun for Missing docs, deep pond for a verified quote, stone for Not applicable). When its rule is selected, the bright land sweeps across from left to right (0.4s ease-out) and the text turns ink partway through; Not applicable sweeps to line-2 and keeps cream text. Highlights clone their padding across line breaks.
+
+### The verdict field (signature)
+A flat field of the verdict's land colour across the top of the case view, in ink: patient and payer on one line, the verdict word and the days-left figure as the two monuments, the reason in ink 2 (max 66ch), and the primary capsule at the right. Its lower edge is a coastline: one cubic path through five points whose heights are seeded by a hash of the case id and the open tab, so every case and tab has its own coast. Opening a case starts from the previous case's colour and coast, then morphs the path (0.4s overshoot) and recolours the field (0.4s ease-out) to the new one; switching tabs redraws the coast.
+
+### Worklist areas
+One flat lobe per verdict above the board, with the count at 48px / 800 and the verdict word below in ink. Each area's width grows with its count (flex-grow equals the count, minimum 150px). The areas are filters: pressing one keeps its land while the others recede to night surface with their count still in the verdict's colour. Hover lifts 3px with overshoot.
+
+### Due lobes
+In the board's first column, days left as a 28px / 800 figure on a small lobe in the verdict's colour with the due date beneath in ink 2. A soon deadline is underlined 3px.
+
+### Decision strip
+"How it was decided": one night-surface strip (22px radius, hairline) split into four equal stages by 1px vertical hairlines, each with a 13.5px / 700 head, a status capsule and a cream 3 note. On small screens it becomes 2 by 2, with hairlines between rows.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** carry every status as a highlighter swatch or stroke plus a word, multiply-blended over paper.
-- **Do** give every quote a catalogue address (`L34220 · S47`, `note n1 · 07/20/2026`) and make it a link to its source.
-- **Do** set fetched and outgoing text in Source Serif 4 and everything else in Public Sans, with tabular figures.
-- **Do** use the single Sheet shadow for all resting paper; express selection with a toner-ink border.
-- **Do** keep the 3px corner for documents and 6px for application surfaces and controls.
-- **Do** respect reduced motion: the sweep and pulse switch off entirely.
+- **Do** bind every land colour to its verdict and status (land Appeal and Supports, coral Don't appeal yet and Blocks, sun Ask the physician and Missing docs, pond Fix & resubmit and verified quotes, lilac Not winnable).
+- **Do** pair every status colour with its word in a capsule.
+- **Do** keep findings on deep land with cream text and reserve the bright land with ink text for the selected rule and for fields where the colour is the answer.
+- **Do** divide the verdict field from the ground with a coastline, and divide strips and tables with 1px hairlines.
+- **Do** make controls capsules; give the primary a round chip on its trailing edge.
+- **Do** use the 0.4s overshoot (cubic-bezier(.34, 1.56, .64, 1)) only for small transforms and the coast morph, and ease-out (cubic-bezier(.16, 1, .3, 1)) for colour changes and the highlight sweep.
+- **Do** honour reduced motion: every animation and transition is switched off, the highlight lands in its final state, and scrolling to a rule jumps instead of smooth-scrolling.
+- **Do** lock export and mark VOID in coral whenever a quote does not match fetched text.
 
 ### Don't:
-- **Don't** render status as a bordered pill or a solid-colour badge; marks are ragged highlighter strokes.
-- **Don't** introduce warm, cream or beige paper; the photocopy is cool grey.
-- **Don't** use a status highlighter for decoration; yellow outside quotes is limited to the active nav item, brand mark, selection and in-progress step.
-- **Don't** add elevation steps or hover lifts beyond the one Sheet shadow.
-- **Don't** set labels in uppercase or letter-spaced caps.
-- **Don't** use focus blue for anything but keyboard focus.
+- **Don't** use gradients, glow, grain or drop shadows on fills.
+- **Don't** put cream text on bright land, or ink text on night.
+- **Don't** let colour carry a status without its word.
+- **Don't** add a second typeface; the hierarchy is weight and size within Hanken Grotesk.
+- **Don't** set anything but the verdict word and days figure at display size.
+- **Don't** use uppercase letter-spaced labels; VOID is the only all-caps word.
+- **Don't** overshoot colour, layout or large surfaces; overshoot is for chips, lifts, presses and the coast.

@@ -9,6 +9,7 @@ const VERDICT = {
   fix_checklist: { label: "Fix & resubmit", line: "Administrative denial: correct the claim. No clinical appeal is needed." },
   not_winnable:  { label: "Not winnable", line: "The plan excludes this service. Medical-necessity evidence won't change the outcome." },
 };
+const SWATCH = { appeal: "land", doc_request: "sun", dont_appeal: "coral", fix_checklist: "pond", not_winnable: "lilac" };
 const ORDER = ["appeal", "doc_request", "fix_checklist", "dont_appeal", "not_winnable"];
 const STATUS = {
   met: "Supports", not_met: "Blocks", missing_documentation: "Missing docs", not_applicable: "Not applicable",
@@ -16,9 +17,9 @@ const STATUS = {
 const KIND = { indication: "Route to coverage", red_flag: "Red-flag route", duration: "Duration rule", documentation: "Documentation", exclusion: "Restriction" };
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const display = (s) => esc(s).replace(/&#39;/g, '<span class="apos">’</span>');
 const fmtDate = (iso) => { if (!iso) return "—"; const [y, m, d] = iso.split("-"); return `${m}/${d}/${y}`; };
 const payerShort = (p) => p.replace(/ \((synthetic[^)]*)\)/i, "");
-const VCLASS = { appeal: "met", dont_appeal: "not_met", doc_request: "missing_documentation", fix_checklist: "quote", not_winnable: "not_applicable" };
 let NOTE_DATES = {};
 const noteShort = (id) => id.split("-").pop();
 const noteAddr = (id) => `note ${noteShort(id)}${NOTE_DATES[id] ? " · " + fmtDate(NOTE_DATES[id]) : ""}`;
@@ -47,6 +48,41 @@ function setNav(name) {
 }
 
 function mark(kind, label) { return `<span class="mark ${kind}">${esc(label)}</span>`; }
+
+// The verdict field's coastline: one path seeded by the case (and tab), so every case has its own coast.
+function coastPath(seed) {
+  let h = 2166136261;
+  for (const ch of seed) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
+  const rnd = () => { h = Math.imul(h ^ (h >>> 15), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296; };
+  const pts = Array.from({ length: 5 }, (_, i) => [i * 300, 4 + rnd() * 62]);
+  const f = (n) => n.toFixed(1);
+  let d = `M0 ${f(pts[0][1])}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+    d += ` C${f(p1[0] + (p2[0] - p0[0]) / 6)} ${f(p1[1] + (p2[1] - p0[1]) / 6)} ${f(p2[0] - (p3[0] - p1[0]) / 6)} ${f(p2[1] - (p3[1] - p1[1]) / 6)} ${p2[0]} ${f(p2[1])}`;
+  }
+  return d + " L1200 72 L0 72 Z";
+}
+// The field opens in the previous case's colour and coast, then morphs to this one's (settleBand).
+function bandOpen(v, seed) {
+  const from = state.band || { v, d: coastPath(seed) };
+  return `<section class="case-band v-${from.v}" data-v="${v}" data-seed="${esc(seed)}">`;
+}
+function coastSvg() {
+  const d = (state.band && state.band.d) || "M0 72 L1200 72 Z";
+  return `<svg class="coast" viewBox="0 0 1200 72" preserveAspectRatio="none" aria-hidden="true"><path d="${d}" style="d: path('${d}')"/></svg>`;
+}
+function settleBand(seed) {
+  const band = $main.querySelector(".case-band[data-v]");
+  if (!band) return;
+  const v = band.dataset.v, d = coastPath(seed || band.dataset.seed);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    band.className = `case-band v-${v}`;
+    const path = band.querySelector(".coast path");
+    path.setAttribute("d", d); path.style.d = `path('${d}')`;
+    state.band = { v, d };
+  }));
+}
 
 // ---------------- Policy watch (drift report) ----------------
 async function drift() {
@@ -78,20 +114,22 @@ async function worklist() {
   const rows = [...data.cases].sort((a, b) => ORDER.indexOf(a.verdict) - ORDER.indexOf(b.verdict) || (a.days_left ?? 999) - (b.days_left ?? 999));
   const count = (v) => rows.filter((r) => v === "all" || r.verdict === v).length;
   const shown = rows.filter((r) => state.filter === "all" || r.verdict === state.filter);
-  const seg = ["all", ...ORDER].filter((v) => v === "all" || count(v))
-    .map((v) => `<button type="button" data-f="${v}" aria-pressed="${state.filter === v}">${v === "all" ? "All" : VERDICT[v].label}<span class="n">${count(v)}</span></button>`).join("");
+  // The board as land: one flat area per verdict, sized by its count; pressing one filters the table.
+  const areas = ORDER.filter((v) => count(v))
+    .map((v) => `<button type="button" class="area" data-f="${v}" style="--c: var(--${SWATCH[v]}); flex-grow: ${count(v)}" aria-pressed="${state.filter === v}"><b>${count(v)}</b><span>${VERDICT[v].label}</span></button>`).join("");
 
   $main.innerHTML = `
     <header class="page-head">
       <div>
         <h1 class="page-title">Denials to work</h1>
-        <p class="lede">Ranked by what to do and how soon it's due. Every recommendation traces back to the payer's own policy sentences and the chart.</p>
+        <p class="lede">What to do with each denial, soonest deadline first.</p>
         ${watchLine(rep)}
       </div>
     </header>
+    <div class="areas${state.filter === "all" ? "" : " filtered"}" role="group" aria-label="Filter by recommendation">${areas}</div>
     <div class="board-tools">
-      <div class="seg" role="group" aria-label="Filter by recommendation">${seg}</div>
-      <span class="muted" style="font-size:13px">Deadlines as of ${fmtDate(data.as_of)} (synthetic review date)</span>
+      <span class="muted" style="font-size:13px">${state.filter === "all" ? `${rows.length} denials` : `${shown.length} of ${rows.length} denials · ${esc(VERDICT[state.filter].label)}`} · deadlines as of ${fmtDate(data.as_of)} (synthetic review date)</span>
+      ${state.filter === "all" ? "" : `<button type="button" class="btn ghost" data-f="all">Show all ${rows.length}</button>`}
     </div>
     <div class="board">
       ${shown.length ? `<table>
@@ -99,14 +137,14 @@ async function worklist() {
         <tbody>${shown.map(rowHtml).join("")}</tbody>
       </table>` : `<p class="empty">No denials match this filter.</p>`}
     </div>`;
-  $main.querySelectorAll("[data-f]").forEach((b) => b.addEventListener("click", () => { state.filter = b.dataset.f; worklist(); }));
+  $main.querySelectorAll("[data-f]").forEach((b) => b.addEventListener("click", () => { state.filter = b.dataset.f === state.filter ? "all" : b.dataset.f; worklist(); }));
 }
 
 function rowHtml(r) {
   const soon = r.days_left != null && r.days_left < 21;
-  const due = r.days_left == null ? `<span class="muted">Check notice</span>` : `${r.days_left}<small>days left<br>${fmtDate(r.due)}</small>`;
+  const due = r.days_left == null ? `<small>Check notice</small>` : `<b>${r.days_left}</b><small>days left<br>${fmtDate(r.due)}</small>`;
   return `<tr>
-    <td class="due-cell" style="--c: var(--hl-${{appeal:"green",doc_request:"orange",dont_appeal:"pink",fix_checklist:"yellow",not_winnable:"grey"}[r.verdict]})"><span class="due${soon ? " soon" : ""}">${due}</span></td>
+    <td class="due-cell"><span class="due${soon ? " soon" : ""}" style="--c: var(--${SWATCH[r.verdict]})">${due}</span></td>
     <td class="hide-sm">${mark("v-" + r.verdict, VERDICT[r.verdict].label)}${r.live ? ' <span class="addr">live run</span>' : ""}</td>
     <td class="who"><a href="#/case/${r.id}">${esc(r.patient)}</a><div class="addr">${esc(r.id.replace("case_", "Case "))} · CPT ${esc(r.cpt)}</div><div class="stack-sm">${mark("v-" + r.verdict, VERDICT[r.verdict].label)}</div></td>
     <td class="hide-sm">${esc(payerShort(r.payer))}</td>
@@ -144,21 +182,23 @@ async function caseView(id) {
   NOTE_DATES = Object.fromEntries(c.notes.map((n) => [n.note_id, n.date]));
   const soon = dl && dl.days_left != null && dl.days_left < 21;
   const policyAddr = run.policy ? run.policy.policy_id : "";
-  const primary = run.appeal ? `<button class="btn" data-tab-go="next">Review appeal</button>`
-    : run.doc_request ? `<button class="btn" data-copy-docreq>${icon.copy}Copy documentation request</button>` : "";
+  const NEXT = { appeal: "Review appeal", dont_appeal: "See what's missing", fix_checklist: "Open the fix checklist", not_winnable: "See why", doc_request: "See the request" };
+  const primary = run.doc_request ? `<button class="btn" data-copy-docreq>${icon.copy}Copy documentation request</button>`
+    : `<button class="btn" data-tab-go="next">${NEXT[run.verdict]}</button>`;
 
   $main.innerHTML = `
-    <section class="case-band">
+    ${bandOpen(run.verdict, c.id)}
       <div>
         <div class="case-who"><span><b>${esc(c.patient)}</b> (synthetic)</span><span>${esc(payerShort(d.payer_name))} · ${esc(d.plan_type.replace(/_/g, " "))}</span><span>Lumbar MRI · CPT ${esc(d.cpt)}</span><span>Service ${fmtDate(d.dos)} · Notice ${fmtDate(d.notice_date)}</span></div>
         <div class="decision">
-          <h1><span class="hl ${VCLASS[run.verdict]} sweep">${esc(v.label)}</span></h1>
+          <h1>${display(v.label)}</h1>
           ${dl && dl.due ? `<span class="deadline${soon ? " soon" : ""}"><b>${dl.days_left}</b> days left · due ${fmtDate(dl.due)} <span class="muted">(as of ${fmtDate(c.as_of)})</span></span>` : `<span class="deadline">Deadline: check the notice</span>`}
         </div>
         <p class="decision-why">${esc(v.line)} ${dl ? `<span class="muted">${esc(dl.citation)}${dl.verified ? "" : " · unverified"}.</span>` : ""}</p>
         ${driftFlag(rep, c.id, "denial")}
       </div>
       <div class="band-actions">${primary}<a class="btn ghost" href="#/worklist">${icon.back}Worklist</a></div>
+      ${coastSvg()}
     </section>
     ${overviewHtml(c, run, matches)}
     <div class="workspace">
@@ -204,6 +244,7 @@ function wireWorkspace(ctx, panes) {
     ctx.tab = name;
     $main.querySelector(".workspace").classList.toggle("letter-focus", name === "next" && !!run.appeal);
     pane.innerHTML = panes[name](ctx);
+    settleBand(`${ctx.c.id}:${name}`);
     if (name === "next") wireAppeal(ctx, pane);
     if (ctx.selected) focusRule(ctx, ctx.selected, false);
   };
@@ -282,7 +323,7 @@ function ruleHtml(m, [kind, word], policyAddr) {
   const ev = m.evidence.filter((e) => e.verified);
   const a = `${policyAddr}${m.addr ? " · " + m.addr : ""}`;
   const conf = m.confidence || "single";
-  const evHtml = (e) => `<span class="rule-ev">“${esc(e.quote)}”<a class="addr link" href="#" data-goto="note:${esc(e.note_id)}">${esc(noteAddr(e.note_id))}</a></span>`;
+  const evHtml = (e) => `<span class="rule-ev"><span class="q">“${esc(e.quote)}”</span><a class="addr link" href="#" data-goto="note:${esc(e.note_id)}">${esc(noteAddr(e.note_id))}</a></span>`;
   return `<article class="rule" data-rule="${m.criterion_id}">
     <button type="button" class="rule-toggle" data-rule="${m.criterion_id}" aria-pressed="false">
       <span class="rule-top">${mark(kind, word)}${conf === "escalated" ? '<span class="conf">Ultra decided</span>' : ""}</span>
@@ -313,29 +354,24 @@ function stageState(st, ms) {
   if (st.key === "limits") return has("not_met") ? ["bad", "Applies"] : ["ok", "None apply"];
   return has("missing_documentation") ? ["warn", "Gaps"] : ["ok", "Complete"];
 }
-function decisionMap(run, matches, final) {
-  const v = final || VERDICT[run.verdict];
+function decisionMap(run, matches) {
   if (run.triage.route !== "clinical_review") {
-    return `<section class="dmap" aria-label="How the recommendation was reached">
-      <ol class="dmap-flow short">
-        <li class="dm-stage ${run.triage.route === "fix_checklist" ? "warn" : "mute"}"><span class="stage-h">Reason code ${esc(run.denial.carc.join(", ") || "—")}</span><span class="stage-s">${esc(run.triage.explanation.split(".")[0])}</span><span class="stage-n">Reason-code table, no model</span></li>
-        <li class="dm-stage verdict v-${run.verdict}"><span class="stage-h">${esc(v.label)}</span></li>
-      </ol></section>`;
+    return `<ol class="strip short" aria-label="How the recommendation was reached">
+      <li><span class="stage-h">Reason code ${esc(run.denial.carc.join(", ") || "—")}</span><span class="stage-s">${esc(run.triage.explanation.split(".")[0])}</span><span class="stage-n">Reason-code table, no model</span></li>
+    </ol>`;
   }
   const cells = STAGES.map((st) => {
     const all = matches.filter((m) => st.kinds.includes(m.crit.kind));
     const shown = all.filter((m) => m.status !== "not_applicable" && m.show !== "route");
     const [k, word] = stageState(st, all.filter((m) => m.show !== "route"));
     const quiet = all.length - shown.length;
-    return `<li class="dm-stage ${k}">
+    return `<li>
       <span class="stage-h">${st.title}</span>
       <span class="stage-s">${mark({ ok: "met", bad: "not_met", warn: "missing_documentation", mute: "not_applicable" }[k], word)}</span>
       <span class="chips">${shown.map((m) => `<button type="button" class="chip ${m.status}" data-chip="${m.criterion_id}" title="${esc(m.crit.summary)}">${esc(m.addr || m.criterion_id)}</button>`).join("")}${quiet ? `<span class="chip-quiet">+${quiet} not relevant</span>` : ""}</span>
     </li>`;
   }).join("");
-  return `<section class="dmap" aria-label="How the recommendation was reached">
-    <ol class="dmap-flow">${cells}<li class="dm-stage verdict v-${v.v || run.verdict}"><span class="stage-h">${esc(v.label)}</span><span class="stage-n">fixed rule, not a model</span></li></ol>
-  </section>`;
+  return `<ol class="strip" aria-label="How the recommendation was reached">${cells}</ol>`;
 }
 
 const day = 864e5;
@@ -369,19 +405,18 @@ function timelineHtml(c, run, mriLabel = "MRI") {
     <div class="tl-head"><h2>Chart timeline</h2><span class="addr">${f.symptom_days != null ? `symptom onset to MRI: ${f.symptom_days} days · ` : ""}conservative care: ${f.conservative_days ?? 0} days</span></div>
     <div class="tl-track" style="--rows:${rows.length}">
       ${lines.map((l) => `<span class="tl-line ${l.state}${pct(l.at) > 62 ? " flip" : ""}" style="left:${x(l.at)};--lr:${l.row}"><span class="tl-line-l">${esc(l.label)}</span></span>`).join("")}
-      ${rows.map((t, i) => `<span class="tl-bar" style="left:${x(toMs(t.start))};width:calc(${x(toMs(t.end))} - ${x(toMs(t.start))});top:calc(48px + ${i} * 30px)"><span>${esc(label(t.kind))}${t.sessions ? ` · ${t.sessions} sessions` : ""} · ${days(t.start, t.end)} days${t.response ? " · " + esc(t.response.replace(/_/g, " ")) : ""}</span></span>`).join("")}
+      ${rows.map((t, i) => `<span class="tl-bar" style="left:${x(toMs(t.start))};width:calc(${x(toMs(t.end))} - ${x(toMs(t.start))});top:calc(54px + ${i} * 40px)"><span>${esc(label(t.kind))}${t.sessions ? ` · ${t.sessions} sessions` : ""} · ${days(t.start, t.end)} days${t.response ? " · " + esc(t.response.replace(/_/g, " ")) : ""}</span></span>`).join("")}
       ${Object.entries(f.red_flags.filter((r) => r.noted_on).reduce((g, r) => ((g[r.noted_on] ||= []).push(r.flag), g), {}))
           .map(([on, flags]) => `<span class="tl-flag" style="left:${x(toMs(on))}" title="${esc(flags.join(", "))}"><span>Red flag${flags.length > 1 ? "s" : ""}: ${esc(flags.join(", "))}</span></span>`).join("")}
       <span class="tl-axis"></span>
-      ${onset ? `<span class="tl-pt" style="left:${x(onset)}"><b>Onset</b> ${fmtDate(f.onset)}</span>` : `<span class="tl-pt start" style="left:0"><b>Onset</b> not verified</span>`}
+      ${onset ? `<span class="tl-pt${pct(onset) < 14 ? " start" : ""}" style="left:${x(onset)}"><b>Onset</b> ${fmtDate(f.onset)}</span>` : `<span class="tl-pt start" style="left:0"><b>Onset</b> not verified</span>`}
       <span class="tl-pt end" style="left:${x(dos)}"><b>${esc(mriLabel)}</b> ${fmtDate(run.denial.dos)}</span>
     </div>
     <ul class="tl-legend">${lines.map((l) => `<li>${mark(l.state === "met" ? "met" : l.state === "waived" ? "not_applicable" : "not_met", l.state === "met" ? "Met" : l.state === "waived" ? "Waived: red flags" : "Not met")} ${esc(l.label)} <a class="addr link" href="#" data-goto="policy:${l.sentence}">${esc(l.address)}</a></li>`).join("")}</ul>
   </section>`;
 }
-function overviewHtml(c, run, matches, final, mriLabel) {
-  const tl = timelineHtml(c, run, mriLabel);
-  return `<div class="overview${tl ? "" : " solo"}">${decisionMap(run, matches, final)}${tl}</div>`;
+function overviewHtml(c, run, matches) {
+  return decisionMap(run, matches);
 }
 
 function auditHtml(run, matches) {
@@ -411,13 +446,13 @@ function policyPane(ctx) {
   const isHeading = (t) => !/[.:;)”"]$/.test(t.trim()) && t.length < 70 && !t.startsWith("•");
   const crits = (s) => s.criteria.filter((cid) => status[cid] && (status[cid] !== "not_applicable" || cid === sel));
   const marked = (s) => crits(s).length > 0;
-  let html = "", para = [];
+  let html = "", para = [], lastHeading = "";
   ctx.foldIndex = [];
   const flush = () => { if (para.length) { html += `<p>${para.join(" ")}</p>`; para = []; } };
   const S = c.sentences;
   for (let i = 0; i < S.length; i++) {
     const s = S[i], t = s.text;
-    if (isHeading(t)) { flush(); html += `<div class="heading">${esc(t)}</div>`; continue; }
+    if (isHeading(t)) { flush(); if (t.trim() !== lastHeading) html += `<div class="heading">${esc(t)}</div>`; lastHeading = t.trim(); continue; }
     if (!marked(s)) {
       let j = i;
       while (j + 1 < S.length && !marked(S[j + 1]) && !isHeading(S[j + 1].text)) j++;
@@ -441,8 +476,7 @@ function policyPane(ctx) {
   flush();
   const fetched = (run.policy.fetched_at || "").slice(0, 10);
   return `<article class="sheet">
-    <div class="copyline"><span>Copy of fetched source — ${esc(run.policy.fetched_via === "cms-api" ? "CMS Coverage API" : "aetna.com")}</span><span>fetched ${fmtDate(fetched)} · ${S.length} sentences</span></div>
-    <header class="sheet-head"><h2>${esc(run.policy.title)}</h2><span class="addr">${esc(c.policy_citation)} · <a href="${esc(run.policy.url)}" target="_blank" rel="noopener">source</a></span></header>
+    <header class="sheet-head"><h2>${esc(run.policy.title)}</h2><span class="addr">${esc(c.policy_citation)} · fetched ${fmtDate(fetched)} · ${S.length} sentences · <a class="link" href="${esc(run.policy.url)}" target="_blank" rel="noopener">source</a></span></header>
     ${html}
   </article>`;
 }
@@ -450,9 +484,8 @@ function policyPane(ctx) {
 function chartPane(ctx) {
   const { c, matches } = ctx;
   const sel = ctx.selected;
-  return `<article class="sheet notes">
-    <div class="copyline"><span>Copy of chart notes — synthetic patient</span><span>${c.notes.length} notes</span></div>
-    <header class="sheet-head"><h2>Chart notes</h2><span class="addr">${c.notes.length} notes · synthetic</span></header>
+  return `${timelineHtml(c, ctx.run, ctx.mriLabel)}<article class="sheet notes">
+    <header class="sheet-head"><h2>Chart notes</h2><span class="addr">${c.notes.length} notes · synthetic patient</span></header>
     ${c.notes.map((n) => {
       const marks = [];
       matches.forEach((m) => m.evidence.forEach((e) => {
@@ -533,7 +566,7 @@ function renderLetter(text, gate) {
     if (!c || c.status === "verified") {
       out += `<blockquote class="lq"><span class="hl quote">${esc(squash(q))}</span><cite>${esc(cite)}${c && c.address ? ` · <a class="link" href="#" data-goto="${gotoFor(c.address) || "note:" + esc(c.source_id || "")}">${esc(c.address)}</a>` : ""}</cite></blockquote>`;
     } else {
-      out += `<blockquote class="lq bad"><span class="struck">${esc(squash(q))}</span><cite>Not found in any fetched source${cite ? " · claimed: " + esc(cite) : ""}</cite>${c.closest ? `<span class="closest">Source says: <span class="hl quote">${esc(c.closest.text)}</span> <span class="addr">${esc(c.closest.address || "")}</span></span>` : ""}</blockquote>`;
+      out += `<blockquote class="lq bad"><span class="void">VOID</span><span class="struck">${esc(squash(q))}</span><cite>Not found in any fetched source${cite ? " · claimed: " + esc(cite) : ""}</cite>${c.closest ? `<span class="closest">Source says: <span class="hl quote">${esc(c.closest.text)}</span> <span class="addr">${esc(c.closest.address || "")}</span></span>` : ""}</blockquote>`;
     }
     quote = []; cite = "";
   };
@@ -580,7 +613,7 @@ function wireAppeal(ctx, pane) {
     box.innerHTML = `
       <div class="gate-head"><h3>Citation gate</h3>${mark(g.ok ? "met" : "not_met", g.ok ? "Every quote verified" : bad === 1 ? "1 quote doesn't match" : `${bad} quotes don't match`)}</div>
       <p class="verdict-line">${g.ok ? "Each quoted line matches the policy fetched for this case or the chart, word for word." : esc(g.reason || "Fix the quotes marked below.")}</p>
-      <ol>${g.checks.map((x) => `<li class="${x.status === "verified" ? "" : "bad"}"><span class="q ${x.status === "verified" ? "hl quote" : ""}">${esc(squash(x.text))}</span>
+      <ol>${g.checks.map((x) => `<li class="${x.status === "verified" ? "" : "bad"}">${x.status === "verified" ? "" : '<span class="void">VOID</span>'}<span class="q ${x.status === "verified" ? "hl quote" : ""}">${esc(squash(x.text))}</span>
         <span class="src">${x.status === "verified" ? `matches <a class="link" href="#" data-goto="${gotoFor(x.address) || "note:" + esc(x.source_id)}">${esc(x.address || x.source_id)}</a>` : "not found in any fetched source"}</span>
         ${x.closest ? `<span class="closest">Source says: <span class="hl quote">${esc(x.closest.text)}</span> <span class="addr">${esc(x.closest.address || "")}</span></span>` : ""}</li>`).join("")}</ol>
       <button class="btn" data-export ${g.ok ? "" : "disabled"}>${icon.download}Export letter</button>
@@ -613,7 +646,7 @@ async function liveView() {
   const data = state.cases || (state.cases = await api("/api/cases"));
   $main.innerHTML = `
     <header class="page-head"><div><h1 class="page-title">Run a case live</h1>
-      <p class="lede">Runs the whole pipeline on a synthetic case: Nemotron models on Nebius Token Factory read the letter, split the policy into rules and check each one; commercial policies are located with Tavily search. A run takes one to three minutes and costs a few cents.</p></div></header>
+      <p class="lede">The whole pipeline on a synthetic case, live: Nemotron on Nebius Token Factory, Tavily for commercial policies. One to three minutes, a few cents.</p></div></header>
     <div class="live">
       <form class="panel" data-live>
         ${data.live_enabled ? "" : `<p class="err">Live runs are switched off on this deployment. The precomputed cases in the worklist are free to explore.</p>`}
@@ -673,7 +706,7 @@ async function checksView() {
   $main.innerHTML = `
     <header class="page-head"><div>
       <h1 class="page-title">Before you submit</h1>
-      <p class="lede">Prior-auth requests checked against the payer's policy before they go out, with the same rules and chart evidence as a denial. When a waiting period is the only problem, the earliest date it's met is worked out from the chart's own dates.</p>
+      <p class="lede">Prior-auth requests checked against the payer's policy before they go out.</p>
       ${watchLine(rep)}
     </div></header>
     <div class="board">
@@ -713,19 +746,20 @@ async function checkView(id) {
   const policyAddr = ch.policy ? ch.policy.policy_id : "";
 
   $main.innerHTML = `
-    <section class="case-band">
+    ${bandOpen(rd.v, c.id)}
       <div>
         <div class="case-who"><span><b>${esc(c.patient)}</b> (synthetic)</span><span>${esc(payerShort(r.payer_name))} · ${esc(r.plan_type.replace(/_/g, " "))}</span><span>Lumbar MRI · CPT ${esc(r.cpt)}</span><span>Planned ${fmtDate(r.planned_dos)}</span></div>
         <div class="decision">
-          <h1><span class="hl ${VCLASS[rd.v]} sweep">${esc(rd.label)}</span></h1>
+          <h1>${display(rd.label)}</h1>
           ${ch.earliest ? `<span class="deadline">Earliest date <b>${fmtDate(ch.earliest)}</b></span>` : ""}
         </div>
         <p class="decision-why">${esc(rd.line)}</p>
         ${driftFlag(rep, c.id, "prior_auth")}
       </div>
-      <div class="band-actions">${ch.doc_request ? `<button class="btn" data-copy-docreq>${icon.copy}Copy documentation request</button>` : ""}<a class="btn ghost" href="#/check">${icon.back}All requests</a></div>
+      <div class="band-actions">${ch.doc_request ? `<button class="btn" data-copy-docreq>${icon.copy}Copy documentation request</button>` : `<button class="btn" data-tab-go="next">${{ ready: "See next step", not_yet: "See the earliest date", doesnt_qualify: "See why" }[ch.readiness]}</button>`}<a class="btn ghost" href="#/check">${icon.back}All requests</a></div>
+      ${coastSvg()}
     </section>
-    ${overviewHtml(c, run, matches, rd, "Planned MRI")}
+    ${overviewHtml(c, run, matches)}
     <div class="workspace">
       <aside class="ledger" aria-label="Policy rules for this request">
         <div class="facts"><dl style="margin:0">
@@ -746,7 +780,7 @@ async function checkView(id) {
       </section>
     </div>
     ${auditHtml(run, matches)}`;
-  wireWorkspace({ c, run, matches, selected: null }, { policy: policyPane, chart: chartPane, next: checkNextPane });
+  wireWorkspace({ c, run, matches, selected: null, mriLabel: "Planned MRI" }, { policy: policyPane, chart: chartPane, next: checkNextPane });
 }
 
 function checkNextPane(ctx) {

@@ -49,7 +49,7 @@ class PolicyDoc(BaseModel):
     def citation(self) -> str:
         """Short human citation, e.g. 'L34220 v40, eff 10/23/2025, CMS Coverage API'."""
         eff = self.effective_from.strftime("%m/%d/%Y") if self.effective_from else "date unknown"
-        via = {"cms-api": "CMS Coverage API", "tavily-extract": "fetched via Tavily", "http": "fetched from the payer's site"}
+        via = {"cms-api": "CMS Coverage API", "tavily-extract": "fetched via Tavily", "http": "from the payer's site"}
         ver = f"v{self.version}" if self.version_basis == "api-versioned" else f"snapshot {self.version}"
         return f"{self.policy_id} {ver}, eff {eff}, {via[self.fetched_via]}"
 

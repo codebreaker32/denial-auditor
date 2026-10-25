@@ -5,25 +5,26 @@ primary_target: "web/index.html"
 related_targets: []
 ---
 
-# Surface brief: Denial Auditor web app (worklist, case, live run)
+# Surface brief: Denial Auditor web app (worklist, case, before you submit, live run)
 
-Scope: the whole working app (worklist → case evidence board → appeal / next step; live run). Visitor mode: **Operate**.
-Audience/job: a billing specialist at a small practice working a queue of imaging denials against deadlines; decide, gather evidence, act.
-Constraints: synthetic data banner; CPT bare codes + AMA line; export locked until every quote verifies; human sends.
+Scope: the whole working app (worklist → case → appeal / next step; before you submit; live run; how it works). Visitor mode: **Operate**.
+Audience/job: a billing specialist at a small practice working a queue of imaging denials against deadlines; decide, gather evidence, act. Secondary: judges watching a sub-3-minute video.
+User answers (2026-10-25): disliked the photocopy look entirely; too much text; felt like a prototype; flow hard to follow; "looks like AI slop". Quality bar **Stripe / Mercury**. Theme **dark**.
+Constraints: synthetic data banner; CPT bare codes + AMA line; export locked until every quote verifies; a human sends.
 Build path: code-led (no image generation available).
 
 ## Direction contract
 
-THESIS: The denial file, marked up. Every verdict is a highlighted sentence you can trace: the app shows the payer's own policy text and the chart as photocopied documents, and evidence is literally highlighted on them. Refuses the category default: sidebar + KPI cards + generic table + chat panel.
+THESIS: Every denial is an area on one map, and its verdict is the colour of the land. The case opens on a single flat field of colour (green appeal, coral don't appeal yet, sun ask the physician, pond fix and resubmit, lilac not winnable) whose coastline does the dividing, so the answer is read before a word is. Refuses the category default: grey dashboard, KPI cards, a neon accent, and text-heavy cards.
 
-OWN-WORLD: Cool photocopy-grey paper ground (not cream), toner-black ink and a toner-black app rail, fluorescent highlighter as the entire state system: yellow = policy quote, green = met/supports, pink = blocks/not met, orange = missing documentation, grey = not applicable. Highlights are multiply-blended marker strokes with slightly ragged ends, never pills with borders. Public Sans for UI (US federal-forms lineage), Source Serif 4 for document text, tabular figures everywhere. Catalogue addresses on every quote: `L34220 · S47`, `note n3 · 07/01/2026`.
+OWN-WORLD: The guide-map palette translated to night (named translation: the map's cream water becomes a near-black ink-green ground, and cream becomes the text colour). Flat, unmodulated colour only, with no gradients, glow or grain: land #8ED462, coral #FF6B5A, sun #FFD23F, pond #4FA6E3, lilac #EBC1FF, ink #1B1D1A on colour. One grotesk (Hanken Grotesk); display bold at 0.95 leading and -0.05em; tabular figures. Controls are capsules; the primary capsule carries a round ink chip with an arrow on its trailing edge, and a selected filter's chip crosses to the leading edge. Everything that moves takes 0.4s and overshoots before settling.
 
-STORY: The biller sees which denials to work first (deadline board), opens one, understands in one glance whether to appeal and why (the rules list, each tied to highlighted sentences), checks any claim against its source, and exports a letter only when every quote verifies.
+STORY: The biller sees the board as coloured areas (counts per verdict that double as filters) and a table ranked by days left. They open a case and know the answer from the colour field. They check each rule (a capsule, one line, one quote) against the source, and export only when every quote verifies.
 
-FIRST VIEWPORT: Case view. Left: black rail (Worklist, Case, Run live, How it works). Top band: patient + payer + DOS, verdict stated as one decision line with the deadline number large ("Appeal · 43 days left · due 11/05/2026"). Main split: left column the rule ledger (status highlight swatch + plain summary + address), right column the photocopied policy page with the matched sentences highlighted in their status colours and sentence addresses in the margin. Primary action (Draft appeal / Request docs) top-right of the band.
+FIRST VIEWPORT: Case view. A standard left sidebar (brand lobe, Worklist, Case, Before you submit, Run live, How it works). The top is the verdict field: a flat colour lobe across the main column, its lower edge a drawn coastline. On it, in ink: patient and payer on one line, the verdict word at about 64px, days left as a monumental figure, and the primary capsule (Review appeal / Copy request) at right. Below, on the dark ground, the rules column (capsule status + one-line summary + first quote) beside tabbed source documents (Policy, Chart notes, Letter, Next step), with verified sentences filled flat in their status colour.
 
-FORM: Highlighter on photocopy, my grounded candidate 6 (assigned), seed key fdbf0a84. Raise from split-flap concourse (declined): worklist as a fixed-column board ranked by deadline, tabular figures, rows restyle by state without breaking the grid. Raise from Factory catalog sleeve (declined): every quote carries a catalogue address; addresses are the navigation between rule, policy and chart.
+FORM: Zoo and gardens guide map, a catalog challenger (aww2-zoo-gardens-guide-map) the user adopted over the assigned Exhibit Binder, seed key 00066ded. Translated to dark per the user's pin.
 
-SIGNATURE MOVE: Hovering or selecting a rule sweeps a highlighter stroke across its exact sentence in the policy pane and its evidence sentence in the chart pane (left-to-right, 280 ms, respects reduced motion). In the appeal editor, a tampered quote loses its highlight and gets a pink strike with the source sentence shown beside it.
+SIGNATURE MOVE: The verdict coastline. One SVG path, seeded by the case id, draws the verdict field's coast. Moving between cases or tabs morphs it (0.4s, overshoot) and recolours it. A tampered quote in the appeal turns its fill coral, gets a VOID capsule, and locks export.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

@@ -1,485 +1,559 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-23T14:08:55+00:00",
+  "generatedAt": "2026-10-25T17:25:07+00:00",
   "title": "Design System: Denial Auditor",
   "extensions": {
     "colorMeta": {
-      "copier-ground": {
+      "ground": {
         "role": "neutral",
-        "displayName": "Copier Ground",
-        "canonical": "oklch(90.7% 0.005 135)",
+        "displayName": "Night Ground",
+        "canonical": "oklch(18.6% 0.009 138)",
         "tonalRamp": [
-          "#0A0C0A",
-          "#232422",
-          "#3F403E",
-          "#5C5E5C",
-          "#7C7E7B",
-          "#9D9F9C",
-          "#C3C5C2",
-          "#EDEFEC"
+          "#090C08",
+          "#232622",
+          "#40433E",
+          "#5F625D",
+          "#80847E",
+          "#A2A6A1",
+          "#C6CBC5",
+          "#EBF0EA"
         ]
       },
-      "photocopy-paper": {
+      "surface": {
         "role": "neutral",
-        "displayName": "Photocopy Paper",
-        "canonical": "oklch(96.6% 0.004 122)",
+        "displayName": "Night Surface",
+        "canonical": "oklch(22.4% 0.013 135)",
         "tonalRamp": [
-          "#0B0B0A",
-          "#242422",
-          "#3F403E",
-          "#5D5E5B",
-          "#7D7E7B",
-          "#9E9F9C",
-          "#C3C4C2",
-          "#EEEFEC"
+          "#090C07",
+          "#222720",
+          "#3F443D",
+          "#5E635C",
+          "#7F847C",
+          "#A2A79F",
+          "#C6CBC3",
+          "#EBF1E8"
         ]
       },
-      "paper-edge": {
+      "surface-2": {
         "role": "neutral",
-        "displayName": "Paper Edge",
+        "displayName": "Raised Night",
+        "canonical": "oklch(26.5% 0.016 134)",
         "tonalRamp": [
-          "#0A0C0A",
-          "#232422",
-          "#3F403E",
-          "#5C5E5C",
-          "#7C7E7B",
-          "#9D9F9C",
-          "#C3C5C2",
-          "#EDEFEC"
+          "#080D06",
+          "#22271F",
+          "#3F443B",
+          "#5E635A",
+          "#7E857B",
+          "#A1A79D",
+          "#C5CCC1",
+          "#EAF1E6"
         ]
       },
-      "toner-ink": {
+      "stone": {
+        "role": "neutral",
+        "displayName": "Stone",
+        "canonical": "oklch(32.0% 0.019 133)",
+        "tonalRamp": [
+          "#080D05",
+          "#21271E",
+          "#3E443A",
+          "#5D6459",
+          "#7E8579",
+          "#A0A89C",
+          "#C4CCBF",
+          "#EAF1E4"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(30.8% 0.019 133)",
+        "tonalRamp": [
+          "#080D05",
+          "#21271E",
+          "#3E443A",
+          "#5D6459",
+          "#7E8579",
+          "#A0A89C",
+          "#C4CCBF",
+          "#E9F1E4"
+        ]
+      },
+      "line-2": {
+        "role": "neutral",
+        "displayName": "Strong Hairline",
+        "canonical": "oklch(36.9% 0.022 132)",
+        "tonalRamp": [
+          "#090C07",
+          "#22271F",
+          "#3E443A",
+          "#5D6458",
+          "#7D8578",
+          "#A0A89B",
+          "#C5CCC0",
+          "#EBF1E6"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Cream",
+        "canonical": "oklch(95.8% 0.018 93)",
+        "tonalRamp": [
+          "#0E0B04",
+          "#28251B",
+          "#454237",
+          "#656156",
+          "#868277",
+          "#A9A599",
+          "#CDC9BC",
+          "#F2EEE1"
+        ]
+      },
+      "text-2": {
+        "role": "neutral",
+        "displayName": "Cream 2",
+        "canonical": "oklch(82.4% 0.019 100)",
+        "tonalRamp": [
+          "#0D0B03",
+          "#27251B",
+          "#444237",
+          "#636255",
+          "#858376",
+          "#A7A698",
+          "#CCCABC",
+          "#F1EFE1"
+        ]
+      },
+      "text-3": {
+        "role": "neutral",
+        "displayName": "Cream 3",
+        "canonical": "oklch(68.4% 0.020 100)",
+        "tonalRamp": [
+          "#0C0B06",
+          "#26251E",
+          "#444239",
+          "#636256",
+          "#858375",
+          "#A7A699",
+          "#CBCABE",
+          "#F0EFE5"
+        ]
+      },
+      "land": {
         "role": "primary",
-        "displayName": "Toner Ink",
-        "canonical": "oklch(20.6% 0.004 165)",
+        "displayName": "Land Green",
+        "canonical": "oklch(79.9% 0.164 135)",
         "tonalRamp": [
-          "#0A0C0B",
-          "#222523",
-          "#3E403F",
-          "#5C5E5D",
-          "#7B7E7D",
-          "#9C9F9E",
-          "#C2C5C3",
-          "#ECEFEE"
+          "#001200",
+          "#042F00",
+          "#1E5000",
+          "#387200",
+          "#54961F",
+          "#7CB956",
+          "#A5DC85",
+          "#CEFFB3"
         ]
       },
-      "graphite": {
-        "role": "neutral",
-        "displayName": "Graphite",
+      "coral": {
+        "role": "primary",
+        "displayName": "Coral",
+        "canonical": "oklch(70.9% 0.184 29)",
         "tonalRamp": [
-          "#0A0C0B",
-          "#222523",
-          "#3E403F",
-          "#5C5E5D",
-          "#7B7E7D",
-          "#9C9F9E",
-          "#C2C5C3",
-          "#ECEFEE"
+          "#2B0000",
+          "#530000",
+          "#7E0B07",
+          "#AC2C21",
+          "#DA4A3C",
+          "#FB7767",
+          "#FFA392",
+          "#FFCEBE"
         ]
       },
-      "pencil": {
-        "role": "neutral",
-        "displayName": "Pencil",
+      "sun": {
+        "role": "primary",
+        "displayName": "Sun",
+        "canonical": "oklch(87.9% 0.162 91)",
         "tonalRamp": [
-          "#0A0C0B",
-          "#222523",
-          "#3E403F",
-          "#5C5E5D",
-          "#7B7E7D",
-          "#9C9F9E",
-          "#C2C5C3",
-          "#ECEFEE"
+          "#1A0500",
+          "#391F00",
+          "#5C3C00",
+          "#805B00",
+          "#A67C00",
+          "#C7A012",
+          "#E8C65F",
+          "#FFEC96"
         ]
       },
-      "rule-grey": {
+      "pond": {
+        "role": "primary",
+        "displayName": "Pond",
+        "canonical": "oklch(69.7% 0.123 242)",
+        "tonalRamp": [
+          "#000B26",
+          "#00284A",
+          "#004671",
+          "#11679A",
+          "#318AC5",
+          "#62ADE4",
+          "#90D1FF",
+          "#BDF6FF"
+        ]
+      },
+      "lilac": {
+        "role": "primary",
+        "displayName": "Lilac",
+        "canonical": "oklch(86.7% 0.095 315)",
+        "tonalRamp": [
+          "#14031B",
+          "#311A3B",
+          "#51355E",
+          "#735283",
+          "#9771A9",
+          "#B995CA",
+          "#DCBBEB",
+          "#FFE2FF"
+        ]
+      },
+      "ink": {
         "role": "neutral",
-        "displayName": "Rule Grey",
+        "displayName": "Ink",
+        "canonical": "oklch(22.7% 0.006 135)",
         "tonalRamp": [
           "#0A0C09",
-          "#232521",
-          "#3E413D",
-          "#5C5F5A",
-          "#7B7E7A",
-          "#9D9F9B",
-          "#C2C5C0",
-          "#ECF0EA"
+          "#242623",
+          "#40433F",
+          "#60625E",
+          "#81837F",
+          "#A3A6A2",
+          "#C7CAC6",
+          "#EDEFEB"
         ]
       },
-      "rail-ink": {
+      "ink-2": {
         "role": "neutral",
-        "displayName": "Rail Ink",
+        "displayName": "Ink 2",
+        "canonical": "oklch(29.8% 0.008 129)",
         "tonalRamp": [
-          "#0A0C0B",
-          "#222523",
-          "#3E403F",
-          "#5C5E5D",
-          "#7B7E7D",
-          "#9C9F9E",
-          "#C2C5C3",
-          "#ECEFEE"
+          "#0A0C08",
+          "#242622",
+          "#41433F",
+          "#60625E",
+          "#81837E",
+          "#A3A6A1",
+          "#C7CAC5",
+          "#EDEFEA"
         ]
       },
-      "rail-dim": {
-        "role": "neutral",
-        "displayName": "Rail Dim",
-        "tonalRamp": [
-          "#0A0C0B",
-          "#222523",
-          "#3E403F",
-          "#5C5E5D",
-          "#7B7E7D",
-          "#9C9F9E",
-          "#C2C5C3",
-          "#ECEFEE"
-        ]
-      },
-      "highlighter-yellow": {
+      "land-deep": {
         "role": "secondary",
-        "displayName": "Highlighter Yellow",
-        "canonical": "oklch(90.9% 0.183 104)",
+        "displayName": "Deep Land",
+        "canonical": "oklch(37.3% 0.078 138)",
         "tonalRamp": [
-          "#0E0C00",
-          "#292500",
-          "#484100",
-          "#686000",
-          "#8B8000",
-          "#AEA201",
-          "#D8C800",
-          "#FFF444"
+          "#030F00",
+          "#172B10",
+          "#314A28",
+          "#4D6B43",
+          "#6C8E60",
+          "#90B085",
+          "#B6D3AC",
+          "#DEF8D5"
         ]
       },
-      "highlighter-green": {
+      "coral-deep": {
         "role": "secondary",
-        "displayName": "Highlighter Green",
-        "canonical": "oklch(85.3% 0.173 141)",
+        "displayName": "Deep Coral",
+        "canonical": "oklch(34.1% 0.078 29)",
         "tonalRamp": [
-          "#001100",
-          "#012E00",
-          "#084E00",
-          "#007300",
-          "#359523",
-          "#5AB84A",
-          "#80DF70",
-          "#C0FFB4"
+          "#1B0302",
+          "#3B1A15",
+          "#5F342F",
+          "#85514A",
+          "#AC7068",
+          "#CD958C",
+          "#EFBBB3",
+          "#FFE2DA"
         ]
       },
-      "highlighter-pink": {
+      "sun-deep": {
         "role": "secondary",
-        "displayName": "Highlighter Pink",
-        "canonical": "oklch(75.7% 0.166 355)",
+        "displayName": "Deep Sun",
+        "canonical": "oklch(37.5% 0.065 93)",
         "tonalRamp": [
-          "#1F000D",
-          "#480027",
-          "#750344",
-          "#9F2663",
-          "#C44A83",
-          "#EB6DA4",
-          "#FF9EC9",
-          "#FFE3F0"
+          "#110A00",
+          "#2D2407",
+          "#4B4120",
+          "#6D6139",
+          "#908255",
+          "#B1A57C",
+          "#D4C9A4",
+          "#F9EECD"
         ]
       },
-      "highlighter-orange": {
+      "pond-deep": {
         "role": "secondary",
-        "displayName": "Highlighter Orange",
-        "canonical": "oklch(82.3% 0.145 72)",
+        "displayName": "Deep Pond",
+        "canonical": "oklch(33.5% 0.059 241)",
         "tonalRamp": [
-          "#160700",
-          "#381D00",
-          "#5B3600",
-          "#825200",
-          "#AC6E00",
-          "#D58D16",
-          "#FEB34C",
-          "#FFE7B6"
-        ]
-      },
-      "highlighter-grey": {
-        "role": "secondary",
-        "displayName": "Highlighter Grey",
-        "canonical": "oklch(84.1% 0.008 132)",
-        "tonalRamp": [
-          "#0A0C09",
-          "#232521",
-          "#3E413D",
-          "#5C5F5A",
-          "#7B7E7A",
-          "#9D9F9B",
-          "#C2C5C0",
-          "#ECF0EA"
-        ]
-      },
-      "deadline-magenta": {
-        "role": "tertiary",
-        "displayName": "Deadline Magenta",
-        "canonical": "oklch(45.6% 0.183 5)",
-        "tonalRamp": [
-          "#200008",
-          "#4A001D",
-          "#790036",
-          "#A91250",
-          "#D03F6F",
-          "#F76490",
-          "#FFA2BA",
-          "#FFE3EB"
-        ]
-      },
-      "strike-magenta": {
-        "role": "tertiary",
-        "displayName": "Strike Magenta",
-        "canonical": "oklch(53.1% 0.202 6)",
-        "tonalRamp": [
-          "#200007",
-          "#4A001C",
-          "#780234",
-          "#B0004D",
-          "#D7336C",
-          "#FF5B8C",
-          "#FFA3B9",
-          "#FFE5EB"
-        ]
-      },
-      "focus-blue": {
-        "role": "tertiary",
-        "displayName": "Focus Blue",
-        "canonical": "oklch(52.8% 0.263 265)",
-        "tonalRamp": [
-          "#01003A",
-          "#05007E",
-          "#0B00C7",
-          "#153CEE",
-          "#366BFF",
-          "#6F9AFE",
-          "#A7C4FF",
-          "#E4EFFF"
+          "#000D18",
+          "#112737",
+          "#2B4559",
+          "#46657D",
+          "#6387A2",
+          "#89AAC3",
+          "#AFCEE5",
+          "#D8F3FF"
         ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Case decision line and its deadline number."
+        "purpose": "The verdict word on the verdict field only; 50px below 760px."
+      },
+      "display-figure": {
+        "displayName": "Display figure",
+        "purpose": "Days left on the verdict field; same voice at 48px for worklist counts and 28px in due lobes. Underlined when the deadline is soon."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Page titles."
+        "purpose": "Page titles; 34px below 760px."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Sheet headers and section heads."
+        "purpose": "Sheet heads and section heads."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Application text, ledes, rationale."
+        "purpose": "Interface text and tables, tabular figures on."
       },
-      "document": {
-        "displayName": "Document",
-        "purpose": "Fetched and outgoing text: policy, chart notes, letters, quotes."
+      "body-reading": {
+        "displayName": "Body reading",
+        "purpose": "Source sheets, 72ch per paragraph."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Status marks, field labels, side headings, tabs. Sentence case."
+        "purpose": "Field labels and column heads, sentence case, normal tracking."
       },
-      "address": {
-        "displayName": "Address",
-        "purpose": "Catalogue addresses, table headers, copier strip, legal line."
+      "status": {
+        "displayName": "Status",
+        "purpose": "Status capsules and counts."
       }
     },
     "shadows": [
       {
-        "name": "sheet",
-        "value": "0 1px 1px rgba(22,24,23,.06), 0 6px 18px -8px rgba(22,24,23,.22)",
-        "purpose": "The only elevation: every resting paper surface."
+        "name": "hairline-outline",
+        "value": "inset 0 0 0 1px var(--line)",
+        "purpose": "Outline for cards, sheets, board, tab track, strip and resting filters; replaces borders."
       },
       {
-        "name": "photocopy-vignette",
-        "value": "inset 0 0 46px rgba(22,24,23,.07)",
-        "purpose": "Layered with sheet on document sheets only."
+        "name": "strong-outline",
+        "value": "inset 0 0 0 1.5px var(--line-2)",
+        "purpose": "Ghost capsules; inputs use 1px line-2."
+      },
+      {
+        "name": "focus-field",
+        "value": "inset 0 0 0 2px var(--land)",
+        "purpose": "Focused input and appeal editor."
+      },
+      {
+        "name": "selected-ring",
+        "value": "inset 0 0 0 2px var(--text)",
+        "purpose": "Selected rule card."
+      },
+      {
+        "name": "highlight-hot",
+        "value": "0 0 0 2px var(--cb)",
+        "purpose": "Ring in a highlight's own bright colour when its rule is hovered."
+      },
+      {
+        "name": "row-focus",
+        "value": "inset 0 0 0 2px var(--pond)",
+        "purpose": "Board row whose patient link has keyboard focus."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid var(--pond); outline-offset: 2px",
+        "purpose": "Global :focus-visible."
       }
     ],
     "motion": [
       {
+        "name": "overshoot",
+        "value": "cubic-bezier(.34, 1.56, .64, 1)",
+        "purpose": "0.4s, small transforms only: button chip slide, press scale, filter chip crossing, area and chip lifts, disclosure chevron; and the coastline path morph."
+      },
+      {
         "name": "ease-out",
-        "value": "cubic-bezier(.16,1,.3,1)",
-        "purpose": "Highlighter sweep, button press, disclosure chevron, card border."
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "0.4s for the verdict field recolour and the highlight sweep; 0.25s for the tab fill."
       },
       {
-        "name": "sweep",
-        "value": "background-size 0% to 100%, 320ms ease-out",
-        "purpose": "Highlighter stroke drawing across the selected rule's sentence and evidence."
-      },
-      {
-        "name": "press",
-        "value": "translateY(1px), 120ms ease-out",
-        "purpose": "Button active state."
-      },
-      {
-        "name": "state",
-        "value": "150ms",
-        "purpose": "Colour, background and border transitions."
-      },
-      {
-        "name": "pulse",
-        "value": "opacity to .35, 1.1s ease-in-out infinite",
-        "purpose": "In-progress step during a live run."
+        "name": "hover-fade",
+        "value": "0.2s (default ease)",
+        "purpose": "Colour, background, outline and opacity changes on hover."
       },
       {
         "name": "reduced-motion",
-        "value": "all animations and transitions off",
-        "purpose": "prefers-reduced-motion: reduce."
+        "value": "@media (prefers-reduced-motion: reduce) { animation: none; transition: none }",
+        "purpose": "Everything stops; highlights render in their final swept state; scroll-to-rule uses behavior auto."
       }
     ],
     "breakpoints": [
       {
-        "name": "single-column",
-        "value": "1100px"
+        "name": "stack",
+        "value": "1100px",
+        "purpose": "max-width: workspace and appeal grids become one column; gate unsticks."
       },
       {
-        "name": "mobile",
-        "value": "760px"
-      }
-    ],
-    "textures": [
-      {
-        "name": "ground-speckle",
-        "value": "fractalNoise baseFrequency .9, 2 octaves, alpha .05, 160px tile",
-        "purpose": "Copier ground."
-      },
-      {
-        "name": "toner-grain",
-        "value": "fractalNoise baseFrequency 1.15, 2 octaves, alpha .16, 220px tile, plus 90deg edge darkening",
-        "purpose": "Document sheets."
+        "name": "compact",
+        "value": "760px",
+        "purpose": "max-width: rail becomes an icon-only top bar, verdict field one column with 50px monuments, areas two per row, strip 2 by 2, board hides reason."
       }
     ]
   },
   "components": [
     {
-      "name": "Primary Button",
+      "name": "Primary Capsule",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Toner-black action: Review appeal, Export letter, Run live.",
-      "html": "<button class=\"ds-btn\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 4v11M7 10l5 5 5-5M5 20h14\"/></svg>Export letter</button>",
-      "css": ":host{--ground:#DFE1DE;--paper:#F3F4F1;--paper-edge:#CDD0CC;--ink:#161817;--ink-2:#3E433F;--ink-3:#5E645F;--rule:#C5C9C4;--rail:#161817;--rail-ink:#E9EAE7;--rail-dim:#9EA49F;--hl-yellow:#F5E62E;--hl-green:#8BEA7B;--hl-pink:#FF7FB6;--hl-orange:#FFB44D;--hl-grey:#C9CCC7;--focus:#1F4FFF;--r:6px;--shadow-sheet:0 1px 1px rgba(22,24,23,.06),0 6px 18px -8px rgba(22,24,23,.22);--ease-out:cubic-bezier(.16,1,.3,1);--sans:\"Public Sans\",system-ui,-apple-system,\"Segoe UI\",sans-serif;--serif:\"Source Serif 4\",Georgia,serif;font-variant-numeric:tabular-nums;} .ds-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:var(--r);padding:9px 15px;font:600 15px/1.5 var(--sans);cursor:pointer;transition:transform .12s var(--ease-out),background .15s;}.ds-btn:hover{background:#2B302D;}.ds-btn:active{transform:translateY(1px);}.ds-btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px;}.ds-btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;}.ds-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}"
+      "description": "Primary action: land capsule with a round ink chip on the trailing edge carrying the action's icon.",
+      "html": "<button class=\"ds-btn\">Export letter<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 4v11M7 10l5 5 5-5M5 20h14\"/></svg></button> <button class=\"ds-btn\" disabled>Export letter<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 4v11M7 10l5 5 5-5M5 20h14\"/></svg></button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 12px; border: 0; background: var(--land, #8ED462); color: var(--ink, #1B1D1A); border-radius: 999px; padding: 6px 6px 6px 20px; min-height: 44px; font: 650 15px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; cursor: pointer; transition: transform .4s cubic-bezier(.34, 1.56, .64, 1), opacity .2s; } .ds-btn svg { order: 2; width: 32px; height: 32px; padding: 8px; box-sizing: border-box; border-radius: 50%; background: var(--ink, #1B1D1A); fill: none; stroke: var(--text, #F5F1E4); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .4s cubic-bezier(.34, 1.56, .64, 1); } .ds-btn:hover:not([disabled]) svg { transform: translateX(3px); } .ds-btn:active:not([disabled]) { transform: scale(.97); } .ds-btn:focus-visible { outline: 2px solid var(--pond, #4FA6E3); outline-offset: 2px; } .ds-btn[disabled] { opacity: .38; cursor: not-allowed; }"
     },
     {
-      "name": "Ghost Button",
+      "name": "Ghost Capsule",
       "kind": "button",
       "refersTo": "button-ghost",
-      "description": "Secondary action, e.g. back to Worklist, Copy.",
-      "html": "<button class=\"ds-btn-ghost\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M15 6l-6 6 6 6\"/></svg>Worklist</button>",
-      "css": ":host{--ground:#DFE1DE;--paper:#F3F4F1;--paper-edge:#CDD0CC;--ink:#161817;--ink-2:#3E433F;--ink-3:#5E645F;--rule:#C5C9C4;--rail:#161817;--rail-ink:#E9EAE7;--rail-dim:#9EA49F;--hl-yellow:#F5E62E;--hl-green:#8BEA7B;--hl-pink:#FF7FB6;--hl-orange:#FFB44D;--hl-grey:#C9CCC7;--focus:#1F4FFF;--r:6px;--shadow-sheet:0 1px 1px rgba(22,24,23,.06),0 6px 18px -8px rgba(22,24,23,.22);--ease-out:cubic-bezier(.16,1,.3,1);--sans:\"Public Sans\",system-ui,-apple-system,\"Segoe UI\",sans-serif;--serif:\"Source Serif 4\",Georgia,serif;font-variant-numeric:tabular-nums;} .ds-btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:var(--r);padding:9px 15px;font:600 15px/1.5 var(--sans);cursor:pointer;transition:transform .12s var(--ease-out),background .15s;}.ds-btn-ghost:hover{background:var(--paper);border-color:var(--ink-3);}.ds-btn-ghost:active{transform:translateY(1px);}.ds-btn-ghost:focus-visible{outline:2px solid var(--focus);outline-offset:2px;}.ds-btn-ghost svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}"
+      "description": "Secondary action: outlined capsule with a leading icon and no chip.",
+      "html": "<button class=\"ds-ghost\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M15 6l-6 6 6 6\"/></svg>Worklist</button>",
+      "css": ".ds-ghost { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; color: var(--text, #F5F1E4); border-radius: 999px; padding: 6px 18px 6px 12px; min-height: 40px; box-shadow: inset 0 0 0 1.5px var(--line-2, #3B4236); font: 650 15px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; cursor: pointer; transition: box-shadow .2s; } .ds-ghost svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .4s cubic-bezier(.34, 1.56, .64, 1); } .ds-ghost:hover { box-shadow: inset 0 0 0 1.5px var(--text-2, #C8C6B8); } .ds-ghost:hover svg { transform: translateX(-2px); } .ds-ghost:focus-visible { outline: 2px solid var(--pond, #4FA6E3); outline-offset: 2px; }"
     },
     {
-      "name": "Text Input",
+      "name": "Status Capsules",
+      "kind": "chip",
+      "refersTo": "status-capsule-supports",
+      "description": "Colour plus word, never colour alone; VOID marks a quote not found in any fetched source.",
+      "html": "<span class=\"ds-mark ds-met\">Supports</span> <span class=\"ds-mark ds-not\">Blocks</span> <span class=\"ds-mark ds-miss\">Missing docs</span> <span class=\"ds-mark ds-na\">Not applicable</span> <span class=\"ds-mark ds-pond\">Fix &amp; resubmit</span> <span class=\"ds-mark ds-lilac\">Not winnable</span> <span class=\"ds-void\">VOID</span>",
+      "css": ".ds-mark { --c: var(--stone, #2F352B); display: inline-flex; align-items: center; gap: 7px; padding: 3px 11px 3px 9px; border-radius: 999px; background: var(--c); color: var(--ink, #1B1D1A); font: 650 12.5px/1.35 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; white-space: nowrap; } .ds-mark::before { content: \"\"; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .75; } .ds-met { --c: var(--land, #8ED462); } .ds-not { --c: var(--coral, #FF6B5A); } .ds-miss { --c: var(--sun, #FFD23F); } .ds-pond { --c: var(--pond, #4FA6E3); } .ds-lilac { --c: var(--lilac, #EBC1FF); } .ds-na { color: var(--text-2, #C8C6B8); } .ds-void { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--coral, #FF6B5A); color: var(--ink, #1B1D1A); font: 800 11px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; letter-spacing: .04em; }"
+    },
+    {
+      "name": "Filter Capsules",
+      "kind": "chip",
+      "refersTo": "filter-capsule",
+      "description": "Filters: the round chip rides the trailing edge and crosses to the leading edge when the filter is live.",
+      "html": "<div class=\"ds-seg\"><button aria-pressed=\"true\" style=\"--c: #8ED462\">Appeal <span class=\"n\">4</span></button><button aria-pressed=\"false\" style=\"--c: #FFD23F\">Ask the physician <span class=\"n\">2</span></button></div>",
+      "css": ".ds-seg { display: inline-flex; gap: 6px; flex-wrap: wrap; } .ds-seg button { --c: var(--text-2, #C8C6B8); position: relative; border: 0; background: var(--surface, #191D17); box-shadow: inset 0 0 0 1px var(--line, #2C3228); color: var(--text-2, #C8C6B8); padding: 8px 32px; border-radius: 999px; cursor: pointer; font: 600 15px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; transition: background .2s, color .2s, box-shadow .2s; } .ds-seg button::after { content: \"\"; position: absolute; top: 50%; left: calc(100% - 21px); width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%; background: var(--c); transition: left .4s cubic-bezier(.34, 1.56, .64, 1), background .2s; } .ds-seg .n { font-size: 12.5px; color: var(--text-3, #9C9A8C); } .ds-seg button:hover { color: var(--text, #F5F1E4); box-shadow: inset 0 0 0 1px var(--line-2, #3B4236); } .ds-seg button:focus-visible { outline: 2px solid var(--pond, #4FA6E3); outline-offset: 2px; } .ds-seg button[aria-pressed=\"true\"] { background: var(--c); color: var(--ink, #1B1D1A); box-shadow: none; } .ds-seg button[aria-pressed=\"true\"]::after { left: 13px; background: var(--ink, #1B1D1A); } .ds-seg button[aria-pressed=\"true\"] .n { color: var(--ink-2, #2C2E2A); }"
+    },
+    {
+      "name": "Tab Track",
+      "kind": "nav",
+      "refersTo": "tab-track",
+      "description": "Source tabs as a capsule track; the selected tab fills cream.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button role=\"tab\" aria-selected=\"true\">Policy</button><button role=\"tab\" aria-selected=\"false\">Chart notes</button><button role=\"tab\" aria-selected=\"false\">Letter</button><button role=\"tab\" aria-selected=\"false\">Next step</button></div>",
+      "css": ".ds-tabs { display: inline-flex; gap: 2px; padding: 4px; background: var(--surface, #191D17); border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line, #2C3228); } .ds-tabs button { background: none; border: 0; padding: 8px 16px; border-radius: 999px; font: 600 15px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; color: var(--text-3, #9C9A8C); cursor: pointer; transition: background .25s cubic-bezier(.16, 1, .3, 1), color .2s; } .ds-tabs button:hover { color: var(--text, #F5F1E4); } .ds-tabs button:focus-visible { outline: 2px solid var(--pond, #4FA6E3); outline-offset: 2px; } .ds-tabs button[aria-selected=\"true\"] { color: var(--ink, #1B1D1A); background: var(--text, #F5F1E4); }"
+    },
+    {
+      "name": "Text Field",
       "kind": "input",
       "refersTo": "input",
-      "description": "Paper field with a hairline border and a label above.",
-      "html": "<div class=\"ds-field\"><label for=\"ds-pc\">Passcode</label><input id=\"ds-pc\" class=\"ds-input\" placeholder=\"Live-run passcode\"></div>",
-      "css": ":host{--ground:#DFE1DE;--paper:#F3F4F1;--paper-edge:#CDD0CC;--ink:#161817;--ink-2:#3E433F;--ink-3:#5E645F;--rule:#C5C9C4;--rail:#161817;--rail-ink:#E9EAE7;--rail-dim:#9EA49F;--hl-yellow:#F5E62E;--hl-green:#8BEA7B;--hl-pink:#FF7FB6;--hl-orange:#FFB44D;--hl-grey:#C9CCC7;--focus:#1F4FFF;--r:6px;--shadow-sheet:0 1px 1px rgba(22,24,23,.06),0 6px 18px -8px rgba(22,24,23,.22);--ease-out:cubic-bezier(.16,1,.3,1);--sans:\"Public Sans\",system-ui,-apple-system,\"Segoe UI\",sans-serif;--serif:\"Source Serif 4\",Georgia,serif;font-variant-numeric:tabular-nums;} .ds-field{display:grid;gap:6px;font-family:var(--sans);color:var(--ink);}.ds-field label{font-weight:600;font-size:13px;}.ds-input{font:400 15px/1.5 var(--sans);color:var(--ink);border:1px solid var(--rule);background:var(--paper);border-radius:var(--r);padding:9px 11px;}.ds-input:focus{border-color:var(--ink-2);}.ds-input:focus-visible{outline:2px solid var(--focus);outline-offset:2px;}"
+      "description": "Ground well with a hairline outline that turns 2px land on focus.",
+      "html": "<label class=\"ds-field\"><span>Passcode</span><input class=\"ds-input\" placeholder=\"Enter passcode\"></label>",
+      "css": ".ds-field { display: grid; gap: 7px; font: 600 13px/1.4 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; color: var(--text-2, #C8C6B8); } .ds-input { border: 0; box-shadow: inset 0 0 0 1px var(--line-2, #3B4236); background: var(--ground, #111410); color: var(--text, #F5F1E4); border-radius: 12px; padding: 11px 14px; font: 400 15px/1.5 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; caret-color: var(--land, #8ED462); transition: box-shadow .2s; } .ds-input::placeholder { color: var(--text-3, #9C9A8C); } .ds-input:focus { outline: none; box-shadow: inset 0 0 0 2px var(--land, #8ED462); }"
     },
     {
-      "name": "Segmented Filter",
-      "kind": "chip",
-      "refersTo": "segmented-option",
-      "description": "Worklist filter and letter view toggle; pressed option is toner-filled.",
-      "html": "<div class=\"ds-seg\" role=\"group\"><button aria-pressed=\"true\">All <span class=\"n\">7</span></button><button aria-pressed=\"false\">Appeal <span class=\"n\">3</span></button><button aria-pressed=\"false\">Don't appeal yet <span class=\"n\">2</span></button></div>",
-      "css": ":host{--ground:#DFE1DE;--paper:#F3F4F1;--paper-edge:#CDD0CC;--ink:#161817;--ink-2:#3E433F;--ink-3:#5E645F;--rule:#C5C9C4;--rail:#161817;--rail-ink:#E9EAE7;--rail-dim:#9EA49F;--hl-yellow:#F5E62E;--hl-green:#8BEA7B;--hl-pink:#FF7FB6;--hl-orange:#FFB44D;--hl-grey:#C9CCC7;--focus:#1F4FFF;--r:6px;--shadow-sheet:0 1px 1px rgba(22,24,23,.06),0 6px 18px -8px rgba(22,24,23,.22);--ease-out:cubic-bezier(.16,1,.3,1);--sans:\"Public Sans\",system-ui,-apple-system,\"Segoe UI\",sans-serif;--serif:\"Source Serif 4\",Georgia,serif;font-variant-numeric:tabular-nums;} .ds-seg{display:inline-flex;border:1px solid var(--rule);border-radius:var(--r);background:var(--paper);padding:3px;gap:2px;font-family:var(--sans);font-size:15px;}.ds-seg button{border:0;background:transparent;padding:6px 11px;border-radius:4px;cursor:pointer;font:500 15px/1.5 var(--sans);color:var(--ink-2);display:inline-flex;gap:6px;align-items:baseline;}.ds-seg button:hover{color:var(--ink);}.ds-seg button:focus-visible{outline:2px solid var(--focus);outline-offset:2px;}.ds-seg .n{font-size:12px;color:var(--ink-3);}.ds-seg button[aria-pressed=\"true\"]{background:var(--ink);color:var(--paper);}.ds-seg button[aria-pressed=\"true\"] .n{color:var(--rail-dim);}"
+      "name": "Evidence Highlight",
+      "kind": "custom",
+      "refersTo": "sheet",
+      "description": "Two-tone flat highlight: deep land with cream text at rest; bright land sweeps left to right with ink text for the selected rule.",
+      "html": "<p class=\"ds-sheet\">The patient has <span class=\"ds-hl ds-hl-met\">six weeks of conservative therapy</span> and <span class=\"ds-hl ds-hl-miss ds-sweep\">no documented neurological deficit</span>.</p>",
+      "css": ".ds-sheet { background: var(--surface, #191D17); color: var(--text, #F5F1E4); border-radius: 22px; box-shadow: inset 0 0 0 1px var(--line, #2C3228); padding: 26px 40px; font: 400 16px/1.7 \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; max-width: 72ch; } .ds-hl { --c: var(--stone, #2F352B); --cb: var(--line-2, #3B4236); padding: .04em .22em; border-radius: 5px; color: var(--text, #F5F1E4); background: linear-gradient(var(--cb), var(--cb)) 0 0 / 0% 100% no-repeat, linear-gradient(var(--c), var(--c)); -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: box-shadow .2s; } .ds-hl-met { --c: var(--land-deep, #2B4A1F); --cb: var(--land, #8ED462); } .ds-hl-miss { --c: var(--sun-deep, #4D4012); --cb: var(--sun, #FFD23F); } .ds-hl:hover { box-shadow: 0 0 0 2px var(--cb); } .ds-sweep { color: var(--ink, #1B1D1A); background-size: 100% 100%, 100% 100%; animation: ds-sweep .4s cubic-bezier(.16, 1, .3, 1) both; } @keyframes ds-sweep { from { background-size: 0% 100%, 100% 100%; color: var(--text, #F5F1E4); } 55% { color: var(--ink, #1B1D1A); } to { background-size: 100% 100%, 100% 100%; } } @media (prefers-reduced-motion: reduce) { .ds-sweep { animation: none; } }"
     },
     {
-      "name": "Rail Navigation",
-      "kind": "nav",
-      "refersTo": "nav-item",
-      "description": "Toner rail with stroke icons; current page is a yellow highlighter fill.",
-      "html": "<nav class=\"ds-rail\"><a href=\"#\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\"><path d=\"M4 6h16M4 12h16M4 18h10\"/></svg>Worklist</a><a href=\"#\"><svg viewBox=\"0 0 24 24\"><path d=\"M7 3h7l5 5v13H7z\"/><path d=\"M14 3v5h5M10 13h6M10 17h4\"/></svg>Case</a><a href=\"#\"><svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M10 8.5l5.5 3.5-5.5 3.5z\"/></svg>Run live</a></nav>",
-      "css": ":host{--ground:#DFE1DE;--paper:#F3F4F1;--paper-edge:#CDD0CC;--ink:#161817;--ink-2:#3E433F;--ink-3:#5E645F;--rule:#C5C9C4;--rail:#161817;--rail-ink:#E9EAE7;--rail-dim:#9EA49F;--hl-yellow:#F5E62E;--hl-green:#8BEA7B;--hl-pink:#FF7FB6;--hl-orange:#FFB44D;--hl-grey:#C9CCC7;--focus:#1F4FFF;--r:6px;--shadow-sheet:0 1px 1px rgba(22,24,23,.06),0 6px 18px -8px rgba(22,24,23,.22);--ease-out:cubic-bezier(.16,1,.3,1);--sans:\"Public Sans\",system-ui,-apple-system,\"Segoe UI\",sans-serif;--serif:\"Source Serif 4\",Georgia,serif;font-variant-numeric:tabular-nums;} .ds-rail{background:var(--rail);padding:22px 14px;display:grid;gap:2px;width:208px;font-family:var(--sans);font-size:15px;}.ds-rail a{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:var(--r);text-decoration:none;color:var(--rail-dim);font-weight:500;transition:color .15s,background .15s;}.ds-rail a:hover{color:var(--rail-ink);background:#242826;}.ds-rail a:focus-visible{outline:2px solid var(--focus);outline-offset:2px;}.ds-rail a[aria-current=\"page\"]{color:var(--ink);background:var(--hl-yellow);}.ds-rail svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none;}"
+      "name": "Verdict Field",
+      "kind": "custom",
+      "refersTo": "verdict-field-appeal",
+      "description": "Signature: a flat field in the verdict's land colour, verdict word and days-left figure in ink, lower edge a seeded SVG coastline in the ground colour that morphs between cases and tabs.",
+      "html": "<section class=\"ds-band\"><div class=\"ds-who\"><b>Synthetic patient</b> · Medicare Advantage (synthetic)</div><div class=\"ds-dec\"><h1>Appeal</h1><span class=\"ds-dl\"><b>23</b> days left</span></div><svg class=\"ds-coast\" viewBox=\"0 0 1200 72\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M0 22.0 C100 30.0 200 52.0 300 48.0 C400 44.0 500 12.0 600 14.0 C700 16.0 800 50.0 900 58.0 C1000 66.0 1100 30.0 1200 26.0 L1200 72 L0 72 Z\"/></svg></section>",
+      "css": ".ds-band { position: relative; background: var(--land, #8ED462); color: var(--ink, #1B1D1A); border-radius: 22px 22px 0 0; padding: 26px 30px 86px; font-family: \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; transition: background-color .4s cubic-bezier(.16, 1, .3, 1); } .ds-who { font-size: 13.5px; color: var(--ink-2, #2C2E2A); } .ds-who b { color: var(--ink, #1B1D1A); } .ds-dec { display: flex; align-items: flex-end; gap: 14px 34px; flex-wrap: wrap; margin-top: 14px; } .ds-dec h1 { margin: 0; font-size: 76px; font-weight: 800; letter-spacing: -.035em; line-height: .92; } .ds-dl { display: inline-flex; align-items: baseline; gap: 10px; color: var(--ink-2, #2C2E2A); font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; } .ds-dl b { font-size: 76px; font-weight: 800; letter-spacing: -.04em; line-height: .8; color: var(--ink, #1B1D1A); } .ds-coast { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 72px; display: block; } .ds-coast path { fill: var(--ground, #111410); transition: d .4s cubic-bezier(.34, 1.56, .64, 1); }"
     },
     {
-      "name": "Status Mark",
-      "kind": "chip",
-      "refersTo": "",
-      "description": "Skewed highlighter swatch plus a word; never colour alone.",
-      "html": "<div class=\"ds-marks\"><span class=\"ds-mark met\">Supports</span><span class=\"ds-mark not_met\">Blocks</span><span class=\"ds-mark missing\">Missing documentation</span><span class=\"ds-mark na\">Not applicable</span></div>",
-      "css": ":host{--ground:#DFE1DE;--paper:#F3F4F1;--paper-edge:#CDD0CC;--ink:#161817;--ink-2:#3E433F;--ink-3:#5E645F;--rule:#C5C9C4;--rail:#161817;--rail-ink:#E9EAE7;--rail-dim:#9EA49F;--hl-yellow:#F5E62E;--hl-green:#8BEA7B;--hl-pink:#FF7FB6;--hl-orange:#FFB44D;--hl-grey:#C9CCC7;--focus:#1F4FFF;--r:6px;--shadow-sheet:0 1px 1px rgba(22,24,23,.06),0 6px 18px -8px rgba(22,24,23,.22);--ease-out:cubic-bezier(.16,1,.3,1);--sans:\"Public Sans\",system-ui,-apple-system,\"Segoe UI\",sans-serif;--serif:\"Source Serif 4\",Georgia,serif;font-variant-numeric:tabular-nums;} .ds-marks{display:grid;gap:10px;background:var(--paper);padding:14px;font-family:var(--sans);color:var(--ink);}.ds-mark{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:13px;white-space:nowrap;}.ds-mark::before{content:\"\";width:22px;height:11px;border-radius:2px 6px 3px 7px/6px 3px 7px 2px;background:var(--c,var(--hl-grey));mix-blend-mode:multiply;transform:skewX(-8deg);flex:none;}.ds-mark.met{--c:var(--hl-green);}.ds-mark.not_met{--c:var(--hl-pink);}.ds-mark.missing{--c:var(--hl-orange);}.ds-mark.na{--c:var(--hl-grey);color:var(--ink-3);}"
+      "name": "Worklist Areas",
+      "kind": "custom",
+      "refersTo": "worklist-area",
+      "description": "One organic lobe per verdict, width grown by its count; pressing one filters the board and the rest recede to night.",
+      "html": "<div class=\"ds-areas ds-filtered\"><button class=\"ds-area\" aria-pressed=\"true\" style=\"--c: #8ED462; flex-grow: 4\"><b>4</b><span>Appeal</span></button><button class=\"ds-area\" aria-pressed=\"false\" style=\"--c: #FFD23F; flex-grow: 2\"><b>2</b><span>Ask the physician</span></button><button class=\"ds-area\" aria-pressed=\"false\" style=\"--c: #FF6B5A; flex-grow: 1\"><b>1</b><span>Don't appeal yet</span></button></div>",
+      "css": ".ds-areas { display: flex; gap: 8px; flex-wrap: wrap; font-family: \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; } .ds-area { --c: var(--stone, #2F352B); flex: 1 1 0; min-width: 150px; min-height: 112px; border: 0; background: var(--c); color: var(--ink, #1B1D1A); text-align: left; padding: 16px 20px; display: grid; align-content: space-between; gap: 10px; cursor: pointer; border-radius: 30px 44px 34px 52px / 40px 30px 48px 32px; transition: transform .4s cubic-bezier(.34, 1.56, .64, 1), background .2s, color .2s; } .ds-area:nth-child(2) { border-radius: 48px 28px 54px 32px / 32px 46px 30px 50px; } .ds-area:nth-child(3) { border-radius: 36px 56px 30px 44px / 50px 32px 44px 30px; } .ds-area b { font-size: 48px; font-weight: 800; letter-spacing: -.04em; line-height: .85; } .ds-area span { font-weight: 650; font-size: 14.5px; } .ds-area:hover { transform: translateY(-3px); } .ds-area:active { transform: scale(.98); } .ds-area:focus-visible { outline: 2px solid var(--pond, #4FA6E3); outline-offset: 2px; } .ds-filtered .ds-area[aria-pressed=\"false\"] { background: var(--surface, #191D17); color: var(--text-2, #C8C6B8); box-shadow: inset 0 0 0 1px var(--line, #2C3228); } .ds-filtered .ds-area[aria-pressed=\"false\"] b { color: var(--c); }"
     },
     {
-      "name": "Rule Card",
+      "name": "Decision Strip",
       "kind": "card",
       "refersTo": "rule-card",
-      "description": "Ledger entry: status, summary, rationale and addressed serif evidence.",
-      "html": "<article class=\"ds-rule\" tabindex=\"0\"><div class=\"ds-top\"><span class=\"ds-mark\">Supports</span><a class=\"ds-addr\" href=\"#\">L34220 · S24</a></div><div class=\"ds-sum\">Lumbar MRI may be indicated for patients with red-flag conditions.</div><div class=\"ds-why\">The patient has documented cancer history and nocturnal pain.</div><div class=\"ds-ev\">“History of cancer.”<a class=\"ds-addr\" href=\"#\">note n1 · 07/20/2026</a></div></article>",
-      "css": ":host{--ground:#DFE1DE;--paper:#F3F4F1;--paper-edge:#CDD0CC;--ink:#161817;--ink-2:#3E433F;--ink-3:#5E645F;--rule:#C5C9C4;--rail:#161817;--rail-ink:#E9EAE7;--rail-dim:#9EA49F;--hl-yellow:#F5E62E;--hl-green:#8BEA7B;--hl-pink:#FF7FB6;--hl-orange:#FFB44D;--hl-grey:#C9CCC7;--focus:#1F4FFF;--r:6px;--shadow-sheet:0 1px 1px rgba(22,24,23,.06),0 6px 18px -8px rgba(22,24,23,.22);--ease-out:cubic-bezier(.16,1,.3,1);--sans:\"Public Sans\",system-ui,-apple-system,\"Segoe UI\",sans-serif;--serif:\"Source Serif 4\",Georgia,serif;font-variant-numeric:tabular-nums;} .ds-rule{background:var(--paper);border-radius:var(--r);padding:12px 14px;box-shadow:var(--shadow-sheet);border:1px solid transparent;display:grid;gap:6px;max-width:400px;font:400 15px/1.5 var(--sans);color:var(--ink);cursor:pointer;transition:border-color .15s;}.ds-rule:hover{border-color:var(--paper-edge);}.ds-rule:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-color:var(--ink);}.ds-top{display:flex;justify-content:space-between;align-items:center;}.ds-mark{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:13px;}.ds-mark::before{content:\"\";width:22px;height:11px;border-radius:2px 6px 3px 7px/6px 3px 7px 2px;background:var(--hl-green);mix-blend-mode:multiply;transform:skewX(-8deg);}.ds-addr{font-size:12px;color:var(--ink-3);font-weight:500;letter-spacing:.01em;text-underline-offset:3px;}.ds-sum{font-weight:500;line-height:1.4;}.ds-why{font-size:13px;color:var(--ink-2);}.ds-ev{font-family:var(--serif);font-size:14px;color:var(--ink-2);border-top:1px dashed var(--rule);padding-top:7px;}.ds-ev .ds-addr{font-family:var(--sans);display:block;margin-top:3px;color:var(--ink-3);}"
-    },
-    {
-      "name": "Document Sheet with Highlights",
-      "kind": "custom",
-      "refersTo": "document-sheet",
-      "description": "Photocopied policy page: copier strip, margin sentence addresses, multiply highlighter strokes that sweep in.",
-      "html": "<article class=\"ds-sheet\"><div class=\"ds-copy\"><span>Copy of fetched source — CMS Coverage API</span><span>fetched 10/21/2026 · 99 sentences</span></div><h2>Lumbar MRI</h2><p><span class=\"ds-n\">S24</span><span class=\"ds-hl met ds-sweep\">Lumbar MRI may be indicated for a patient with a “red-flag” condition.</span> The MRI test result may be needed to evaluate these conditions.</p><p><span class=\"ds-n\">S47</span><span class=\"ds-hl quote\">For a \"non-red flag\" condition, the MRI may be appropriate after 1 month of symptoms.</span></p><p><span class=\"ds-n\">S48</span><span class=\"ds-struck\">MRI will be covered only after two weeks.</span></p></article>",
-      "css": ":host{--ground:#DFE1DE;--paper:#F3F4F1;--paper-edge:#CDD0CC;--ink:#161817;--ink-2:#3E433F;--ink-3:#5E645F;--rule:#C5C9C4;--rail:#161817;--rail-ink:#E9EAE7;--rail-dim:#9EA49F;--hl-yellow:#F5E62E;--hl-green:#8BEA7B;--hl-pink:#FF7FB6;--hl-orange:#FFB44D;--hl-grey:#C9CCC7;--focus:#1F4FFF;--r:6px;--shadow-sheet:0 1px 1px rgba(22,24,23,.06),0 6px 18px -8px rgba(22,24,23,.22);--ease-out:cubic-bezier(.16,1,.3,1);--sans:\"Public Sans\",system-ui,-apple-system,\"Segoe UI\",sans-serif;--serif:\"Source Serif 4\",Georgia,serif;font-variant-numeric:tabular-nums;} .ds-sheet{background:var(--paper);border-radius:3px;box-shadow:var(--shadow-sheet),inset 0 0 46px rgba(22,24,23,.07);padding:26px 40px 40px 72px;position:relative;font:400 16px/1.62 var(--serif);color:var(--ink);max-width:640px;}.ds-copy{font:400 12px/1.5 var(--sans);color:var(--ink-3);display:flex;justify-content:space-between;gap:12px;margin:-26px -40px 20px -72px;padding:6px 40px 6px 72px;background:rgba(22,24,23,.045);border-bottom:1px solid #CFD2CE;border-radius:3px 3px 0 0;}.ds-sheet h2{font:700 18px/1.3 var(--sans);margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--rule);}.ds-sheet p{position:relative;margin:0 0 .75em;max-width:72ch;}.ds-n{position:absolute;left:-54px;width:40px;text-align:right;font:400 11px/1.5 var(--sans);color:var(--ink-3);top:.35em;}.ds-hl{padding:0 .12em;margin:0 -.06em;border-radius:3px 8px 4px 9px/8px 4px 9px 3px;background-repeat:no-repeat;background-size:100% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone;mix-blend-mode:multiply;}.ds-hl.met{background-image:linear-gradient(100deg,color-mix(in srgb,var(--hl-green) 80%,transparent),var(--hl-green) 6%,var(--hl-green) 94%,color-mix(in srgb,var(--hl-green) 70%,transparent));}.ds-hl.quote{background-image:linear-gradient(100deg,color-mix(in srgb,var(--hl-yellow) 80%,transparent),var(--hl-yellow) 6%,var(--hl-yellow) 94%,color-mix(in srgb,var(--hl-yellow) 70%,transparent));}.ds-sweep{animation:ds-sweep .32s var(--ease-out) both;}.ds-sheet:hover .ds-sweep{animation:ds-sweep .32s var(--ease-out) both;}@keyframes ds-sweep{from{background-size:0% 100%;}to{background-size:100% 100%;}}.ds-struck{text-decoration:line-through;text-decoration-color:#C2185B;text-decoration-thickness:2px;background:color-mix(in srgb,var(--hl-pink) 35%,transparent);}@media (prefers-reduced-motion:reduce){.ds-sweep{animation:none;}}"
+      "description": "How it was decided: one flat strip split into stages by 1px hairlines, with a due lobe for the deadline.",
+      "html": "<ol class=\"ds-strip\"><li><span class=\"ds-h\">Triage</span><span class=\"ds-cap\">Supports</span><span class=\"ds-n\">CARC 50, clinical</span></li><li><span class=\"ds-h\">Policy</span><span class=\"ds-cap\">Supports</span><span class=\"ds-n\">L34220 in effect on the date of service</span></li><li><span class=\"ds-h\">Deadline</span><span class=\"ds-due\"><b>23</b><small>due 11/17/2026</small></span></li></ol>",
+      "css": ".ds-strip { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--surface, #191D17); border-radius: 22px; box-shadow: inset 0 0 0 1px var(--line, #2C3228); font-family: \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif; color: var(--text, #F5F1E4); } .ds-strip li { padding: 14px 18px 16px; display: grid; gap: 8px; align-content: start; } .ds-strip li + li { border-left: 1px solid var(--line, #2C3228); } .ds-h { font-weight: 700; font-size: 13.5px; } .ds-n { font-size: 12px; color: var(--text-3, #9C9A8C); } .ds-cap { justify-self: start; padding: 3px 11px; border-radius: 999px; background: var(--land, #8ED462); color: var(--ink, #1B1D1A); font-weight: 650; font-size: 12px; } .ds-due { justify-self: start; display: inline-grid; gap: 4px; padding: 9px 13px; background: var(--land, #8ED462); color: var(--ink, #1B1D1A); border-radius: 20px 26px 22px 28px / 24px 20px 26px 22px; } .ds-due b { font-size: 28px; font-weight: 800; letter-spacing: -.04em; line-height: .9; } .ds-due small { font-size: 11.5px; font-weight: 600; color: var(--ink-2, #2C2E2A); }"
     }
   ],
   "narrative": {
-    "northStar": "Highlighter on Photocopy",
-    "overview": "The denial file, marked up. The app is a copier-grey desk with a toner-black rail down the left; on it sit photocopied sheets (the payer's policy, the chart notes, the denial letter, the appeal) and every verdict is a fluorescent highlighter stroke laid over the exact sentence that decides it. The highlighter is not decoration: it is the entire state system. Green supports, pink blocks, orange is missing documentation, yellow is a quoted policy line (and \"you are here\"), grey is not applicable.\n\nDensity is that of a working desk, not a dashboard: a deadline board ranked by days left, a rule ledger beside a document sheet, a citation gate beside an editor. Type splits by material: Public Sans (a US federal-forms face) for the application, Source Serif 4 for anything that is a document. Figures are tabular everywhere, because deadlines, dates and costs are read in columns. Every quote carries a catalogue address (`L34220 · S47`, `note n1 · 07/20/2026`) and those addresses are links, so addresses are the navigation between rule, policy and chart.\n\nThe ground is cool, never cream. Depth is a sheet resting on a desk: one soft paper shadow, toner grain, a faint fax strip across the top edge. Motion is a single gesture, the highlighter sweep.",
+    "northStar": "The Guide Map, at Night",
+    "overview": "Every denial is an area on one map, and its verdict is the colour of the land. The system is a zoo-and-gardens guide map translated to dark: the map's cream water becomes a near-black ink-green ground, cream becomes the text, and the land keeps its flat, saturated colours. A biller reads the answer from the colour of a field before reading a word, then checks the evidence rule by rule against source documents set in the same single grotesk.\n\nColour is flat and unmodulated. There is no glow, grain or drop shadow; surfaces separate by tone and by 1px hairlines, and the big verdict field is divided from the dark ground by a drawn coastline rather than a border. Controls are capsules, and the primary capsule carries a round chip on its trailing edge. Small things that move take 0.4s and overshoot before they settle; colour changes ease out without overshoot.\n\nDensity is a working tool's density: a 232px rail, a rules column beside tabbed source sheets, and tables at 15px. The monumental type is reserved for two things only: the verdict word and the days-left figure.",
     "keyCharacteristics": [
-      "Cool copier-grey ground with faint toner speckle; toner-black rail.",
-      "Fluorescent highlighter strokes, multiply-blended, as the only status colour.",
-      "Marker shapes with ragged, asymmetric ends; never bordered pills.",
-      "Public Sans for the app, Source Serif 4 for documents; tabular figures throughout.",
-      "Catalogue addresses on every quote, and they link.",
-      "One paper shadow; documents get grain, edge darkening and a copier strip."
+      "Five flat land colours, each bound to one verdict or status, on a near-black ink-green night ground.",
+      "Two tones per land: deep land with cream text at rest, bright land with ink text when selected or when the colour is the answer.",
+      "Colour always travels with its word (status capsules), never alone.",
+      "One grotesk (Hanken Grotesk, variable 100 to 900), tabular figures everywhere.",
+      "Coastlines and organic lobes divide; rectangles with borders do not.",
+      "Capsule controls with a round chip; 0.4s overshoot on small transforms only."
     ],
     "rules": [
       {
-        "name": "The Highlighter Is The State Rule",
-        "body": "Status is shown only by the five highlighters, laid as a stroke with `mix-blend-mode: multiply` over paper. No other hue carries meaning except deadline magenta (urgency), strike magenta (failed quote) and focus blue (keyboard).",
+        "name": "The One Meaning Rule",
+        "body": "Each land colour means one verdict and its matching rule status; never use a land colour as decoration or as a generic accent.",
         "section": "colors"
       },
       {
-        "name": "The Never Colour Alone Rule",
-        "body": "Every highlighter swatch sits beside a word (\"Supports\", \"Missing documentation\", \"Every quote verified\"). A colour without its word is a defect.",
+        "name": "The Colour-Plus-Word Rule",
+        "body": "A status colour always appears with its word (Supports, Blocks, Missing docs, Not applicable, Appeal, Don't appeal yet, Ask the physician, Fix & resubmit, Not winnable, VOID). Colour alone never carries a status.",
         "section": "colors"
       },
       {
-        "name": "The Cool Paper Rule",
-        "body": "Ground and paper stay cool green-grey. Cream, beige or warm paper breaks the photocopy.",
+        "name": "The Ink-on-Land Rule",
+        "body": "Text on a bright land colour is ink; text on deep land or night is cream. Never put cream on bright land or ink on night.",
         "section": "colors"
       },
       {
-        "name": "The Two Materials Rule",
-        "body": "If it was fetched, written, or will be sent (policy, chart, letter, quote), it is set in Source Serif 4. Everything the app says about it is Public Sans.",
+        "name": "The Two Monuments Rule",
+        "body": "Only the verdict word and the days-left figure are set at display size; everything else stays at working size.",
         "section": "typography"
       },
       {
-        "name": "The Tabular Rule",
-        "body": "`font-variant-numeric: tabular-nums` is set at the root and never turned off. Dates, days-left, costs and sentence numbers align in columns.",
+        "name": "The Sentence Case Rule",
+        "body": "Labels and headings are sentence case at normal tracking. The only all-caps word in the system is the VOID capsule.",
         "section": "typography"
       },
       {
-        "name": "The No Shouting Rule",
-        "body": "No uppercase labels, no letter-spaced small caps. Hierarchy comes from weight and size.",
-        "section": "typography"
-      },
-      {
-        "name": "The One Sheet Rule",
-        "body": "There is one elevation. Selection and hover change borders or fills, never shadow depth.",
+        "name": "The Flat Land Rule",
+        "body": "Colour fills are flat: no gradients, glow, grain or drop shadow. Layered backgrounds exist only to drive the highlight sweep, and each layer is a single flat colour.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "**Do** carry every status as a highlighter swatch or stroke plus a word, multiply-blended over paper.",
-      "**Do** give every quote a catalogue address (`L34220 · S47`, `note n1 · 07/20/2026`) and make it a link to its source.",
-      "**Do** set fetched and outgoing text in Source Serif 4 and everything else in Public Sans, with tabular figures.",
-      "**Do** use the single Sheet shadow for all resting paper; express selection with a toner-ink border.",
-      "**Do** keep the 3px corner for documents and 6px for application surfaces and controls.",
-      "**Do** respect reduced motion: the sweep and pulse switch off entirely."
+      "Do bind every land colour to its verdict and status (land Appeal and Supports, coral Don't appeal yet and Blocks, sun Ask the physician and Missing docs, pond Fix & resubmit and verified quotes, lilac Not winnable).",
+      "Do pair every status colour with its word in a capsule.",
+      "Do keep findings on deep land with cream text and reserve the bright land with ink text for the selected rule and for fields where the colour is the answer.",
+      "Do divide the verdict field from the ground with a coastline, and divide strips and tables with 1px hairlines.",
+      "Do make controls capsules; give the primary a round chip on its trailing edge.",
+      "Do use the 0.4s overshoot (cubic-bezier(.34, 1.56, .64, 1)) only for small transforms and the coast morph, and ease-out (cubic-bezier(.16, 1, .3, 1)) for colour changes and the highlight sweep.",
+      "Do honour reduced motion: every animation and transition is switched off, the highlight lands in its final state, and scrolling to a rule jumps instead of smooth-scrolling.",
+      "Do lock export and mark VOID in coral whenever a quote does not match fetched text."
     ],
     "donts": [
-      "**Don't** render status as a bordered pill or a solid-colour badge; marks are ragged highlighter strokes.",
-      "**Don't** introduce warm, cream or beige paper; the photocopy is cool grey.",
-      "**Don't** use a status highlighter for decoration; yellow outside quotes is limited to the active nav item, brand mark, selection and in-progress step.",
-      "**Don't** add elevation steps or hover lifts beyond the one Sheet shadow.",
-      "**Don't** set labels in uppercase or letter-spaced caps.",
-      "**Don't** use focus blue for anything but keyboard focus."
+      "Don't use gradients, glow, grain or drop shadows on fills.",
+      "Don't put cream text on bright land, or ink text on night.",
+      "Don't let colour carry a status without its word.",
+      "Don't add a second typeface; the hierarchy is weight and size within Hanken Grotesk.",
+      "Don't set anything but the verdict word and days figure at display size.",
+      "Don't use uppercase letter-spaced labels; VOID is the only all-caps word.",
+      "Don't overshoot colour, layout or large surfaces; overshoot is for chips, lifts, presses and the coast."
     ]
   }
 }

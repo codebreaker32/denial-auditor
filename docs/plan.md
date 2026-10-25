@@ -300,7 +300,7 @@ Estimated cost per routed case is ~$0.05 (NANO_ONLY ~$0.01). Check against the T
 **Done today:**
 - **Full eval, scanned letters, Super ×2 + Ultra referee** (`eval/results/final_super_scan.md`): triage 30/30, recommendation 30/30, gold rule statuses 138/138, $0.048/case, 72 s/case. Nano single-vote ablation: `eval/results/final_nano_scan.md`.
 - **Prevention mode** (`prevention.py`, "Before you submit" pages): readiness from the same fixed rule; earliest date computed in code from documented chart dates. 4 precomputed checks (001 and 018 ready; 009 Aetna 38/42 days and 023 MA too early are "not yet").
-- **Policy watch** (`drift.py`): no model, runs beside the app in the container (nightly 03:00 UTC). Showcase case_007 (DOS 06/02/2025) cites v37; the watch notes that v40 starts after its service date.
+- **Policy watch** (`drift.py`): no model, runs beside the app in the container (nightly 03:00 UTC). case_007 (DOS 06/02/2025, cites v37) was tried in the showcase and then removed: the board counts deadlines from one 2026 review date, so its 2025 appeal window showed as long expired (-376 days) next to an "Appeal" recommendation. Date-of-service versioning is still covered by the eval (cases 007 and 008).
 - Fact-checked statistics against primary sources (`docs/facts.md`). Drafted `docs/devpost.md` (including the Token Factory feedback section) and `docs/video-script.md`. README rewritten with an architecture diagram and the eval table.
 - Frontend fixes: board listeners now scoped with an AbortController (stale handlers from earlier cases could redraw the pane); the facts citation wraps on mobile; timeline threshold labels are staggered.
 
@@ -311,3 +311,5 @@ Estimated cost per routed case is ~$0.05 (NANO_ONLY ~$0.01). Check against the T
 2. Record the video against the deployed URL (`docs/video-script.md`).
 3. Fill the Nano column in README/devpost; final Devpost text.
 4. **Oct 28: remind the user the repo must be public** (their decision).
+
+**UI redesign (Oct 25, user request "didn't like it at all"):** replaced "Highlighter on photocopy" with a dark guide-map world the user picked in the direction round (zoo/gardens guide map, translated to dark; Stripe/Mercury quality bar). Flat land colours as verdicts (green appeal, coral don't appeal yet, sun ask the physician, pond fix and resubmit, lilac not winnable), a verdict field with a seeded coastline that morphs between cases and tabs, capsule controls, Hanken Grotesk. Contract: `.impeccable/surfaces/web-index-html.md`.
