@@ -57,11 +57,13 @@ Models only ever return text; code checks it. Policy rules are sentence ranges c
 
 | | Super ×2 + Ultra referee | Nano, one vote |
 |---|---|---|
-| Triage route | 30/30 | NANO_TRIAGE |
-| Recommendation | 30/30 | NANO_VERDICT |
-| Gold rule statuses | 138/138 | NANO_GOLD |
-| Mean cost per case | $0.048 | NANO_COST |
-| Mean time per case | 72 s | NANO_LAT |
+| Triage route | 30/30 | 29/29 ¹ |
+| Recommendation | 30/30 | 16/29 (55%) |
+| Gold rule statuses | 138/138 | 119/131 (91%) |
+| Mean cost per case | $0.048 | $0.010 |
+| Mean time per case | 72 s | 90 s |
+
+¹ One Nano run produced malformed output (a runaway answer cut off mid-JSON) and isn't scored. Nano's misses are mostly the red-flag route marked as blocking when the patient simply has no red flags (8 of 18), and four weeks of documented care marked as undocumented (3 of 18). Two Super votes with an Ultra referee cost about 5× more and get every recommendation right on this set.
 
 Reports: `eval/results/final_super_scan.md`, `eval/results/final_nano_scan.md`. The cases are synthetic and the ground truth is ours, so these numbers show the pipeline is consistent on the situations we designed, not how it does on real charts.
 

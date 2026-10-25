@@ -56,10 +56,12 @@ A person reviews and sends everything; the tool never submits anything. Deadline
 
 | | Super ×2 + Ultra referee | Nano, one vote |
 |---|---|---|
-| Triage | 30/30 | NANO_TRIAGE |
-| Recommendation | 30/30 | NANO_VERDICT |
-| Gold rule statuses | 138/138 | NANO_GOLD |
-| Cost per case | $0.048 | NANO_COST |
+| Triage | 30/30 | 29/29 ¹ |
+| Recommendation | 30/30 | 16/29 (55%) |
+| Gold rule statuses | 138/138 | 119/131 (91%) |
+| Cost per case | $0.048 | $0.010 |
+
+¹ One Nano run produced malformed output (a runaway answer cut off mid-JSON) and isn't scored. Nano's misses are mostly the red-flag route marked as blocking when the patient simply has no red flags (8 of 18), and four weeks of documented care marked as undocumented (3 of 18). Two Super votes with an Ultra referee cost about 5× more and get every recommendation right on this set.
 
 These are synthetic cases with our own ground truth. They show the pipeline is consistent on the situations we designed, not how it performs on real charts.
 
