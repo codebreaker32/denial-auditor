@@ -781,6 +781,10 @@ function howView() {
       <li><b>Decide.</b> A fixed rule, not a model, turns those judgments into one recommendation: appeal, ask the physician, don't appeal yet, fix and resubmit, or not winnable.</li>
       <li><b>Write the appeal.</b> Nemotron 3 Ultra drafts the letter using only pre-verified quotes, Super critiques it as the payer's medical reviewer, and Ultra revises. The citation gate blocks export unless every quote matches its source word for word.</li>
     </ol>
+    <h2>Before a request goes out</h2>
+    <p><b>Before you submit</b> runs the same steps on a prior-auth request, using the policy version in effect on the planned date. If the chart falls short of a waiting period, such as four weeks of conservative care, code works out the earliest date it's met from the chart's own dates. No model guesses a date.</p>
+    <h2>When a policy changes</h2>
+    <p>The <b>policy watch</b> runs every night beside the app and calls no model. It compares each open case's cited policy with the live source: a newer CMS version, or changed text in the Aetna bulletin. It flags only the cases whose service date the change covers, and names the rules whose wording moved.</p>
     <h2>What it never does</h2>
     <p>It never submits anything; a person reviews and sends every letter. Deadlines come from a fixed table checked against federal regulations, never from a model. CPT codes are shown bare, without AMA descriptions. All patients and notices in this demo are synthetic.</p>
   </article>`;

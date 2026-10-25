@@ -2,42 +2,91 @@
 
 > Payers check your MRI order criterion by criterion. Denial Auditor lets a three-doctor practice do the same.
 
-Denial Auditor helps billing staff at small medical practices work health-insurance denials for outpatient **MRI and CT imaging**. It:
+Denial Auditor helps billing staff at small medical practices work health-insurance denials for outpatient **lumbar MRI**. It:
 
 - **triages** each denial by whether it can be won (administrative fix, plan exclusion, or clinical);
-- fetches the payer's **live coverage policy**, choosing the version in effect on the date of service;
-- splits the policy into numbered criteria and **matches each one to the exact sentence in the chart**;
-- turns missing evidence into a **documentation request** to the physician;
-- drafts an appeal whose **every quoted policy line is verified** against the fetched source text before it can be exported.
+- fetches the payer's **coverage policy in effect on the date of service** (CMS keeps every version; Aetna's bulletin is located at runtime with Tavily);
+- splits the policy into rules cut **word for word from the source**, and checks each rule against the chart with **verified quotes**;
+- decides with a **fixed rule, not a model**: appeal, ask the physician, don't appeal yet, fix and resubmit, or not winnable;
+- drafts an appeal that **can't be exported** unless every quoted line matches the fetched policy or chart exactly.
 
-A second mode runs the same checks on a prior-authorization request **before** it's submitted.
+**Before you submit** runs the same checks on a prior-auth request, and when a waiting period is the only problem it works out, in code, the earliest date the chart can meet it. A **policy watch** re-checks every open case's policy nightly and names the rules whose wording changed.
 
 Built for the [Nebius x NVIDIA Global AI Hackathon](https://nebiusglobalaihackathon.devpost.com/), **Best Apps & Agents** track, by team **Road House**: Aman Bihari and Bhawna.
 
-> 🚧 In active development (Oct 20–30, 2026). See [docs/plan.md](docs/plan.md) for the build plan.
+**Live demo:** _URL added at submission_ (precomputed cases are free to browse; live runs need the passcode in the Devpost testing instructions).
 
-## How it uses Nemotron, Token Factory and Tavily
+## Architecture
+
+```mermaid
+flowchart LR
+  L[Faxed denial letter] -->|Nemotron 3.5 Super-VL| D[Denial fields]
+  D --> T{Reason-code table}
+  T -->|administrative| F[Fix checklist]
+  T -->|plan exclusion| N[Not winnable]
+  T -->|clinical| P[Policy in effect on the service date]
+  P -.->|Medicare| CMS[(CMS Coverage API, versioned)]
+  P -.->|Aetna| TV[(Tavily search → aetna.com)]
+  P -->|code numbers sentences; Nemotron 3 Super picks ids| R[Rules, verbatim spans]
+  C[Chart notes] -->|Nemotron 3 Nano; quotes verified, durations in code| X[Chart facts]
+  R --> M[Each rule vs chart: 2 Super votes, Ultra breaks ties; evidence verified]
+  X --> M
+  M -->|fixed rule| V{Recommendation}
+  V -->|appeal| A[Ultra draft → Super payer-reviewer critique → Ultra revise]
+  A --> G[Citation gate: every quote must match a fetched source exactly]
+  G --> H[A person reviews, exports and sends]
+  V -->|ask the physician| Q[Documentation request]
+```
+
+Models only ever return text; code checks it. Policy rules are sentence ranges cut from the fetched text, every chart quote is located in its note, durations are computed from dates, deadlines come from a table checked against eCFR, and the recommendation is a fixed rule over the rule statuses.
 
 | Step | Model / service |
 |---|---|
-| Read a scanned denial letter | Nemotron 3.5 Super-VL (Token Factory) |
-| Extract codes and dates; triage; check each criterion against the chart | Nemotron 3 Nano (Token Factory) |
-| Pick the policy sentences that state each coverage criterion (spans cut from the source by code) | Nemotron 3 Super (Token Factory) |
-| Draft the appeal, then critique it as the payer's reviewer and revise | Nemotron 3 Ultra / Super (Token Factory) |
-| Find and extract payer policies and supporting sources at runtime | Tavily search / extract / map |
-| Versioned Medicare coverage policies (LCDs) | CMS Coverage API |
-| Nightly policy-change watcher | Cron on the app server (no LLM) |
+| Read the scanned denial letter | Nemotron 3.5 Super-VL (Token Factory) |
+| Split the policy into rules (pick sentence ids) | Nemotron 3 Super |
+| Extract chart facts with quotes | Nemotron 3 Nano, thinking off |
+| Check each rule against the chart | Nemotron 3 Super ×2; Nemotron 3 Ultra when the votes split |
+| Draft, critique, revise the appeal | Nemotron 3 Ultra / Super / Ultra |
+| Locate the Aetna bulletin at runtime | Tavily search |
+| Versioned Medicare coverage policies (LCD L34220) | CMS Coverage API |
+| Policy watch | Nightly job beside the app; no model ($0 cap) |
+
+## Evaluation
+
+30 synthetic cases in 7 groups (`cases/`, ground truth in each `scenario.json`; gold policy anchors in `eval/gold/`). Every letter is read from the scanned image.
+
+| | Super ×2 + Ultra referee | Nano, one vote |
+|---|---|---|
+| Triage route | 30/30 | NANO_TRIAGE |
+| Recommendation | 30/30 | NANO_VERDICT |
+| Gold rule statuses | 138/138 | NANO_GOLD |
+| Mean cost per case | $0.048 | NANO_COST |
+| Mean time per case | 72 s | NANO_LAT |
+
+Reports: `eval/results/final_super_scan.md`, `eval/results/final_nano_scan.md`. The cases are synthetic and the ground truth is ours, so these numbers show the pipeline is consistent on the situations we designed, not how it does on real charts.
+
+```bash
+./.venv/bin/python eval/run_eval.py --matcher super --votes 2 --tag NAME   # ~$1.50 for 30 cases
+./.venv/bin/python eval/run_eval.py --rescore NAME                          # re-score a saved run, $0
+```
 
 ## Setup
 
 ```bash
 python3 -m venv .venv
-./.venv/bin/pip install -e .
-cp .env.example .env   # add TAVILY_API_KEY and NEBIUS_TOKEN_FACTORY_KEY
-./.venv/bin/python smoke_test.py
+./.venv/bin/pip install -e '.[app,dev]'
+cp .env.example .env      # add TAVILY_API_KEY and NEBIUS_TOKEN_FACTORY_KEY
+./.venv/bin/pytest        # offline tests; any network call fails a test
+./.venv/bin/uvicorn nebius_nvidia.api:app --port 8600   # open http://127.0.0.1:8600
 ```
 
-`smoke_test.py` makes one live Tavily search and one Nemotron call. Spending is hard-capped in code (see `src/nebius_nvidia/budget.py`); override the caps with `TOKEN_FACTORY_BUDGET_USD` and `TAVILY_CREDIT_CAP`.
+- One case end to end on the command line: `./.venv/bin/python -m nebius_nvidia.pipeline cases/case_001` (a few cents).
+- A prior-auth check: `./.venv/bin/python -m nebius_nvidia.prevention cases/case_009`.
+- The policy watch: `./.venv/bin/python -m nebius_nvidia.drift` ($0).
+- Live runs in the web app: set `DEMO_PASSCODE` in `.env`.
+- Deploy (AWS Lightsail container service, needs Docker): `scripts/deploy.sh up | status | down`.
+
+Spending is hard-capped in code (`src/nebius_nvidia/budget.py`): every Token Factory request and Tavily call is checked against its cap before it is sent. Override the caps with `TOKEN_FACTORY_BUDGET_USD` and `TAVILY_CREDIT_CAP`.
 
 ## Important notices
 

@@ -294,3 +294,20 @@ Estimated cost per routed case is ~$0.05 (NANO_ONLY ~$0.01). Check against the T
 4. Update README/CLAUDE.md/brief for team name Road House (still says Road House).
 
 **Shutdown check (wrap-up rule):** Lightsail container service deleted (`scripts/deploy.sh status` empty); no local servers or background jobs running.
+
+## Status Sun Oct 25
+
+**Done today:**
+- **Full eval, scanned letters, Super ×2 + Ultra referee** (`eval/results/final_super_scan.md`): triage 30/30, recommendation 30/30, gold rule statuses 138/138, $0.048/case, 72 s/case. Nano single-vote ablation: `eval/results/final_nano_scan.md`.
+- **Prevention mode** (`prevention.py`, "Before you submit" pages): readiness from the same fixed rule; earliest date computed in code from documented chart dates. 4 precomputed checks (001 and 018 ready; 009 Aetna 38/42 days and 023 MA too early are "not yet").
+- **Policy watch** (`drift.py`): no model, runs beside the app in the container (nightly 03:00 UTC). Showcase case_007 (DOS 06/02/2025) cites v37; the watch notes that v40 starts after its service date.
+- Fact-checked statistics against primary sources (`docs/facts.md`). Drafted `docs/devpost.md` (including the Token Factory feedback section) and `docs/video-script.md`. README rewritten with an architecture diagram and the eval table.
+- Frontend fixes: board listeners now scoped with an AbortController (stale handlers from earlier cases could redraw the pane); the facts citation wraps on mobile; timeline threshold labels are staggered.
+
+**Known issue:** run-to-run variance on case_007. In 1 of 2 precompute runs, both Super votes marked the advisory L34220 sentence "If low back symptoms do not improve within four weeks, reassessment may be warranted" as missing documentation, which gave doc_request. The re-run gave appeal, gate PASS. A fix would skip advisory sentences in `criteria.SYSTEM`, but that changes extraction and needs a full re-eval (~$1.50), so it needs a go-ahead.
+
+**Next:**
+1. Redeploy (Docker Desktop must be running); the user to choose `DEMO_PASSCODE`.
+2. Record the video against the deployed URL (`docs/video-script.md`).
+3. Fill the Nano column in README/devpost; final Devpost text.
+4. **Oct 28: remind the user the repo must be public** (their decision).
