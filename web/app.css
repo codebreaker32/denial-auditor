@@ -94,6 +94,10 @@ main:focus, main:focus-visible { outline: none; }
 .page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 18px; flex-wrap: wrap; }
 .page-title { font-size: 30px; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
 .lede { color: var(--ink-2); max-width: 70ch; margin: 6px 0 0; }
+/* Policy watch: a grey swatch when nothing moved, orange when a cited policy changed. */
+.watch { display: flex; align-items: baseline; gap: 10px; margin: 10px 0 0; font-size: 13px; color: var(--ink-2); max-width: 80ch; }
+.watch::before { content: ""; width: 18px; height: 8px; background: var(--hl-grey); border-radius: 2px 5px 3px 6px; mix-blend-mode: multiply; flex: none; transform: translateY(-1px); }
+.watch.flagged::before { background: var(--hl-orange); }
 .addr { font-size: 12px; color: var(--ink-3); font-weight: 500; letter-spacing: .01em; white-space: nowrap; }
 .muted { color: var(--ink-3); }
 
@@ -215,7 +219,7 @@ main:focus, main:focus-visible { outline: none; }
   background: linear-gradient(90deg, rgba(22,24,23,.05), transparent 2.5%, transparent 97.5%, rgba(22,24,23,.04)); }
 .sheet-head { font-family: var(--sans); display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--rule); padding-bottom: 12px; margin-bottom: 18px; flex-wrap: wrap; }
 .sheet-head h2 { font-size: 18px; font-weight: 700; }
-.sheet-head .addr { white-space: normal; }
+.sheet-head .addr, .facts .addr { white-space: normal; }
 .sheet p { margin: 0 0 .75em; max-width: 72ch; }
 .sent { position: relative; }
 .sent .n { position: absolute; left: -54px; width: 40px; text-align: right; font-family: var(--sans); font-size: 11px; color: var(--ink-3); top: .35em; user-select: none; }
@@ -317,7 +321,7 @@ pre.docreq { white-space: pre-wrap; font-family: var(--serif); font-size: 15px; 
 .tl-pt.start { transform: none; }
 .tl-pt.start::before { left: 4px; }
 .tl-track { overflow: visible; }
-.tl-line-l { position: absolute; top: -2px; left: 5px; font-size: 10.5px; color: var(--ink-3); white-space: nowrap; background: var(--paper); padding: 0 3px; }
+.tl-line-l { position: absolute; top: calc(-2px + var(--lr, 0) * 16px); left: 5px; font-size: 10.5px; color: var(--ink-3); white-space: nowrap; background: var(--paper); padding: 0 3px; }
 .tl-flag { position: absolute; bottom: 36px; transform: translateX(-50%); width: 12px; height: 12px; background: var(--hl-pink); border-radius: 2px 5px 3px 6px; mix-blend-mode: multiply; }
 .tl-flag span { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); font-size: 11px; white-space: nowrap; color: #8A0F3D; }
 .tl-legend { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; font-size: 13px; }

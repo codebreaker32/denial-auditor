@@ -1,4 +1,4 @@
-# Denial Auditor: Streamlit app image (deployed on AWS Lightsail).
+# Denial Auditor: web app image (deployed on AWS Lightsail).
 FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
@@ -23,4 +23,5 @@ VOLUME ["/state"]
 
 ENV DA_ROOT=/srv
 EXPOSE 8501
-CMD ["uvicorn", "nebius_nvidia.api:app", "--host", "0.0.0.0", "--port", "8501"]
+# The policy watch runs beside the app: once at start, then nightly at 03:00 UTC, with a $0 model cap.
+CMD ["sh", "-c", "python -m nebius_nvidia.drift --nightly & exec uvicorn nebius_nvidia.api:app --host 0.0.0.0 --port 8501"]

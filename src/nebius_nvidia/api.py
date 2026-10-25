@@ -6,6 +6,9 @@ Serves web/ (the frontend) and these endpoints:
   GET  /api/cases                 worklist rows (precomputed runs + this server's live runs)
   GET  /api/cases/{id}            one case: run, notes, policy split into numbered sentences
   GET  /api/cases/{id}/letter     the synthetic scanned denial letter (PNG)
+  GET  /api/checks                prior-auth checks (prevention mode, precomputed)
+  GET  /api/checks/{id}           one check: result, notes, numbered policy sentences
+  GET  /api/drift                 the policy watch's latest report (nebius_nvidia.drift, nightly)
   POST /api/gate                  re-check an edited appeal letter against the case's sources
   POST /api/live                  start a live run (passcode; rate-limited) → job id
   GET  /api/live/{job}            live run progress and result
@@ -26,7 +29,8 @@ from pydantic import BaseModel
 from nebius_nvidia.appeal import session_for
 from nebius_nvidia.budget import BudgetExceeded, _locked_json
 from nebius_nvidia.citations import check, extract_quotes
-from nebius_nvidia.models import CaseRun, ChartNote
+from nebius_nvidia.models import CaseRun, ChartNote, Criterion, PolicyDoc, PriorAuthCheck
+from nebius_nvidia.prevention import THRESHOLDS
 from nebius_nvidia.scenario import Scenario
 from nebius_nvidia.rules import deadline as deadline_for
 from nebius_nvidia.text import locate, normalize, segment
@@ -34,6 +38,7 @@ from nebius_nvidia.text import locate, normalize, segment
 ROOT = Path(os.environ.get("DA_ROOT", Path(__file__).resolve().parents[2]))
 CASES = ROOT / "cases"
 RUNS = ROOT / "demo" / "runs"
+CHECKS = ROOT / "demo" / "checks"
 WEB = ROOT / "web"
 STATE = Path("/state") if Path("/state").is_dir() else ROOT / ".cache"
 SESSION_LIMIT_PER_JOBS = 3  # per browser token
@@ -119,30 +124,34 @@ def list_cases() -> dict:
             "live_enabled": bool(os.environ.get("DEMO_PASSCODE"))}
 
 
-# Duration thresholds the timeline draws, each tied to the policy sentence that states it.
-# "from" is the clock start: symptom onset, or the first conservative treatment.
-THRESHOLDS = {
-    "L34220": [
-        {"label": "1 month of symptoms", "from": "onset", "days": 30, "anchor": "the MRI may be appropriate after 1 month of symptoms"},
-        {"label": "4 weeks of conservative care", "from": "treatment", "days": 28, "anchor": "conservative management lasting at least four weeks"},
-    ],
-    "Aetna CPB 0236": [
-        {"label": "6 weeks of conservative therapy", "from": "treatment", "days": 42, "anchor": "no improvement after 6 weeks of conservative therapy"},
-    ],
-}
-
-
-def _thresholds(run: CaseRun, sentences: list[dict]) -> list[dict]:
-    if not run.policy:
+def _thresholds(policy: PolicyDoc | None, sentences: list[dict]) -> list[dict]:
+    """The policy's waiting periods for the timeline, each with the sentence that states it."""
+    if not policy:
         return []
     out = []
-    for t in THRESHOLDS.get(run.policy.policy_id, []):
-        hit = locate(t["anchor"], run.policy.text)
+    for t in THRESHOLDS.get(policy.policy_id, []):
+        hit = locate(t["anchor"], policy.text)
         n = next((x["n"] for x in sentences if hit and x["start"] <= hit[0] < x["end"]), None)
         if n:
             out.append({**{k: v for k, v in t.items() if k != "anchor"}, "sentence": n,
-                        "address": f"{run.policy.policy_id} · S{n}"})
+                        "address": f"{policy.policy_id} · S{n}"})
     return out
+
+
+def _policy_view(policy: PolicyDoc | None, criteria: list[Criterion]) -> dict:
+    """Numbered sentence units of the fetched policy, which criteria cover each, and each criterion's address."""
+    sentences = []
+    if policy:
+        for i, (a, b) in enumerate(segment(policy.text), start=1):
+            covering = [c.criterion_id for c in criteria if c.span_verified and c.span_start is not None
+                        and c.span_start <= a and b <= c.span_end]
+            sentences.append({"n": i, "start": a, "end": b, "text": policy.text[a:b], "criteria": covering})
+    addr = {}
+    for c in criteria:
+        ns = [x["n"] for x in sentences if c.criterion_id in x["criteria"]]
+        addr[c.criterion_id] = f"S{ns[0]}" + (f"–{ns[-1]}" if len(ns) > 1 else "") if ns else ""
+    return {"sentences": sentences, "addresses": addr, "thresholds": _thresholds(policy, sentences),
+            "policy_citation": policy.citation() if policy else None}
 
 
 @app.get("/api/cases/{case_id}")
@@ -151,28 +160,14 @@ def get_case(case_id: str) -> dict:
     run = _run(case_id)
     s = Scenario.load(CASES / case_id)
     notes = _notes(case_id)
-    sentences = []
-    if run.policy:
-        # Numbered sentence units of the fetched policy, and which criteria cover each one.
-        for i, (a, b) in enumerate(segment(run.policy.text), start=1):
-            covering = [c.criterion_id for c in run.criteria if c.span_verified and c.span_start is not None
-                        and c.span_start <= a and b <= c.span_end]
-            sentences.append({"n": i, "start": a, "end": b, "text": run.policy.text[a:b], "criteria": covering})
-    addr = {}
-    for c in run.criteria:
-        ns = [x["n"] for x in sentences if c.criterion_id in x["criteria"]]
-        addr[c.criterion_id] = f"S{ns[0]}" + (f"–{ns[-1]}" if len(ns) > 1 else "") if ns else ""
     return {
         "id": case_id,
         "patient": s.patient_name,
         "run": run.model_dump(mode="json"),
         "notes": [n.model_dump(mode="json") for n in notes],
-        "sentences": sentences,
-        "addresses": addr,
+        **_policy_view(run.policy, run.criteria),
         "as_of": (as_of := board_as_of()).isoformat(),
         "deadline": _deadline(run, as_of).model_dump(mode="json"),
-        "policy_citation": run.policy.citation() if run.policy else None,
-        "thresholds": _thresholds(run, sentences),
         "live": case_id in _live,
     }
 
@@ -181,6 +176,51 @@ def get_case(case_id: str) -> dict:
 def letter(case_id: str):
     case_id = _safe_id(case_id)
     return FileResponse(CASES / case_id / "letter.png", media_type="image/png")
+
+
+def _check(case_id: str) -> PriorAuthCheck:
+    p = CHECKS / f"{case_id}.json"
+    if not p.exists():
+        raise HTTPException(404, "No prior-auth check for this case")
+    return PriorAuthCheck.model_validate_json(p.read_text())
+
+
+@app.get("/api/checks")
+def list_checks() -> dict:
+    rows = []
+    for p in sorted(CHECKS.glob("case_*.json")):
+        ch = PriorAuthCheck.model_validate_json(p.read_text())
+        r = ch.request
+        rows.append({"id": ch.case_id, "patient": Scenario.load(CASES / ch.case_id).patient_name,
+                     "payer": r.payer_name, "plan_type": r.plan_type, "cpt": r.cpt,
+                     "planned_dos": r.planned_dos.isoformat(), "readiness": ch.readiness,
+                     "earliest": ch.earliest.isoformat() if ch.earliest else None,
+                     "policy": ch.policy.citation() if ch.policy else None, "cost_usd": ch.cost_usd})
+    return {"checks": rows}
+
+
+@app.get("/api/checks/{case_id}")
+def get_check(case_id: str) -> dict:
+    case_id = _safe_id(case_id)
+    ch = _check(case_id)
+    return {
+        "id": case_id,
+        "patient": Scenario.load(CASES / case_id).patient_name,
+        "check": ch.model_dump(mode="json"),
+        "notes": [n.model_dump(mode="json") for n in _notes(case_id)],
+        **_policy_view(ch.policy, ch.criteria),
+    }
+
+
+@app.get("/api/drift")
+def drift() -> dict:
+    from nebius_nvidia.drift import REPORT
+
+    if not REPORT.exists():
+        return {"checked_at": None, "items": []}
+    import json
+
+    return json.loads(REPORT.read_text())
 
 
 class GateIn(BaseModel):

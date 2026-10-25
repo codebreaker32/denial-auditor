@@ -49,7 +49,7 @@ class PolicyDoc(BaseModel):
     def citation(self) -> str:
         """Short human citation, e.g. 'L34220 v40, eff 10/23/2025, CMS Coverage API'."""
         eff = self.effective_from.strftime("%m/%d/%Y") if self.effective_from else "date unknown"
-        via = {"cms-api": "CMS Coverage API", "tavily-extract": "fetched via Tavily", "http": "fetched"}
+        via = {"cms-api": "CMS Coverage API", "tavily-extract": "fetched via Tavily", "http": "fetched from the payer's site"}
         ver = f"v{self.version}" if self.version_basis == "api-versioned" else f"snapshot {self.version}"
         return f"{self.policy_id} {ver}, eff {eff}, {via[self.fetched_via]}"
 
@@ -227,6 +227,39 @@ class CaseRun(BaseModel):
     gate: GateResult | None = None
     deadline: Deadline | None = None
     facts: FactsView | None = None
+    trace: list[StepTrace] = Field(default_factory=list)
+
+    @computed_field
+    @property
+    def cost_usd(self) -> float:
+        return round(sum(t.cost_usd for t in self.trace), 6)
+
+
+# --- Prevention (prior-auth check before submission) -------------------------
+
+Readiness = Literal["ready", "add_documentation", "not_yet", "doesnt_qualify"]
+
+
+class PriorAuthRequest(BaseModel):
+    payer_name: str
+    plan_type: PlanType
+    cpt: str  # bare code only
+    icd10: list[str]
+    planned_dos: date
+    practice_state: str | None = None
+
+
+class PriorAuthCheck(BaseModel):
+    case_id: str
+    request: PriorAuthRequest
+    policy: PolicyDoc | None = None
+    criteria: list[Criterion] = Field(default_factory=list)
+    matches: list[CriterionMatch] = Field(default_factory=list)
+    facts: FactsView | None = None
+    readiness: Readiness
+    earliest: date | None = None  # computed in code from the chart dates and the policy's waiting periods
+    earliest_basis: list[str] = Field(default_factory=list)
+    doc_request: str | None = None
     trace: list[StepTrace] = Field(default_factory=list)
 
     @computed_field

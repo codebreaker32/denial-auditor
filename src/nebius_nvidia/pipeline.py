@@ -39,15 +39,15 @@ class UnsupportedPolicy(LookupError):
     pass
 
 
-def resolve_policy(denial: Denial, practice_state: str | None) -> PolicyDoc:
-    if denial.plan_type in ("MA", "MEDICARE_FFS"):
+def resolve_policy(plan_type: str, payer_name: str, dos: date, practice_state: str | None) -> PolicyDoc:
+    if plan_type in ("MA", "MEDICARE_FFS"):
         lcd = LUMBAR_MRI_LCD.get(practice_state or "")
         if not lcd:
             raise UnsupportedPolicy(f"No Medicare LCD configured for lumbar MRI in {practice_state!r}")
-        return cms().lcd_on(lcd, denial.dos)
-    if "aetna" in denial.payer_name.lower():
+        return cms().lcd_on(lcd, dos)
+    if "aetna" in payer_name.lower():
         return lumbar_mri_policy()  # located at runtime with Tavily search
-    raise UnsupportedPolicy(f"Commercial policy lookup for {denial.payer_name!r} is not configured yet")
+    raise UnsupportedPolicy(f"Commercial policy lookup for {payer_name!r} is not configured yet")
 
 
 def load_notes(case_dir: Path) -> list[ChartNote]:
@@ -73,7 +73,7 @@ def run_case(case_dir: Path, use_text: bool = False, as_of: date | None = None, 
     if tri.route == "clinical_review":
         say("Finding the policy in effect on the date of service"
             + (" (CMS Coverage API)" if denial.plan_type in ("MA", "MEDICARE_FFS") else " (Tavily search)"))
-        policy = resolve_policy(denial, scenario.practice_state)
+        policy = resolve_policy(denial.plan_type, denial.payer_name, denial.dos, scenario.practice_state)
         say("Splitting the policy into rules (Nemotron 3 Super picks sentences)")
         criteria = extract_criteria(policy, tracker=tracker)
         notes = load_notes(case_dir)

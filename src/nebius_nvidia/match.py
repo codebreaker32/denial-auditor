@@ -144,6 +144,11 @@ def verdict(triage: TriageResult, matches: list[CriterionMatch], criteria: list[
         return "fix_checklist"
     if triage.route == "not_winnable":
         return "not_winnable"
+    return clinical_verdict(matches, criteria)
+
+
+def clinical_verdict(matches: list[CriterionMatch], criteria: list[Criterion] | None = None) -> Verdict:
+    """The clinical part of verdict(); prevention mode uses it on a request that hasn't been denied."""
     kind = {c.criterion_id: c.kind for c in criteria or []}
     if any(m.status == "not_met" and kind.get(m.criterion_id) != "indication" for m in matches):
         return "dont_appeal"

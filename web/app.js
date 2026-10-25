@@ -48,12 +48,33 @@ function setNav(name) {
 
 function mark(kind, label) { return `<span class="mark ${kind}">${esc(label)}</span>`; }
 
+// ---------------- Policy watch (drift report) ----------------
+async function drift() {
+  if (!state.drift) { try { state.drift = await api("/api/drift"); } catch { state.drift = { checked_at: null, items: [] }; } }
+  return state.drift;
+}
+const watchedAt = (iso) => `${fmtDate(iso.slice(0, 10))} ${iso.slice(11, 16)} UTC`;
+function watchLine(rep) {
+  if (!rep.checked_at) return "";
+  const hit = rep.items.filter((i) => i.affects_case);
+  const ids = [...new Set(rep.items.map((i) => i.policy_id))].join(", ");
+  return `<p class="watch${hit.length ? " flagged" : ""}"><span><b>Policy watch</b> checked ${watchedAt(rep.checked_at)} · ${
+    hit.length ? `${hit.length} open item${hit.length > 1 ? "s" : ""} affected by a policy change` : `${esc(ids)}: no open item affected by a policy change`}</span></p>`;
+}
+function driftFlag(rep, id, kind) {
+  const i = rep.items.find((x) => x.case_id === id && x.kind === kind);
+  if (!i || i.status === "current" || i.status === "error") return "";
+  const rules = i.changed_rules.length ? ` Changed wording: ${i.changed_rules.map((r) => esc(r.summary)).join("; ")}.` : "";
+  return `<p class="watch${i.affects_case ? " flagged" : ""}"><span><b>Policy watch, ${watchedAt(rep.checked_at)}:</b> ${esc(i.policy_id)} ${esc(i.cited)} → ${esc(i.current)}. ${esc(i.note)}${rules}</span></p>`;
+}
+
 // ---------------- Worklist ----------------
 async function worklist() {
   setNav("worklist");
   document.title = "Worklist · Denial Auditor";
   $main.innerHTML = `<div class="skeleton" style="width:40%;height:28px;margin-bottom:18px"></div><div class="skeleton" style="height:320px"></div>`;
   const data = state.cases || (state.cases = await api("/api/cases"));
+  const rep = await drift();
   const rows = [...data.cases].sort((a, b) => ORDER.indexOf(a.verdict) - ORDER.indexOf(b.verdict) || (a.days_left ?? 999) - (b.days_left ?? 999));
   const count = (v) => rows.filter((r) => v === "all" || r.verdict === v).length;
   const shown = rows.filter((r) => state.filter === "all" || r.verdict === state.filter);
@@ -65,6 +86,7 @@ async function worklist() {
       <div>
         <h1 class="page-title">Denials to work</h1>
         <p class="lede">Ranked by what to do and how soon it's due. Every recommendation traces back to the payer's own policy sentences and the chart.</p>
+        ${watchLine(rep)}
       </div>
     </header>
     <div class="board-tools">
@@ -109,6 +131,7 @@ async function caseView(id) {
   try { c = await api(`/api/cases/${encodeURIComponent(id)}`); }
   catch (e) { $main.innerHTML = `<p class="empty">${esc(e.message)}</p>`; return; }
   const run = c.run, d = run.denial, v = VERDICT[run.verdict];
+  const rep = await drift();
   document.title = `${c.patient} · Denial Auditor`;
   const byId = Object.fromEntries(run.criteria.map((x) => [x.criterion_id, x]));
   const matches = run.matches.map((m) => ({ ...m, crit: byId[m.criterion_id], addr: c.addresses[m.criterion_id] }));
@@ -133,6 +156,7 @@ async function caseView(id) {
           ${dl && dl.due ? `<span class="deadline${soon ? " soon" : ""}"><b>${dl.days_left}</b> days left · due ${fmtDate(dl.due)} <span class="muted">(as of ${fmtDate(c.as_of)})</span></span>` : `<span class="deadline">Deadline: check the notice</span>`}
         </div>
         <p class="decision-why">${esc(v.line)} ${dl ? `<span class="muted">${esc(dl.citation)}${dl.verified ? "" : " · unverified"}.</span>` : ""}</p>
+        ${driftFlag(rep, c.id, "denial")}
       </div>
       <div class="band-actions">${primary}<a class="btn ghost" href="#/worklist">${icon.back}Worklist</a></div>
     </section>
@@ -163,14 +187,23 @@ async function caseView(id) {
     </div>
     ${auditHtml(run, matches)}`;
 
-  const ctx = { c, run, matches, selected: null };
+  wireWorkspace({ c, run, matches, selected: null }, { policy: policyPane, chart: chartPane, letter: letterPane, next: nextPane });
+}
+
+// Tabs, rule selection, linked hover and policy/chart links for an evidence board.
+function wireWorkspace(ctx, panes) {
+  const { run, matches } = ctx;
+  // $main outlives each view, so drop the previous board's delegated listeners.
+  state.board?.abort();
+  state.board = new AbortController();
+  const signal = state.board.signal;
   const pane = $main.querySelector("[data-pane]");
   const tabs = [...$main.querySelectorAll("[data-tab]")];
   const show = (name) => {
     tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.tab === name)));
     ctx.tab = name;
     $main.querySelector(".workspace").classList.toggle("letter-focus", name === "next" && !!run.appeal);
-    pane.innerHTML = ({ policy: policyPane, chart: chartPane, letter: letterPane, next: nextPane })[name](ctx);
+    pane.innerHTML = panes[name](ctx);
     if (name === "next") wireAppeal(ctx, pane);
     if (ctx.selected) focusRule(ctx, ctx.selected, false);
   };
@@ -196,7 +229,7 @@ async function caseView(id) {
     const el = e.target.closest(".rule[data-rule], [data-crit], [data-chip]");
     const id = el && (el.dataset.rule || el.dataset.chip || el.dataset.crit.split(" ")[0]);
     if (id !== ctx.hotId) { if (ctx.hotId) hot(ctx.hotId, false); ctx.hotId = id; if (id) hot(id, true); }
-  });
+  }, { signal });
   $main.addEventListener("click", (e) => {
     const fold = e.target.closest("[data-fold]");
     if (fold) { ctx.expanded.add(fold.dataset.fold); show(ctx.tab); return; }
@@ -216,13 +249,13 @@ async function caseView(id) {
       show("chart");
       pane.querySelector(`[data-note="${CSS.escape(ref)}"]`)?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  });
+  }, { signal });
   $main.querySelectorAll("[data-tab-go]").forEach((b) => b.addEventListener("click", () => show(b.dataset.tabGo)));
   $main.querySelector("[data-copy-docreq]")?.addEventListener("click", async (e) => {
     await navigator.clipboard?.writeText(run.doc_request); e.currentTarget.lastChild.textContent = "Copied"; });
   $main.querySelector("[data-na]")?.addEventListener("click", (e) => {
     const l = $main.querySelector("[data-na-list]"); l.hidden = !l.hidden;
-    e.currentTarget.textContent = l.hidden ? `${na.length} more rules don't apply to this case` : "Hide rules that don't apply"; });
+    e.currentTarget.textContent = l.hidden ? `${l.children.length} more rules don't apply to this case` : "Hide rules that don't apply"; });
   $main.querySelectorAll(".rule-toggle").forEach((b) => {
     b.addEventListener("click", () => {
       const id = b.dataset.rule;
@@ -280,8 +313,8 @@ function stageState(st, ms) {
   if (st.key === "limits") return has("not_met") ? ["bad", "Applies"] : ["ok", "None apply"];
   return has("missing_documentation") ? ["warn", "Gaps"] : ["ok", "Complete"];
 }
-function decisionMap(run, matches) {
-  const v = VERDICT[run.verdict];
+function decisionMap(run, matches, final) {
+  const v = final || VERDICT[run.verdict];
   if (run.triage.route !== "clinical_review") {
     return `<section class="dmap" aria-label="How the recommendation was reached">
       <ol class="dmap-flow short">
@@ -301,13 +334,13 @@ function decisionMap(run, matches) {
     </li>`;
   }).join("");
   return `<section class="dmap" aria-label="How the recommendation was reached">
-    <ol class="dmap-flow">${cells}<li class="dm-stage verdict v-${run.verdict}"><span class="stage-h">${esc(v.label)}</span><span class="stage-n">fixed rule, not a model</span></li></ol>
+    <ol class="dmap-flow">${cells}<li class="dm-stage verdict v-${v.v || run.verdict}"><span class="stage-h">${esc(v.label)}</span><span class="stage-n">fixed rule, not a model</span></li></ol>
   </section>`;
 }
 
 const day = 864e5;
 const toMs = (iso) => (iso ? Date.parse(iso + "T00:00:00Z") : null);
-function timelineHtml(c, run) {
+function timelineHtml(c, run, mriLabel = "MRI") {
   const f = run.facts;
   if (!f || (!f.onset && !f.treatments.length && !f.red_flags.length)) return "";
   const dos = toMs(run.denial.dos), onset = toMs(f.onset);
@@ -325,26 +358,30 @@ function timelineHtml(c, run) {
   const hi = Math.max(dos, ...lines.map((l) => l.at)) + 6 * day;
   const pct = (ms) => ((ms - lo) / (hi - lo)) * 100;
   const x = (ms) => pct(ms).toFixed(2) + "%";
+  // Lines that end close together put their labels on separate rows.
+  [...lines].sort((a, b) => a.at - b.at).forEach((l, i, arr) => {
+    l.row = i && pct(l.at) - pct(arr[i - 1].at) < 18 ? Math.min(arr[i - 1].row + 1, 2) : 0;
+  });
   const rows = f.treatments.filter((t) => t.start && t.end);
   const label = (k) => k.replace(/_/g, " ").replace(/^\w/, (m) => m.toUpperCase());
   const days = (a, b) => Math.round((toMs(b) - toMs(a)) / day);
   return `<section class="tl" aria-label="Chart timeline">
     <div class="tl-head"><h2>Chart timeline</h2><span class="addr">${f.symptom_days != null ? `symptom onset to MRI: ${f.symptom_days} days · ` : ""}conservative care: ${f.conservative_days ?? 0} days</span></div>
     <div class="tl-track" style="--rows:${rows.length}">
-      ${lines.map((l) => `<span class="tl-line ${l.state}${pct(l.at) > 62 ? " flip" : ""}" style="left:${x(l.at)}"><span class="tl-line-l">${esc(l.label)}</span></span>`).join("")}
+      ${lines.map((l) => `<span class="tl-line ${l.state}${pct(l.at) > 62 ? " flip" : ""}" style="left:${x(l.at)};--lr:${l.row}"><span class="tl-line-l">${esc(l.label)}</span></span>`).join("")}
       ${rows.map((t, i) => `<span class="tl-bar" style="left:${x(toMs(t.start))};width:calc(${x(toMs(t.end))} - ${x(toMs(t.start))});top:calc(48px + ${i} * 30px)"><span>${esc(label(t.kind))}${t.sessions ? ` · ${t.sessions} sessions` : ""} · ${days(t.start, t.end)} days${t.response ? " · " + esc(t.response.replace(/_/g, " ")) : ""}</span></span>`).join("")}
       ${Object.entries(f.red_flags.filter((r) => r.noted_on).reduce((g, r) => ((g[r.noted_on] ||= []).push(r.flag), g), {}))
           .map(([on, flags]) => `<span class="tl-flag" style="left:${x(toMs(on))}" title="${esc(flags.join(", "))}"><span>Red flag${flags.length > 1 ? "s" : ""}: ${esc(flags.join(", "))}</span></span>`).join("")}
       <span class="tl-axis"></span>
       ${onset ? `<span class="tl-pt" style="left:${x(onset)}"><b>Onset</b> ${fmtDate(f.onset)}</span>` : `<span class="tl-pt start" style="left:0"><b>Onset</b> not verified</span>`}
-      <span class="tl-pt end" style="left:${x(dos)}"><b>MRI</b> ${fmtDate(run.denial.dos)}</span>
+      <span class="tl-pt end" style="left:${x(dos)}"><b>${esc(mriLabel)}</b> ${fmtDate(run.denial.dos)}</span>
     </div>
     <ul class="tl-legend">${lines.map((l) => `<li>${mark(l.state === "met" ? "met" : l.state === "waived" ? "not_applicable" : "not_met", l.state === "met" ? "Met" : l.state === "waived" ? "Waived: red flags" : "Not met")} ${esc(l.label)} <a class="addr link" href="#" data-goto="policy:${l.sentence}">${esc(l.address)}</a></li>`).join("")}</ul>
   </section>`;
 }
-function overviewHtml(c, run, matches) {
-  const tl = timelineHtml(c, run);
-  return `<div class="overview${tl ? "" : " solo"}">${decisionMap(run, matches)}${tl}</div>`;
+function overviewHtml(c, run, matches, final, mriLabel) {
+  const tl = timelineHtml(c, run, mriLabel);
+  return `<div class="overview${tl ? "" : " solo"}">${decisionMap(run, matches, final)}${tl}</div>`;
 }
 
 function auditHtml(run, matches) {
@@ -619,6 +656,114 @@ async function liveView() {
   });
 }
 
+// ---------------- Before you submit (prevention) ----------------
+// Readiness reuses the verdict colours: ready = appeal, add docs = ask, not yet = don't appeal.
+const READY = {
+  ready:             { label: "Ready to submit", v: "appeal", line: "The chart meets the policy in effect on the planned date. Submit the prior-auth request." },
+  add_documentation: { label: "Add documentation first", v: "doc_request", line: "A route to coverage is met, but something the policy asks for isn't in the chart yet. Ask the physician before submitting." },
+  not_yet:           { label: "Not yet", v: "dont_appeal", line: "The chart, as documented, falls short of a waiting period in the policy. Submitting now would likely be denied." },
+  doesnt_qualify:    { label: "Doesn't qualify", v: "not_winnable", line: "The chart doesn't meet this policy, and waiting won't change that. Review the rules below with the physician." },
+};
+
+async function checksView() {
+  setNav("check");
+  document.title = "Before you submit · Denial Auditor";
+  const data = await api("/api/checks");
+  const rep = await drift();
+  $main.innerHTML = `
+    <header class="page-head"><div>
+      <h1 class="page-title">Before you submit</h1>
+      <p class="lede">Prior-auth requests checked against the payer's policy before they go out, with the same rules and chart evidence as a denial. When a waiting period is the only problem, the earliest date it's met is worked out from the chart's own dates.</p>
+      ${watchLine(rep)}
+    </div></header>
+    <div class="board">
+      ${data.checks.length ? `<table>
+        <thead><tr><th scope="col">Readiness</th><th scope="col">Patient</th><th scope="col" class="hide-sm">Payer</th><th scope="col">Planned MRI</th><th scope="col" class="hide-sm">Earliest date</th><th scope="col" class="hide-sm">Policy</th></tr></thead>
+        <tbody>${data.checks.map((r) => `<tr>
+          <td>${mark("v-" + READY[r.readiness].v, READY[r.readiness].label)}</td>
+          <td class="who"><a href="#/check/${r.id}">${esc(r.patient)}</a><div class="addr">${esc(r.id.replace("case_", "Chart "))} · CPT ${esc(r.cpt)}</div></td>
+          <td class="hide-sm">${esc(payerShort(r.payer))}</td>
+          <td>${fmtDate(r.planned_dos)}</td>
+          <td class="hide-sm">${r.earliest ? fmtDate(r.earliest) : `<span class="muted">—</span>`}</td>
+          <td class="hide-sm"><span class="addr">${esc(r.policy || "")}</span></td>
+        </tr>`).join("")}</tbody>
+      </table>` : `<p class="empty">No prior-auth checks yet. Build them with <code>scripts/precompute.py --checks</code>.</p>`}
+    </div>`;
+}
+
+async function checkView(id) {
+  setNav("check");
+  $main.innerHTML = `<div class="skeleton" style="width:55%;height:34px;margin-bottom:22px"></div><div class="skeleton" style="height:480px"></div>`;
+  let c;
+  try { c = await api(`/api/checks/${encodeURIComponent(id)}`); }
+  catch (e) { $main.innerHTML = `<p class="empty">${esc(e.message)}</p>`; return; }
+  const ch = c.check, r = ch.request, rd = READY[ch.readiness];
+  const rep = await drift();
+  document.title = `${c.patient} · Before you submit · Denial Auditor`;
+  // The board renderers take a run; a check is shaped like one with the planned date as the service date.
+  const run = { ...ch, denial: { dos: r.planned_dos }, triage: { route: "clinical_review" }, appeal: null, verdict: rd.v };
+  const byId = Object.fromEntries(ch.criteria.map((x) => [x.criterion_id, x]));
+  const matches = ch.matches.map((m) => ({ ...m, crit: byId[m.criterion_id], addr: c.addresses[m.criterion_id] }));
+  const label = (m) => (m.status === "not_met" && m.crit.kind === "indication" && ch.readiness === "ready") ? ["route", "Route not used"] : [m.status, STATUS[m.status]];
+  const rank = { not_met: 0, missing_documentation: 1, met: 2, route: 3, not_applicable: 4 };
+  matches.forEach((m) => { m.show = label(m)[0]; });
+  const shown = matches.filter((m) => m.status !== "not_applicable").sort((a, b) => rank[a.show] - rank[b.show]);
+  const na = matches.filter((m) => m.status === "not_applicable");
+  NOTE_DATES = Object.fromEntries(c.notes.map((n) => [n.note_id, n.date]));
+  const policyAddr = ch.policy ? ch.policy.policy_id : "";
+
+  $main.innerHTML = `
+    <section class="case-band">
+      <div>
+        <div class="case-who"><span><b>${esc(c.patient)}</b> (synthetic)</span><span>${esc(payerShort(r.payer_name))} · ${esc(r.plan_type.replace(/_/g, " "))}</span><span>Lumbar MRI · CPT ${esc(r.cpt)}</span><span>Planned ${fmtDate(r.planned_dos)}</span></div>
+        <div class="decision">
+          <h1><span class="hl ${VCLASS[rd.v]} sweep">${esc(rd.label)}</span></h1>
+          ${ch.earliest ? `<span class="deadline">Earliest date <b>${fmtDate(ch.earliest)}</b></span>` : ""}
+        </div>
+        <p class="decision-why">${esc(rd.line)}</p>
+        ${driftFlag(rep, c.id, "prior_auth")}
+      </div>
+      <div class="band-actions">${ch.doc_request ? `<button class="btn" data-copy-docreq>${icon.copy}Copy documentation request</button>` : ""}<a class="btn ghost" href="#/check">${icon.back}All requests</a></div>
+    </section>
+    ${overviewHtml(c, run, matches, rd, "Planned MRI")}
+    <div class="workspace">
+      <aside class="ledger" aria-label="Policy rules for this request">
+        <div class="facts"><dl style="margin:0">
+          <dt>Policy in effect on ${fmtDate(r.planned_dos)}</dt><dd>${esc(ch.policy.title)} <span class="addr">${esc(c.policy_citation)}</span></dd>
+          ${ch.earliest ? `<dt>How the earliest date is worked out</dt>${ch.earliest_basis.map((b) => `<dd>${esc(b)}</dd>`).join("")}<dd class="muted">Worked out in code from verified chart dates, assuming conservative care continues. Re-check the chart before submitting.</dd>` : ""}
+        </dl></div>
+        <h2>Rules that decide this request</h2>
+        ${shown.map((m) => ruleHtml(m, label(m), policyAddr)).join("")}
+        ${na.length ? `<button class="na-toggle" type="button" data-na>${na.length} more rules don't apply to this case</button><div data-na-list hidden>${na.map((m) => ruleHtml(m, label(m), policyAddr)).join("")}</div>` : ""}
+      </aside>
+      <section aria-label="Documents">
+        <div class="tabs" role="tablist">
+          <button role="tab" data-tab="policy" aria-selected="true">Policy</button>
+          <button role="tab" data-tab="chart" aria-selected="false">Chart notes</button>
+          <button role="tab" data-tab="next" aria-selected="false">${ch.doc_request ? "Documentation request" : "Next step"}</button>
+        </div>
+        <div data-pane></div>
+      </section>
+    </div>
+    ${auditHtml(run, matches)}`;
+  wireWorkspace({ c, run, matches, selected: null }, { policy: policyPane, chart: chartPane, next: checkNextPane });
+}
+
+function checkNextPane(ctx) {
+  const { run, matches } = ctx;
+  const rd = READY[run.readiness];
+  if (run.doc_request) return nextPane(ctx);
+  const blockers = matches.filter((m) => m.status === "not_met" && m.show !== "route");
+  return `<article class="sheet notes"><header class="sheet-head"><h2>${esc(rd.label)}</h2></header>
+    <p>${esc(rd.line)}</p>
+    ${run.earliest ? `<p>Earliest date the chart can meet the policy: <span class="hl quote">${fmtDate(run.earliest)}</span>. ${run.earliest <= run.request.planned_dos
+      ? `That's on or before the planned date, so the date can stand if the chart documents conservative care through ${fmtDate(run.earliest)}.`
+      : "Move the MRI to that date or later."} Re-check the chart before submitting.</p>` : ""}
+    ${blockers.length ? `<p class="heading">What the chart doesn't meet yet</p>${blockers.map((m) => `<p><span class="hl not_met">${esc(m.crit.verbatim_span.slice(0, 260))}</span><br><span class="muted">${esc(m.rationale)}</span></p>`).join("")}` : ""}
+    <p class="muted">Denial Auditor never submits anything. A person reviews and sends every request.</p>
+  </article>`;
+}
+
 // ---------------- How it works ----------------
 function howView() {
   setNav("how");
@@ -644,9 +789,11 @@ function howView() {
 // ---------------- Router ----------------
 async function route() {
   const [, view, id] = location.hash.split("/");
+  state.board?.abort();
   try {
     if (view === "case") await caseView(id);
     else if (view === "live") await liveView();
+    else if (view === "check") await (id ? checkView(id) : checksView());
     else if (view === "how") howView();
     else await worklist();
   } catch (e) {

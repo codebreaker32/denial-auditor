@@ -160,15 +160,21 @@ def draft_appeal(run: CaseRun, notes: list[ChartNote], patient_name: str, tracke
 
 def documentation_request(run: CaseRun, patient_name: str) -> str | None:
     """Templated request to the physician for each criterion the chart doesn't document."""
-    by_crit = {c.criterion_id: c for c in run.criteria}
-    gaps = [by_crit[m.criterion_id] for m in run.matches if m.status == "missing_documentation"]
+    return gap_request(run.criteria, run.matches, patient_name, run.denial.dos, run.denial.payer_name, run.policy,
+                       "The claim was denied. Before we appeal, please check the chart for the items below "
+                       "and add an addendum if they were done:")
+
+
+def gap_request(criteria, matches, patient_name: str, dos, payer_name: str, policy, ask: str) -> str | None:
+    by_crit = {c.criterion_id: c for c in criteria}
+    gaps = [by_crit[m.criterion_id] for m in matches if m.status == "missing_documentation"]
     if not gaps:
         return None
     lines = [
-        f"Documentation request: {patient_name} (synthetic), lumbar MRI, date of service {run.denial.dos:%m/%d/%Y}",
-        f"Payer: {run.denial.payer_name}. Policy in effect: {run.policy.citation() if run.policy else 'n/a'}.",
+        f"Documentation request: {patient_name} (synthetic), lumbar MRI, date of service {dos:%m/%d/%Y}",
+        f"Payer: {payer_name}. Policy in effect: {policy.citation() if policy else 'n/a'}.",
         "",
-        "The claim was denied. Before we appeal, please check the chart for the items below and add an addendum if they were done:",
+        ask,
         "",
     ]
     for i, c in enumerate(gaps, 1):
