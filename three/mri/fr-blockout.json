@@ -1,0 +1,4 @@
+[{"id":"ring-gantry-bore","score":0.78,"notes":"Rounded-square ring and deep bore read correctly; ring is slightly too deep front-to-back"},
+ {"id":"couch-into-bore","score":0.6,"notes":"Couch aligns with the bore but the pedestal is far too bulky and long; pillow not visible"},
+ {"id":"inset-front-cover","score":0.5,"notes":"Inset step visible but cover colour is not lighter: albedo maps carry baked room shadow"},
+ {"id":"rounded-square-silhouette","score":0.75,"notes":"Silhouette and plinth correct"}]

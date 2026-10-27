@@ -14,6 +14,8 @@ Service: Lumbar spine MRI
 CPT: 72148
 Diagnosis: M54.16
 Date of service: 07/31/2026
+Billed amount: $1,930.00
+Amount paid: $0.00
 
 Decision: DENIED
 Reason code(s): 50

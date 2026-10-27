@@ -1,0 +1,290 @@
+/* Run live: form on the left, the step stream on the right. */
+.lv {
+  max-width: 1080px;
+}
+.lv-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+.lv-form {
+  display: grid;
+  gap: 20px;
+  padding-right: 32px;
+  border-right: 1px solid var(--rule);
+}
+.lv-field {
+  display: grid;
+  gap: 8px;
+}
+.lv-input {
+  height: 44px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--rule-2);
+  font: inherit;
+  font-size: var(--fs-body);
+  color: var(--ink);
+  transition: box-shadow var(--dur-micro) var(--ease-micro);
+}
+.lv-input::placeholder {
+  color: var(--ink-3);
+}
+.lv-input:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 1px var(--ink-3);
+}
+.lv-input:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--ink);
+  border-radius: 10px;
+}
+.lv-input[aria-invalid="true"] {
+  box-shadow: inset 0 0 0 2px var(--t-neg);
+}
+.lv-input:disabled {
+  opacity: 0.6;
+}
+select.lv-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23686a62' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+.lv-hint,
+.lv-small {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+.lv-err {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.45;
+  color: var(--t-neg);
+}
+.lv-err svg {
+  flex: none;
+  margin-top: 3px;
+}
+.lv-off {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--t-clay-tint);
+  color: var(--t-clay);
+  font-size: var(--fs-small);
+}
+.lv-prev {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.lv-prev-t {
+  display: grid;
+  min-width: 0;
+  font-size: var(--fs-small);
+  color: var(--ink-3);
+}
+.lv-prev-t b {
+  font-size: var(--fs-body);
+  font-weight: 500;
+  color: var(--ink);
+}
+.lv-prev-v {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+}
+.lv-go {
+  justify-self: start;
+  min-width: 140px;
+}
+.lv-go:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+.lv-spin {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid rgb(255 255 255 / 0.3);
+  border-top-color: #fff;
+  animation: lv-rot 0.8s linear infinite;
+}
+@keyframes lv-rot {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.lv-run-h {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+}
+.lv-run-h h2 {
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: 500;
+}
+.lv-clock {
+  font-size: var(--fs-small);
+  color: var(--ink-3);
+}
+.lv-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+.lv-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--rule);
+  transition: opacity var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+}
+.lv-step.is-wait .lv-dot {
+  opacity: 0.6;
+}
+.lv-step.is-wait .lv-step-t b {
+  color: var(--ink-2);
+  font-weight: 400;
+}
+.lv-step.is-now {
+  background: var(--surface);
+  border-radius: 10px;
+}
+.lv-dot {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+}
+.lv-idx {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--rule-2);
+  font-size: var(--fs-small);
+  color: var(--ink-3);
+}
+.lv-pulse {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--ink);
+}
+.lv-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 999px;
+  border: 2px solid var(--ink);
+  animation: lv-ping 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes lv-ping {
+  from {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+.lv-step-t {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.lv-step-t b {
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  font-weight: 500;
+}
+.lv-msg {
+  display: block;
+  overflow: hidden;
+  font-size: var(--fs-small);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+.lv-word {
+  font-size: var(--fs-small);
+  line-height: 1.45;
+  font-weight: 500;
+}
+.lv-after {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--surface);
+}
+.lv-stop {
+  justify-content: flex-start;
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+}
+
+@media (max-width: 899px) {
+  .lv-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .lv-form {
+    padding-right: 0;
+    border-right: 0;
+  }
+}
+
+/* ---------- rows: white surfaces one tone step from the ground, no hairlines between them ---------- */
+.lv-prev {
+  border: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--surface);
+}
+.lv-steps {
+  display: grid;
+  gap: 2px;
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.lv-step {
+  border: 0;
+  background: var(--surface);
+  padding-left: 14px;
+  padding-right: 14px;
+}

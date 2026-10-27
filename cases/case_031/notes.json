@@ -1,0 +1,23 @@
+[
+ {
+  "note_id": "case_031-n1",
+  "date": "2026-05-13",
+  "note_type": "initial_visit",
+  "author_role": "Clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nPatient is a 71-year-old female presenting with new-onset low back pain. She reports onset of low back pain on 05/12/2026. She is starting NSAIDs and is referred to physical therapy at an outside clinic. She denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficits. On exam, lower-extremity strength, reflexes, and sensation are normal. Assessment: low back pain unspecified (M54.50). Plan: continue NSAIDs and activity modification, consider obtaining lumbar MRI if symptoms persist, and reassess after a course of physical therapy."
+ },
+ {
+  "note_id": "case_031-n2",
+  "date": "2026-06-23",
+  "note_type": "follow_up",
+  "author_role": "Clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nThe patient returns for follow-up of persistent low back pain initially noted on 05/12/2026. She continues to report discomfort despite NSAIDs and physical therapy at an outside clinic; records of that outside physical therapy remain unavailable. She denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficits. Examination shows normal lower-extremity strength, reflexes, and sensation. Assessment: low back pain unspecified (M54.50). Plan: obtain lumbar MRI to localize the level prior to a planned L4-L5 epidural steroid injection; if MRI confirms appropriate level, proceed with injection."
+ },
+ {
+  "note_id": "case_031-n3",
+  "date": "2026-08-04",
+  "note_type": "imaging_order",
+  "author_role": "Clinician",
+  "text": "SYNTHETIC \u2013 NOT A REAL PATIENT\nLumbar MRI is ordered to localize the level prior to a planned L4-L5 epidural steroid injection. The patient is a 71-year-old female with low back pain onset on 05/12/2026 who has tried NSAIDs and physical therapy at an outside clinic without lasting relief; records of the outside physical therapy are not on file. She denies trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, or progressive neurologic deficits. Exam shows normal lower-extremity strength, reflexes, and sensation. Assessment: low back pain unspecified (M54.50). Plan: proceed with MRI and, if appropriate, perform L4-L5 epidural steroid injection."
+ }
+]

@@ -3,7 +3,7 @@
  "group": "F_administrative",
  "patient_name": "Val Simulant",
  "plan_type": "MA",
- "payer": "Harbor Health MA (synthetic)",
+ "payer": "Prosper Health MA (synthetic)",
  "practice_state": "AZ",
  "policy": "L34220",
  "cpt": "72148",
@@ -16,6 +16,7 @@
   "29"
  ],
  "reason_text": "Claim received after the filing deadline.",
+ "billed_usd": 2430,
  "facts": {
   "age": 73,
   "sex": "F",
@@ -41,7 +42,8 @@
   "radiculopathy": "none",
   "prior_imaging": [],
   "plan_after_mri": "Spine surgery referral is under consideration pending MRI findings",
-  "surgery_or_injection_considered": true
+  "surgery_or_injection_considered": true,
+  "treatment_dates_documented": true
  },
  "expected": {
   "route": "fix_checklist",

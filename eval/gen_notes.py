@@ -69,7 +69,12 @@ def fact_sheet(s: Scenario) -> tuple[str, dict[str, list[str]]]:
         "conservative_treatment": [
             {"type": t.kind, "start": fmt(t.start), "end": fmt(t.end), "sessions": t.sessions, "response": t.response}
             for t in f.treatments
-        ],
+        ] if f.treatment_dates_documented else (
+            "UNDATED: the patient reports trying " + " and ".join(sorted({t.kind.replace("_", " ") for t in f.treatments}))
+            + " without lasting relief, at an outside clinic whose records have not been received. The chart records NO start date,"
+            " end date, duration, number of weeks or number of sessions for any of it; write none (this overrides the rule about"
+            " restating the full course), and have the follow-up note say the outside physical therapy records are not on file."
+        ),
         "red_flags": f.red_flags or "none (no trauma, cancer, fever, weight loss, bladder or bowel symptoms, saddle anesthesia, progressive deficit)",
         "neurologic_exam": {
             "normal": "normal lower-extremity strength, reflexes and sensation",
@@ -85,8 +90,11 @@ def fact_sheet(s: Scenario) -> tuple[str, dict[str, list[str]]]:
         "plan_if_mri": f.plan_after_mri,
     }
     need: dict[str, list[str]] = {"onset": [fmt(f.onset)]}
-    for i, t in enumerate(f.treatments):
-        need[f"treatment_{i}"] = [fmt(t.start), fmt(t.end)]
+    if f.treatment_dates_documented:
+        for i, t in enumerate(f.treatments):
+            need[f"treatment_{i}"] = [fmt(t.start), fmt(t.end)]
+    elif f.treatments:
+        need["outside_records_missing"] = []
     if f.red_flags:
         for i, rf in enumerate(f.red_flags):
             need[f"red_flag_{i}"] = []  # synonyms are fine ("intravenous drug use"); the sentence must exist
@@ -110,7 +118,7 @@ def schedule(s: Scenario) -> list[tuple[date, str]]:
 
     f = s.facts
     out = [(f.onset + timedelta(days=1), "initial_visit")]
-    if f.treatments:
+    if f.treatments and f.treatment_dates_documented:
         end = max(t.end for t in f.treatments)
         out.append((end, "pt_note"))
         out.append((min(end + timedelta(days=5), s.dos - timedelta(days=1)), "follow_up"))
@@ -161,6 +169,9 @@ def generate(s: Scenario, case_dir: Path, tracker: CostTracker) -> dict:
         # Plans the fact sheet doesn't include must not appear (they open other policy routes).
         plan = (s.facts.plan_after_mri or "").lower()
         forbidden = tuple(t for t in ("injection", "epidural") if t not in plan)
+        if not s.facts.treatment_dates_documented:
+            # Undated care must stay undated: no treatment date, week count or session count may appear.
+            forbidden += tuple(fmt(d) for t in s.facts.treatments for d in (t.start, t.end)) + (" weeks of", " sessions")
         problems = check(ns, need, [fmt(d) for d, _ in schedule(s)], forbidden)
         if not problems:
             notes = [

@@ -7,3 +7,5 @@
 .token_factory_spend.json
 .tavily_spend.json
 eval/results
+ui/node_modules
+ui/dist

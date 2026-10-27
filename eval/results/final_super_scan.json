@@ -1859,7 +1859,7 @@
   "run": {
    "case_id": "case_003",
    "denial": {
-    "payer_name": "Harbor Health MA",
+    "payer_name": "Prosper Health MA",
     "plan_type": "MA",
     "cpt": "72148",
     "icd10": [
@@ -5617,7 +5617,7 @@
   "run": {
    "case_id": "case_007",
    "denial": {
-    "payer_name": "Harbor Health MA",
+    "payer_name": "Prosper Health MA",
     "plan_type": "MA",
     "cpt": "72148",
     "icd10": [
@@ -21783,7 +21783,7 @@
   "run": {
    "case_id": "case_021",
    "denial": {
-    "payer_name": "Harbor Health MA",
+    "payer_name": "Prosper Health MA",
     "plan_type": "MA",
     "cpt": "72148",
     "icd10": [
@@ -25699,7 +25699,7 @@
   "run": {
    "case_id": "case_027",
    "denial": {
-    "payer_name": "Harbor Health MA (synthetic)",
+    "payer_name": "Prosper Health MA (synthetic)",
     "plan_type": "MA",
     "cpt": "72148",
     "icd10": [

@@ -1,0 +1,3786 @@
+{
+ "case_001-letter-1440": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    660,
+    700,
+    740,
+    664
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    660,
+    700,
+    680,
+    640
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "8px 8px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    668,
+    708,
+    664,
+    859
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_001-next-1440": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".sheet.letter": {
+   "n": 1,
+   "rect": [
+    264,
+    750,
+    792,
+    2574
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "48px 56px",
+   "inset": null
+  },
+  ".sheet.letter::before": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": "8px"
+  },
+  ".sheet.letter::after": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": "auto"
+  },
+  ".letter-tools": {
+   "n": 1,
+   "rect": [
+    264,
+    700,
+    792,
+    38
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".gate": {
+   "n": 1,
+   "rect": [
+    1080,
+    700,
+    320,
+    1729
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(244, 247, 254)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "20px 20px",
+   "inset": null
+  },
+  "figure.lq": {
+   "n": 15,
+   "rect": [
+    320,
+    1106,
+    664,
+    52
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  "chainSheet": [
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.appeal",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace.letter-focus",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "chainImg": [],
+  "bordered": [
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)"
+  ],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "none",
+    "20px"
+   ],
+   [
+    "ASIDE.gate",
+    "rgb(244, 247, 254)",
+    "0px none",
+    "none",
+    "20px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_015-letter-1440": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    660,
+    698,
+    740,
+    664
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    660,
+    698,
+    680,
+    640
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "8px 8px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    668,
+    706,
+    664,
+    859
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_015-next-1440": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".sheet.letter": {
+   "n": 1,
+   "rect": [
+    264,
+    748,
+    792,
+    2682
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "48px 56px",
+   "inset": null
+  },
+  ".sheet.letter::before": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": "8px"
+  },
+  ".sheet.letter::after": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": "auto"
+  },
+  ".letter-tools": {
+   "n": 1,
+   "rect": [
+    264,
+    698,
+    792,
+    38
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".gate": {
+   "n": 1,
+   "rect": [
+    1080,
+    698,
+    320,
+    1478
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(244, 247, 254)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "20px 20px",
+   "inset": null
+  },
+  "figure.lq": {
+   "n": 11,
+   "rect": [
+    320,
+    1104,
+    664,
+    52
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  "chainSheet": [
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.appeal",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace.letter-focus",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "chainImg": [],
+  "bordered": [
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)"
+  ],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "none",
+    "20px"
+   ],
+   [
+    "ASIDE.gate",
+    "rgb(244, 247, 254)",
+    "0px none",
+    "none",
+    "20px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_028-letter-1440": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    660,
+    640,
+    740,
+    664
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    660,
+    640,
+    680,
+    640
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "8px 8px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    668,
+    648,
+    664,
+    859
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_001-letter-1024": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    40,
+    329,
+    944,
+    664
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    40,
+    329,
+    680,
+    640
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "8px 8px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    48,
+    337,
+    664,
+    859
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_001-next-1024": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".sheet.letter": {
+   "n": 1,
+   "rect": [
+    40,
+    286,
+    944,
+    2574
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "48px 56px",
+   "inset": null
+  },
+  ".sheet.letter::before": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": "8px"
+  },
+  ".sheet.letter::after": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": "auto"
+  },
+  ".letter-tools": {
+   "n": 1,
+   "rect": [
+    40,
+    124,
+    944,
+    38
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".gate": {
+   "n": 1,
+   "rect": [
+    40,
+    2929,
+    944,
+    177
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(244, 247, 254)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "20px 20px",
+   "inset": null
+  },
+  "figure.lq": {
+   "n": 15,
+   "rect": [
+    96,
+    642,
+    664,
+    52
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  "chainSheet": [
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.appeal",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace.letter-focus",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "chainImg": [],
+  "bordered": [
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)"
+  ],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "none",
+    "20px"
+   ],
+   [
+    "ASIDE.gate",
+    "rgb(244, 247, 254)",
+    "0px none",
+    "none",
+    "20px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_015-letter-1024": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    40,
+    374,
+    944,
+    664
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    40,
+    374,
+    680,
+    640
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "8px 8px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    48,
+    382,
+    664,
+    859
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_015-next-1024": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".sheet.letter": {
+   "n": 1,
+   "rect": [
+    40,
+    286,
+    944,
+    2682
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "48px 56px",
+   "inset": null
+  },
+  ".sheet.letter::before": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": "8px"
+  },
+  ".sheet.letter::after": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": "auto"
+  },
+  ".letter-tools": {
+   "n": 1,
+   "rect": [
+    40,
+    124,
+    944,
+    38
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".gate": {
+   "n": 1,
+   "rect": [
+    40,
+    3037,
+    944,
+    177
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(244, 247, 254)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "20px 20px",
+   "inset": null
+  },
+  "figure.lq": {
+   "n": 11,
+   "rect": [
+    96,
+    642,
+    664,
+    52
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  "chainSheet": [
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.appeal",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace.letter-focus",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "chainImg": [],
+  "bordered": [
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)"
+  ],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "none",
+    "20px"
+   ],
+   [
+    "ASIDE.gate",
+    "rgb(244, 247, 254)",
+    "0px none",
+    "none",
+    "20px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_028-letter-1024": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    40,
+    464,
+    944,
+    664
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    40,
+    464,
+    680,
+    640
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "8px 8px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    48,
+    472,
+    664,
+    859
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_001-letter-768": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    40,
+    278,
+    688,
+    899
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    40,
+    278,
+    680,
+    875
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "8px 8px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    48,
+    286,
+    664,
+    859
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_001-next-768": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".sheet.letter": {
+   "n": 1,
+   "rect": [
+    40,
+    286,
+    688,
+    2678
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "48px 56px",
+   "inset": null
+  },
+  ".sheet.letter::before": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": "8px"
+  },
+  ".sheet.letter::after": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": "auto"
+  },
+  ".letter-tools": {
+   "n": 1,
+   "rect": [
+    40,
+    124,
+    688,
+    38
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".gate": {
+   "n": 1,
+   "rect": [
+    40,
+    3033,
+    688,
+    177
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(244, 247, 254)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "20px 20px",
+   "inset": null
+  },
+  "figure.lq": {
+   "n": 15,
+   "rect": [
+    96,
+    642,
+    576,
+    78
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  "chainSheet": [
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.appeal",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace.letter-focus",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "chainImg": [],
+  "bordered": [
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)"
+  ],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "none",
+    "20px"
+   ],
+   [
+    "ASIDE.gate",
+    "rgb(244, 247, 254)",
+    "0px none",
+    "none",
+    "20px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_015-letter-768": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    40,
+    339,
+    688,
+    899
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    40,
+    339,
+    680,
+    875
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "8px 8px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    48,
+    347,
+    664,
+    859
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_015-next-768": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".sheet.letter": {
+   "n": 1,
+   "rect": [
+    40,
+    276,
+    688,
+    2916
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "48px 56px",
+   "inset": null
+  },
+  ".sheet.letter::before": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": "8px"
+  },
+  ".sheet.letter::after": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": "auto"
+  },
+  ".letter-tools": {
+   "n": 1,
+   "rect": [
+    40,
+    124,
+    688,
+    38
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".gate": {
+   "n": 1,
+   "rect": [
+    40,
+    3261,
+    688,
+    164
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "20px 20px",
+   "inset": null
+  },
+  "figure.lq": {
+   "n": 11,
+   "rect": [
+    96,
+    632,
+    576,
+    78
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  "chainSheet": [
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.appeal",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace.letter-focus",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "chainImg": [],
+  "bordered": [
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)"
+  ],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "none",
+    "20px"
+   ],
+   [
+    "ASIDE.gate",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "none",
+    "20px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_028-letter-768": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    40,
+    428,
+    688,
+    899
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    40,
+    428,
+    680,
+    875
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "20px",
+   "pad": "8px 8px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    48,
+    436,
+    664,
+    859
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "12px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_001-letter-390": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    16,
+    403,
+    358,
+    500
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    16,
+    403,
+    358,
+    460
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "16px",
+   "pad": "6px 6px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    22,
+    409,
+    346,
+    448
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "10px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_001-next-390": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".sheet.letter": {
+   "n": 1,
+   "rect": [
+    16,
+    324,
+    358,
+    2973
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "16px",
+   "pad": "24px 24px",
+   "inset": null
+  },
+  ".sheet.letter::before": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "10px",
+   "pad": "0px 0px",
+   "inset": "6px"
+  },
+  ".sheet.letter::after": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": "auto"
+  },
+  ".letter-tools": {
+   "n": 1,
+   "rect": [
+    16,
+    132,
+    358,
+    82
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".gate": {
+   "n": 1,
+   "rect": [
+    16,
+    3366,
+    358,
+    209
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(244, 247, 254)",
+   "bgi": "none",
+   "radius": "16px",
+   "pad": "20px 20px",
+   "inset": null
+  },
+  "figure.lq": {
+   "n": 15,
+   "rect": [
+    40,
+    772,
+    310,
+    72
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  "chainSheet": [
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.appeal",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace.letter-focus",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "chainImg": [],
+  "bordered": [
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)"
+  ],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "none",
+    "16px"
+   ],
+   [
+    "ASIDE.gate",
+    "rgb(244, 247, 254)",
+    "0px none",
+    "none",
+    "16px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_015-letter-390": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    16,
+    387,
+    358,
+    500
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    16,
+    387,
+    358,
+    460
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "16px",
+   "pad": "6px 6px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    22,
+    393,
+    346,
+    448
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "10px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_015-next-390": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".sheet.letter": {
+   "n": 1,
+   "rect": [
+    16,
+    324,
+    358,
+    3389
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "16px",
+   "pad": "24px 24px",
+   "inset": null
+  },
+  ".sheet.letter::before": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "10px",
+   "pad": "0px 0px",
+   "inset": "6px"
+  },
+  ".sheet.letter::after": {
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": "auto"
+  },
+  ".letter-tools": {
+   "n": 1,
+   "rect": [
+    16,
+    132,
+    358,
+    82
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".gate": {
+   "n": 1,
+   "rect": [
+    16,
+    3782,
+    358,
+    209
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(244, 247, 254)",
+   "bgi": "none",
+   "radius": "16px",
+   "pad": "20px 20px",
+   "inset": null
+  },
+  "figure.lq": {
+   "n": 11,
+   "rect": [
+    40,
+    726,
+    310,
+    72
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  "chainSheet": [
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.appeal",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace.letter-focus",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "chainImg": [],
+  "bordered": [
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)",
+   "BLOCKQUOTE. Left 1px rgb(228, 228, 226)"
+  ],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ARTICLE.sheet.letter",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "none",
+    "16px"
+   ],
+   [
+    "ASIDE.gate",
+    "rgb(244, 247, 254)",
+    "0px none",
+    "none",
+    "16px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ },
+ "case_028-letter-390": {
+  "body": "rgb(237, 237, 236)",
+  "main": "rgba(0, 0, 0, 0)",
+  ".letter-fig": {
+   "n": 1,
+   "rect": [
+    16,
+    419,
+    358,
+    500
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "bgi": "none",
+   "radius": "0px",
+   "pad": "0px 0px",
+   "inset": null
+  },
+  ".letter-scroll": {
+   "n": 1,
+   "rect": [
+    16,
+    419,
+    358,
+    460
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(245, 245, 244)",
+   "bgi": "none",
+   "radius": "16px",
+   "pad": "6px 6px",
+   "inset": null
+  },
+  ".letter-img": {
+   "n": 1,
+   "rect": [
+    22,
+    425,
+    346,
+    448
+   ],
+   "bt": "0px none rgb(18, 18, 18)",
+   "bl": "0px none",
+   "outline": "none 3px",
+   "shadow": "none",
+   "bg": "rgb(255, 255, 255)",
+   "bgi": "none",
+   "radius": "10px",
+   "pad": "0px 0px",
+   "inset": null,
+   "natural": [
+    1700,
+    2200
+   ],
+   "complete": true
+  },
+  "chainSheet": [],
+  "chainImg": [
+   [
+    "IMG.letter-img",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.letter-scroll",
+    "rgb(245, 245, 244)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "FIGURE.letter-fig",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "SECTION.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.workspace",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "MAIN.",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.page",
+    "rgb(255, 255, 255)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.stage",
+    "rgb(237, 237, 236)",
+    "0px none",
+    "",
+    "none"
+   ],
+   [
+    "DIV.shell",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "",
+    "none"
+   ]
+  ],
+  "bordered": [],
+  "cards": [
+   [
+    "DL.facts",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "SECTION.coverage",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ],
+   [
+    "ASIDE.ledger",
+    "rgba(0, 0, 0, 0)",
+    "0px none",
+    "none",
+    "0px"
+   ]
+  ],
+  "hscroll": false,
+  "banner": true,
+  "ama": true,
+  "errs": []
+ }
+}

@@ -47,6 +47,7 @@ Denial Auditor turns an insurance denial into a decision and a defensible next s
 
 - Product name: **Denial Auditor**. Team: **Road House** (Aman Bihari, Bhawna).
 - Voice: plain, precise, unhype; says what the policy says and what is missing. No legal or medical advice.
+- Visual standard (user, 2026-10-26, after rejecting four themed worlds: photocopy, guide map, blue pencil, red claim form): **polished modern SaaS, the category standard at full craft**. Quality bar: Linear, Stripe, Vercel, Mercury. No themed or metaphor worlds; premium, clean, light.
 
 ## Evidence on Hand
 

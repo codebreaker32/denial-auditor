@@ -16,6 +16,7 @@
   "204"
  ],
  "reason_text": "This service is not covered under the member's current benefit plan.",
+ "billed_usd": 1440,
  "facts": {
   "age": 40,
   "sex": "F",
@@ -41,7 +42,8 @@
   "radiculopathy": "none",
   "prior_imaging": [],
   "plan_after_mri": "MRI results will decide between epidural steroid injection and surgical referral",
-  "surgery_or_injection_considered": true
+  "surgery_or_injection_considered": true,
+  "treatment_dates_documented": true
  },
  "expected": {
   "route": "not_winnable",

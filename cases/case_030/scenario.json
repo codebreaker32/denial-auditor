@@ -16,6 +16,7 @@
   "96"
  ],
  "reason_text": "Non-covered: imaging requested for an employment physical is excluded.",
+ "billed_usd": 1480,
  "facts": {
   "age": 38,
   "sex": "F",
@@ -41,7 +42,8 @@
   "radiculopathy": "none",
   "prior_imaging": [],
   "plan_after_mri": "MRI results will decide between epidural steroid injection and surgical referral",
-  "surgery_or_injection_considered": true
+  "surgery_or_injection_considered": true,
+  "treatment_dates_documented": true
  },
  "expected": {
   "route": "not_winnable",

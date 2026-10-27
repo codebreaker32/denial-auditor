@@ -1,0 +1,4 @@
+[{"id":"ring-gantry-bore","score":0.8,"notes":"Rounded-square ring with deep bore reads correctly from the reference angle"},
+ {"id":"couch-into-bore","score":0.72,"notes":"Pedestal slimmed to 0.42 x 0.52 x 1.25; couch aligned with the bore"},
+ {"id":"inset-front-cover","score":0.6,"notes":"Inset step present; cream vs off-white difference is subtle"},
+ {"id":"rounded-square-silhouette","score":0.78,"notes":"Silhouette and plinth correct"}]

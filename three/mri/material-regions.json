@@ -1,0 +1,80 @@
+{
+ "referenceId": "mri-front",
+ "regions": [
+  {
+   "componentId": "gantry-shell",
+   "regionId": "shell",
+   "sourceImage": "reference.jpg",
+   "bbox": {
+    "x": 1560,
+    "y": 330,
+    "width": 160,
+    "height": 190
+   },
+   "family": "plastic",
+   "subtype": "generic-polymer",
+   "finish": "matte",
+   "materialSpecId": "shell"
+  },
+  {
+   "componentId": "front-cover-panel",
+   "regionId": "cover",
+   "sourceImage": "reference.jpg",
+   "bbox": {
+    "x": 880,
+    "y": 470,
+    "width": 180,
+    "height": 170
+   },
+   "family": "plastic",
+   "subtype": "generic-polymer",
+   "finish": "matte",
+   "materialSpecId": "cover"
+  },
+  {
+   "componentId": "couch-pad",
+   "regionId": "pad",
+   "sourceImage": "reference.jpg",
+   "bbox": {
+    "x": 330,
+    "y": 1390,
+    "width": 310,
+    "height": 90
+   },
+   "family": "plastic",
+   "subtype": "generic-polymer",
+   "finish": "matte",
+   "materialSpecId": "pad"
+  },
+  {
+   "componentId": "gantry-plinth",
+   "regionId": "trim",
+   "sourceImage": "reference.jpg",
+   "bbox": {
+    "x": 1300,
+    "y": 1335,
+    "width": 300,
+    "height": 37
+   },
+   "family": "metal",
+   "subtype": "aluminum",
+   "finish": "satin",
+   "materialSpecId": "trim"
+  },
+  {
+   "componentId": "display-panel",
+   "regionId": "display",
+   "sourceImage": "reference.jpg",
+   "bbox": {
+    "x": 1162,
+    "y": 428,
+    "width": 74,
+    "height": 50
+   },
+   "family": "glass",
+   "subtype": "clear",
+   "finish": "polished",
+   "materialSpecId": "display"
+  }
+ ]
+}

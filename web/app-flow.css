@@ -1,0 +1,399 @@
+/* Flow layer (round 1): shell orientation, the compact case header, the worklist's next step,
+   and the citation gate kept beside what it depends on. Loaded after app.css; tokens only. */
+
+/* ---------- Shell: an outline page with the blue-pencil tick, utility links grouped under the modes ---------- */
+.brand-mark { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.brand-mark .page { stroke: var(--text); stroke-width: 1.6; fill: var(--sheet); }
+.brand-mark .tick { stroke: var(--accent); stroke-width: 2.2; }
+.nav .group-l { margin: 18px 0 4px; padding: 0 10px; font-size: 12px; line-height: 16px; font-weight: 500; color: var(--faint); }
+.nav .long { display: inline; }
+.nav .short { display: none; }
+
+/* ---------- Worklist: one quiet orientation sentence, and what to do on each row ---------- */
+.orient { margin-top: 4px; font-size: 14px; line-height: 20px; color: var(--faint); max-width: 90ch; }
+.orient .link { color: var(--text); }
+td.nx { overflow: hidden; }
+.nx-link { display: inline-flex; align-items: center; gap: 4px; max-width: 100%; color: var(--text); font-weight: 500; text-decoration: underline 1px transparent; text-underline-offset: 3px; transition: text-decoration-color var(--t) var(--ease); }
+.nx-link span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nx-link svg { width: 14px; height: 14px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: var(--faint); }
+.nx-link:hover { text-decoration-color: currentColor; }
+.nx-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+
+/* ---------- Coverage path: one card, four cells split by hairlines ---------- */
+.coverage { margin-top: 18px; }
+.coverage-head { margin-bottom: 8px; }
+.coverage-steps.flat { gap: 0; background: var(--card); border-radius: var(--radius-card); }
+.coverage-steps.flat li { position: relative; display: grid; align-content: start; gap: 6px; min-height: 64px; padding: 12px 16px; background: transparent; border-radius: 0; }
+.coverage-steps.flat li + li::before { content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 1px; background: var(--border); }
+.coverage-steps.flat .lab { grid-column: auto; }
+.coverage-steps.flat .line { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; min-width: 0; }
+.coverage-steps.flat .res { margin-top: 0; grid-column: auto; grid-row: auto; white-space: nowrap; }
+.coverage-steps.flat .refs { margin-top: 0; grid-column: auto; }
+.coverage-steps.flat .res > .glyph { width: 20px; height: 20px; padding: 3px; }
+.coverage-steps.flat.single li { min-height: 52px; }
+.workspace { margin-top: 20px; }
+
+/* ---------- Rules: a summary that restates the policy sentence is dropped beside the policy pane ---------- */
+.rule-echo { display: none; font-size: 13px; line-height: 18px; color: var(--faint); }
+@media (min-width: 1101px) {
+  .rule-sum.echo { display: none; }
+  .rule-echo { display: block; }
+}
+
+/* ---------- Citation gate: summary and Export first, sticky beside the letter ---------- */
+.gate-bar { display: none; }
+@media (min-width: 1101px) {
+  .appeal .gate { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; -webkit-mask-image: none; mask-image: none; }
+  .appeal .gate ol { max-height: none; overflow: visible; -webkit-mask-image: none; mask-image: none; }
+}
+@media (max-width: 1100px) {
+  .gate-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 12px; margin-bottom: 12px; padding: 12px 16px; background: var(--card); border-radius: var(--radius-card); }
+  .gate-bar .btn { margin-left: auto; }
+  .gate-bar .bar-foot { flex-basis: 100%; font-size: 13px; line-height: 18px; color: var(--muted); }
+  .nav .group-l { display: none; }
+  [role="tablist"][aria-label="Documents"] { scroll-margin-top: 64px; }
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 640px) {
+  .nav .long { display: none; }
+  .nav .short { display: inline; }
+  table.list td.nx { display: block; grid-column: 1 / -1; font-size: 14px; line-height: 20px; }
+  .coverage-steps.flat { grid-template-columns: minmax(0, 1fr); }
+  .coverage-steps.flat li { min-height: 0; padding: 12px 16px; grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .coverage-steps.flat li + li::before { left: 16px; right: 16px; top: 0; bottom: auto; width: auto; height: 1px; }
+  .gate-bar .btn { margin-left: 0; width: 100%; min-height: 44px; justify-content: center; }
+}
+@media (min-width: 641px) and (max-width: 860px) {
+  .coverage-steps.flat { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .coverage-steps.flat li:nth-child(3)::before { display: none; }
+}
+.gate .foot { padding-top: 0; border-top: 0; }
+@media (max-width: 640px) { .l2-dos { display: none; } }
+
+/* ---------- Round 2 flow: empty filters, administrative denials, work status ---------- */
+
+.coverage .single-line { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; min-height: 52px; padding: 12px 16px; background: var(--card); border-radius: var(--radius-card); font-size: 15px; line-height: 22px; color: var(--text); }
+.coverage .single-line > [aria-hidden] { color: var(--faint); }
+.coverage .single-line .to { display: inline-flex; align-items: center; gap: 4px; font-weight: 500; }
+.coverage .single-line .to svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: var(--faint); }
+
+.fix-why { margin: 4px 0 8px; font-size: 15px; line-height: 22px; color: var(--muted); max-width: 60ch; }
+.fixlist { font-size: 15px; line-height: 22px; }
+.fixlist li + li { margin-top: 6px; }
+
+.nx-link .glyph { width: 14px; height: 14px; flex: none; color: var(--positive-ink); }
+.nx-link.work-exported, .nx-link.work-sent { font-weight: 500; }
+.work-line { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin-top: 10px; font-size: 14px; line-height: 20px; color: var(--muted); }
+.work-line .btn.text { color: var(--text); text-decoration: underline 1px; text-underline-offset: 3px; }
+.bar-work { flex-basis: 100%; }
+.bar-work .work-line { margin-top: 0; }
+.nx-link[class*="work-"] span { white-space: normal; }
+.work-line p { flex-basis: 100%; margin: 0; }
+.work-line p .btn.text { display: inline; font: inherit; }
+
+/* ---------- Round 3 flow ---------- */
+/* Verdict tile, two columns on desktop: the answer with its action under it | the window or date. */
+.box-act[hidden] { display: none; }
+@media (min-width: 861px) {
+  .vline { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+  .vline > .box:first-child { grid-column: 1; grid-row: 1; }
+  .vline > .box:nth-child(2) { grid-column: 2; grid-row: 1 / span 2; }
+  .vline > .box-act { grid-column: 1; grid-row: 2; align-content: start; margin-top: -6px; padding-top: 0; }
+}
+
+/* Coverage path: every state is a glyph in a tinted disc, then the word in the tone's ink. */
+.coverage-steps .res.warn { color: var(--warning-ink); }
+.coverage-steps .res.warn > .glyph { background: var(--warning-tint); color: var(--warning-ink); }
+.coverage-steps .res.bad { color: var(--negative-ink); }
+.coverage-steps .res.bad > .glyph { background: var(--negative-tint); color: var(--negative-ink); }
+.coverage-steps .res.ok { color: var(--positive-ink); }
+.coverage-steps.flat .res { white-space: normal; }
+
+/* Rules: a split vote, said on the card itself. */
+.conf-flag { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 12px; line-height: 16px; color: var(--muted); }
+.conf-flag .glyph { width: 13px; height: 13px; flex: none; }
+
+/* Fix & resubmit: why there's no clinical appeal (left), a checklist someone can tick (Next step). */
+.fix-why { display: grid; gap: 8px; margin: 0; font-size: 15px; line-height: 22px; color: var(--muted); max-width: 60ch; }
+.fix-why p { margin: 0; }
+.fix-why .id { color: var(--text); }
+.fix-why button.link { color: var(--text); font-weight: 500; }
+.sheet.plain .fix-flag { color: var(--muted); }
+.fix-checks { list-style: none; margin: 4px 0 12px; padding: 0; display: grid; gap: 8px; max-width: var(--read); }
+.fix-checks label { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-radius: var(--radius-card); background: var(--card); cursor: pointer; font-size: 16px; line-height: 24px; color: var(--text); transition: background-color var(--t) var(--ease); }
+.fix-checks label:hover { background: var(--hover); }
+.fix-checks input { flex: none; width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--text); cursor: pointer; }
+.fix-checks input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.fix-checks input:checked + span { color: var(--muted); text-decoration: line-through 1px var(--faint); }
+.sheet.plain .fix-count { font-size: 13px; line-height: 18px; color: var(--muted); }
+
+/* The letter scan scrolls inside its frame on wider screens, so the page doesn't run on past the workspace. */
+.letter-fig { margin: 0; }
+.letter-scroll { max-width: 680px; border: 1px solid var(--border); border-radius: var(--radius-card); overflow: hidden; }
+.letter-scroll .letter-img { border: 0; border-radius: 0; max-width: none; }
+.letter-scroll:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (min-width: 861px) {
+  .letter-scroll { max-height: 640px; overflow: auto; overscroll-behavior: contain; }
+}
+.ledger .sec { flex-wrap: wrap; row-gap: 2px; }
+
+/* ---------- Loop round 2 flow ---------- */
+/* A case with no rules (plan exclusion) gives the ledger's column to the documents. */
+.workspace.solo { grid-template-columns: minmax(0, 1fr); }
+.workspace.solo > .ledger { display: none; }
+
+/* Rules: days counted in code, the model's words labelled as the model's, split votes in their own group. */
+.counted { display: flex; align-items: flex-start; gap: 6px; margin: 0; font-size: 13px; line-height: 18px; color: var(--muted); }
+.counted .glyph { width: 13px; height: 13px; flex: none; margin-top: 2px; color: var(--text); }
+.counted b { font-weight: 500; color: var(--text); }
+.sheet.plain .blk .counted { margin-top: 6px; font-size: 14px; line-height: 20px; }
+.lead { font-weight: 500; color: var(--faint); }
+.sec.sub-sec { margin-top: 20px; font-size: 14px; line-height: 20px; font-weight: 600; }
+.conf-flag { align-items: flex-start; }
+.conf-flag .glyph { margin-top: 2px; }
+.conf-flag b { font-weight: 500; color: var(--text); }
+
+/* Next step on a held denial: what would change it, and the note to the physician. */
+.note-act { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin: 4px 0 16px; font-size: 13px; line-height: 18px; }
+
+
+/* Model calls and cost: a stage per row, the rules' votes folded under their subtotal. */
+.audit-t tr.a-stage td { font-weight: 500; color: var(--text); }
+.audit-t tr.a-call td { color: var(--muted); font-size: 13px; }
+.audit-t tr.a-call td:first-child { padding-left: 28px; }
+.audit-t tr.a-stage button.link { margin-left: 6px; font-size: 12px; font-weight: 400; }
+.audit-t tr.a-total td { font-weight: 600; color: var(--text); }
+.audit-t td .glyph { width: 13px; height: 13px; margin-right: 6px; vertical-align: -2px; color: var(--warning-ink); }
+.audit-t td.r { font-variant-numeric: tabular-nums; }
+
+/* Policy pane: snapshot hash. */
+.sha-copy { margin-left: 4px; font-size: 12px; }
+
+/* Appeal editor: plain text, with the gate's rule said above it. */
+.edit-help { margin: 0 0 8px; font-size: 13px; line-height: 18px; color: var(--muted); }
+
+/* Run live: a refused start is said on the form, next to the field it is about. */
+.field-err { display: flex; align-items: flex-start; gap: 6px; margin: 0; font-size: 14px; line-height: 20px; color: var(--negative-ink); }
+.field-err .glyph { width: 14px; height: 14px; flex: none; margin-top: 3px; }
+.input[aria-invalid="true"] { border-color: var(--negative); }
+[data-clock].stopped { color: var(--negative-ink); }
+
+/* Policy watch: the stamp opens the list of citations it compared. */
+.watch-btn { display: inline-flex; align-items: center; gap: 4px; min-height: 24px; padding: 0; border: 0; background: none; font: inherit; color: inherit; cursor: pointer; text-align: left; text-decoration: underline 1px transparent; text-underline-offset: 3px; transition: color var(--t) var(--ease), text-decoration-color var(--t) var(--ease); }
+.watch-btn:hover { color: var(--text); text-decoration-color: currentColor; }
+.watch-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.watch-btn svg { width: 12px; height: 12px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.watch-pop { width: min(680px, calc(100vw - 32px)); max-height: min(80vh, 640px); overflow: auto; margin: auto; padding: 24px; border: 0; border-radius: var(--radius-card); background: var(--sheet); color: var(--text); }
+.watch-pop::backdrop { background: color-mix(in srgb, var(--text) 28%, transparent); }
+.wp-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.wp-head h2 { font-size: 20px; line-height: 28px; font-weight: 500; letter-spacing: -0.01em; }
+.wp-head .btn.text { min-height: 24px; color: var(--text); text-decoration: underline 1px; text-underline-offset: 3px; }
+.wp-say { margin-top: 6px; font-size: 14px; line-height: 20px; color: var(--muted); max-width: 64ch; }
+.wp-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; }
+.wp-list li { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) auto; grid-template-areas: "who pol st" "kind pol st"; align-items: center; gap: 2px 16px; padding: 12px 0; border-top: 1px solid var(--border); font-size: 14px; line-height: 20px; }
+.wp-list li > .link { grid-area: who; color: var(--text); font-weight: 500; }
+.wp-list .wp-kind { grid-area: kind; font-size: 12px; line-height: 16px; color: var(--faint); }
+.wp-list .wp-pol { grid-area: pol; color: var(--muted); }
+.wp-list .wp-pol > span:not(.id) { display: block; font-size: 12px; line-height: 16px; color: var(--faint); }
+.wp-list .mark { grid-area: st; }
+@media (max-width: 640px) {
+  .watch-pop { padding: 20px 16px; }
+  .wp-list li { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "who st" "kind st" "pol pol"; }
+}
+
+/* Phone and tablet appeal: the bar above the letter is the one Export; the gate below is the full quote list. */
+@media (max-width: 1100px) {
+  .appeal .gate { position: static; }
+  .appeal .gate .export [data-export], .appeal .gate [data-work] { display: none; }
+  .appeal .gate .export:not(:has(.why-lock)) { display: none; }
+  .appeal .gate ol { max-height: none; overflow: visible; -webkit-mask-image: none; mask-image: none; }
+}
+
+/* ---------- Loop round 3 flow ---------- */
+/* Worklist sort: the deadline (default) or the fixed recommendation order. Per viewer. */
+.sort { display: inline-flex; align-items: center; gap: 2px; padding: 4px; border-radius: var(--radius-control); background: var(--card); }
+.sort .sort-l { padding: 0 8px 0 10px; font-size: 13px; line-height: 18px; color: var(--faint); }
+.sort button { height: 28px; padding: 4px 12px; border: 0; border-radius: var(--radius-control); background: transparent; font: 500 13px/18px var(--font); color: var(--muted); cursor: pointer; transition: color var(--t) var(--ease), background-color var(--t) var(--ease); }
+.sort button:hover { color: var(--text); }
+.sort button[aria-pressed="true"] { background: var(--sheet); color: var(--text); }
+.sort button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (max-width: 640px) {
+  .sort { order: 3; }
+  .sort button { height: 36px; }
+}
+
+/* Split votes Ultra ruled "doesn't apply": folded, one row each inside one card, the quote on open. */
+.na-toggle.split-toggle { display: inline-flex; align-items: center; gap: 6px; }
+.na-toggle.split-toggle .glyph { width: 14px; height: 14px; color: var(--warning-ink); }
+.rules.compact { gap: 0; padding: 4px 0; border-radius: var(--radius-card); background: var(--card); }
+.rules.compact[hidden] { display: none; }
+.rule.compact { gap: 2px; padding: 10px 16px; border-radius: 0; background: transparent; }
+.rule.compact + .rule.compact { border-top: 1px solid var(--border); }
+.rule.compact:hover, .rule.compact.hot { background: var(--hover); }
+.rule.compact.on { background: var(--sheet); }
+.rule.compact .rule-toggle { padding-right: 96px; }
+.rule.compact .rule-sum { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; line-clamp: 1; overflow: hidden; font-size: 14px; line-height: 20px; }
+.rule.compact.on .rule-sum { display: block; -webkit-line-clamp: unset; line-clamp: none; }
+.rule.compact .rule-addr { top: 12px; }
+.rule.compact .rule-more { padding-top: 8px; }
+
+/* Citation gate: one row per distinct quote; below the letter the list folds, since the letter shows each quote. */
+.gate-list > summary { margin-top: 12px; font-size: 14px; line-height: 20px; }
+.gate-list > summary + ol { margin-top: 8px; }
+.gate li .used { color: var(--muted); }
+@media (min-width: 1101px) {
+  .gate-list > summary { display: none; }
+}
+
+/* Policy gutter at tablet width (64px): its words stack and wrap inside the gutter instead of running off the page. */
+@media (min-width: 641px) and (max-width: 860px) {
+  .gut:has(> .split) { grid-template-columns: minmax(0, 1fr); }
+  .gut:has(> .split) > .id, .gut:has(> .split) > .split, .gut:has(> .split) > .w:not(.split) { grid-row: auto; grid-column: 1; justify-self: end; }
+  .gut .w { white-space: normal; text-align: right; }
+}
+
+/* ---------- Loop round 4 flow ---------- */
+/* Case and check header: one definition list at one size, two pairs a row on wider screens. */
+.facts { margin: 14px 0 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px 32px; max-width: 1040px; font-size: 13px; line-height: 18px; }
+.facts > div { display: grid; grid-template-columns: 136px minmax(0, 1fr); gap: 12px; align-items: baseline; min-width: 0; }
+.facts dt { color: var(--faint); }
+.facts dd { margin: 0; min-width: 0; color: var(--muted); overflow-wrap: anywhere; }
+.facts dd .link { color: var(--text); }
+.facts dd .id { color: var(--muted); }
+.facts dd .mark { vertical-align: middle; }
+.facts .nw { white-space: nowrap; }
+.dl-mark { display: inline-flex; align-items: flex-start; gap: 6px; }
+.dl-mark .glyph { width: 12px; height: 12px; flex: none; margin-top: 3px; color: var(--positive-ink); }
+@media (min-width: 861px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts > .wide { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .facts > div { grid-template-columns: 96px minmax(0, 1fr); }
+}
+
+/* Rule cards: the payer's sentence is the heading (three lines, all of it once selected); Nemotron's summary under it. */
+.rule-sum.verb { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+.rule.on .rule-sum.verb { display: block; -webkit-line-clamp: unset; line-clamp: none; }
+.rule.compact .rule-sum.verb { -webkit-line-clamp: 1; line-clamp: 1; }
+.rule.compact.on .rule-sum.verb { display: block; -webkit-line-clamp: unset; line-clamp: none; }
+.rule-short { display: block; font-size: 13px; line-height: 18px; color: var(--muted); }
+
+/* Policy gutter: each status is a glyph and a word; a split vote is one half-disc beside the sentence id. */
+.gut .w { display: inline-flex; align-items: center; gap: 4px; }
+.gut .w .glyph { width: 12px; height: 12px; }
+.gut .split { display: inline-flex; align-items: center; color: var(--warning-ink); }
+.gut .split .glyph { width: 12px; height: 12px; }
+
+/* The appeal letter keeps the tabs where they were: the rules column folds to one line in its place. */
+.rules-rail { display: none; }
+@media (min-width: 1101px) {
+  .workspace.letter-focus { grid-template-columns: var(--ledger) minmax(0, 1fr); }
+  .workspace.letter-focus > section { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; row-gap: 0; }
+  .workspace.letter-focus > section > .tabs { grid-column: 2; grid-row: 1; }
+  .workspace.letter-focus > section > [data-pane] { grid-column: 1 / -1; grid-row: 2; }
+  .workspace.letter-focus .rules-rail { grid-column: 1; grid-row: 1; display: flex; align-items: center; gap: 6px 14px; margin: 0 0 18px; white-space: nowrap; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 18px; color: var(--muted); }
+  .rules-rail .rr-split { display: inline-flex; align-items: center; gap: 4px; }
+  .rules-rail .rr-split .glyph { width: 12px; height: 12px; color: var(--warning-ink); }
+  .rules-rail .link { flex: none; min-height: 24px; font-size: 13px; color: var(--text); }
+}
+
+/* Worklist: the row the headline names. */
+.start-here { display: block; font-size: 12px; line-height: 16px; font-weight: 600; color: var(--text); }
+@media (max-width: 640px) { .start-here { display: inline; margin-right: 8px; } }
+
+/* Case history: oldest first, one line per event, each with a glyph and a word. */
+.history { margin-top: 32px; }
+.history .sec { margin-top: 0; }
+.hist { list-style: none; margin: 0; padding: 4px 18px; border-radius: var(--radius-card); background: var(--card); }
+.hist li { display: grid; grid-template-columns: 96px 152px minmax(0, 1fr); align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--border); font-size: 14px; line-height: 20px; color: var(--muted); }
+.hist li:first-child { border-top: 0; }
+.hist time { font-variant-numeric: tabular-nums; color: var(--faint); }
+.hist .mark { justify-self: start; }
+.hist .link { color: var(--text); }
+@media (max-width: 640px) {
+  .hist { padding: 4px 16px; }
+  .hist li { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; }
+  .hist li > span:last-child { grid-column: 1 / -1; }
+  .hist .mark { grid-column: 2; grid-row: 1; }
+}
+
+/* Prior-auth key: one row of equal columns on desktop, the note under it with room. */
+@media (min-width: 1101px) {
+  .key { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); max-width: none; }
+  .key > div { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+}
+.key-cap { margin-top: 24px; }
+
+/* ---------- Cycle 1 flow ---------- */
+/* A held denial is a pause, not a failure: amber with the pause glyph (red stays for what blocks). */
+:root { --v-dont_appeal-ink: var(--warning-ink); }
+
+/* Counted in code: the glyph and the closing word come from the comparison with the policy's wait. */
+.counted.pos .glyph, .counted.pos .cv { color: var(--positive-ink); }
+.counted.neg .glyph, .counted.neg .cv { color: var(--negative-ink); }
+.counted.quiet .glyph { color: var(--faint); }
+.counted .cv { font-weight: 500; }
+
+/* Split votes: their own fork glyph (the half-disc is kept for "once charted"). */
+.conf-flag .glyph svg, .gut .split .glyph svg, .rr-split .glyph svg, .split-toggle .glyph svg { stroke-width: 1.8; }
+
+/* Note to the physician: the note itself, read-only, as paper on a tone-step tray; its one action under it. */
+.note-pane .note-tray { margin: 16px 0 12px; padding: 8px; max-width: calc(var(--letter-read) + 72px); border-radius: var(--radius-card); background: var(--card); }
+.note-pane .note-paper { padding: 28px 32px; border-radius: calc(var(--radius-card) - 8px); background: var(--sheet); font-size: 16px; line-height: 26px; color: var(--text); }
+.note-pane .note-paper p { margin: 0 0 12px; max-width: var(--letter-read); }
+.note-pane .note-paper .np-title { font-weight: 600; }
+.note-pane .np-list { list-style: none; margin: 20px 0 8px; padding: 0; display: grid; gap: 16px; }
+.note-pane .np-list li { display: grid; gap: 6px; }
+.note-pane .np-list .np-addr { margin: 0; font-size: 12px; line-height: 16px; font-weight: 500; color: var(--faint); }
+.note-pane .np-list figure.lq { margin: 0; }
+.note-pane .np-list .np-count { margin: 0; padding-left: 17px; font-size: 14px; line-height: 20px; color: var(--muted); }
+.note-pane .note-paper .np-foot { margin: 16px 0 0; font-size: 12px; line-height: 16px; color: var(--faint); }
+.note-pane .note-act { margin: 0 0 24px; }
+.note-pane .note-act .btn { min-height: 44px; padding: 10px 20px; font-size: 16px; line-height: 24px; }
+
+/* History folds under its heading on a phone; wider screens always show it. */
+.fold-toggle { display: none; }
+@media (max-width: 640px) {
+  .fold-toggle { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0; border: 0; background: none; font: 500 14px/20px var(--font); color: var(--text); cursor: pointer; }
+  .fold-toggle .glyph { width: 12px; height: 12px; color: var(--muted); transition: transform var(--t) var(--ease); }
+  .fold-toggle[aria-expanded="true"] .glyph { transform: rotate(90deg); }
+  .fold-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+  [data-fold-wrap]:not(.open) > .hist { display: none; }
+  .history { margin-top: 24px; }
+  .history .sec { margin-bottom: 0; }
+}
+
+/* Phone: one region at a time. A sticky switch (rules first, then the documents) replaces the side-by-side workspace. */
+.region-switch { display: none; }
+@media (max-width: 640px) {
+  .region-switch { position: sticky; top: 56px; z-index: 5; display: flex; gap: 2px; margin: 20px -16px 0; padding: 8px 16px; background: var(--sheet); }
+  .region-switch::before { content: ""; position: absolute; inset: 8px 16px; z-index: -1; border-radius: var(--radius-control); background: var(--card); }
+  .region-switch button { flex: 1 1 0; min-width: 0; height: 40px; margin: 4px 0; padding: 0 6px; border: 0; border-radius: var(--radius-control); background: transparent;
+    font: 500 14px/20px var(--font); color: var(--muted); white-space: nowrap; cursor: pointer; transition: color var(--t) var(--ease), background-color var(--t) var(--ease); }
+  .region-switch button:first-child { margin-left: 4px; }
+  .region-switch button:last-child { margin-right: 4px; }
+  .region-switch button[aria-selected="true"] { background: var(--sheet); color: var(--text); }
+  .region-switch button:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+  main[data-region] .workspace > section > .tabs { display: none; }
+  main[data-region="rules"] .workspace > section { display: none; }
+  main[data-region="docs"] .facts, main[data-region="docs"] .coverage, main[data-region="docs"] .workspace > .ledger { display: none; }
+  main[data-region] .facts { margin-top: 12px; }
+  main[data-region] .coverage { margin-top: 20px; }
+  /* The appeal letter at phone measure: one step smaller type, so the letter reads as a page and not a scroll. */
+  .appeal .sheet.letter { font-size: 15px; line-height: 23px; }
+  .appeal .sheet.letter p { margin-bottom: 12px; }
+  .appeal .sheet.letter figure.lq { margin-bottom: 14px; }
+  main[data-region] .workspace { margin-top: 12px; }
+  main[data-region="rules"] .ledger > .sec:first-child, main[data-region="rules"] .ledger > .fix-why:first-child { margin-top: 0; }
+  .region-switch, [role="tablist"][aria-label="Documents"] { scroll-margin-top: 56px; }
+}
+.lq-more { display: none; }
+@media (max-width: 640px) {
+  .appeal .sheet.letter figure.lq.long:not(.open) blockquote { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+  .appeal .sheet.letter figure.lq.long figcaption { justify-content: flex-start; }
+  .appeal .sheet.letter .lq-more { display: inline-flex; align-items: center; min-height: 32px; margin-right: auto; padding: 0; font-size: 13px; line-height: 18px; color: var(--text); }
+  /* The card above holds the phone's one Export; the bar keeps the gate's count and who sends it. */
+  .gate-bar [data-export] { display: none; }
+}

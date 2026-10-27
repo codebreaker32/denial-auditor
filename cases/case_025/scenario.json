@@ -16,6 +16,7 @@
   "16"
  ],
  "reason_text": "Claim is missing the referring provider's NPI.",
+ "billed_usd": 1570,
  "facts": {
   "age": 83,
   "sex": "F",
@@ -41,7 +42,8 @@
   "radiculopathy": "none",
   "prior_imaging": [],
   "plan_after_mri": "MRI to localize the level before a planned L4-L5 epidural steroid injection",
-  "surgery_or_injection_considered": true
+  "surgery_or_injection_considered": true,
+  "treatment_dates_documented": true
  },
  "expected": {
   "route": "fix_checklist",

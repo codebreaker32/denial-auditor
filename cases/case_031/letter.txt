@@ -1,0 +1,27 @@
+SYNTHETIC – NOT A REAL PATIENT
+FICTIONAL TEST NOTICE - not issued by any insurer
+
+Payer: Prosper Health MA (synthetic)
+
+Date of notice: 08/23/2026
+
+NOTICE OF DENIAL OF PAYMENT
+
+Member: Indigo Testdata
+Member ID: SYN-3755790
+Provider: Example Spine & Joint Clinic (synthetic)
+Service: Lumbar spine MRI
+CPT: 72148
+Diagnosis: M54.50
+Date of service: 08/04/2026
+Billed amount: $2,510.00
+Amount paid: $0.00
+
+Decision: DENIED
+Reason code(s): 50
+Reason: Not medically necessary. The records submitted do not document a trial of conservative management of at least four weeks.
+
+If you disagree with this decision, you have the right to appeal. You may request a reconsideration within 60 calendar days of receiving this notice.
+Send your request with any supporting medical records to the address on this notice.
+
+This notice was generated for software testing and refers to no real person.

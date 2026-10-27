@@ -46,6 +46,9 @@ class Facts(BaseModel):
     prior_imaging: list[str] = Field(default_factory=list)  # e.g. "lumbar x-ray 2026-06-20: mild spondylosis"
     plan_after_mri: str | None = None  # how results will change treatment (L34220: findings must affect treatment)
     surgery_or_injection_considered: bool = False
+    # False: the chart says conservative care happened but records no dates, sessions or duration
+    # (e.g. outside PT records never received), so the four-week rule can't be checked.
+    treatment_dates_documented: bool = True
 
 
 class Expected(BaseModel):
@@ -69,6 +72,7 @@ class Scenario(BaseModel):
     notice_date: date
     carc: list[str] = Field(default_factory=list)
     reason_text: str
+    billed_usd: int | None = None  # synthetic billed charge for the claim, shown as the amount at stake
     facts: Facts
     expected: Expected
 

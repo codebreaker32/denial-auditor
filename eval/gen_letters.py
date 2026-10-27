@@ -55,6 +55,7 @@ def letter_text(s: Scenario) -> str:
         f"CPT: {s.cpt}",
         f"Diagnosis: {', '.join(s.icd10)}",
         f"Date of service: {s.dos:%m/%d/%Y}",
+        *([f"Billed amount: ${s.billed_usd:,.2f}", "Amount paid: $0.00"] if s.billed_usd else []),
         "",
         "Decision: DENIED",
         f"Reason code(s): {codes}",

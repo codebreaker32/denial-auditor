@@ -9,28 +9,22 @@ related_targets: []
 
 Scope: the whole working app. Visitor mode: **Operate**.
 Audience/job: a billing specialist at a small practice working a queue of imaging denials against deadlines, in long sessions; decide, gather evidence, act. Secondary: judges watching a sub-3-minute video.
-User asks (2026-10-25): "Remove AI slop using taste-skill-v2 and improve color choice"; earlier pins: dark, Stripe/Mercury quality bar, less text, a flow that is easy to follow. Standing rule: /impeccable for UI, taste-skill-v2 for anti-slop (app-screen rules, `lint.mjs --app`, `inspect.mjs --app`).
+User asks (2026-10-26): "Didn't like deck and submission. /impeccable pick some next-level design that fits with the product. same goes for UI-UX and use taste-skill-v2 for anti AI slop." Answers: everything was too dark and gloomy, generic, too much text, no wow moment; energy bold and graphic; light or dark left to the direction. Chosen on the decision page: Red Drop-out Claim Form (impeccable's pick card). Standing rule: /impeccable for UI, taste-skill-v2 for anti-slop (framed-sheet app style, `lint.mjs --app`, `inspect.mjs --app`).
 Constraints: synthetic data banner; CPT bare codes + AMA line; export locked until every quote verifies; a person sends; status never by colour alone.
-Build path: code-led (no image generation). Critique reference: the panel's mock captures (scratchpad/mock-out/{case,worklist,appeal}/desktop-fold.jpg).
-Full spec: scratchpad/impeccable/final-spec.md (judge panel, 2026-10-25).
+Build path: code-led (no image generation in this environment).
 
 ## Direction contract
 
-THESIS: A claims desk read in long sessions: neutral graphite, colour only where a rule decides, and one blue-pencil mark on every line the code has checked against its source. It refuses the generated dashboard (KPI tiles, saturated chips, neon on black, hero headers) and the previous guide-map field.
+THESIS: The app is printed like the claim itself: the form's structure (numbered field boxes, condensed caps labels, column heads, rules) in drop-out red, everything the case supplies typed in black. It refuses the dark data-terminal and graphite looks, the generic white SaaS kit, and any costume of the form over standard controls.
 
-OWN-WORLD: The taste-skill data-terminal neutrals: #171719 ground, #131217 cards one step darker, #222224 rules, soft ink #EDEDEF, and two greys far apart (#B4B4BA, #94949B). Status is a hue on its own dark tint, always with a glyph and a word: green #5FC39C, amber #D9A441, red #E5566F, neutral filled, neutral outlined. The face is the blue pencil #8EC5E8, used only for "verified against fetched text". Public Sans throughout, IBM Plex Mono for IDs only, six sizes, weights up to 600. Full-round controls, 6px cards, and an inverted ink primary.
+OWN-WORLD: White sheet on a pale drop-out pink frame (#F8E1E6), drop-out red #C8262B for labels and box numbers, line-red #F1C4C1 for field rules, typed black #141414, greys #4E4A49/#6E6766. Archivo (condensed caps for printed labels) for words; Courier Prime only for typed entries: IDs, codes, dates, figures, the answer word. Status: green and amber on tints; red is the form, so "blocks/not yet/VOID" are black reversed. Tight radii (4px cards, 10px sheet).
 
-STORY: The biller opens the worklist sorted by days left and reads the finding sentence. They open a case and read the coloured answer word, the deadline with its appeal-window runway, and the one primary action. They check the coverage path and the rules beside the policy (rule sentences bright, background prose grey). They export only when every quote carries the blue verified mark.
+STORY: The biller opens the worklist (column heads A–E printed like the form's service lines), opens a case, reads boxes 1–3 (answer, appeal window, next step) and boxes 4–7 (the coverage path), checks rules beside the policy, and exports only when every quote's box carries its X.
 
-FIRST VIEWPORT: Case view. A labelled 224px sidebar (brand mark, Worklist with count, Before you submit; Run live and How it works at the foot) and a context line (synthetic note, policy watch stamp). The main column holds:
-- the breadcrumb (Worklist / patient h1 / Case id);
-- the verdict line: a coloured 28px answer word with its glyph, the deadline cell (figure, runway, Notice/Due, CFR source), and the one primary on the right;
-- the why-line and meta line;
-- the coverage path (four stages, "Decided by a fixed rule, not a model");
-- the rules column (400px) beside the tabbed policy sheet with its sentence gutter.
+FIRST VIEWPORT: Case view. Tinted frame with sidebar and context line; white sheet holding the breadcrumb, the three-box header row ruled in red, the why-line and meta, the four-box coverage row, then the rules ledger (380px) beside the tabbed policy sheet with its red sentence addresses.
 
-FORM: Taste-skill-v2 app style data-terminal, seed 1818343043, pinned by the user's request and chosen by a judge panel (mercury "Blue pencil" proposal, 23.9/30). No impeccable concept roll; the direction is pinned.
+FORM: Red drop-out claim form (CMS-1500), position 1 on the ordered list; chosen as the pick card over the roll (The Coverage Card). Seed key e6dbdb1e.
 
-SIGNATURE MOVE: The blue pencil. A tick-and-tie mark sits on every chart quote and appeal quote the code has verified against its source, so it is the only hue that states a fact. The coverage path shows the payer's decision order with the addresses that decided each stage. A tampered quote becomes VOID (a red-edged tint pair, struck text, "Source says"), and Export locked states its reason.
+SIGNATURE MOVE: The checked box. A verified quote is a printed red square with a typed black X; in the citation gate the X's type in one after another as the check completes. The case header and coverage path are numbered form boxes 1–7. A tampered quote is struck through with a black VOID stamp and the source's own words shown beneath.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

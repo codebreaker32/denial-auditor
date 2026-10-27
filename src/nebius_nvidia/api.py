@@ -1,7 +1,7 @@
 """HTTP API and static host for the Denial Auditor web app.
 
 Run locally:  ./.venv/bin/uvicorn nebius_nvidia.api:app --port 8600
-Serves web/ (the frontend) and these endpoints:
+Serves the frontend (ui/dist, the shadcn app, at /; the classic web/ app at /classic/) and these endpoints:
 
   GET  /api/cases                 worklist rows (precomputed runs + this server's live runs)
   GET  /api/cases/{id}            one case: run, notes, policy split into numbered sentences
@@ -40,6 +40,7 @@ CASES = ROOT / "cases"
 RUNS = ROOT / "demo" / "runs"
 CHECKS = ROOT / "demo" / "checks"
 WEB = ROOT / "web"
+UI_DIST = ROOT / "ui" / "dist"  # `cd ui && npm run build`
 STATE = Path("/state") if Path("/state").is_dir() else ROOT / ".cache"
 SESSION_LIMIT_PER_JOBS = 3  # per browser token
 DAILY_LIMIT = 30
@@ -105,6 +106,7 @@ def _row(case_id: str, run: CaseRun, live: bool, as_of: date) -> dict:
         "cpt": d.cpt,
         "dos": d.dos.isoformat(),
         "reason": d.reason_text,
+        "billed_usd": s.billed_usd,
         "verdict": run.verdict,
         "days_left": (dl := _deadline(run, as_of)).days_left,
         "due": dl.due.isoformat() if dl.due else None,
@@ -163,6 +165,7 @@ def get_case(case_id: str) -> dict:
     return {
         "id": case_id,
         "patient": s.patient_name,
+        "billed_usd": s.billed_usd,
         "run": run.model_dump(mode="json"),
         "notes": [n.model_dump(mode="json") for n in notes],
         **_policy_view(run.policy, run.criteria),
@@ -316,4 +319,8 @@ def health() -> dict:
     return {"ok": True}
 
 
-app.mount("/", StaticFiles(directory=WEB, html=True), name="web")
+if UI_DIST.is_dir():
+    app.mount("/classic", StaticFiles(directory=WEB, html=True), name="classic")
+    app.mount("/", StaticFiles(directory=UI_DIST, html=True), name="ui")
+else:
+    app.mount("/", StaticFiles(directory=WEB, html=True), name="web")

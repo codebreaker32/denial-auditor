@@ -16,6 +16,7 @@
   "50"
  ],
  "reason_text": "Not medically necessary. Insufficient trial of conservative treatment.",
+ "billed_usd": 2080,
  "facts": {
   "age": 79,
   "sex": "F",
@@ -41,7 +42,8 @@
   "radiculopathy": "none",
   "prior_imaging": [],
   "plan_after_mri": "MRI results will decide between epidural steroid injection and surgical referral",
-  "surgery_or_injection_considered": true
+  "surgery_or_injection_considered": true,
+  "treatment_dates_documented": true
  },
  "expected": {
   "route": "clinical_review",

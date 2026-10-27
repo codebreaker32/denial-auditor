@@ -1,4 +1,12 @@
 # Denial Auditor: web app image (deployed on AWS Lightsail).
+# The shadcn frontend (ui/) is built in a Node stage; only its static dist/ ships.
+FROM node:24-slim AS ui
+WORKDIR /ui
+COPY ui/package.json ui/package-lock.json ./
+RUN npm ci
+COPY ui ./
+RUN npm run build
+
 FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
@@ -10,6 +18,7 @@ COPY pyproject.toml README.md LICENSE ./
 COPY src ./src
 RUN pip install ".[app]"
 COPY web ./web
+COPY --from=ui /ui/dist ./ui/dist
 COPY cases ./cases
 COPY demo ./demo
 COPY eval/gold ./eval/gold

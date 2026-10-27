@@ -1,0 +1,62 @@
+{
+ "case_id": "case_031",
+ "group": "H_ma_missing_docs",
+ "patient_name": "Indigo Testdata",
+ "plan_type": "MA",
+ "payer": "Prosper Health MA (synthetic)",
+ "practice_state": "NV",
+ "policy": "L34220",
+ "cpt": "72148",
+ "icd10": [
+  "M54.50"
+ ],
+ "dos": "2026-08-04",
+ "notice_date": "2026-08-23",
+ "carc": [
+  "50"
+ ],
+ "reason_text": "Not medically necessary. The records submitted do not document a trial of conservative management of at least four weeks.",
+ "billed_usd": 2510,
+ "facts": {
+  "age": 71,
+  "sex": "F",
+  "onset": "2026-05-12",
+  "treatments": [
+   {
+    "kind": "nsaids",
+    "start": "2026-05-13",
+    "end": "2026-06-29",
+    "sessions": null,
+    "response": "partial"
+   },
+   {
+    "kind": "physical_therapy",
+    "start": "2026-05-18",
+    "end": "2026-06-29",
+    "sessions": 12,
+    "response": "no_improvement"
+   }
+  ],
+  "red_flags": [],
+  "neuro_exam": "normal",
+  "radiculopathy": "none",
+  "prior_imaging": [],
+  "plan_after_mri": "MRI to localize the level before a planned L4-L5 epidural steroid injection",
+  "surgery_or_injection_considered": true,
+  "treatment_dates_documented": false
+ },
+ "expected": {
+  "route": "clinical_review",
+  "verdict": "doc_request",
+  "gold": {
+   "G1_red_flag_indication": "not_applicable",
+   "G2_red_flag_list": "not_applicable",
+   "G3_first_month": "clear",
+   "G4_four_weeks_conservative": "missing_documentation",
+   "G5_ddd_hnp_no_surgery": "clear",
+   "G6_findings_affect_treatment": "clear",
+   "G7_duplication": "clear"
+  },
+  "why": "Symptoms for 12 weeks and physical therapy is mentioned, but no note dates it or counts sessions. Ask the physician for the outside PT records before appealing."
+ }
+}

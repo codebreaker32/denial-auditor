@@ -1,0 +1,14 @@
+{
+  "admitted": true,
+  "reasons": [],
+  "provenance": {
+    "viewpoint": "reference",
+    "sourcePath": "/home/aman/projects/nebius-nvidia/three/mri/reference.jpg",
+    "width": 1920,
+    "height": 1751,
+    "foregroundCoverage": 0.3798,
+    "largestComponentFraction": 0.7175,
+    "pHash": 17058043236076122204,
+    "duplicateOfHash": null
+  }
+}

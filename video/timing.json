@@ -1,0 +1,234 @@
+{
+  "_meta": {
+    "engine": "polly-generative",
+    "voices": {
+      "narrator": "Matthew",
+      "biller": "Ruth"
+    },
+    "lead": 0.3,
+    "tail": 0.6,
+    "total_speech": 149.59,
+    "total_seconds": 162.19,
+    "total_characters": 2308,
+    "cost_usd": 0.0692,
+    "estimated": false
+  },
+  "greet": {
+    "audio": "voiceover/greet.mp3",
+    "voice": "Matthew",
+    "speech": 6.38,
+    "seconds": 7.28,
+    "lead": 0.3,
+    "words": 17,
+    "wps": 2.66,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.41
+    ],
+    "characters": 104
+  },
+  "biller": {
+    "audio": "voiceover/biller.mp3",
+    "voice": "Ruth",
+    "speech": 6.53,
+    "seconds": 7.43,
+    "lead": 0.3,
+    "words": 10,
+    "wps": 1.53,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.76,
+      0.95
+    ],
+    "characters": 69
+  },
+  "stakes": {
+    "audio": "voiceover/stakes.mp3",
+    "voice": "Matthew",
+    "speech": 14.02,
+    "seconds": 14.92,
+    "lead": 0.3,
+    "words": 36,
+    "wps": 2.57,
+    "trailing_silence": 0.0,
+    "pauses": [
+      1.03,
+      0.71,
+      0.31
+    ],
+    "characters": 237
+  },
+  "pitch": {
+    "audio": "voiceover/pitch.mp3",
+    "voice": "Matthew",
+    "speech": 7.7,
+    "seconds": 8.6,
+    "lead": 0.3,
+    "words": 23,
+    "wps": 2.99,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.37,
+      0.53
+    ],
+    "characters": 124
+  },
+  "worklist": {
+    "audio": "voiceover/worklist.mp3",
+    "voice": "Matthew",
+    "speech": 9.36,
+    "seconds": 10.26,
+    "lead": 0.3,
+    "words": 27,
+    "wps": 2.88,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.46,
+      0.31,
+      0.43,
+      0.34
+    ],
+    "characters": 146
+  },
+  "case": {
+    "audio": "voiceover/case.mp3",
+    "voice": "Matthew",
+    "speech": 10.44,
+    "seconds": 11.34,
+    "lead": 0.3,
+    "words": 29,
+    "wps": 2.78,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.75,
+      0.38
+    ],
+    "characters": 169
+  },
+  "rules": {
+    "audio": "voiceover/rules.mp3",
+    "voice": "Matthew",
+    "speech": 13.87,
+    "seconds": 14.77,
+    "lead": 0.3,
+    "words": 40,
+    "wps": 2.88,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.4,
+      1.22
+    ],
+    "characters": 213
+  },
+  "appeal": {
+    "audio": "voiceover/appeal.mp3",
+    "voice": "Matthew",
+    "speech": 9.98,
+    "seconds": 10.88,
+    "lead": 0.3,
+    "words": 24,
+    "wps": 2.4,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.64,
+      0.91
+    ],
+    "characters": 150
+  },
+  "tamper": {
+    "audio": "voiceover/tamper.mp3",
+    "voice": "Matthew",
+    "speech": 12.41,
+    "seconds": 13.31,
+    "lead": 0.3,
+    "words": 28,
+    "wps": 2.26,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.3,
+      0.74,
+      1.01,
+      0.37,
+      0.32,
+      0.59
+    ],
+    "characters": 162
+  },
+  "physician": {
+    "audio": "voiceover/physician.mp3",
+    "voice": "Matthew",
+    "speech": 8.23,
+    "seconds": 9.13,
+    "lead": 0.3,
+    "words": 23,
+    "wps": 2.79,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.66,
+      0.34
+    ],
+    "characters": 141
+  },
+  "check": {
+    "audio": "voiceover/check.mp3",
+    "voice": "Matthew",
+    "speech": 11.5,
+    "seconds": 12.4,
+    "lead": 0.3,
+    "words": 34,
+    "wps": 2.96,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.6,
+      0.42
+    ],
+    "characters": 188
+  },
+  "how": {
+    "audio": "voiceover/how.mp3",
+    "voice": "Matthew",
+    "speech": 14.02,
+    "seconds": 14.92,
+    "lead": 0.3,
+    "words": 38,
+    "wps": 2.71,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.33,
+      0.77
+    ],
+    "characters": 230
+  },
+  "proof": {
+    "audio": "voiceover/proof.mp3",
+    "voice": "Matthew",
+    "speech": 13.75,
+    "seconds": 14.65,
+    "lead": 0.3,
+    "words": 36,
+    "wps": 2.62,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.33,
+      0.72,
+      0.63
+    ],
+    "characters": 226
+  },
+  "close": {
+    "audio": "voiceover/close.mp3",
+    "voice": "Matthew",
+    "speech": 11.4,
+    "seconds": 12.3,
+    "lead": 0.3,
+    "words": 26,
+    "wps": 2.28,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.42,
+      0.77,
+      1.1
+    ],
+    "characters": 149
+  }
+}

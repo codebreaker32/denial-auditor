@@ -1,7 +1,7 @@
 SYNTHETIC – NOT A REAL PATIENT
 FICTIONAL TEST NOTICE - not issued by any insurer
 
-Payer: Harbor Health MA (synthetic)
+Payer: Prosper Health MA (synthetic)
 
 Date of notice: 08/20/2026
 
@@ -14,6 +14,8 @@ Service: Lumbar spine MRI
 CPT: 72148
 Diagnosis: M54.50
 Date of service: 08/08/2026
+Billed amount: $2,430.00
+Amount paid: $0.00
 
 Decision: DENIED
 Reason code(s): 29

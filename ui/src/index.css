@@ -1,0 +1,363 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------- type: Geist (UI and display) + IBM Plex Mono (labels, codes, numbers) ---------- */
+@font-face {
+  font-family: "Geist";
+  src: url(/fonts/geist-var.woff2) format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plex Mono";
+  src: url(/fonts/plex-mono-400.woff2) format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plex Mono";
+  src: url(/fonts/plex-mono-500.woff2) format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@theme inline {
+  --font-sans: "Geist", system-ui, sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+/* "Toner and highlighter": greyscale chrome; every accent has one job. */
+:root {
+  --ground: #f3f2ef;
+  --surface: #ffffff;
+  --sunk: #e9e8e4;
+  --sunk-2: #e1e0db;
+  --ink: #0e0f0c;
+  --ink-2: #4c4e47;
+  --ink-3: #686a62;
+  --rule: rgb(14 15 12 / 0.09);
+  --rule-2: rgb(14 15 12 / 0.16);
+
+  --night: #0b0c0a;
+  --night-2: #151613;
+  --on-night: #f2f1ec;
+  --on-night-2: #a7a99f;
+  --on-night-3: #85877e;
+  --rule-night: rgb(242 241 236 / 0.1);
+
+  /* blue means only "verified against fetched text" */
+  --verified: #1e4bd7;
+  --verified-tint: #e6ecfb;
+  --verified-night: #7d9bff;
+  --highlight: #f9b91c;
+  --highlight-tint: rgb(249 185 28 / 0.32);
+
+  /* recommendations and rule statuses: always a glyph and a word as well */
+  --t-pos: #1a7340;
+  --t-pos-tint: #e2f0e7;
+  --t-warn: #8f5600;
+  --t-warn-fill: #e39a17;
+  --t-warn-tint: #f8ecd6;
+  --t-neg: #b0301a;
+  --t-neg-tint: #f7e3de;
+  --t-teal: #0e676d;
+  --t-teal-tint: #ddeeee;
+  --t-clay: #8e4a2c;
+  --t-clay-tint: #f1e6df;
+  --t-quiet: #5f615a;
+  --t-quiet-tint: #e7e6e2;
+
+  --dur-instant: 80ms;
+  --dur-micro: 140ms;
+  --dur-short: 220ms;
+  --dur-base: 300ms;
+  --dur-enter: 640ms;
+  --dur-panel: 700ms;
+  --dur-draw: 1200ms;
+  --ease-micro: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-panel: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  --mono: "Plex Mono", ui-monospace, monospace; /* literal code only */
+  /* type scale for the app (the landing scopes its own on .lp): six sizes, far apart */
+  --fs-small: 14px; /* secondary text, labels, meta; nothing read is smaller (13px only for the legal line) */
+  --fs-body: 16px; /* body, rule text, buttons, nav */
+  --fs-lead: 18px; /* row names, lead lines */
+  --fs-h3: 20px; /* section headings */
+  --fs-h2: 32px; /* case title, page titles */
+  --fs-fig: 40px; /* key figures: money, days */
+  --fs-legal: 13px;
+
+  /* shadcn primitives (menus, tooltips) read these */
+  --radius: 10px;
+  --background: var(--ground);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: #ffffff;
+  --secondary: var(--sunk);
+  --secondary-foreground: var(--ink);
+  --muted: var(--sunk);
+  --muted-foreground: var(--ink-3);
+  --accent: var(--sunk);
+  --accent-foreground: var(--ink);
+  --destructive: var(--t-neg);
+  --border: var(--rule-2);
+  --input: var(--rule-2);
+  --ring: var(--ink);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: var(--fs-body);
+    line-height: 1.5;
+    font-feature-settings: "ss01" on;
+    -webkit-font-smoothing: antialiased;
+  }
+  button {
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: var(--highlight-tint);
+  }
+}
+
+/* ---------- shared pieces ---------- */
+/* Codes and figures stay in the text face with tabular digits; only literal code is monospace. */
+.mono {
+  font-variant-numeric: tabular-nums;
+}
+.num {
+  font-variant-numeric: tabular-nums;
+}
+/* Labels: sentence case in the text face, quiet, at the small size. */
+.lbl {
+  font-size: var(--fs-small);
+  line-height: 20px;
+  font-weight: 450;
+  color: var(--ink-3);
+}
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip {
+  position: fixed;
+  z-index: 100;
+  left: 16px;
+  top: 12px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: var(--fs-small);
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--dur-short) var(--ease-out);
+}
+.skip:focus-visible {
+  transform: none;
+  outline-color: var(--highlight);
+}
+#main:focus {
+  outline: none;
+}
+/* Touch: every target at least 44px. */
+@media (pointer: coarse) {
+  .pill,
+  .pill-sm,
+  .qf,
+  .rail-i,
+  .textbtn,
+  .lp-links a,
+  .lp-links button {
+    min-height: 44px;
+  }
+}
+
+/* Pills. Commands inside the app also press (scale handled by motion). */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 0;
+  font-size: var(--fs-body);
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background-color var(--dur-micro) var(--ease-micro),
+    color var(--dur-micro) var(--ease-micro);
+}
+.pill-ink {
+  background: var(--ink);
+  color: #fff;
+}
+.pill-light {
+  background: var(--on-night);
+  color: var(--night);
+}
+.pill-ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--rule-2);
+}
+.pill-sm {
+  height: 40px;
+  padding: 0 16px;
+  font-size: var(--fs-body);
+}
+.pill svg {
+  transition: transform var(--dur-micro) var(--ease-micro);
+}
+@media (hover: hover) {
+  .pill-ink:hover {
+    background: #2a2c27;
+  }
+  .pill-light:hover {
+    background: #ffffff;
+  }
+  .pill-ghost:hover {
+    background: rgb(14 15 12 / 0.05);
+  }
+  .pill:hover svg.nudge {
+    transform: translateX(2px);
+  }
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+  background-image: none;
+  transition: color var(--dur-micro) var(--ease-micro);
+}
+
+/* Glyph + word marks for recommendations and statuses */
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.t-pos { color: var(--t-pos); }
+.t-warn { color: var(--t-warn); }
+.t-neg { color: var(--t-neg); }
+.t-teal { color: var(--t-teal); }
+.t-clay { color: var(--t-clay); }
+.t-quiet { color: var(--t-quiet); }
+.t-ink { color: var(--ink); }
+.t-verified { color: var(--verified); }
+
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.avatar.t-pos { background: var(--t-pos-tint); }
+.avatar.t-warn { background: var(--t-warn-tint); }
+.avatar.t-neg { background: var(--t-neg-tint); }
+.avatar.t-teal { background: var(--t-teal-tint); }
+.avatar.t-clay { background: var(--t-clay-tint); }
+.avatar.t-quiet { background: var(--t-quiet-tint); }
+.avatar.t-ink { background: var(--ink); color: #fff; }
+
+/* Cursor-tracked highlight for interactive surfaces (set --mx/--my from JS). */
+.glow {
+  position: relative;
+  isolation: isolate;
+}
+.glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: url(/img/glow-ink.svg) no-repeat;
+  background-size: 360px 360px;
+  background-position: calc(var(--mx, -999px) - 180px) calc(var(--my, -999px) - 180px);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-micro);
+}
+@media (hover: hover) {
+  .glow:hover::after {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

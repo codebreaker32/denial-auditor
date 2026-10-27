@@ -9,6 +9,10 @@ Deterministic (fixed seed). Groups follow docs/plan.md:
   E  MA, only ~2 weeks of conservative care             3  → dont_appeal
   F  Administrative denial                               3  → fix_checklist
   G  Plan exclusion                                      3  → not_winnable
+  H  MA, conservative care charted without dates         1  → doc_request (showcase only; not in the 30-case eval)
+
+Every claim also gets a synthetic billed charge (its own seeded generator, so the
+clinical facts above are unchanged by it).
 
 Usage: ./.venv/bin/python eval/make_scenarios.py [--out cases]
 """
@@ -30,8 +34,9 @@ NAMES = [
     "Hayden Mockup", "Jamie Fauxname", "Kendall Pretend", "Logan Notreal", "Marley Standin",
     "Noel Stub", "Oakley Proxy", "Peyton Fictive", "Remy Draftwell", "Shiloh Testwood",
     "Tatum Mockwell", "Val Simulant", "Wren Fakeley", "Arden Specimen", "Blair Testford",
+    "Indigo Testdata",
 ]
-MA_PLANS = ["Sunrise Senior Advantage (synthetic MA plan)", "Evergreen Medicare Advantage (synthetic)", "Harbor Health MA (synthetic)"]
+MA_PLANS = ["Sunrise Senior Advantage (synthetic MA plan)", "Evergreen Medicare Advantage (synthetic)", "Prosper Health MA (synthetic)"]
 NORIDIAN_STATES = ["CA", "WA", "OR", "AZ", "UT", "NV"]
 DOS_2026 = date(2026, 8, 14)
 
@@ -200,6 +205,24 @@ def scenarios() -> list[Scenario]:
                   surgery_or_injection_considered=True),
             Expected(route="not_winnable", verdict="not_winnable",
                      why="The plan excludes this service; medical necessity evidence won't change the outcome. Explain to the patient."))
+
+    # H: MA, no red flags, physical therapy at an outside clinic whose records never reached the chart.
+    # The care probably happened, but nothing dates it, so the four-week rule is undocumented, not failed.
+    dos = date(2026, 8, 4)  # notice stays before the board's latest one, so the review date doesn't move
+    onset = dos - timedelta(days=84)
+    add("H_ma_missing_docs", "MA", MA_PLANS[2], "L34220", dos, ["50"],
+        "Not medically necessary. The records submitted do not document a trial of conservative management of at least four weeks.",
+        Facts(age=71, sex="F", onset=onset, treatments=conservative(onset, dos, 6), treatment_dates_documented=False,
+              neuro_exam="normal",
+              plan_after_mri=PLANS_AFTER_MRI[0], surgery_or_injection_considered=True),
+        Expected(route="clinical_review", verdict="doc_request",
+                 gold={**GOLD_MET_NO_RED_FLAGS, "G4_four_weeks_conservative": "missing_documentation"},
+                 why="Symptoms for 12 weeks and physical therapy is mentioned, but no note dates it or counts sessions. "
+                     "Ask the physician for the outside PT records before appealing."))
+
+    billing = random.Random(72148)
+    for s in out:
+        s.billed_usd = billing.randrange(1240, 2680, 10)
     return out
 
 
@@ -208,7 +231,7 @@ def main() -> None:
     ap.add_argument("--out", default="cases")
     args = ap.parse_args()
     items = scenarios()
-    assert len(items) == 30, len(items)
+    assert len(items) == 31, len(items)
     for s in items:
         s.save(Path(args.out))
     groups = {}

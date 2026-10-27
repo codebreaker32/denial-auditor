@@ -1407,7 +1407,7 @@
   "run": {
    "case_id": "case_003",
    "denial": {
-    "payer_name": "Harbor Health MA",
+    "payer_name": "Prosper Health MA",
     "plan_type": "MA",
     "cpt": "72148",
     "icd10": [
@@ -4172,7 +4172,7 @@
   "run": {
    "case_id": "case_007",
    "denial": {
-    "payer_name": "Harbor Health MA",
+    "payer_name": "Prosper Health MA",
     "plan_type": "MA",
     "cpt": "72148",
     "icd10": [
@@ -4680,7 +4680,7 @@
    ],
    "verdict": "appeal",
    "appeal": null,
-   "doc_request": "Documentation request: Rowan Synthetic (synthetic), lumbar MRI, date of service 06/02/2025\nPayer: Harbor Health MA. Policy in effect: L34220 v37, eff 08/18/2022, CMS Coverage API.\n\nThe claim was denied. Before we appeal, please check the chart for the items below and add an addendum if they were done:\n\n1. MRI that duplicates other imaging studies (e.g., spinal CT) may be unreasonable or unnecessary.\n   Policy wording: \"A lumbar MRI that is a duplication of other imaging studies (such as a spinal CT scan) may be unreasonable or unnecessary.\"\n\nPlease don't add anything that didn't happen; only document care that was actually provided.",
+   "doc_request": "Documentation request: Rowan Synthetic (synthetic), lumbar MRI, date of service 06/02/2025\nPayer: Prosper Health MA. Policy in effect: L34220 v37, eff 08/18/2022, CMS Coverage API.\n\nThe claim was denied. Before we appeal, please check the chart for the items below and add an addendum if they were done:\n\n1. MRI that duplicates other imaging studies (e.g., spinal CT) may be unreasonable or unnecessary.\n   Policy wording: \"A lumbar MRI that is a duplication of other imaging studies (such as a spinal CT scan) may be unreasonable or unnecessary.\"\n\nPlease don't add anything that didn't happen; only document care that was actually provided.",
    "gate": null,
    "deadline": {
     "rule_id": "ma-reconsideration",
@@ -15474,7 +15474,7 @@
   "run": {
    "case_id": "case_021",
    "denial": {
-    "payer_name": "Harbor Health MA",
+    "payer_name": "Prosper Health MA",
     "plan_type": "MA",
     "cpt": "72148",
     "icd10": [

@@ -16,6 +16,7 @@
   "27"
  ],
  "reason_text": "Member's coverage was not active on the date of service.",
+ "billed_usd": 2310,
  "facts": {
   "age": 78,
   "sex": "M",
@@ -41,7 +42,8 @@
   "radiculopathy": "none",
   "prior_imaging": [],
   "plan_after_mri": "Spine surgery referral is under consideration pending MRI findings",
-  "surgery_or_injection_considered": true
+  "surgery_or_injection_considered": true,
+  "treatment_dates_documented": true
  },
  "expected": {
   "route": "fix_checklist",

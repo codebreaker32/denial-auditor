@@ -5,24 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Denial Auditor</title>
 <meta name="description" content="Denial Auditor: criterion-by-criterion evidence and verified appeals for MRI and CT insurance denials.">
-<link rel="preload" href="fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23171719'/%3E%3Cpath d='M4 12.5l3.5 3.5L14 9.5M15.5 16h4.5' fill='none' stroke='%238EC5E8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<meta name="theme-color" content="#171719">
+<link rel="preload" href="fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8'%3E%3Cpath d='M6.5 3.5h7.5l4.5 4.5v12.5h-12z' fill='%23fff' stroke='%23121212'/%3E%3Cpath d='M14 3.5V8h4.5' stroke='%23121212'/%3E%3Cpath d='M9 14.2l2.2 2.2 4.3-4.6' stroke='%231E4BD7' stroke-width='2.2'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#F3F5FA">
 <link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="app-flow.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
   <nav class="rail" aria-label="Primary">
     <a class="brand" href="#/worklist" aria-label="Denial Auditor, worklist">
-      <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l3.5 3.5L14 9.5M15.5 16h4.5"/></svg>
+      <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><path class="page" d="M6.5 3.5h7.5l4.5 4.5v12.5h-12z"/><path class="page" d="M14 3.5V8h4.5"/><path class="tick" d="M9 14.2l2.2 2.2 4.3-4.6"/></svg>
       <span class="brand-text"><b>Denial Auditor</b><small>Demo practice · synthetic data</small></span>
     </a>
     <ul class="nav">
       <li><a href="#/worklist" data-nav="worklist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Worklist</span><span class="n" data-count></span></a></li>
-      <li><a href="#/check" data-nav="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M9 5.5H6v15h12v-15h-3"/><path d="M9 14l2 2 4-4.5"/></svg><span>Before you submit</span></a></li>
-      <li class="utility"><a href="#/live" data-nav="live"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></svg><span>Run live</span></a></li>
+      <li><a href="#/check" data-nav="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M9 5.5H6v15h12v-15h-3"/><path d="M9 14l2 2 4-4.5"/></svg><span class="long">Prior-auth checks</span><span class="short">Prior auth</span></a></li>
+      <li class="group-l">This demo</li>
+      <li><a href="#/live" data-nav="live"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></svg><span>Run live</span></a></li>
       <li><a href="#/how" data-nav="how"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v6M12 7.5v.5"/></svg><span>How it works</span></a></li>
     </ul>
     <p class="rail-foot">Road House · Nemotron on Nebius Token Factory</p>
@@ -32,8 +34,10 @@
       <span><b>Synthetic data only.</b> <span class="long">Decision support for billing staff, not legal or medical advice. A person reviews and sends every appeal.</span><span class="short">Not legal or medical advice. A person reviews and sends every appeal.</span></span>
       <span class="watch" data-watch></span>
     </div>
+    <div class="page">
     <main id="main" tabindex="-1"></main>
     <footer class="legal">CPT® codes are shown as bare codes only. CPT is a registered trademark of the American Medical Association. All rights reserved. Policy text quoted briefly with attribution; Aetna content © Aetna Inc.</footer>
+    </div>
   </div>
 </div>
 <script src="app.js" type="module"></script>

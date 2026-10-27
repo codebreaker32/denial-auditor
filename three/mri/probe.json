@@ -1,0 +1,11 @@
+{
+  "path": "/home/aman/projects/nebius-nvidia/three/mri/reference.jpg",
+  "type": "jpeg",
+  "bytes": 339825,
+  "width": 1920,
+  "height": 1751,
+  "aspectRatio": 1.096516276413478,
+  "technicalSuitability": "pass",
+  "warnings": [],
+  "note": "This is only technical image probing. Semantic object suitability still requires visual inspection."
+}

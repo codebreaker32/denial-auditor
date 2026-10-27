@@ -763,7 +763,7 @@
   "run": {
    "case_id": "case_003",
    "denial": {
-    "payer_name": "Harbor Health MA (synthetic)",
+    "payer_name": "Prosper Health MA (synthetic)",
     "plan_type": "MA",
     "cpt": "72148",
     "icd10": [
@@ -1300,7 +1300,7 @@
    ],
    "verdict": "doc_request",
    "appeal": null,
-   "doc_request": "Documentation request: Riley Placeholder (synthetic), lumbar MRI, date of service 08/05/2026\nPayer: Harbor Health MA (synthetic). Policy in effect: L34220 v40, eff 10/23/2025, CMS Coverage API.\n\nThe claim was denied. Before we appeal, please check the chart for the items below and add an addendum if they were done:\n\n1. Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.\n   Policy wording: \"Documentation should support the medical necessity for the need for both studies.\"\n\n2. Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.\n   Policy wording: \"Lumbar MRI abnormalities alone do not validate the need for the test without other supporting clinical rationale. Radiologists and/or ordering physicians should include sufficient clinical information in the report to justify its necessity.\n\nThe clinical findings and relevant prior treatment that support the need for the MRI must be documented in the MRI report or clinical record and made available to the contractor upon request.\n\nThe medical record of the referring physician must support a contemplated diagnosis or treatment change derived from the MRI findings.\"\n\nPlease don't add anything that didn't happen; only document care that was actually provided.",
+   "doc_request": "Documentation request: Riley Placeholder (synthetic), lumbar MRI, date of service 08/05/2026\nPayer: Prosper Health MA (synthetic). Policy in effect: L34220 v40, eff 10/23/2025, CMS Coverage API.\n\nThe claim was denied. Before we appeal, please check the chart for the items below and add an addendum if they were done:\n\n1. Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.\n   Policy wording: \"Documentation should support the medical necessity for the need for both studies.\"\n\n2. Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.\n   Policy wording: \"Lumbar MRI abnormalities alone do not validate the need for the test without other supporting clinical rationale. Radiologists and/or ordering physicians should include sufficient clinical information in the report to justify its necessity.\n\nThe clinical findings and relevant prior treatment that support the need for the MRI must be documented in the MRI report or clinical record and made available to the contractor upon request.\n\nThe medical record of the referring physician must support a contemplated diagnosis or treatment change derived from the MRI findings.\"\n\nPlease don't add anything that didn't happen; only document care that was actually provided.",
    "gate": null,
    "deadline": {
     "rule_id": "ma-reconsideration",
@@ -3807,7 +3807,7 @@
   "run": {
    "case_id": "case_007",
    "denial": {
-    "payer_name": "Harbor Health MA (synthetic)",
+    "payer_name": "Prosper Health MA (synthetic)",
     "plan_type": "MA",
     "cpt": "72148",
     "icd10": [
@@ -4304,7 +4304,7 @@
    ],
    "verdict": "doc_request",
    "appeal": null,
-   "doc_request": "Documentation request: Rowan Synthetic (synthetic), lumbar MRI, date of service 06/02/2025\nPayer: Harbor Health MA (synthetic). Policy in effect: L34220 v37, eff 08/18/2022, CMS Coverage API.\n\nThe claim was denied. Before we appeal, please check the chart for the items below and add an addendum if they were done:\n\n1. For non-red-flag conditions, lumbar MRI may be appropriate after 1 month of symptoms.\n   Policy wording: \"For a \"non-red flag\" condition, the MRI may be appropriate after 1 month of symptoms.\"\n\n2. Within spine study, contrast is indicated to differentiate recurrent disc vs scar/granulation tissue, spinal cord neoplasm, myelopathy, or inflammatory cord disease.\n   Policy wording: \"Within the study of the spine, contrast also is indicated to differentiate recurrent disc versus scar or granulation tissue, spinal cord neoplasm, any case of myelopathy, and inflammatory cord disease.\"\n\n3. MRI covered only if patient has not responded to a reasonable trial of conservative management lasting at least four weeks (for non-red-flag low back pain).\n   Policy wording: \"For example, for a patient with low back pain syndrome where there is no known injury, history of cancer, or septic disorder and there are no symptoms or signs suggesting nerve root disorder or spinal cord dysfunction (i.e. no \"red flags\"), MRI will be covered only if the patient has not responded to a reasonable trial of conservative management lasting at least four weeks.\"\n\n4. Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.\n   Policy wording: \"Documentation should support the medical necessity for the need for both studies.\"\n\nPlease don't add anything that didn't happen; only document care that was actually provided.",
+   "doc_request": "Documentation request: Rowan Synthetic (synthetic), lumbar MRI, date of service 06/02/2025\nPayer: Prosper Health MA (synthetic). Policy in effect: L34220 v37, eff 08/18/2022, CMS Coverage API.\n\nThe claim was denied. Before we appeal, please check the chart for the items below and add an addendum if they were done:\n\n1. For non-red-flag conditions, lumbar MRI may be appropriate after 1 month of symptoms.\n   Policy wording: \"For a \"non-red flag\" condition, the MRI may be appropriate after 1 month of symptoms.\"\n\n2. Within spine study, contrast is indicated to differentiate recurrent disc vs scar/granulation tissue, spinal cord neoplasm, myelopathy, or inflammatory cord disease.\n   Policy wording: \"Within the study of the spine, contrast also is indicated to differentiate recurrent disc versus scar or granulation tissue, spinal cord neoplasm, any case of myelopathy, and inflammatory cord disease.\"\n\n3. MRI covered only if patient has not responded to a reasonable trial of conservative management lasting at least four weeks (for non-red-flag low back pain).\n   Policy wording: \"For example, for a patient with low back pain syndrome where there is no known injury, history of cancer, or septic disorder and there are no symptoms or signs suggesting nerve root disorder or spinal cord dysfunction (i.e. no \"red flags\"), MRI will be covered only if the patient has not responded to a reasonable trial of conservative management lasting at least four weeks.\"\n\n4. Documentation must evidence condition/treatment, include clinical info, not rely solely on MRI abnormalities, and show prior treatment and contemplated diagnosis/treatment change.\n   Policy wording: \"Documentation should support the medical necessity for the need for both studies.\"\n\nPlease don't add anything that didn't happen; only document care that was actually provided.",
    "gate": null,
    "deadline": {
     "rule_id": "ma-reconsideration",
@@ -15846,7 +15846,7 @@
   "run": {
    "case_id": "case_021",
    "denial": {
-    "payer_name": "Harbor Health MA (synthetic)",
+    "payer_name": "Prosper Health MA (synthetic)",
     "plan_type": "MA",
     "cpt": "72148",
     "icd10": [
@@ -18870,7 +18870,7 @@
   "run": {
    "case_id": "case_027",
    "denial": {
-    "payer_name": "Harbor Health MA",
+    "payer_name": "Prosper Health MA",
     "plan_type": "MA",
     "cpt": "72148",
     "icd10": [
