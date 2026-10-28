@@ -44,7 +44,7 @@ Models only ever return text; code checks it. Policy rules are sentence ranges c
 |---|---|
 | Read the scanned denial letter | Nemotron 3.5 Super-VL (Token Factory) |
 | Split the policy into rules (pick sentence ids) | Nemotron 3 Super |
-| Extract chart facts with quotes | Nemotron 3 Nano, thinking off |
+| Extract chart facts with quotes | Nemotron 3 Nano |
 | Check each rule against the chart | Nemotron 3 Super ×2; Nemotron 3 Ultra when the votes split |
 | Draft, critique, revise the appeal | Nemotron 3 Ultra / Super / Ultra |
 | Locate the Aetna bulletin at runtime | Tavily search |

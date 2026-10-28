@@ -1,0 +1,11 @@
+<!doctype html><meta charset=utf-8><style>
+@font-face{font-family:Geist;src:url(../../ui/public/fonts/geist-var.woff2);font-weight:100 900}
+html,body{margin:0;background:transparent}
+.l{display:inline-flex;align-items:center;gap:28px;padding:40px 56px;font-family:Geist;font-weight:600;font-size:88px;letter-spacing:-0.035em;line-height:1}
+.light{color:#0e0f0c;background:#efefed}.dark{color:#f3f3f1;background:#0b0c0a}.clear{color:#0e0f0c}
+</style>
+<script>
+const mark=(night)=>`<svg width="96" height="96" viewBox="0 0 24 24"><rect width="24" height="24" rx="7" fill="${night?'#f3f3f1':'#0e0f0c'}"/><path transform="rotate(180 7.9 12) translate(0 -.4)" d="M10.2 9.6a2.35 2.35 0 1 0-2.6 2.34c-.2 1.24-.94 2.2-2.1 2.86l.62.98c2.36-1.12 3.98-3.3 4.08-6.18Z" fill="${night?'#0e0f0c':'#f3f3f1'}"/><path d="M11.6 13.2l2.5 2.6 5.1-6.4" fill="none" stroke="${night?'#5c84ff':'#1e4bd7'}" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const v=new URLSearchParams(location.search).get('v')||'light';
+document.write(`<div id=x class="l ${v}">${mark(v==='dark')}<span>Denial Auditor</span></div>`);
+</script>
