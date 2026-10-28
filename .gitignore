@@ -36,3 +36,6 @@ video/public/rec/
 .impeccable/critique/**/*.webp
 .impeccable/critique/**/*.webm
 .impeccable/critique/**/*.mp4
+
+# Submission files (the testing PDF carries the demo passcode): never commit
+submission/
