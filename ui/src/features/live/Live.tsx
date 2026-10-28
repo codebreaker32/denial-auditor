@@ -189,6 +189,7 @@ export function Live() {
   const { data } = useCases()
   const available = data?.available ?? []
   const left = data?.live_left
+  const total = data?.live_total ?? 10
   const enabled = (data?.live_enabled ?? true) && left !== 0
   const [caseId, setCaseId] = useState("case_015")
   const [pass, setPass] = useState("")
@@ -395,8 +396,8 @@ export function Live() {
           )}
           <p className="lv-small">
             {left === 0
-              ? "All 5 live runs for this demo have been used. The saved cases show the same pipeline's output."
-              : `${left ?? 5} of 5 live runs left on this demo. Each run makes real model calls, about $0.06.`}
+              ? `All ${total} live runs for this demo have been used. The saved cases show the same pipeline's output.`
+              : `${left ?? total} of ${total} live runs left on this demo. Each run makes real model calls, about $0.06.`}
           </p>
         </motion.form>
 

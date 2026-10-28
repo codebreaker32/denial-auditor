@@ -1715,7 +1715,7 @@ async function liveView() {
         <dl class="kv" data-preview></dl>
         <button class="btn primary" type="submit" data-run ${on ? "" : 'aria-disabled="true"'}>${svg("play")}Run live</button>
         <p class="field-err" id="run-err" aria-live="polite" hidden></p>
-        <p class="small">This demo allows 5 live runs in total, about $0.06 each; a spending cap stops any run that would exceed its budget.</p>
+        <p class="small">This demo allows 10 live runs in total, about $0.06 each; a spending cap stops any run that would exceed its budget.</p>
       </form>
       <section class="panel" data-progress aria-live="off">
         <div class="panel-head"><h2>Progress</h2><span data-clock>Not started</span></div>

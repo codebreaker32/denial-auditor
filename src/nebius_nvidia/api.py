@@ -44,8 +44,8 @@ WEB = ROOT / "web"
 UI_DIST = ROOT / "ui" / "dist"  # `cd ui && npm run build`
 STATE = Path("/state") if Path("/state").is_dir() else ROOT / ".cache"
 SESSION_LIMIT_PER_JOBS = 3  # per browser token
-# Live runs allowed in total on a deployment (user, 2026-10-28: 5, ever). Counted from the "total" key in live_runs.json.
-TOTAL_LIMIT = int(os.environ.get("LIVE_TOTAL_LIMIT", "5"))
+# Live runs allowed in total on a deployment (user, 2026-10-28: 10, ever). Counted from the "total" key in live_runs.json.
+TOTAL_LIMIT = int(os.environ.get("LIVE_TOTAL_LIMIT", "10"))
 
 app = FastAPI(title="Denial Auditor", docs_url=None, redoc_url=None)
 _live: dict[str, CaseRun] = {}  # live results held in memory for this server's lifetime
@@ -125,7 +125,7 @@ def list_cases() -> dict:
     rows = [_row(cid, run, cid in _live, as_of) for cid, run in runs.items()]
     available = sorted(p.name for p in CASES.iterdir() if (p / "notes.json").exists())
     return {"cases": rows, "as_of": as_of.isoformat(), "available": available,
-            "live_enabled": bool(os.environ.get("DEMO_PASSCODE")), "live_left": _live_left()}
+            "live_enabled": bool(os.environ.get("DEMO_PASSCODE")), "live_left": _live_left(), "live_total": TOTAL_LIMIT}
 
 
 def _live_left() -> int:
