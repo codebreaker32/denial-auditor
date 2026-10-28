@@ -278,13 +278,16 @@ kbd {
   display: flex;
   align-items: center;
   gap: 12px;
-  height: 36px;
+  height: 40px;
   padding: 0 12px;
   border-radius: 9px;
   color: var(--ink-2);
-  font-size: var(--fs-small);
+  font-size: var(--fs-body);
   text-decoration: none;
   transition: background-color var(--dur-micro) var(--ease-micro), color var(--dur-micro) var(--ease-micro);
+}
+.rail-s {
+  display: none;
 }
 .rail-i svg {
   transition: transform var(--dur-micro) var(--ease-micro);
@@ -330,7 +333,7 @@ kbd {
 }
 .rail-sub {
   display: block;
-  color: var(--ink-3);
+  color: var(--ink-2);
 }
 .main {
   min-width: 0;
@@ -498,8 +501,17 @@ kbd {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  flex: none;
+  flex: 1 1 auto;
+  min-width: 0;
   font-size: var(--fs-small);
+}
+.qrow-work > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.qrow-work svg {
+  flex: none;
 }
 .q-rows {
   list-style: none;
@@ -1255,19 +1267,41 @@ kbd {
   .ws-t span {
     display: none;
   }
+  /* Four sections side by side: icon over a short label, the full name kept for screen readers. */
   .rail-nav {
     order: 4;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
     gap: 2px;
   }
   .rail-i {
-    flex: none;
-    height: 32px;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    min-height: 52px;
+    padding: 6px 4px;
     font-size: var(--fs-small);
-    gap: 8px;
+    line-height: 1.2;
+    gap: 4px;
+    text-align: center;
+  }
+  .rail-l {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .rail-s {
+    display: block !important;
+  }
+  .rail-n {
+    position: absolute;
+    top: 4px;
+    right: calc(50% - 22px);
   }
   .rail-foot {
     order: 2;
@@ -1293,11 +1327,7 @@ kbd {
     grid-template-columns: minmax(0, 1fr);
   }
   .q-filters {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    margin: 0 -8px;
-    padding: 0 12px 16px;
+    padding: 0 4px 12px;
   }
   .qf {
     flex: none;

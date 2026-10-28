@@ -5,7 +5,7 @@ import { Download, PenLine, RotateCcw } from "lucide-react"
 import { useEffect, useMemo, useState } from "react"
 import { EASE_ENTER } from "@/lib/motion"
 import { go } from "@/lib/router"
-import type { CaseDetail } from "@/lib/data"
+import { quoteCount, type CaseDetail } from "@/lib/data"
 import { Glyph, Press } from "@/features/ui"
 
 interface GateResp { ok: boolean; reason: string | null; checks: { text: string; status: string; address: string | null; closest?: { address: string | null } }[] }
@@ -26,7 +26,7 @@ export function GateDemo({ d }: { d: CaseDetail }) {
   const [busy, setBusy] = useState(false)
   const shake = useAnimationControls()
   const text = quote && swap ? (edited ? quote.replace(swap[1], swap[2]) : quote) : null
-  const others = (d.run.gate?.checks ?? []).length - 1
+  const others = quoteCount(d.run.gate?.checks ?? []).total - 1
 
   useEffect(() => {
     if (!text) return

@@ -28,6 +28,8 @@ function useIsPhone() {
 }
 
 const FILTERS: (Verdict | null)[] = [null, ...ORDER]
+// The row's short word for a work state; the full label is in the tooltip and for screen readers.
+const ROW_WORD: Record<WorkStatus, string> = { todo: "To do", waiting: "Waiting", ready: "Ready", sent: "Sent" }
 // Filter names cover every row they hold: "Don't appeal" spans "Don't appeal yet" and "Reorder, don't appeal".
 const FILTER_LABEL: Record<Verdict, string> = { ...Object.fromEntries(ORDER.map((v) => [v, VERDICT[v].label])), dont_appeal: "Don't appeal" } as Record<Verdict, string>
 
@@ -233,11 +235,13 @@ function QueueRow({
       </span>
       <span className="qrow-b">
         <Mark tone={v.tone} glyph={v.glyph} label={v.label} size={13} />
-        <span className="qrow-payer">{shortPayer(r.payer)}</span>
+        {/* Once work has started, its state replaces the payer, so the row keeps one line. */}
+        {work === "todo" && <span className="qrow-payer">{shortPayer(r.payer)}</span>}
         {work !== "todo" && (
           <span className={`qrow-work t-${w.tone}`} title={`Work state: ${w.label}`}>
             <Glyph name={w.glyph} size={12} />
-            <span>{w.label}</span>
+            <span aria-hidden="true">{ROW_WORD[work]}</span>
+            <span className="sr">{w.label}</span>
           </span>
         )}
         <span className={`qrow-days mono num ${soon ? "is-soon" : ""}`} title={`Due ${r.due}`}>

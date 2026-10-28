@@ -7,10 +7,10 @@
     },
     "lead": 0.3,
     "tail": 0.6,
-    "total_speech": 149.59,
-    "total_seconds": 162.19,
-    "total_characters": 2308,
-    "cost_usd": 0.0692,
+    "total_speech": 148.9,
+    "total_seconds": 161.5,
+    "total_characters": 2300,
+    "cost_usd": 0.069,
     "estimated": false
   },
   "greet": {
@@ -123,17 +123,18 @@
   "appeal": {
     "audio": "voiceover/appeal.mp3",
     "voice": "Matthew",
-    "speech": 9.98,
-    "seconds": 10.88,
+    "speech": 9.29,
+    "seconds": 10.19,
     "lead": 0.3,
     "words": 24,
-    "wps": 2.4,
+    "wps": 2.58,
     "trailing_silence": 0.0,
     "pauses": [
-      0.64,
-      0.91
+      0.49,
+      0.33,
+      0.71
     ],
-    "characters": 150
+    "characters": 142
   },
   "tamper": {
     "audio": "voiceover/tamper.mp3",

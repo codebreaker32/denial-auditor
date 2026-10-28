@@ -25,10 +25,6 @@ export function useCheck(caseId: string) {
 }
 
 // ---------- names ----------
-const MODEL_NAME: [RegExp, string][] = [
-  [/super-vl/i, "Nemotron 3.5 Super-VL"], [/nano/i, "Nemotron 3 Nano"], [/ultra/i, "Nemotron 3 Ultra"], [/super/i, "Nemotron 3 Super"],
-]
-export const modelName = (m: string) => MODEL_NAME.find(([re]) => re.test(m))?.[1] ?? m.split("/").pop() ?? m
 export const squash = (t: string) => String(t ?? "").replace(/\s+/g, " ").trim()
 export const lc1 = (t: string) => t.replace(/^./, (c) => c.toLowerCase())
 export const capFirst = (t: string) => t.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase())

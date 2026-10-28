@@ -5,8 +5,8 @@ import { ArrowRight, ArrowUpRight } from "lucide-react"
 import Lenis from "lenis"
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react"
 import { useCase, useCases, useDrift, useJSON } from "@/lib/api"
-import { ORDER, VERDICT, fmtDate, policyLabel, shortPayer, shortRule, type CaseDetail } from "@/lib/data"
-import { EASE_ENTER } from "@/lib/motion"
+import { ORDER, VERDICT, fmtDate, policyLabel, quoteCount, shortPayer, shortRule, type CaseDetail } from "@/lib/data"
+import { EASE_ENTER, useReveal } from "@/lib/motion"
 import { Glyph, Mark, SkipLink, Wordmark } from "@/features/ui"
 import { Highlight } from "@/features/case/parts"
 import { PolicyGlobe, type GlobeCase } from "./Globe"
@@ -28,15 +28,17 @@ function useIsCompact() {
 }
 
 function Reveal({ children, className = "", delay = 0, as = "div" }: { children: ReactNode; className?: string; delay?: number; as?: "div" | "li" }) {
-  const M = as === "li" ? motion.li : motion.div
+  const M = (as === "li" ? motion.li : motion.div) as typeof motion.div
+  // Starts 15% of a screen before the block scrolls in; shows at once for a full-page capture (lib/motion useReveal).
+  const r = useReveal<HTMLDivElement>()
   return (
     <M
+      ref={r.ref}
       className={className}
-      initial={{ opacity: 0.001, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      // Starts 15% of a screen before the block scrolls in, so nothing is blank while you scroll.
-      viewport={{ once: true, amount: 0, margin: "0px 0px 15% 0px" }}
-      transition={{ duration: 0.64, ease: EASE_ENTER, delay: Math.min(delay, 0.3) }}
+      // Rise only, never hidden: a full-page capture or a reader who hasn't scrolled yet still sees the content.
+      initial={{ y: 24 }}
+      animate={r.shown ? { y: 0 } : undefined}
+      transition={r.instant ? { duration: 0 } : { duration: 0.64, ease: EASE_ENTER, delay: Math.min(delay, 0.3) }}
     >
       {children}
     </M>
@@ -156,7 +158,7 @@ export default function Landing() {
             <Reveal delay={0.075}><p>Every quoted policy line is checked against the text fetched for this case. Change one word and export locks.</p></Reveal>
           </div>
           <Reveal className="sec-fig gate-fig" delay={0.15}>
-            <img className="pic pic-appeal" src="/img/landing/appeal.webp" width={1494} height={630} alt="The appeal letter in Denial Auditor, with 22 of 22 quotes matching the fetched policy text" loading="lazy" />
+            <img className="pic pic-appeal" src="/img/landing/appeal.webp" width={1480} height={660} alt="The appeal letter in Denial Auditor, with every quote matching the policy and chart word for word" decoding="async" />
             {b && <GateDemo d={b} />}
           </Reveal>
         </div>
@@ -166,7 +168,7 @@ export default function Landing() {
       <section className="sec band-white" aria-labelledby="outcomes-h">
         <div className="wrap out-in">
           <Reveal className="out-pic" delay={0.15}>
-            <img className="pic" src="/img/landing/queue.webp" width={760} height={1692} alt="The denial worklist: eight synthetic denials, each sorted into one of five answers" loading="lazy" />
+            <img className="pic" src="/img/landing/queue.webp" width={800} height={1728} alt="The denial worklist: eight synthetic denials, each sorted into one of five answers" decoding="async" />
           </Reveal>
           <div className="out-copy">
             <Reveal><h2 id="outcomes-h">Five answers. <span>Not every denial gets a letter.</span></h2></Reveal>
@@ -195,7 +197,7 @@ export default function Landing() {
           <div className="pre-grid">
             <Reveal delay={0.15}><Prevention /></Reveal>
             <Reveal className="pre-pic" delay={0.225}>
-              <img className="pic" src="/img/landing/checks.webp" width={1757} height={835} alt="The prior-auth checks list: two orders ready to send, two not yet, each with its earliest date" loading="lazy" />
+              <img className="pic" src="/img/landing/checks.webp" width={2080} height={1072} alt="The prior-auth checks list: two orders ready to submit, two not yet, each with its earliest date" decoding="async" />
             </Reveal>
           </div>
         </div>
@@ -205,7 +207,7 @@ export default function Landing() {
       <section className="sec" id="watch" aria-labelledby="watch-h">
         <div className="wrap watch-in">
           <Reveal className="watch-pic" delay={0.15}>
-            <img className="pic" src="/img/landing/rules.webp" width={1494} height={1710} alt="A case in Denial Auditor: the verdict, the deadline and each rule with its policy sentence and version" loading="lazy" />
+            <img className="pic" src="/img/landing/rules.webp" width={1480} height={2406} alt="A case in Denial Auditor: the recommendation, the deadline and each policy rule with what the chart shows" decoding="async" />
           </Reveal>
           <div className="watch-copy">
             <Reveal><h2 id="watch-h">Policies change. <span>Open cases hear about it.</span></h2></Reveal>
@@ -275,12 +277,13 @@ export default function Landing() {
 
 // ---------------- five outcomes band ----------------
 function Outcomes({ counts }: { counts: Record<string, number> }) {
+  const r = useReveal<HTMLOListElement>()
   return (
-    <motion.ol className="outcomes" initial="off" whileInView="on" viewport={{ once: true, amount: 0, margin: "0px 0px 15% 0px" }}>
+    <motion.ol ref={r.ref} className="outcomes" initial="off" animate={r.shown ? (r.instant ? "flat" : "on") : "off"}>
       {ORDER.map((v, i) => {
         const x = VERDICT[v]
         return (
-          <motion.li key={v} variants={{ off: { opacity: 0, y: 12 }, on: { opacity: 1, y: 0, transition: { duration: 0.64, ease: EASE_ENTER, delay: 0.15 + i * 0.075 } } }}>
+          <motion.li key={v} variants={{ off: { opacity: 1, y: 12 }, flat: { opacity: 1, y: 0, transition: { duration: 0 } }, on: { opacity: 1, y: 0, transition: { duration: 0.64, ease: EASE_ENTER, delay: 0.15 + i * 0.075 } } }}>
             <span className={`out-g t-${x.tone}`}><Glyph name={x.glyph} size={20} /></span>
             <span className="out-t">
               <b className={`t-${x.tone}`}>{x.label}</b>
@@ -414,13 +417,13 @@ function ShotRules({ d }: { d: CaseDetail }) {
 
 function ShotAppeal({ d }: { d: CaseDetail }) {
   const g = d.run.gate!
-  const ok = g.checks.filter((c) => c.status === "verified").length
+  const qc = quoteCount(g.checks)
   const q = g.checks.find((c) => c.source_id.startsWith("L"))
   return (
     <div className="ui-card shot-appeal" data-ui>
       <div className="ui-card-h">
         <span className="lbl">Appeal letter · {d.patient}</span>
-        <span className="mark t-verified"><Glyph name="check" size={13} /> {ok} of {g.checks.length} quotes verified</span>
+        <span className="mark t-verified"><Glyph name="check" size={13} /> {qc.ok} of {qc.total} quotes verified</span>
       </div>
       <div className="paper">
         <b>Applicable coverage policy</b>

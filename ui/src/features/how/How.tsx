@@ -1,12 +1,12 @@
 // How it works, in the app: each pipeline step illustrated with the real run of one showcase case,
 // then the eval figures (synthetic test set) and the nightly policy watch.
 import NumberFlow from "@number-flow/react"
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
-import { useRef, type ReactNode } from "react"
+import { type ReactNode } from "react"
 import { useCase, useCases, useDrift } from "@/lib/api"
-import { STATUS, STATUS_ORDER, VERDICT, coverage, fmtDate, shortPayer, type CaseDetail, type Match } from "@/lib/data"
-import { EASE_ENTER, enter } from "@/lib/motion"
+import { STATUS, STATUS_ORDER, VERDICT, coverage, fmtDate, quoteCount, shortPayer, type CaseDetail, type Match } from "@/lib/data"
+import { EASE_ENTER, enter, useReveal } from "@/lib/motion"
 import { Glyph, Mark } from "@/features/ui"
 import "./how.css"
 
@@ -21,26 +21,26 @@ const EVAL = [
 
 type Who = "model" | "code"
 function Station({ i, title, who, whoText, line, children }: { i: number; title: string; who: Who; whoText: string; line: string; children: ReactNode }) {
-  const ref = useRef<HTMLLIElement>(null)
-  const seen = useInView(ref, { once: true, margin: "-15% 0px" })
+  const r = useReveal<HTMLLIElement>("0px 0px -10% 0px")
+  const seen = r.shown
   return (
     <motion.li
-      ref={ref}
+      ref={r.ref}
       className={`hiw-st ${seen ? "is-seen" : ""}`}
-      initial={{ opacity: 0, y: 16 }}
-      animate={seen ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 0.7, ease: EASE_ENTER }}
+      initial={{ y: 16 }}
+      animate={seen ? { y: 0 } : undefined}
+      transition={r.instant ? { duration: 0 } : { duration: 0.7, ease: EASE_ENTER }}
     >
       <div className="hiw-st-l">
-        <span className="hiw-n mono" aria-hidden="true">{String(i).padStart(2, "0")}</span>
-        <h3>{title}</h3>
+        <span className="hiw-n num" aria-hidden="true">{i}</span>
+        <h2>{title}</h2>
         <span className={`hiw-who is-${who}`}>
           <i aria-hidden="true" />
           {whoText}
         </span>
         <p>{line}</p>
       </div>
-      <div className="hiw-st-r">{seen && children}</div>
+      <div className="hiw-st-r">{children}</div>
     </motion.li>
   )
 }
@@ -299,14 +299,14 @@ function Verdict({ d }: { d: CaseDetail }) {
 function Gate({ d, docCase }: { d: CaseDetail; docCase: string | null }) {
   const g = d.run.gate
   if (!g) return null
-  const ok = g.checks.filter((c) => c.status === "verified").length
+  const qc = quoteCount(g.checks)
   const q = g.checks.find((c) => c.status === "verified" && c.source_id.startsWith("L"))
   return (
     <div className="hiw-gate">
       <p className={`hiw-gate-n ${g.ok ? "t-verified" : "t-neg"}`}>
         <Glyph name={g.ok ? "check" : "cross"} size={18} />
         <span className="num">
-          <NumberFlow value={ok} /> of {g.checks.length}
+          <NumberFlow value={qc.ok} /> of {qc.total}
         </span>
         <span className="hiw-gate-w">quotes match fetched text · export open</span>
       </p>
@@ -355,7 +355,7 @@ function Watch() {
           </p>
           <ul className="hiw-wl">
             {items.map((it, i) => (
-              <motion.li key={`${it.case_id}-${it.kind}`} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: Math.min(i, 10) * 0.03 }}>
+              <motion.li key={`${it.case_id}-${it.kind}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: Math.min(i, 10) * 0.03 }}>
                 <span className="mono">{it.case_id.replace("case_", "Case ")}</span>
                 <span>{it.kind === "prior_auth" ? "Prior-auth" : "Denial"}</span>
                 <span className="mono">{it.policy_id.replace(/^Aetna /, "")} {/^\d{4}-/.test(it.cited) ? fmtDate(it.cited, false) : `v${it.cited}`}</span>

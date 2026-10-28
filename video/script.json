@@ -7,7 +7,7 @@
       "biller": "Ruth"
     },
     "audio_dir": "public/voiceover",
-    "note": "vo is sent to ElevenLabs as written (eleven_v3 audio tags in square brackets). text is the clean caption. Sources: docs/facts.md (KFF Jan 28 2026), eval/results/final_super_scan.md, demo/runs/case_015.json (22/22 gate), demo/runs/case_031.json (doc request), demo/checks/case_009.json (38 of 42 days). vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request."
+    "note": "vo is sent to ElevenLabs as written (eleven_v3 audio tags in square brackets). text is the clean caption. Sources: docs/facts.md (KFF Jan 28 2026), eval/results/final_super_scan.md, demo/runs/case_015.json (22/22 gate), demo/runs/case_031.json (doc request), demo/checks/case_009.json (38 of 42 days). vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request."
   },
   "scenes": [
     {
@@ -85,11 +85,11 @@
       "kind": "rec",
       "clip": "appeal",
       "voice": "narrator",
-      "visual": "Verdict: Appeal, decided by a fixed rule. Review appeal: letter with verified quotes in blue; gate reads 22 of 22 match their source.",
-      "caption": "A fixed rule says appeal. 22 of 22 quotes match their source.",
-      "text": "So a fixed rule says: appeal. Nemotron drafts the letter, and the citation gate checks every quote against its source. Twenty-two of twenty-two match.",
-      "vo": "So a fixed rule says: appeal. Nemotron drafts the letter, and the citation gate checks every quote against its source. [short pause] Twenty-two of twenty-two match.",
-      "ssml": "<speak>So a fixed rule says: appeal. Nemotron drafts the letter, and the citation gate checks every quote against its source. <break time=\"0.3s\"/> <break time=\"0.2s\"/><prosody rate=\"92%\">Twenty-two of twenty-two match.</prosody></speak>"
+      "visual": "Verdict: Appeal, decided by a fixed rule. Review appeal: letter with verified quotes in blue; gate reads 12 of 12 match their source.",
+      "caption": "A fixed rule says appeal. 12 of 12 quotes match their source.",
+      "text": "So a fixed rule says: appeal. Nemotron drafts the letter, and the citation gate checks every quote against its source. Twelve of twelve match.",
+      "vo": "So a fixed rule says: appeal. Nemotron drafts the letter, and the citation gate checks every quote against its source. [short pause] Twelve of twelve match.",
+      "ssml": "<speak>So a fixed rule says: appeal. Nemotron drafts the letter, and the citation gate checks every quote against its source. <break time=\"0.3s\"/> Twelve of twelve match.</speak>"
     },
     {
       "id": "tamper",

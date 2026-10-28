@@ -32,4 +32,10 @@ export function endSession() {
   memory = false
 }
 let memory = false
-export const signedIn = () => memory || hasSession()
+// A shared deep link can carry ?demo=1 to open straight into the demo workspace (there is no real account to skip).
+function demoLink(): boolean {
+  if (typeof window === "undefined" || !/[?&]demo=1\b/.test(window.location.hash)) return false
+  startSession()
+  return true
+}
+export const signedIn = () => memory || hasSession() || demoLink()

@@ -231,7 +231,7 @@ function GateMark({ gate }: { gate: Gate }) {
     )
   return (
     <motion.span className="gm t-verified" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, ease: EASE_OUT }}>
-      <Glyph name="check" size={15} /> Every quote matches the policy and chart, word for word ({uniq})
+      <Glyph name="check" size={15} /> All {uniq} quotes match the policy and chart
     </motion.span>
   )
 }
@@ -429,7 +429,15 @@ function QuoteList({ checks, pending, goto }: { checks: GateCheck[]; pending: bo
                 <span className={c.status === "verified" ? "t-verified" : "t-neg"}>
                   <Glyph name={c.status === "verified" ? "check" : "cross"} size={14} />
                 </span>
-                <span className="ql-q">{squash(c.text)}</span>
+                <span className="ql-q">
+                  {c.status === "verified" ? squash(c.text) : <s>{squash(c.text)}</s>}
+                  {c.status !== "verified" && c.closest && (
+                    <span className="ql-says">
+                      <span className="t-verified"><Glyph name="check" size={12} /> The source says</span> “{squash(c.closest.text)}”{" "}
+                      <Addr c={c.closest} goto={goto} />
+                    </span>
+                  )}
+                </span>
                 <span className="ql-a">
                   {c.status === "verified" ? <Addr c={c} goto={goto} /> : <span className="t-neg ql-ns">Doesn't match</span>}
                   {uses > 1 && <span className="num ql-n">used {uses} times</span>}

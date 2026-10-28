@@ -135,7 +135,7 @@ export const usd = (n: number) => `$${n.toLocaleString("en-US")}`
 export const usd4 = (n: number) => `$${n.toFixed(4)}`
 
 export const shortPayer = (p: string) =>
-  p.replace(/\s*\(synthetic( member)?\)/i, "").replace("Medicare Advantage", "MA").replace("Employer Health Plan", "Employer")
+  p.replace(/\s*\(synthetic[^)]*\)/i, "").replace("Medicare Advantage", "MA").replace("Employer Health Plan", "Employer")
 
 // ---------- per-case computations ----------
 export function firstTreatmentStart(f: Facts | null): string | null {

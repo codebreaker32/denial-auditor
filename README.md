@@ -14,7 +14,7 @@ Denial Auditor helps billing staff at small medical practices work health-insura
 
 Built for the [Nebius x NVIDIA Global AI Hackathon](https://nebiusglobalaihackathon.devpost.com/), **Best Apps & Agents** track, by team **Road House**: Aman Bihari and Bhawna.
 
-**Live demo:** _URL added at submission_ (precomputed cases are free to browse; live runs need the passcode in the Devpost testing instructions).
+**Live demo:** https://denial-auditor-898760356208.us-central1.run.app (sign in with the one-click demo account; the eight showcase cases are free to browse; live runs need the passcode in the Devpost testing instructions). The first visit after a quiet spell can take a few seconds while the server wakes.
 
 ## Architecture
 
@@ -49,7 +49,7 @@ Models only ever return text; code checks it. Policy rules are sentence ranges c
 | Draft, critique, revise the appeal | Nemotron 3 Ultra / Super / Ultra |
 | Locate the Aetna bulletin at runtime | Tavily search |
 | Versioned Medicare coverage policies (LCD L34220) | CMS Coverage API |
-| Policy watch | Nightly job beside the app; no model ($0 cap) |
+| Policy watch | Nightly Cloud Run job; no model ($0 cap) |
 
 ## Evaluation
 
@@ -74,19 +74,25 @@ Reports: `eval/results/final_super_scan.md`, `eval/results/final_nano_scan.md`. 
 
 ## Setup
 
+Needs Python 3.12 and Node 20+.
+
 ```bash
 python3 -m venv .venv
 ./.venv/bin/pip install -e '.[app,dev]'
-cp .env.example .env      # add TAVILY_API_KEY and NEBIUS_TOKEN_FACTORY_KEY
+cp .env.example .env      # add TAVILY_API_KEY and NEBIUS_TOKEN_FACTORY_KEY (DEMO_PASSCODE enables live runs)
 ./.venv/bin/pytest        # offline tests; any network call fails a test
+
+cd ui && npm ci && npm run build && cd ..                # the web app (React + shadcn) -> ui/dist
 ./.venv/bin/uvicorn nebius_nvidia.api:app --port 8600   # open http://127.0.0.1:8600
 ```
+
+The server serves `ui/dist` at `/` (and the earlier plain-HTML version at `/classic/`). For frontend work, run `cd ui && npx vite --port 5173` alongside the server; it proxies `/api` to port 8600.
 
 - One case end to end on the command line: `./.venv/bin/python -m nebius_nvidia.pipeline cases/case_001` (a few cents).
 - A prior-auth check: `./.venv/bin/python -m nebius_nvidia.prevention cases/case_009`.
 - The policy watch: `./.venv/bin/python -m nebius_nvidia.drift` ($0).
-- Live runs in the web app: set `DEMO_PASSCODE` in `.env`.
-- Deploy (AWS Lightsail container service, needs Docker): `scripts/deploy.sh up | status | down`.
+- Container: `docker build -t denial-auditor .` builds the web app and the API into one image (port 8501).
+- Deploy (Google Cloud Run, scale to zero): `gcloud run deploy denial-auditor --source . --region us-central1` with the keys as Secret Manager secrets and a Cloud Storage bucket mounted at `/state` for the spend ledger and the policy-watch report. The nightly policy watch runs as a Cloud Run job on a Cloud Scheduler trigger.
 
 Spending is hard-capped in code (`src/nebius_nvidia/budget.py`): every Token Factory request and Tavily call is checked against its cap before it is sent. Override the caps with `TOKEN_FACTORY_BUDGET_USD` and `TAVILY_CREDIT_CAP`.
 

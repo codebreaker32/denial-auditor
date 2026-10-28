@@ -13,10 +13,10 @@ import { AppToaster } from "@/features/toast"
 import "./app.css"
 
 const NAV = [
-  { key: "worklist", href: "#/app", label: "Worklist", icon: Inbox },
-  { key: "checks", href: "#/app/checks", label: "Prior-auth checks", icon: ClipboardCheck },
-  { key: "live", href: "#/app/live", label: "Run live", icon: PlayCircle },
-  { key: "how", href: "#/app/how", label: "How it works", icon: Route },
+  { key: "worklist", href: "#/app", label: "Worklist", short: "Worklist", icon: Inbox },
+  { key: "checks", href: "#/app/checks", label: "Prior-auth checks", short: "Checks", icon: ClipboardCheck },
+  { key: "live", href: "#/app/live", label: "Run live", short: "Run live", icon: PlayCircle },
+  { key: "how", href: "#/app/how", label: "How it works", short: "How", icon: Route },
 ]
 
 export function Shell({ section, children }: { section: string; children: ReactNode }) {
@@ -59,7 +59,8 @@ export function Shell({ section, children }: { section: string; children: ReactN
           {NAV.map((n) => (
             <a key={n.key} href={n.href} className="rail-i" aria-current={section === n.key ? "page" : undefined}>
               <n.icon size={17} strokeWidth={1.6} aria-hidden="true" />
-              <span>{n.label}</span>
+              <span className="rail-l">{n.label}</span>
+              <span className="rail-s" aria-hidden="true">{n.short}</span>
               {n.key === "worklist" && open > 0 && <span className="rail-n mono num">{open}</span>}
             </a>
           ))}
