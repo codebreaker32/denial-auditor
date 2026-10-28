@@ -132,7 +132,7 @@ nvidia-nemotron, nebius-token-factory, tavily, cms-coverage-api, python, fastapi
 
 - Live demo: https://denial-auditor-898760356208.us-central1.run.app
 - Source code: https://github.com/codebreaker32/denial-auditor
-- Demo video: [YouTube link]
+- Demo video: https://youtu.be/aWevndkFuQM
 
 ---
 

@@ -14,6 +14,8 @@ Denial Auditor helps billing staff at small medical practices work health-insura
 
 Built for the [Nebius x NVIDIA Global AI Hackathon](https://nebiusglobalaihackathon.devpost.com/), **Best Apps & Agents** track, by team **Road House**: Aman Bihari and Bhawna.
 
+**Demo video:** https://youtu.be/aWevndkFuQM
+
 **Live demo:** https://denial-auditor-898760356208.us-central1.run.app (sign in with the one-click demo account; the eight showcase cases are free to browse; live runs need the passcode in the Devpost testing instructions). The first visit after a quiet spell can take a few seconds while the server wakes.
 
 ## Architecture
