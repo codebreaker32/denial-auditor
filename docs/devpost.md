@@ -168,7 +168,7 @@ The demo is free to browse. It uses synthetic patients only and needs no account
 
 ## How we used Nebius Token Factory and NVIDIA Nemotron
 
-We used no other Nebius service: Token Factory serves every model call, and the app itself is hosted on Google Cloud Run. Every model call in the app goes to the Token Factory OpenAI-compatible API (`https://api.tokenfactory.nebius.com/v1/`) at runtime, and every model is an NVIDIA Nemotron open model. We use five of them:
+We used no other Nebius service: Token Factory serves every model call, and the app itself is hosted on Google Cloud Run. Every model call in the app goes to the Token Factory OpenAI-compatible API (`https://api.tokenfactory.nebius.com/v1/`) at runtime, and every model is an NVIDIA Nemotron open model. We probed five and use four of them:
 - Nemotron 3 Nano 30B-A3B
 - Nemotron 3 Super 120B-A12B
 - Nemotron 3 Ultra 550B-A55B
@@ -212,7 +212,7 @@ The query never contains patient data, only the payer and the service. Each serv
 ## Sponsor survey answers (paste as is)
 
 **Which model(s) did you use, and why did you choose that size/variant?**
-Five NVIDIA Nemotron models on Nebius Token Factory, each routed by measurement to the cheapest one that passed our checks: Nemotron 3.5 Super-VL reads the scanned denial letter; Nemotron 3 Nano 30B-A3B extracts chart facts and, with thinking off, handles quick extraction (0.4 s vs 4.2 s); Nemotron 3 Super 120B-A12B splits the policy into rules (7/7 gold rules in 3/3 runs) and casts two independent votes per rule; Nemotron 3 Ultra 550B-A55B referees only when the votes disagree (58 of 410 rule checks) and drafts the appeal. We tested Nemotron 3.5 Lightning and left it out because it took 50 to 230 s per call.
+Four NVIDIA Nemotron models on Nebius Token Factory (five probed), each routed by measurement to the cheapest one that passed our checks: Nemotron 3.5 Super-VL reads the scanned denial letter; Nemotron 3 Nano 30B-A3B extracts chart facts and, with thinking off, handles quick extraction (0.4 s vs 4.2 s); Nemotron 3 Super 120B-A12B splits the policy into rules (7/7 gold rules in 3/3 runs) and casts two independent votes per rule; Nemotron 3 Ultra 550B-A55B referees only when the votes disagree (58 of 410 rule checks) and drafts the appeal. We tested Nemotron 3.5 Lightning and left it out because it took 50 to 230 s per call.
 
 **How would you rate Nemotron's output quality for your use case? (1–10)**
 8. Instruction-following and structured output were excellent: json_schema worked on every model, and two Super votes with an Ultra referee got 30/30 recommendations and 138/138 rule statuses on our 30 synthetic cases. Shortfalls: long reasoning sometimes used up max_tokens and returned empty content, a single Nano vote got only 16/29 recommendations, and Lightning was too slow for interactive use.
