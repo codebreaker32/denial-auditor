@@ -79,7 +79,7 @@ Every model call uses `response_format` with a JSON schema and is validated with
 
 **Spend caps in code.** A custom httpx transport sits under the OpenAI SDK. It checks the worst-case cost of every Token Factory request against a project cap before sending it, and records the actual cost afterwards. Tavily calls go through the same kind of guard. The caps are $27 for Token Factory and 4,125 credits for Tavily. The development ledger shows about $6.23 spent so far (Oct 28), including every 30-case evaluation.
 
-**App.** The backend is FastAPI. The frontend is React with shadcn components. Every quote in the UI links to the exact sentence it came from in the policy or the chart. The app runs on Google Cloud Run, scaled to zero, with keys in Secret Manager and the spend ledgers in a Cloud Storage bucket. The policy watch runs as a nightly Cloud Run job with a $0 model cap.
+**App.** The backend is FastAPI. The frontend is React with shadcn components. The case screens speak a biller's language (rules, quotes, deadlines, money at stake); the model-level detail (which Nemotron model ran each step, votes, referee calls, cost per case) lives on the How it works page. Every quote in the UI links to the exact sentence it came from in the policy or the chart. A live run streams what the pipeline is doing as it happens: each step's result, then each rule as it is checked, with a running tally. The app runs on Google Cloud Run, scaled to zero, with keys in Secret Manager and the spend ledgers in a Cloud Storage bucket. The policy watch runs as a nightly Cloud Run job with a $0 model cap.
 
 **Evaluation.** We wrote 30 synthetic cases in 7 groups, each with ground truth (`cases/*/scenario.json`) and gold policy anchors (`eval/gold/`). Every letter is read from its scanned image.
 
@@ -159,8 +159,7 @@ The demo is free to browse. It uses synthetic patients only and needs no account
 2. Aetna CPB 0236 asks for six weeks of conservative therapy. The chart documents 38 of 42 days. On the timeline, code places the earliest qualifying date at 07/31/2026, which is before the planned date, so the result reads "Qualifies if charted": the wait is reached, but the chart has to record it.
 
 **4. Optional: a live run (2 to 3 minutes, real Token Factory and Tavily calls, about $0.06)**
-1. Open **Run live**, pick an **Aetna** case (for example Emerson Specimen) to see the runtime Tavily call, and enter the passcode: **[DEMO PASSCODE — paste into the Devpost field only, never into this file]**. The policy step reads "Finding the policy in effect on the date of service (Tavily search)".
-2. Watch each step as it runs. For an Aetna case (for example case 009), the policy step says "(Tavily search)". For a Medicare case, it says "(CMS Coverage API)".
+1. Open **Run live**, pick an **Aetna** case (for example Emerson Specimen) to see the runtime Tavily call, and enter the passcode: **[DEMO PASSCODE — paste into the Devpost field only, never into this file]**. 2. Watch each step report its result as it runs: the denial read from the scan, the policy found for the date of service (on Emerson: "Finding the policy in effect on the date of service (Tavily search)", then "Aetna CPB 0236 · snapshot fetched … · found with a web search"; on a Medicare case it says "(CMS Coverage API)"), the rules found in the policy, then each rule appearing as it is checked, with its status and a running tally, and finally the recommendation. On Drew Exemplar the appeal is drafted and every quote checked.
 3. **Cost and limit:** each live run makes real calls to NVIDIA Nemotron on Nebius Token Factory (about **$0.06** per run, plus one Tavily search on an Aetna case). To keep the demo's spend bounded, the passcode allows **5 live runs in total**, shared by all judges, and the Run live page shows how many are left. Please run one or two at most. Once they're used up, the saved cases above show the same pipeline's output, and the video shows a full live run.
 
 **Run it locally:** see the README. It needs Python 3.12, Node 20+, and a Token Factory and Tavily key in `.env`.
@@ -261,15 +260,15 @@ Yes. At runtime, for Aetna denials, the app calls Tavily search restricted to ae
 
 - [ ] **Make the repo public:** github.com/codebreaker32/denial-auditor is PRIVATE today. The user decides when; the rules need it public at submission.
 - [ ] **Licence detected:** GitHub shows "Apache License 2.0" (it already detects it via `gh repo view`). Confirm it shows in the About sidebar once public.
-- [ ] **Demo URL works** from a logged-out browser: the landing page, sign-in, case 015, 031 and 009, and one live run with the passcode. The service must stay up until judging ends Dec 15; the auto-shutdown runs Dec 16.
-- [ ] **Passcode pasted** into the testing-instructions field in place of the placeholder. Don't put it in the public repo or the story text.
-- [ ] **Video:** under 3:00, uploaded to YouTube as Public (not Unlisted), link pasted in place of [YouTube link]. No third-party music or logos.
-- [ ] **Video copy matches the app:** the script's case 009 scene says "Not yet", but the current app labels it "Qualifies if charted". Re-check the recorded clip and the narration.
+- [ ] **Demo URL works** from a logged-out browser: the landing page, sign-in, case 015, 031 and 009, and the Run live page showing "5 of 5 live runs left". Don't start a live run yourself: there are 5 in total for the judges. The service must stay up until judging ends Dec 15; the auto-shutdown runs Dec 16.
+- [ ] **Passcode for judges only:** attach `submission/Denial_Auditor_Testing_Instructions.pdf` (built by `scripts/build_judges_pdf.py`; it has the passcode and is gitignored) in a judges-only field, or paste the passcode into the judges-only testing-instructions field. Never in the public repo, the story text or the video.
+- [ ] **Video:** upload the latest `video/out/final.mp4` (under 3:00) to YouTube as Public (not Unlisted), and paste the link in place of [YouTube link]. No third-party music or logos.
+- [x] **Video copy matches the app:** the check scene now shows "Qualifies if charted" with 38 of 42 days and earliest Jul 31; the appeal line says "Twelve of twelve"; the closing line makes no time-saving claim.
 - [ ] **Team members added** on Devpost: Aman Bihari, Bhawna.
 - [ ] **Track selected:** Best Apps & Agents.
 - [ ] **Built-with tags** and **Try it out** links filled in.
-- [ ] **Gallery images** uploaded (deck pages or app screenshots, synthetic data only).
-- [ ] **Geist licence file:** `ui/public/fonts/` has `plex-mono-OFL.txt` but no Geist OFL text. Add it before the repo goes public; the OFL asks for the licence to travel with the font.
+- [ ] **Gallery images** uploaded: `docs/gallery/01-cover.png` first, then 02 to 07 (2400×1600, synthetic data only).
+- [x] **Geist licence file:** `ui/public/fonts/geist-OFL.txt` and `video/public/fonts/geist-OFL.txt` are in the repo.
 - [ ] **Fact check:** read this page once against the Fact register below after any edit.
 - [ ] Submit before **Fri Oct 30, 2026, 10:00 am PT**. Nothing can change after the deadline.
 
@@ -328,15 +327,17 @@ Every number and checkable claim above, with where it comes from. Repo paths are
 | `supported_features` lists only tools and reasoning | `.cache/model_probe.json` | `"supported_features": ["tools", "reasoning"]` |
 | Empty content → retry with 2× max_tokens | `src/nebius_nvidia/llm.py` | "Empty content (reasoning used the token budget) → one retry with 2× max_tokens." |
 | Caps $27 / 4,125 credits | `src/nebius_nvidia/budget.py` | `DEFAULT_CAP_USD = 27.0`; `DEFAULT_TAVILY_CAP = 4125` |
-| ~$6.18 spent (dev ledger) | `.token_factory_spend.json` (read 2026-10-28) | `spent_usd: 6.18306…`; its note says part was reconstructed after a ledger race. The Cloud Run ledger in `gs://nebius-nvidia-state` is separate and wasn't read. |
-| Live runs: passcode, 5 in total | `src/nebius_nvidia/api.py`; `ui/src/features/live/Live.tsx` | `TOTAL_LIMIT = 5`; "N of 5 live runs left on this demo. Each run makes real model calls, about $0.06." |
+| ~$6.23 spent (dev ledger) | `.token_factory_spend.json` (read 2026-10-28, afternoon) | `spent_usd` ≈ 6.23; its note says part was reconstructed after a ledger race. The Cloud Run ledger in `gs://nebius-nvidia-state` is separate and wasn't read. |
+| Live runs: passcode, 5 in total; refused after 5 (tested on the deployment, $0) | `src/nebius_nvidia/api.py`; `ui/src/features/live/Live.tsx` | `TOTAL_LIMIT = 5`; "N of 5 live runs left on this demo. Each run makes real model calls, about $0.06." |
 | Sign-in: "Open the demo" → "Continue to the demo", no password | `ui/src/landing/Landing.tsx`; `ui/src/app/Login.tsx` | "Open the demo"; "Continue to the demo"; "There is no password and nothing to sign up for." |
 | UI labels: Worklist, Prior-auth checks, Run live, Rules, Policy, Review appeal, Edit, Letter, Export locked, Restore the draft, Ask the physician | `ui/src/app/Shell.tsx`, `features/case/Detail.tsx`, `features/case/model.ts`, `features/appeal/Appeal.tsx`, `lib/data.ts` | as quoted in the source |
 | Patients: Drew Exemplar (015), Indigo Testdata (031), Emerson Specimen (009) | `cases/case_0NN/scenario.json` | `patient_name` fields |
+| Live run streams step results and each rule as it is checked | `src/nebius_nvidia/pipeline.py` (`emit`), `match.py` (`on_done`), `ui/src/features/live/Live.tsx`; `tests/test_live_events.py` | events `{at, step, kind: start/detail/rule/done, text}`; "11 of 15 rules checked · 4 supported · 1 blocking · 6 don't apply" |
+| Live run on Aetna shows the Tavily step | `src/nebius_nvidia/pipeline.py` | `" (Tavily search)"`; `"Aetna … · snapshot fetched … · found with a web search"` |
 | Hosting: Cloud Run, scale to zero, Secret Manager, GCS ledger, nightly job | `CLAUDE.md` (Hosting) | "Google Cloud Run … Scale to zero (min 0, max 1 …)"; "spend ledger and `drift_report.json` in bucket `gs://nebius-nvidia-state`" |
 | Demo URL live | `curl` on 2026-10-28 | `GET /api/cases` returned case rows |
 | Repo private; Apache-2.0 detected | `gh repo view` on 2026-10-28 | `"licenseInfo":{"key":"apache-2.0"…},"visibility":"PRIVATE"` |
-| Fonts Geist and IBM Plex Mono, OFL 1.1 | `ui/public/fonts/`; `video/CREDITS.md` | `plex-mono-OFL.txt`: "licensed under the SIL Open Font License, Version 1.1"; "Geist (SIL Open Font License 1.1)" |
+| Fonts Geist and IBM Plex Mono, OFL 1.1 | `ui/public/fonts/geist-OFL.txt`, `plex-mono-OFL.txt`; `video/CREDITS.md` | "This Font Software is licensed under the SIL Open Font License, Version 1.1." |
 | Polly voices; synthesised SFX | `video/CREDITS.md` | "Amazon Polly (generative voices Matthew and Ruth)"; "synthesised from scratch with numpy … no samples, no third-party recordings" |
 | eviCore/Carelon/ACR never sent to models; UHC dropped | `CLAUDE.md` | "Never send eviCore, Carelon or ACR text to a model or store it … link to them by name only (`sources.assert_allowed`)"; "UHC was dropped, because its imaging criteria are eviCore text" |
 | CMS-0057-F prior-auth API from Jan 2027 | `docs/go-to-market.md` | "from Jan 2027, CMS-0057-F requires covered payers (MA, Medicaid/CHIP, federal-exchange plans) to offer a Prior Authorization API" (not re-verified against the Federal Register here) |
