@@ -51,6 +51,29 @@ Models only ever return text; code checks it. Policy rules are sentence ranges c
 | Versioned Medicare coverage policies (LCD L34220) | CMS Coverage API |
 | Policy watch | Nightly Cloud Run job; no model ($0 cap) |
 
+## NVIDIA Nemotron on Nebius Token Factory
+
+Every model call goes to the **Nebius Token Factory** OpenAI-compatible API (`https://api.tokenfactory.nebius.com/v1/`, client in `src/nebius_nvidia/llm.py`) at runtime, and every model is an **NVIDIA Nemotron** open model:
+
+| Model | What it does here | Why this one (measured) |
+|---|---|---|
+| Nemotron 3.5 Super-VL | Reads the scanned, faxed denial letter (`intake.py`) | Reads the image directly; image input showed $0 in our probe |
+| Nemotron 3 Nano 30B-A3B | Chart facts with quotes (`facts.py`); text-letter intake and triage fallback with thinking off | Thinking off: 0.4 s instead of 4.2 s for simple extraction |
+| Nemotron 3 Super 120B-A12B | Picks the policy sentences that form each rule (`criteria.py`); two independent votes per rule (`match.py`); critiques the appeal as the payer's reviewer | 7 of 7 gold policy rules in 3 of 3 runs, at Super's price |
+| Nemotron 3 Ultra 550B-A55B | Referee only when the two Super votes disagree (58 of 410 rule checks in the final eval); drafts and revises the appeal (`appeal.py`) | Hard reasoning where it matters, and only there |
+| Nemotron 3.5 Lightning | Probed, then left out | 50–230 s even on small prompts |
+
+Every call returns a validated schema (`llm.structured()` with `response_format` json_schema, which all five models honoured), and code checks what the model said: spans are cut from the fetched policy by sentence id, chart quotes are located in their notes, durations come from dates, and the recommendation is a fixed rule. A full case costs a mean of **$0.048** and **72 s** on our test set (`eval/results/final_super_scan.md`).
+
+**Where Token Factory sped up our work**
+- **One API key and one client for five model sizes.** Swapping a step's model is a one-constant change, which is how we routed each step to the cheapest model that passed our checks.
+- **Choosing models by measurement in an afternoon.** `scripts/probe_models.py` ran the same structured-output, latency and vision probes across every Nemotron model on Token Factory before we wrote the pipeline.
+- **Structured output on every model.** json_schema worked on all five, so there is no per-model parsing glue.
+- **Evals cheap enough to repeat.** The full 30-case run with two Super votes and an Ultra referee costs about $1.50, so we re-ran it after every rule change, plus a Nano single-vote ablation (16/29 recommendations vs 30/30) that justified the two-vote design.
+- **Synthetic data on the same API.** Nemotron 3 Super wrote the synthetic chart notes from our scenario specs (`eval/gen_notes.py`, about $0.01 per case).
+
+Spending is capped in code for every call (`budget.py`: $27 for the whole project). **Other Nebius services:** none. Token Factory is the only Nebius service we used, and the app is hosted on Google Cloud Run.
+
 ## Evaluation
 
 30 synthetic cases in 7 groups (`cases/`, ground truth in each `scenario.json`; gold policy anchors in `eval/gold/`). Every letter is read from the scanned image.
