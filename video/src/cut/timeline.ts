@@ -9,11 +9,13 @@ const TM = timing as unknown as Record<string, T>;
 export type SceneId = (typeof script.scenes)[number]["id"];
 
 // Scene starts come from the measured narration (video/timing.json); cumulative rounding keeps audio in sync.
+const TRIM = 0.25;
 let acc = 0;
 export const SCENES = script.scenes.map((s) => {
   const t = TM[s.id];
   const from = Math.round(acc * FPS);
-  acc += t.seconds;
+  // scenes overlap by a transition, so all but the last give back part of their 0.6 s tail
+  acc += s.id === "close" ? t.seconds : t.seconds - TRIM;
   const to = Math.round(acc * FPS);
   return { id: s.id as string, from, dur: to - from, audio: t.audio, lead: t.lead, seconds: t.seconds };
 });

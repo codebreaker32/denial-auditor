@@ -7,7 +7,7 @@
       "biller": "Ruth"
     },
     "audio_dir": "public/voiceover",
-    "note": "vo is sent to ElevenLabs as written (eleven_v3 audio tags in square brackets). text is the clean caption. Sources: docs/facts.md (KFF Jan 28 2026), eval/results/final_super_scan.md, demo/runs/case_015.json (22/22 gate), demo/runs/case_031.json (doc request), demo/checks/case_009.json (38 of 42 days). vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request."
+    "note": "vo is sent to ElevenLabs as written (eleven_v3 audio tags in square brackets). text is the clean caption. Sources: docs/facts.md (KFF Jan 28 2026), eval/results/final_super_scan.md, demo/runs/case_015.json (22/22 gate), demo/runs/case_031.json (doc request), demo/checks/case_009.json (38 of 42 days). vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request."
   },
   "scenes": [
     {
@@ -160,10 +160,11 @@
       "id": "close",
       "kind": "close",
       "voice": "narrator",
-      "visual": "Demo URL on the yellow card, repo link, 'Denial Auditor, by Road House'. Synthetic data only.",
-      "text": "Those appeals are worth filing, and now a small practice has the time. Try the live demo below. Denial Auditor, by Road House. Thanks for watching.",
-      "vo": "[warmly] Those appeals are worth filing. And now, a small practice has the time. [short pause] Try the live demo, below. [pause] Denial Auditor, by Road House. Thanks for watching.",
-      "ssml": "<speak><prosody rate=\"96%\">Those appeals are worth filing. And now, a small practice has the time. <break time=\"0.3s\"/> Try the live demo, below. <break time=\"0.6s\"/> <break time=\"0.2s\"/><prosody rate=\"92%\">Denial Auditor, by Road House.</prosody> Thanks for watching.</prosody></speak>"
+      "visual": "Night band, the policy globe turning with more rules lit. 'Checked in minutes. / Every quote verified.' (blue check on verified), then the logo, 'Denial Auditor', 'by Team Road House', the demo URL, the attribution line and 'Synthetic data only.'",
+      "text": "Denial Auditor checks a denial in minutes and verifies every quote, so a small practice can see which appeals are worth filing. Try the live demo at the link on screen. Denial Auditor, by team Road House. Thanks for watching.",
+      "vo": "Denial Auditor checks a denial in minutes and verifies every quote, so a small practice can see which appeals are worth filing. Try the live demo at the link on screen. Denial Auditor, by team Road House. Thanks for watching.",
+      "ssml": "<speak><prosody rate=\"105%\">Denial Auditor checks a denial in minutes, and verifies every quote, <break time=\"0.15s\"/> so a small practice can see which appeals are worth filing. <break time=\"0.4s\"/> Try the live demo at the link on screen. <break time=\"0.4s\"/><prosody rate=\"94%\">Denial Auditor, by team Road House.</prosody> <break time=\"0.2s\"/> Thanks for watching.</prosody></speak>",
+      "ssml_raw": "<speak><prosody rate=\"105%\">Denial Auditor checks a denial in minutes, and verifies every quote, <break time=\"0.15s\"/> so a small practice can see which appeals are worth filing. <break time=\"0.4s\"/> Try the live demo at the link on screen. <break time=\"0.4s\"/><prosody rate=\"94%\">Denial Auditor, by team Road House.</prosody> <break time=\"0.2s\"/> Thanks for watching.</prosody></speak>"
     }
   ]
 }

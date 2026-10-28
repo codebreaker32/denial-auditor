@@ -190,7 +190,7 @@ const TASKS = ["Dig up the payer's policy", "Read it, rule by rule", "Match each
 export const Grind: React.FC<{ dur: number }> = ({ dur }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const at = [1.15, 3.2, 4.6, 5.5];
+  const at = [0.5, 3.2, 4.6, 5.5];
   const rows = at.map((s) => ease(f, sec(s), sec(s) + 12));
   const ticks = at.map((s) => ease(f, sec(s) + 14, sec(s) + 22));
   const hrsIn = ease(f, sec(6.7), sec(7.05));

@@ -272,10 +272,11 @@ const Tag: React.FC<{ text: string }> = ({ text }) => (
 export const How: React.FC<P> = ({ dur }) => (
   <>
     {SEGS.map((g, i) => {
-      const len = i === SEGS.length - 1 ? dur - sec(g.at) : sec(g.len);
+      const len = i === SEGS.length - 1 ? dur - sec(g.at) + 24 : sec(g.len);
       return (
         <Sequence key={i} from={sec(g.at)} durationInFrames={len} layout="none">
           <Recording clip="live" dur={len} from={g.from} rate={g.rate} cam={[{ t: 0, ...g.cam }]}
+            patches={[{ a: 0, b: 173.2, box: [280, 588, 640, 616] }, { a: 172.6, b: 999, box: [280, 520, 640, 548] }]}
             callouts={
               i === 2 ? [{ t0: 0.4, t1: 4.8, box: [728, 738, 1290, 796], label: "Every rule, one by one", tone: "hi", below: false }]
               : i === 4 ? [{ t0: 1.0, t1: 3.4, box: [676, 826, 1302, 1024], label: "Appeal, every quote matched", tone: "pos", below: false }]

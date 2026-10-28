@@ -38,7 +38,8 @@ const Enter: React.FC<{ kind: In; dur: number; exitWhip: boolean; children: Reac
   if (kind === "fade") style = { opacity: p };
   if (kind === "zoom") style = { opacity: p, transform: `scale(${1.22 - 0.22 * p})` };
   if (kind === "punch") style = { opacity: interpolate(f, [0, 3], [0, 1], clamp), transform: `scale(${1.06 - 0.06 * p})` };
-  if (kind === "rise") style = { clipPath: `inset(${(1 - p) * 100}% 0 0 0 round ${(1 - p) * 60}px)` };
+  // a full-frame dissolve with a slight settle: the incoming frame is always whole, never a half-drawn panel
+  if (kind === "rise") style = { opacity: p, transform: `scale(${1.04 - 0.04 * p})` };
   if (kind === "whip") style = { transform: `translateX(${(1 - p) * W}px)`, filter: p < 1 ? `blur(${(1 - p) * 18}px)` : undefined };
   // leaving: when the next scene whips in, this one whips out to the left
   if (exitWhip && f >= dur) {
@@ -55,7 +56,7 @@ const SFX: [string, number, number][] = [
   ["tick", at("biller", 4.2), 0.25], ["tick", at("biller", 5.2), 0.25], ["pop", at("biller", 5.45), 0.3],
   ["pop", at("greet", 2.4), 0.3], ["pop", at("greet", 5.7), 0.25], ["pop", at("greet", 6.35), 0.25],
   ...Array.from({ length: 8 }, (_, i) => ["click", at("greet", 9.8) + i * 4 + 6, 0.35] as [string, number, number]),
-  ["tick", at("grind", 1.6), 0.25], ["tick", at("grind", 3.65), 0.25], ["tick", at("grind", 5.05), 0.25], ["tick", at("grind", 5.95), 0.25],
+  ["tick", at("grind", 1.0), 0.25], ["tick", at("grind", 3.65), 0.25], ["tick", at("grind", 5.05), 0.25], ["tick", at("grind", 5.95), 0.25],
   ["whoosh", at("grind", 6.6), 0.2], ["pop", at("grind", 11.45), 0.35],
   ["pop", at("stakes", 6.5), 0.35], ["pop", at("stakes", 10.4), 0.35], ["whoosh", at("stakes", 11.25), 0.3],
   ["pop", at("pitch", 0.1), 0.35], ["whoosh", at("pitch", 1.8), 0.3],
@@ -64,7 +65,7 @@ const SFX: [string, number, number][] = [
   ["chime", at("tamper", 11.0), 0.3],
   ["whoosh", at("physician", 5.5), 0.25],
   ["pop", at("check", 9.0), 0.3],
-  ["chime", at("close", 7.6), 0.22],
+  ["chime", at("close", 11.0), 0.22],
   ...SCENES.filter((s) => VIEW[s.id].in === "whip").map((s) => ["whoosh", s.from - 3, 0.28] as [string, number, number]),
 ];
 

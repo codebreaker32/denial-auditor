@@ -113,7 +113,7 @@ export const Pitch: React.FC<{ dur: number }> = ({ dur }) => {
 // statuses flood the field, the cost counts. Then the honest caveat.
 export const Proof: React.FC<{ dur: number }> = ({ dur }) => {
   const f = useCurrentFrame();
-  const a = ease(f, sec(0.3), sec(0.8));
+  const a = ease(f, -6, 8);
   const casesP = interpolate(f, [sec(1.0), sec(4.0)], [0, 30], clamp);
   const toB = interpolate(f, [sec(4.3), sec(4.7)], [0, 1], { ...clamp, easing: easeIO });
   const rulesP = interpolate(f, [sec(4.5), sec(7.0)], [0, 138], clamp);
@@ -168,13 +168,13 @@ export const Proof: React.FC<{ dur: number }> = ({ dur }) => {
 // URL → the mark, the name and the team; credits and "synthetic data only".
 export const Close: React.FC<{ dur: number }> = ({ dur }) => {
   const f = useCurrentFrame();
-  const l1 = interpolate(f, [sec(0.3), sec(1.1)], [0, 1], { ...clamp, easing: easeOut });
-  const l2 = interpolate(f, [sec(2.4), sec(3.2)], [0, 1], { ...clamp, easing: easeOut });
-  const gone = interpolate(f, [sec(4.7), sec(5.2)], [0, 1], clamp);
-  const url = interpolate(f, [sec(5.0), sec(5.8)], [0, 1], { ...clamp, easing: easeOut });
-  const brand = interpolate(f, [sec(7.2), sec(8.0)], [0, 1], { ...clamp, easing: easeOut });
-  const draw = interpolate(f, [sec(7.2), sec(8.4)], [0, 1], { ...clamp, easing: easeOut });
-  const team = interpolate(f, [sec(8.4), sec(9.0)], [0, 1], { ...clamp, easing: easeOut });
+  const l1 = interpolate(f, [sec(0.4), sec(1.0)], [0, 1], { ...clamp, easing: easeOut });
+  const l2 = interpolate(f, [sec(2.75), sec(3.3)], [0, 1], { ...clamp, easing: easeOut });
+  const gone = interpolate(f, [sec(7.3), sec(7.7)], [0, 1], clamp);
+  const url = interpolate(f, [sec(7.7), sec(8.3)], [0, 1], { ...clamp, easing: easeOut });
+  const brand = interpolate(f, [sec(10.8), sec(11.4)], [0, 1], { ...clamp, easing: easeOut });
+  const draw = interpolate(f, [sec(10.8), sec(11.8)], [0, 1], { ...clamp, easing: easeOut });
+  const team = interpolate(f, [sec(11.6), sec(12.1)], [0, 1], { ...clamp, easing: easeOut });
   const fin = out(f, dur - 16, 16);
   return (
     <AbsoluteFill style={{ background: C.night, fontFamily: SANS, overflow: "hidden" }}>
@@ -183,8 +183,10 @@ export const Close: React.FC<{ dur: number }> = ({ dur }) => {
           <Globe frame={f + 400} cx={1640} cy={560} r={560} lit={interpolate(f, [0, dur], [0.04, 0.22], clamp)} opacity={0.95} />
         </svg>
         <div style={{ position: "absolute", left: 140, top: 330, opacity: 1 - gone }}>
-          <div style={{ fontSize: 120, fontWeight: 400, letterSpacing: "-0.045em", lineHeight: 1.04, color: C.onNight, opacity: l1, transform: `translateY(${(1 - l1) * 20}px)` }}>Worth filing.</div>
-          <div style={{ fontSize: 120, fontWeight: 300, letterSpacing: "-0.045em", lineHeight: 1.04, color: C.onNight2, opacity: l2, transform: `translateY(${(1 - l2) * 20}px)` }}>Now there's time.</div>
+          <div style={{ fontSize: 120, fontWeight: 400, letterSpacing: "-0.045em", lineHeight: 1.04, color: C.onNight, opacity: l1, transform: `translateY(${(1 - l1) * 20}px)` }}>Checked in minutes.</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 28, fontSize: 120, fontWeight: 300, letterSpacing: "-0.045em", lineHeight: 1.04, color: C.onNight2, opacity: l2, transform: `translateY(${(1 - l2) * 20}px)` }}>
+            Every quote verified. <Glyph name="check" size={96} color={C.verifiedNight} draw={l2} />
+          </div>
         </div>
         <div style={{ position: "absolute", left: 140, top: 250, opacity: brand, transform: `translateY(${(1 - brand) * 20}px)`, display: "flex", alignItems: "center", gap: 30 }}>
           <LogoMark size={118} onNight draw={draw} />

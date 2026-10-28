@@ -40,7 +40,8 @@ export function camAt(keys: Key[], t: number) {
 
 // The 1920x1080 frame a clip will fill: the real recording when public/rec/<clip>.mp4 exists (listed in recs.json by
 // scripts/record.py), else a labelled placeholder of the same size so the camera and callouts can be timed.
-const Footage: React.FC<{ clip: string; from: number; rate: number; dur: number }> = ({ clip, from, rate, dur }) => {
+const Footage: React.FC<{ clip: string; from: number; rate: number; dur: number }> = ({ clip, from, rate, dur: sceneDur }) => {
+  const dur = sceneDur + 24; // keep footage on screen through the transition overlap into the next scene
   const len = AVAILABLE[clip];
   if (!len) return <Placeholder clip={clip} />;
   const playable = Math.max(1, Math.floor(((len - from) * FPS) / rate) - 2);
@@ -74,15 +75,17 @@ const Placeholder: React.FC<{ clip: string }> = ({ clip }) => (
 
 // A highlighter sweep over lines of text in the recording: each line box fills left to right in turn.
 export type Sweep = { t0: number; t1: number; lines: [number, number, number, number][] };
+// A flat patch of page ground over a stale line of UI text, in recording coordinates, between footage seconds a and b.
+export type Patch = { a: number; b: number; box: [number, number, number, number]; color?: string };
 
 export const Recording: React.FC<{
-  clip: string; dur: number; from?: number; rate?: number; cam: Key[]; callouts?: Callout[]; sweeps?: Sweep[]; children?: React.ReactNode;
-}> = ({ clip, dur, from = 0, rate = 1, cam, callouts = [], sweeps = [], children }) => {
+  clip: string; dur: number; from?: number; rate?: number; cam: Key[]; callouts?: Callout[]; sweeps?: Sweep[]; patches?: Patch[]; children?: React.ReactNode;
+}> = ({ clip, dur, from = 0, rate = 1, cam, callouts = [], sweeps = [], patches = [], children }) => {
   const f = useCurrentFrame();
   const t = f / FPS;
   const c = camAt(cam, t);
   // a slow continuous push keeps even held shots alive
-  const s = c.s * (1 + 0.025 * Math.min(1, t / (dur / FPS)));
+  const s = c.s * (1 + 0.025 * Math.min(1, t / Math.max(1, dur / FPS)));
   let tx = W / 2 - c.x * s;
   let ty = H / 2 - c.y * s;
   tx = Math.min(0, Math.max(W - W * s, tx));
@@ -93,6 +96,11 @@ export const Recording: React.FC<{
     <AbsoluteFill style={{ background: C.ground, overflow: "hidden" }}>
       <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, transformOrigin: "0 0", transform: `translate(${tx}px, ${ty}px) scale(${s})` }}>
         <Footage clip={clip} from={from} rate={rate} dur={dur} />
+        {patches.map((pt, i) => {
+          const ft = from + t * rate;
+          if (ft < pt.a || ft >= pt.b) return null;
+          return <div key={`p${i}`} style={{ position: "absolute", left: pt.box[0], top: pt.box[1], width: pt.box[2] - pt.box[0], height: pt.box[3] - pt.box[1], background: pt.color ?? "rgb(243,242,238)" }} />;
+        })}
         {sweeps.map((w, i) => {
           const z = interpolate(t, [w.t1 - 0.3, w.t1], [1, 0], clamp);
           return w.lines.map((b, j) => {
