@@ -77,7 +77,7 @@ Every model call uses `response_format` with a JSON schema and is validated with
 
 **Policy sources.** The CMS Coverage API is the primary source: free, versioned, and returning each LCD version's effective dates. Aetna doesn't publish prior versions of a bulletin, so Aetna CPB 0236 is a dated snapshot. The tool records the fetch date and Aetna's "Last Review" date (04/09/2026 in our showcase run), and labels the result as a snapshot, not a versioned policy. The policy watch re-fetches it and flags changes.
 
-**Spend caps in code.** A custom httpx transport sits under the OpenAI SDK. It checks the worst-case cost of every Token Factory request against a project cap before sending it, and records the actual cost afterwards. Tavily calls go through the same kind of guard. The caps are $27 for Token Factory and 4,125 credits for Tavily. The development ledger shows about $6.18 spent so far, including every 30-case evaluation.
+**Spend caps in code.** A custom httpx transport sits under the OpenAI SDK. It checks the worst-case cost of every Token Factory request against a project cap before sending it, and records the actual cost afterwards. Tavily calls go through the same kind of guard. The caps are $27 for Token Factory and 4,125 credits for Tavily. The development ledger shows about $6.23 spent so far (Oct 28), including every 30-case evaluation.
 
 **App.** The backend is FastAPI. The frontend is React with shadcn components. Every quote in the UI links to the exact sentence it came from in the policy or the chart. The app runs on Google Cloud Run, scaled to zero, with keys in Secret Manager and the spend ledgers in a Cloud Storage bucket. The policy watch runs as a nightly Cloud Run job with a $0 model cap.
 
@@ -109,7 +109,7 @@ These are synthetic cases we wrote, scored against our own ground truth. They sh
 - An appeal can't be exported unless every quote is found word for word in a source fetched for that case. In the showcase appeal (case 015), all 12 unique quoted passages pass, 22 uses in all.
 - The policy version comes from the date of service, not from whatever is live today.
 - It can say "don't appeal yet" or "ask the physician", and it explains why.
-- Every model call, vote, referee decision and cost is in the case's audit trail.
+- Every model call, vote, referee decision and cost is recorded in each case's saved run, and the How it works page walks through one real run step by step.
 
 ## What we learned
 
