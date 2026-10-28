@@ -210,50 +210,37 @@ The query never contains patient data, only the payer and the service. Each serv
 
 ---
 
-## Sponsor survey answers (Nemotron / Nebius questions)
-
-Ratings marked **[team to confirm]** are suggestions; they are your opinion to give.
+## Sponsor survey answers (paste as is)
 
 **Which model(s) did you use, and why did you choose that size/variant?**
-Five NVIDIA Nemotron models on Nebius Token Factory, each routed to the step it was cheapest and good enough for, chosen by measurement (`scripts/probe_models.py`):
-- Nemotron 3.5 Super-VL reads the scanned, faxed denial letter (image input).
-- Nemotron 3 Nano 30B-A3B extracts chart facts with quotes, and with thinking off handles text-letter intake and triage (0.4 s instead of 4.2 s).
-- Nemotron 3 Super 120B-A12B picks the policy sentences that form each rule (7 of 7 gold rules in 3 of 3 runs) and casts two independent votes per rule.
-- Nemotron 3 Ultra 550B-A55B referees only when the two Super votes disagree (58 of 410 rule checks in the final eval) and drafts and revises the appeal.
-- Nemotron 3.5 Lightning was probed and left out (50–230 s even on small prompts).
+Five NVIDIA Nemotron models on Nebius Token Factory, each routed by measurement to the cheapest one that passed our checks: Nemotron 3.5 Super-VL reads the scanned denial letter; Nemotron 3 Nano 30B-A3B extracts chart facts and, with thinking off, handles quick extraction (0.4 s vs 4.2 s); Nemotron 3 Super 120B-A12B splits the policy into rules (7/7 gold rules in 3/3 runs) and casts two independent votes per rule; Nemotron 3 Ultra 550B-A55B referees only when the votes disagree (58 of 410 rule checks) and drafts the appeal. We tested Nemotron 3.5 Lightning and left it out because it took 50 to 230 s per call.
 
-**How would you rate Nemotron's output quality for your use case?** Suggested **8/10** [team to confirm].
-Worked well: instruction-following with json_schema on every model; Super's reading of policy criteria (7/7 gold rules, 3/3 runs); two Super votes plus an Ultra referee got 30/30 recommendations and 138/138 gold rule statuses on our 30 synthetic cases. Fell short: reasoning can use up `max_tokens` and return empty content (we retry with double the tokens); a single Nano vote got 16/29 recommendations, mostly by marking the red-flag route as blocking when the patient simply had no red flags; Lightning was too slow for a request path. Domain knowledge was rarely needed, because the policy text is always supplied and quotes are checked in code. Multilingual: not tested (English only).
+**How would you rate Nemotron's output quality for your use case? (1–10)**
+8. Instruction-following and structured output were excellent: json_schema worked on every model, and two Super votes with an Ultra referee got 30/30 recommendations and 138/138 rule statuses on our 30 synthetic cases. Shortfalls: long reasoning sometimes used up max_tokens and returned empty content, a single Nano vote got only 16/29 recommendations, and Lightning was too slow for interactive use.
 
 **Did you fine-tune, prompt-engineer, or use Nemotron out of the box?**
-Out of the box, with prompt engineering and code around it, no fine-tuning. Each step asks for a pydantic schema via `response_format` json_schema. The model picks sentence ids rather than writing policy text, so rules are cut from the source. Every quote is located in its note or policy by code. Durations, deadlines and the final recommendation are computed in code. Two independent Super votes per rule with an Ultra referee on a split replaced prompt tweaking as our main accuracy lever.
+Out of the box with prompt engineering; no fine-tuning. Every step returns a validated schema, the model selects policy sentence ids instead of writing policy text, code verifies every quote and computes dates, deadlines and the final recommendation, and two independent votes plus a referee replaced prompt tweaking as our main accuracy lever.
 
 **How did Nemotron's performance compare to other models you've used for similar tasks?**
-We did not benchmark non-NVIDIA models in this project, so we can't make that comparison fairly. Within Nemotron: two Super votes with an Ultra referee cost about 5× a single Nano vote ($0.048 vs $0.010 per case) and moved recommendations from 16/29 to 30/30 on our test set.
+We built only on Nemotron for this project. Across sizes, two Super votes with an Ultra referee cost about 5× a single Nano vote ($0.048 vs $0.010 per case) and raised correct recommendations from 16/29 to 30/30.
 
 **Which Nebius platform capabilities were most valuable, and how did you run Nemotron?**
-Token Factory's serverless, OpenAI-compatible inference API: no GPU instances to provision or scale. One API key and the standard `openai` SDK client reached five model sizes, so routing a step to a different model was a one-constant change. Structured output worked on every model. Per-call usage let us compute and show cost per case, and enforce a hard project cap in code ($27). Each case runs up to four rule checks in parallel. The app itself (FastAPI + React) is hosted on Google Cloud Run and calls Token Factory at runtime; we used no other Nebius service.
+Token Factory's serverless, OpenAI-compatible API. One key and the standard OpenAI SDK reached five model sizes with no GPUs to provision, so switching a step's model was a one-line change. Structured output on every model, and per-call usage that let us show cost per case and enforce a hard $27 project cap in code. Rule checks run four in parallel; the app is hosted on Google Cloud Run and calls Token Factory at runtime.
 
-**How likely are you to recommend running Nemotron on Nebius to other developers?** Suggested **8/10** [team to confirm].
-Fast to start (OpenAI-compatible, no infrastructure), a range of sizes under one key, structured output that works, low cost per call. Held back by: no server-side per-key spending cap, model IDs in mixed formats and case-sensitive, and empty-content responses when reasoning runs long.
+**How likely are you to recommend running Nemotron on Nebius to other developers? (1–10)**
+8. Fast to start, no infrastructure, many sizes under one key, reliable structured output and low cost. It would be a 10 with a server-side spending cap per key, consistent model IDs, and no empty responses after long reasoning.
 
-**How would you rate running Nemotron inference on Nebius compared to previous environments?** Suggested **8/10** [team to confirm].
-Compared with running models ourselves, there was nothing to provision, and switching between a 30B and a 550B model cost nothing to set up. Latency for Nano with thinking off was well suited to interactive steps; larger models with reasoning are slower, so we ran rule checks in parallel.
+**How would you rate your experience running Nemotron inference on Nebius compared to previous environments? (1–10)**
+8. Nothing to provision, and moving between a 30B and a 550B model cost nothing to set up. Nano with thinking off was quick enough for interactive steps; larger reasoning models are slower, so we ran checks in parallel.
 
 **What additional features or improvements would have made it more effective?**
-- A server-side hard spending cap per API key.
-- Structured-output support listed per model in `GET /v1/models` (`supported_features` showed only "tools" and "reasoning").
-- A documented reasoning budget, or a guaranteed answer after reasoning, so `content` is never empty.
-- `enable_thinking` as a first-class request parameter rather than `chat_template_kwargs`.
-- Model ID aliases and consistent casing.
-- A latency note per model (Lightning surprised us).
-- Confirmation that image input on Super-VL being $0 is intended.
+A server-side hard spending cap per API key; structured-output support listed per model in GET /v1/models; a reasoning budget or guaranteed answer so content is never empty; enable_thinking as a first-class parameter; consistent, case-insensitive model IDs; and a published latency guide per model.
 
 **What do you most hope to see from the Nemotron team next?**
-A fast, cheap vision-language model tuned for scanned administrative documents (faxes, forms) with reliable field extraction; controllable reasoning length; and a Lightning variant with interactive latency.
+A fast vision-language model tuned for scanned administrative documents (faxes, forms), controllable reasoning length, and a Lightning variant with interactive latency.
 
 **Did you use Tavily in your project?**
-Yes. At runtime, when a clinical denial comes from Aetna, the pipeline calls Tavily search restricted to aetna.com with a fixed query (no patient data) to locate the Clinical Policy Bulletin that covers the service, then fetches that page and cuts it to its policy section (`src/nebius_nvidia/aetna.py`). Every Tavily call goes through a credit cap in code.
+Yes. At runtime, for Aetna denials, the app calls Tavily search restricted to aetna.com with a fixed query (no patient data) to locate the current Clinical Policy Bulletin for the service, then fetches it and extracts the policy section. Every call goes through a credit cap in code.
 
 ## Disclosures
 
