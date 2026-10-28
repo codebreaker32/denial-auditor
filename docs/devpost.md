@@ -159,7 +159,7 @@ The demo is free to browse. It uses synthetic patients only and needs no account
 2. Aetna CPB 0236 asks for six weeks of conservative therapy. The chart documents 38 of 42 days. On the timeline, code places the earliest qualifying date at 07/31/2026, which is before the planned date, so the result reads "Qualifies if charted": the wait is reached, but the chart has to record it.
 
 **4. Optional: a live run (1 to 2 minutes, real Token Factory and Tavily calls)**
-1. Open **Run live**, pick a synthetic case, and enter the passcode: **[DEMO PASSCODE — paste from .env before submitting]**
+1. Open **Run live**, pick an **Aetna** case (for example Emerson Specimen) to see the runtime Tavily call, and enter the passcode: **[DEMO PASSCODE — paste from .env before submitting]**. The policy step reads "Finding the policy in effect on the date of service (Tavily search)".
 2. Watch each step as it runs. For an Aetna case (for example case 009), the policy step says "(Tavily search)". For a Medicare case, it says "(CMS Coverage API)".
 3. Live runs are capped at 30 a day across all visitors and by a spending cap on the server. If you hit the cap, the precomputed cases above show the same pipeline's saved output.
 
