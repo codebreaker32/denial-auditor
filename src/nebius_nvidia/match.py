@@ -7,7 +7,7 @@ to "missing_documentation". The final verdict is a fixed rule over the
 statuses, so no model makes the appeal / don't-appeal call.
 """
 
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date
 from typing import Literal
 
@@ -108,9 +108,20 @@ def match_one(criterion: Criterion, notes: list[ChartNote], facts: ChartFacts, d
 
 
 def match_all(criteria: list[Criterion], notes: list[ChartNote], facts: ChartFacts, dos: date,
-              model: str = SUPER, tracker=None, workers: int = 4, cpt: str | None = None, votes: int = 2) -> list[CriterionMatch]:
+              model: str = SUPER, tracker=None, workers: int = 4, cpt: str | None = None, votes: int = 2,
+              on_done=None) -> list[CriterionMatch]:
+    """Judge every rule in parallel. Returns matches in criteria order; `on_done(criterion, match)`,
+    if given, is called (on the calling thread) as each rule finishes, in completion order."""
     with ThreadPoolExecutor(workers) as pool:
-        return list(pool.map(lambda c: match_one(c, notes, facts, dos, model, tracker, cpt, votes), criteria))
+        futures = {pool.submit(match_one, c, notes, facts, dos, model, tracker, cpt, votes): i
+                   for i, c in enumerate(criteria)}
+        out: list[CriterionMatch | None] = [None] * len(criteria)
+        for fut in as_completed(futures):
+            i = futures[fut]
+            out[i] = fut.result()
+            if on_done:
+                on_done(criteria[i], out[i])
+    return out  # type: ignore[return-value]
 
 
 ROUTE_KINDS = {"indication", "red_flag", "duration"}

@@ -347,7 +347,7 @@ const BY_SUMMARY: [RegExp, string][] = [
   [/unresponsive to 4 weeks/i, "Four weeks, degenerative disease"],
 ]
 type Named = { criterion_id: string; summary: string; verbatim_span: string }
-function baseName(c: Named): string {
+export function baseName(c: Named): string {
   for (const [re, n] of BY_SPAN) if (re.test(c.verbatim_span)) return n
   for (const [re, n] of BY_SUMMARY) if (re.test(c.summary)) return n
   const clause = c.summary

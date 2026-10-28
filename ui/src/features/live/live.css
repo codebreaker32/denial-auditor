@@ -157,13 +157,30 @@ select.lv-input {
 }
 .lv-step {
   position: relative;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--rule);
+  transition: opacity var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+}
+.lv-step-h {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr) auto;
   gap: 12px;
   align-items: start;
-  padding: 14px 4px;
-  border-bottom: 1px solid var(--rule);
-  transition: opacity var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+button.lv-step-h {
+  cursor: pointer;
+  border-radius: 8px;
+}
+button.lv-step-h:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 6px;
 }
 .lv-step.is-wait .lv-dot {
   opacity: 0.6;
@@ -236,9 +253,201 @@ select.lv-input {
   color: var(--ink-3);
 }
 .lv-word {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-size: var(--fs-small);
   line-height: 1.45;
   font-weight: 500;
+  white-space: nowrap;
+}
+.lv-took {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+.lv-x {
+  margin-left: 4px;
+  color: var(--ink-3);
+  transition: transform var(--dur-short) var(--ease-out);
+}
+.lv-x.is-open {
+  transform: rotate(180deg);
+}
+@media (hover: hover) {
+  button.lv-step-h:hover .lv-x {
+    color: var(--ink);
+  }
+}
+
+/* ---------- the activity feed of a step ---------- */
+.lv-body {
+  overflow: hidden;
+  margin-left: 40px;
+}
+.lv-feed,
+.lv-rules {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0 0;
+  display: grid;
+  gap: 2px;
+  max-height: 340px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.lv-rules {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14px);
+}
+.lv-rules:empty {
+  display: none;
+}
+.lv-line,
+.lv-rule {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+  padding: 4px 10px 4px 6px;
+  border-radius: 8px;
+  font-size: var(--fs-small);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.lv-line.is-now {
+  color: var(--ink);
+  background: var(--ground);
+}
+.lv-line-dot {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+}
+.lv-tick {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--t-pos);
+}
+.lv-spin.lv-spin-ink {
+  width: 12px;
+  height: 12px;
+  border-color: var(--sunk-2);
+  border-top-color: var(--ink);
+}
+.lv-line-t {
+  min-width: 0;
+}
+.lv-line-at {
+  color: var(--ink-3);
+  font-size: var(--fs-small);
+}
+.lv-rule {
+  grid-template-columns: minmax(136px, max-content) minmax(0, 1fr) auto auto;
+  gap: 12px;
+  padding-left: 0;
+  color: var(--ink);
+  font-size: var(--fs-body);
+}
+.lv-rule .rr-st {
+  height: 26px;
+}
+.lv-rule-n {
+  display: grid;
+  min-width: 0;
+}
+.lv-rule-2 {
+  font-size: var(--fs-small);
+  color: var(--ink-3);
+}
+.lv-rule .sec {
+  font-size: var(--fs-small);
+}
+.lv-rule-wait {
+  grid-template-columns: 18px minmax(0, 1fr);
+  margin-top: 4px;
+}
+.lv-tally {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--ground);
+}
+.lv-tally-t {
+  margin: 0;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--ink);
+}
+.lv-bar {
+  display: block;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--sunk-2);
+  overflow: hidden;
+}
+.lv-bar-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: var(--ink);
+}
+
+/* ---------- the summary when the run ends ---------- */
+.lv-sum {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  margin: 16px 0 0;
+  padding: 20px;
+  border-radius: 14px;
+  background: var(--surface);
+}
+.lv-sum-v {
+  font-size: var(--fs-lead);
+  font-weight: 500;
+}
+.lv-sum-t {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 60ch;
+}
+.lv-sum-m {
+  margin: 0 0 4px;
+  font-size: var(--fs-small);
+  color: var(--ink-3);
+}
+@media (max-width: 599px) {
+  .lv-body {
+    margin-left: 0;
+  }
+  .lv-rule {
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 10px;
+    font-size: var(--fs-small);
+  }
+  .lv-rule .rr-st {
+    grid-area: auto;
+    margin-left: 0;
+  }
+  .lv-rule .sec,
+  .lv-rule .lv-line-at {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lv-pulse::after {
+    animation: none;
+    opacity: 0;
+  }
 }
 .lv-after {
   display: flex;

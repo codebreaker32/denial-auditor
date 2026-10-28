@@ -288,30 +288,44 @@ def start_live(body: LiveIn) -> dict:
             raise HTTPException(429, "Today's live-run limit for this demo has been reached. Browse the precomputed cases instead.")
         counts[today] = counts.get(today, 0) + 1
     job = uuid.uuid4().hex[:12]
-    _jobs[job] = {"case_id": case_id, "steps": [], "state": "running", "error": None}
-
-    def work():
-        from nebius_nvidia.pipeline import run_case
-
-        try:
-            run, _ = run_case(CASES / case_id, progress=lambda m: _jobs[job]["steps"].append(m))
-            with _lock:
-                _live[case_id] = run
-            _jobs[job]["state"] = "done"
-        except BudgetExceeded as e:
-            _jobs[job].update(state="error", error=f"Stopped by this deployment's spending cap: {e}")
-        except Exception as e:  # noqa: BLE001 - surfaced to the user as a failed run
-            _jobs[job].update(state="error", error=f"{type(e).__name__}: {str(e)[:300]}")
-
-    threading.Thread(target=work, daemon=True).start()
+    with _lock:
+        _jobs[job] = {"case_id": case_id, "steps": [], "events": [], "state": "running", "error": None}
+    threading.Thread(target=_work, args=(job, case_id), daemon=True).start()
     return {"job": job}
+
+
+def _work(job: str, case_id: str) -> None:
+    """Run one live case in a background thread; progress lines and feed events go on the job under _lock."""
+    from nebius_nvidia.pipeline import run_case
+
+    entry = _jobs[job]
+
+    def add(key: str, item) -> None:
+        with _lock:
+            entry[key].append(item)
+
+    def finish(**fields) -> None:
+        with _lock:
+            entry.update(**fields)
+
+    try:
+        run, _ = run_case(CASES / case_id, progress=lambda m: add("steps", m), on_event=lambda e: add("events", e))
+        with _lock:
+            _live[case_id] = run
+        finish(state="done")
+    except BudgetExceeded as e:
+        finish(state="error", error=f"Stopped by this deployment's spending cap: {e}")
+    except Exception as e:  # noqa: BLE001 - surfaced to the user as a failed run
+        finish(state="error", error=f"{type(e).__name__}: {str(e)[:300]}")
 
 
 @app.get("/api/live/{job}")
 def live_status(job: str) -> dict:
-    if job not in _jobs:
-        raise HTTPException(404, "No such job")
-    return _jobs[job]
+    with _lock:
+        if job not in _jobs:
+            raise HTTPException(404, "No such job")
+        j = _jobs[job]
+        return {**j, "steps": list(j["steps"]), "events": list(j["events"])}
 
 
 @app.get("/healthz")

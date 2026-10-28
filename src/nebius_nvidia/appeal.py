@@ -134,28 +134,46 @@ def session_for(run: CaseRun, notes: list[ChartNote]) -> Session:
 
 
 def draft_appeal(run: CaseRun, notes: list[ChartNote], patient_name: str, tracker=None,
-                 drafter: str = ULTRA, critic: str = SUPER, revise: bool = True) -> tuple[AppealDraft, list[Quote], GateResult]:
+                 drafter: str = ULTRA, critic: str = SUPER, revise: bool = True,
+                 on_step=None) -> tuple[AppealDraft, list[Quote], GateResult]:
+    """`on_step(text)`, if given, is told each sub-step and its result in plain words (for the live UI)."""
+    say = on_step or (lambda text: None)
     bank = build_quote_bank(run, notes)
+    say(f"Writing the first draft from {len(bank)} verified quotes")
     user = f"{_context(run, patient_name)}\n\nQUOTE BANK:\n{_bank_block(bank)}"
     first = structured(drafter, [{"role": "system", "content": DRAFT_SYSTEM}, {"role": "user", "content": user}],
                        DraftOut, max_tokens=8192, step="appeal_draft", tracker=tracker)
     draft = AppealDraft(sections=[Section(**s.model_dump()) for s in first.sections])
     draft.rendered = render(draft, bank)
+    say(f"First draft written: {_n(len(draft.sections), 'section')}")
 
     if revise:
+        say("A payer-side reviewer is reading the draft")
         crit = structured(critic, [{"role": "system", "content": CRITIQUE_SYSTEM},
                                    {"role": "user", "content": f"{_context(run, patient_name)}\n\nLETTER:\n{draft.rendered}"}],
                           CritiqueOut, max_tokens=4096, step="appeal_critique", tracker=tracker)
+        major = sum(c.severity == "major" for c in crit.items)
+        say(f"Review raised {_n(len(crit.items), 'point')}" + (f", {major} major" if major else "")
+            if crit.items else "Review found nothing to change")
         if crit.items:
+            say("Revising the draft to answer the review")
             critique = "\n".join(f"- [{c.severity}] {c.issue} → {c.suggestion}" for c in crit.items)
             second = structured(drafter, [{"role": "system", "content": REVISE_SYSTEM},
                                           {"role": "user", "content": f"{user}\n\nYOUR DRAFT:\n{first.model_dump_json()}\n\nREVIEWER CRITIQUE:\n{critique}"}],
                                 DraftOut, max_tokens=8192, step="appeal_revise", tracker=tracker)
             draft = AppealDraft(sections=[Section(**s.model_dump()) for s in second.sections], critique=crit.items, revision=1)
             draft.rendered = render(draft, bank)
+            say("Revision done")
 
     gate = check(draft.rendered, session_for(run, notes))
+    ok = sum(c.status == "verified" for c in gate.checks)
+    say(f"Checking every quote: {ok} of {len(gate.checks)} match the fetched text"
+        + ("" if gate.ok else ". Export is blocked until they all match"))
     return draft, bank, gate
+
+
+def _n(k: int, word: str) -> str:
+    return f"{k} {word}{'' if k == 1 else 's'}"
 
 
 def documentation_request(run: CaseRun, patient_name: str) -> str | None:
