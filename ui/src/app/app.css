@@ -1,21 +1,5 @@
 /* App: login, shell, worklist and case detail. Rails and hairlines instead of boxed cards. */
 
-.wordmark {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-size: var(--fs-h3);
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  white-space: nowrap;
-}
-.logomark {
-  flex: none;
-  border-radius: 9px;
-  transition: transform var(--dur-micro, 140ms) cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-a:hover > .wordmark .logomark,
-a:hover .logomark { transform: rotate(-4deg) scale(1.04); }
 .textbtn,
 .textlink {
   display: inline-flex;
