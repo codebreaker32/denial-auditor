@@ -1,13 +1,15 @@
 {
-  "appeal": 15.067,
-  "case": 16.933,
-  "check": 13.867,
+  "appeal": 12.767,
+  "case": 14.567,
+  "check": 13.3,
   "cost": 12.167,
-  "how": 17.167,
-  "physician": 11.367,
+  "how": 16.7,
+  "live": 178.267,
+  "physician": 10.267,
   "policy": 30.733,
   "rule": 24.067,
-  "rules": 19.267,
-  "tamper": 20.2,
-  "worklist": 12.367
+  "rules": 19.733,
+  "tamper": 21.467,
+  "tour": 24.867,
+  "worklist": 11.433
 }

@@ -7,56 +7,78 @@
     },
     "lead": 0.3,
     "tail": 0.6,
-    "total_speech": 148.9,
-    "total_seconds": 161.5,
-    "total_characters": 2300,
-    "cost_usd": 0.069,
+    "total_speech": 163.23,
+    "total_seconds": 176.73,
+    "total_characters": 2508,
+    "cost_usd": 0.0752,
     "estimated": false
   },
   "greet": {
     "audio": "voiceover/greet.mp3",
     "voice": "Matthew",
-    "speech": 6.38,
-    "seconds": 7.28,
+    "speech": 10.54,
+    "seconds": 11.44,
     "lead": 0.3,
-    "words": 17,
-    "wps": 2.66,
+    "words": 24,
+    "wps": 2.28,
     "trailing_silence": 0.0,
     "pauses": [
+      0.54,
+      0.42,
+      0.36,
       0.41
     ],
-    "characters": 104
+    "characters": 144
   },
   "biller": {
     "audio": "voiceover/biller.mp3",
     "voice": "Ruth",
-    "speech": 6.53,
-    "seconds": 7.43,
+    "speech": 6.0,
+    "seconds": 6.9,
     "lead": 0.3,
-    "words": 10,
-    "wps": 1.53,
+    "words": 13,
+    "wps": 2.17,
     "trailing_silence": 0.0,
     "pauses": [
-      0.76,
-      0.95
+      0.41,
+      0.34,
+      0.4
     ],
-    "characters": 69
+    "characters": 75
+  },
+  "grind": {
+    "audio": "voiceover/grind.mp3",
+    "voice": "Matthew",
+    "speech": 12.1,
+    "seconds": 13.0,
+    "lead": 0.3,
+    "words": 35,
+    "wps": 2.89,
+    "trailing_silence": 0.0,
+    "pauses": [
+      0.31,
+      0.51,
+      0.56,
+      0.73,
+      0.43
+    ],
+    "characters": 181
   },
   "stakes": {
     "audio": "voiceover/stakes.mp3",
     "voice": "Matthew",
-    "speech": 14.02,
-    "seconds": 14.92,
+    "speech": 12.62,
+    "seconds": 13.52,
     "lead": 0.3,
-    "words": 36,
-    "wps": 2.57,
+    "words": 28,
+    "wps": 2.22,
     "trailing_silence": 0.0,
     "pauses": [
-      1.03,
-      0.71,
-      0.31
+      0.4,
+      0.82,
+      0.62
     ],
-    "characters": 237
+    "characters": 218
   },
   "pitch": {
     "audio": "voiceover/pitch.mp3",

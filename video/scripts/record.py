@@ -39,28 +39,63 @@ CURSOR = """
   const mk = () => {
     if (document.getElementById('__cur')) return;
     const c = document.createElement('div'); c.id = '__cur';
-    Object.assign(c.style, {position:'fixed', left:'0', top:'0', width:'22px', height:'22px', marginLeft:'-11px',
-      marginTop:'-11px', borderRadius:'50%', background:'rgba(14,15,12,.18)', border:'2px solid rgba(14,15,12,.75)',
-      zIndex:2147483647, pointerEvents:'none', transition:'transform .12s ease, background .12s ease',
-      transform:'translate(-100px,-100px)'});
+    c.innerHTML = '<svg width="30" height="30" viewBox="0 0 24 24"><path d="M4 2.5l15.5 9.2-6.6 1.5 3.9 7.1-2.9 1.5-3.8-7.1-4.9 4.6z" fill="#0e0f0c" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+    Object.assign(c.style, {position:'fixed', left:'0', top:'0', width:'30px', height:'30px', marginLeft:'-5px', marginTop:'-3px',
+      zIndex:2147483647, pointerEvents:'none', transformOrigin:'5px 3px', transition:'scale .12s ease',
+      transform:'translate(-100px,-100px)', filter:'drop-shadow(0 2px 3px rgba(0,0,0,.25))'});
     document.body.appendChild(c);
-    let x=-100, y=-100;
-    addEventListener('mousemove', e => { x=e.clientX; y=e.clientY; c.style.transform=`translate(${x}px,${y}px)`; }, true);
-    addEventListener('mousedown', () => { c.style.transform=`translate(${x}px,${y}px) scale(.7)`; c.style.background='rgba(30,75,215,.35)'; }, true);
-    addEventListener('mouseup', () => { c.style.transform=`translate(${x}px,${y}px)`; c.style.background='rgba(14,15,12,.18)'; }, true);
+    addEventListener('mousemove', e => { c.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; }, true);
+    addEventListener('mousedown', () => { c.style.scale = '0.82'; }, true);
+    addEventListener('mouseup', () => { c.style.scale = '1'; }, true);
   };
   if (document.body) mk(); else addEventListener('DOMContentLoaded', mk);
 })();
 """
 
 
-def glide(pg: Page, loc, steps: int = 28, pause: int = 250):
-    """Move the pointer smoothly onto an element's centre."""
+_pos = {"x": 1300.0, "y": 760.0}
+
+
+def human_move(pg: Page, x: float, y: float, ms: float | None = None):
+    """Move like a hand: a curved path, eased speed, a small overshoot, then a settle onto the target."""
+    import math
+    import random
+    x0, y0 = _pos["x"], _pos["y"]
+    dx, dy = x - x0, y - y0
+    d = math.hypot(dx, dy)
+    if d < 2:
+        return
+    ms = ms or min(1100.0, max(380.0, 320 + d * 0.42))
+    ux, uy = dx / d, dy / d
+    ov = min(14.0, d * 0.035)
+    tx, ty = x + ux * ov, y + uy * ov  # overshoot point
+    bend = d * random.uniform(0.08, 0.16) * random.choice((-1, 1))
+    cx, cy = x0 + dx * 0.5 - uy * bend, y0 + dy * 0.5 + ux * bend
+    n = max(12, int(ms / 33))  # each move + wait costs ~an extra 10-15 ms in playwright; keep real time ≈ ms
+    t_start = time.monotonic()
+    for i in range(1, n + 1):
+        t = i / n
+        e = 4 * t ** 3 if t < 0.5 else 1 - (-2 * t + 2) ** 3 / 2  # ease in-out cubic
+        px = (1 - e) ** 2 * x0 + 2 * (1 - e) * e * cx + e ** 2 * tx
+        py = (1 - e) ** 2 * y0 + 2 * (1 - e) * e * cy + e ** 2 * ty
+        pg.mouse.move(px, py)
+        lag = t_start + ms / 1000 * i / n - time.monotonic()
+        if lag > 0:
+            pg.wait_for_timeout(lag * 1000)
+    for i in range(1, 7):  # settle back from the overshoot
+        t = i / 6
+        pg.mouse.move(tx + (x - tx) * t, ty + (y - ty) * t)
+        pg.wait_for_timeout(12)
+    _pos["x"], _pos["y"] = x, y
+
+
+def glide(pg: Page, loc, steps: int = 28, pause: int = 250, ms: float | None = None):
+    """Move the pointer naturally onto an element's centre (steps is kept for callers; speed follows distance)."""
     loc.scroll_into_view_if_needed()
     bb = loc.bounding_box()
     if not bb:
         return
-    pg.mouse.move(bb["x"] + bb["width"] / 2, bb["y"] + bb["height"] / 2, steps=steps)
+    human_move(pg, bb["x"] + bb["width"] / 2, bb["y"] + bb["height"] / 2, ms)
     pg.wait_for_timeout(pause)
 
 
@@ -87,6 +122,103 @@ def settle(pg: Page, hash_: str, wait: int = 2200):
 
 
 # ---------------------------------------------------------------- clips
+def tour(pg: Page):  # pitch + worklist narration (~19 s): landing → Open the demo → login → worklist
+    pg.goto(BASE + "/#/")
+    pg.wait_for_load_state("networkidle")
+    pg.reload()
+    pg.wait_for_load_state("networkidle")
+    pg.wait_for_timeout(1800)  # globe up
+    _pos.update(x=1300.0, y=760.0)
+    pg.mouse.move(1300, 760)
+    yield
+    pg.wait_for_timeout(400)
+    human_move(pg, 640, 470, 700)
+    hero = pg.locator("a.pill", has_text="Open the demo").nth(1)
+    if hero.count():
+        glide(pg, hero, pause=500, ms=600)  # hover state, no click yet
+    for k in range(3):  # a quick read down the landing sections
+        smooth_scroll(pg, 1000, 700)
+        human_move(pg, 980 + (k % 2) * 220, 560 + k * 50, 450)
+    cta = pg.locator("a.pill-lg", has_text="Open the demo").first
+    cta.evaluate("(e) => e.scrollIntoView({block: 'center', behavior: 'smooth'})")
+    pg.wait_for_timeout(1100)
+    glide(pg, cta, pause=350, ms=650)
+    cta.click()
+    pg.wait_for_timeout(900)
+    go = pg.get_by_role("button", name="Continue to the demo")
+    go.wait_for()
+    glide(pg, go, pause=250, ms=650)
+    go.click()
+    pg.wait_for_url("**/#/app**")
+    pg.wait_for_timeout(1500)
+    glide(pg, pg.locator("text=Drew Exemplar").first, pause=400)
+    for _ in range(3):
+        pg.keyboard.press("j"); pg.wait_for_timeout(700)
+    for _ in range(3):
+        pg.keyboard.press("k"); pg.wait_for_timeout(550)
+    human_move(pg, 600, 560)
+    pg.wait_for_timeout(1800)
+
+
+def _passcode() -> str:
+    """DEMO_PASSCODE from the repo's .env, read in code and never printed or logged."""
+    env = Path(__file__).resolve().parents[2] / ".env"
+    for line in env.read_text().splitlines():
+        if line.strip().startswith("DEMO_PASSCODE="):
+            return line.split("=", 1)[1].strip().strip('"').strip("'")
+    raise RuntimeError("DEMO_PASSCODE is not set in .env")
+
+
+LIVE_MARKS: dict = {}
+
+
+def live(pg: Page):  # one real live run on case_015 (~2.5 min, a few cents of Token Factory). Only when named.
+    settle(pg, "#/app/live", 2500)
+    yield
+    t0 = time.monotonic()
+    mark = lambda k: LIVE_MARKS.setdefault(k, round(time.monotonic() - t0, 2))
+    sel = pg.locator("#lv-case")
+    glide(pg, sel, pause=300)
+    sel.select_option("case_015")
+    pg.wait_for_timeout(700)
+    pw = pg.locator("#lv-pass")
+    glide(pg, pw, pause=200)
+    pw.click()
+    pg.keyboard.type(_passcode(), delay=60)  # a password field: only dots are drawn
+    assert pw.get_attribute("type") == "password"
+    pg.wait_for_timeout(400)
+    go = pg.locator("button.lv-go")
+    glide(pg, go, pause=300)
+    go.click()
+    mark("run")
+    human_move(pg, 1500, 900, 900)
+    last = -1
+    deadline = time.monotonic() + 420
+    while time.monotonic() < deadline:
+        pg.wait_for_timeout(500)
+        bar = pg.locator(".lv-bar")
+        if bar.count():
+            n = int(bar.get_attribute("aria-valuenow") or 0)
+            if n > 0:
+                mark("first_rule")
+            if n != last:
+                LIVE_MARKS[f"rules_{n}"] = round(time.monotonic() - t0, 2)
+                last = n
+        if pg.locator("text=Finished in").count():
+            mark("done")
+            break
+        if pg.locator("text=Run stopped").count() or pg.locator(".lv-form .lv-err").count():
+            mark("error")
+            break
+    pg.wait_for_timeout(1200)
+    summary = pg.locator(".lv-sum").first
+    if summary.count():
+        summary.evaluate("(e) => e.scrollIntoView({block: 'center', behavior: 'smooth'})")
+        pg.wait_for_timeout(1000)
+        glide(pg, summary, pause=3500)
+    mark("end")
+
+
 def worklist(pg: Page):  # ~10.3 s narration
     settle(pg, "#/app")
     yield
@@ -112,23 +244,29 @@ def case(pg: Page):  # ~11.3 s
     glide(pg, pg.locator("text=50: medical necessity").first, steps=40, pause=3000)
 
 
-def rules(pg: Page):  # ~14.8 s
+def rules(pg: Page):  # ~14.8 s: rules tab, stage summary, expand a rule (policy words + chart quotes), back to the list
     settle(pg, "#/app/c/case_015", 3200)
     pg.keyboard.press("Escape")
+    glide(pg, pg.locator("text=in effect on the").first, pause=200, ms=500)
     yield
-    click(pg, pg.get_by_role("tab", name="Rules"), after=900)
-    smooth_scroll(pg, 520, 1600)
-    row = pg.locator("button.rule-h").nth(1)
+    pg.wait_for_timeout(1400)
+    click(pg, pg.get_by_role("tab", name="Rules"), after=700)
+    smooth_scroll(pg, 420, 1300)
+    row = pg.locator(".rule .rr").nth(1)
     if not row.count():
         row = pg.locator("text=Four weeks of conservative care").first
-    click(pg, row, after=1800)
-    chip = pg.locator("button.chip, .chip").filter(has_text="48").first
-    if chip.count():
-        click(pg, chip, after=2600)
-    else:
-        click(pg, pg.get_by_role("tab", name="Policy"), after=2600)
-    smooth_scroll(pg, 160, 2200)
-    pg.wait_for_timeout(2400)
+    click(pg, row, after=1600)
+    words = pg.locator(".rule mark, .rule .hl").first
+    if words.count():
+        glide(pg, words, pause=1600)
+    smooth_scroll(pg, 260, 1200)
+    found = pg.locator("text=Found in").first
+    if found.count():
+        glide(pg, found, pause=1800)
+    click(pg, row, after=900)  # collapse: all five rules in view
+    smooth_scroll(pg, -300, 1200)
+    human_move(pg, 1500, 620)
+    pg.wait_for_timeout(2600)
 
 
 def appeal(pg: Page):  # ~10.9 s
@@ -183,10 +321,11 @@ def tamper(pg: Page):  # ~13.3 s
     exp = pg.get_by_role("button", name="Export locked")
     if exp.count():
         glide(pg, exp, steps=24, pause=1200)
-    void = pg.locator("text=Not in source").first
+    void = pg.locator("text=This quote isn't in the policy").first
     if void.count():
-        void.scroll_into_view_if_needed()
-        glide(pg, void, steps=24, pause=1800)
+        void.evaluate("(e) => e.scrollIntoView({block: 'center', behavior: 'smooth'})")
+        pg.wait_for_timeout(900)
+        glide(pg, void, steps=24, pause=2200)
     # revert: back to Edit, retype the original words, export unlocks
     click(pg, pg.get_by_role("button", name="Edit", exact=True), after=350)
     ta = pg.locator("#ap-ta")
@@ -240,7 +379,8 @@ def how(pg: Page):  # ~14.9 s
     pg.wait_for_timeout(1200)
 
 
-CLIPS = {f.__name__: f for f in (worklist, case, rules, appeal, tamper, physician, check, how)}
+ONLY_WHEN_NAMED = {"live": live}
+CLIPS = {f.__name__: f for f in (tour, worklist, case, rules, appeal, tamper, physician, check, how)}
 
 
 def encode(src: Path, dst: Path, start: float):
@@ -301,12 +441,13 @@ def main(names: list[str]):
         for name in names:
             d = tmp / name
             warm()
-            ctx = browser.new_context(viewport=SIZE, device_scale_factor=1, storage_state=state,
+            ctx = browser.new_context(viewport=SIZE, device_scale_factor=1, storage_state=None if name == "tour" else state,
                                       record_video_dir=str(d), record_video_size=SIZE)
             ctx.add_init_script(CURSOR)
+            _pos.update(x=1300.0, y=760.0)
             pg = ctx.new_page()
             t0 = time.monotonic()
-            steps = CLIPS[name](pg)
+            steps = (CLIPS.get(name) or ONLY_WHEN_NAMED[name])(pg)
             next(steps)  # set-up done: the clip starts here
             start = time.monotonic() - t0
             for _ in steps:
@@ -317,6 +458,10 @@ def main(names: list[str]):
             raw = Path(video.path())
             encode(raw, OUT / f"{name}.mp4", start)
             print(f"{name}: {dur:.1f}s -> {OUT / (name + '.mp4')}")
+            if name == "live":
+                import json
+                (OUT / "live.json").write_text(json.dumps(LIVE_MARKS, indent=1) + "\n")
+                print("live marks:", {k: v for k, v in LIVE_MARKS.items() if not k.startswith("rules_")})
         browser.close()
     write_manifest()
     shutil.rmtree(tmp, ignore_errors=True)

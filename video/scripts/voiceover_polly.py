@@ -33,6 +33,8 @@ REWRITE = {"biller": ("[sighs] Another MRI denied.", 'Oh, no. <break time="0.3s"
 
 
 def to_ssml(s):
+    if s.get("ssml_raw"):  # hand-written SSML (the opening): sent as is
+        return s["ssml_raw"]
     t = s["vo"]
     if s["id"] in REWRITE:
         t = t.replace(*REWRITE[s["id"]])

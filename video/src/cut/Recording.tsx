@@ -148,7 +148,7 @@ export const Recording: React.FC<{
         const left = Math.max(40, Math.min(W - 760, x0 - 10));
         return (
           <div key={`l${i}`} style={{
-            position: "absolute", left, top: below ? y1 + 24 : undefined, bottom: below ? undefined : H - y0 + 24,
+            position: "absolute", left, top: below ? y1 + 24 : Math.max(24, y0 - 24 - 64),
             background: tone.bg, color: tone.fg, fontFamily: SANS, fontSize: 36, fontWeight: 560, letterSpacing: "-0.015em",
             padding: "12px 24px 14px", borderRadius: 14, whiteSpace: "nowrap", opacity: a * z,
             transform: `translateY(${(1 - a) * (below ? -10 : 10)}px)`,

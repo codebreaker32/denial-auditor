@@ -1,0 +1,287 @@
+{
+ "greet": [
+  {
+   "t0": 0.0,
+   "t1": 1.93,
+   "text": "Hi, we're team Road House!"
+  },
+  {
+   "t0": 1.93,
+   "t1": 5.99,
+   "text": "Meet Maya, who runs billing at a small spine clinic."
+  },
+  {
+   "t0": 5.99,
+   "t1": 8.59,
+   "text": "Monday, 8:01 a.m. Coffee: hot."
+  },
+  {
+   "t0": 8.59,
+   "t1": 10.54,
+   "text": "Inbox: eight new denials."
+  }
+ ],
+ "biller": [
+  {
+   "t0": 0.0,
+   "t1": 5.17,
+   "text": "Oh, come on! Another MRI, denied? Okay. The clock's ticking."
+  },
+  {
+   "t0": 5.17,
+   "t1": 6.0,
+   "text": "Let's do this."
+  }
+ ],
+ "grind": [
+  {
+   "t0": 0.0,
+   "t1": 5.16,
+   "text": "To fight it, Maya has to dig up the payer's policy, read it rule by rule,"
+  },
+  {
+   "t0": 5.16,
+   "t1": 8.82,
+   "text": "match the chart, and write the letter. That's hours. Per denial."
+  },
+  {
+   "t0": 8.82,
+   "t1": 12.1,
+   "text": "Payers check rule by rule. Why can't Maya?"
+  }
+ ],
+ "stakes": [
+  {
+   "t0": 0.0,
+   "t1": 4.06,
+   "text": "Here's the wild part. In Medicare Advantage in 2024,"
+  },
+  {
+   "t0": 4.06,
+   "t1": 8.09,
+   "text": "80.7 percent of appealed prior auth denials were overturned."
+  },
+  {
+   "t0": 8.09,
+   "t1": 10.87,
+   "text": "Only 11.5 percent were appealed."
+  },
+  {
+   "t0": 10.87,
+   "t1": 12.62,
+   "text": "What if checking took minutes?"
+  }
+ ],
+ "pitch": [
+  {
+   "t0": 0.0,
+   "t1": 1.77,
+   "text": "So we built Denial Auditor."
+  },
+  {
+   "t0": 1.77,
+   "t1": 6.55,
+   "text": "It checks each denial against the payer's own policy and tells you what to do next,"
+  },
+  {
+   "t0": 6.55,
+   "t1": 7.7,
+   "text": "with proof."
+  }
+ ],
+ "worklist": [
+  {
+   "t0": 0.0,
+   "t1": 2.79,
+   "text": "It starts with the worklist: every denial,"
+  },
+  {
+   "t0": 2.79,
+   "t1": 5.47,
+   "text": "ranked by what to do and when it's due."
+  },
+  {
+   "t0": 5.47,
+   "t1": 9.36,
+   "text": "Deadlines come from a fixed rules table, never from the model."
+  }
+ ],
+ "case": [
+  {
+   "t0": 0.0,
+   "t1": 1.11,
+   "text": "Let's open one."
+  },
+  {
+   "t0": 1.11,
+   "t1": 6.19,
+   "text": "This Medicare Advantage plan denied a lumbar MRI for having no x-ray first."
+  },
+  {
+   "t0": 6.19,
+   "t1": 10.44,
+   "text": "Nemotron reads the fax, and a reason-code table sends it to clinical review."
+  }
+ ],
+ "rules": [
+  {
+   "t0": 0.0,
+   "t1": 5.41,
+   "text": "It pulls the Medicare policy in force on the date of service from the CMS Coverage API,"
+  },
+  {
+   "t0": 5.41,
+   "t1": 9.07,
+   "text": "and matches each rule, in the payer's own words, to the chart."
+  },
+  {
+   "t0": 9.07,
+   "t1": 10.99,
+   "text": "Code finds every quote."
+  },
+  {
+   "t0": 10.99,
+   "t1": 13.87,
+   "text": "Nothing here asks for an x-ray first."
+  }
+ ],
+ "appeal": [
+  {
+   "t0": 0.0,
+   "t1": 1.55,
+   "text": "So a fixed rule says: appeal."
+  },
+  {
+   "t0": 1.55,
+   "t1": 4.23,
+   "text": "Nemotron drafts the letter,"
+  },
+  {
+   "t0": 4.23,
+   "t1": 7.62,
+   "text": "and the citation gate checks every quote against its source."
+  },
+  {
+   "t0": 7.62,
+   "t1": 9.29,
+   "text": "Twelve of twelve match."
+  }
+ ],
+ "tamper": [
+  {
+   "t0": 0.0,
+   "t1": 4.35,
+   "text": "Now, change one word. Four weeks becomes two weeks."
+  },
+  {
+   "t0": 4.35,
+   "t1": 10.31,
+   "text": "The quote turns void, the real sentence appears beside it, and export locks."
+  },
+  {
+   "t0": 10.31,
+   "t1": 12.41,
+   "text": "A person always sends the letter."
+  }
+ ],
+ "physician": [
+  {
+   "t0": 0.0,
+   "t1": 3.02,
+   "text": "When the chart is missing something, it doesn't guess."
+  },
+  {
+   "t0": 3.02,
+   "t1": 5.62,
+   "text": "It asks the physician, quoting the rule,"
+  },
+  {
+   "t0": 5.62,
+   "t1": 8.23,
+   "text": "to document only care that actually happened."
+  }
+ ],
+ "check": [
+  {
+   "t0": 0.0,
+   "t1": 4.04,
+   "text": "Before a request goes out, the same checks run on the prior auth."
+  },
+  {
+   "t0": 4.04,
+   "t1": 8.63,
+   "text": "Aetna needs six weeks of therapy and the chart shows thirty-eight days,"
+  },
+  {
+   "t0": 8.63,
+   "t1": 11.5,
+   "text": "so code works out the earliest date it qualifies."
+  }
+ ],
+ "how": [
+  {
+   "t0": 0.0,
+   "t1": 0.92,
+   "text": "Under the hood,"
+  },
+  {
+   "t0": 0.92,
+   "t1": 5.53,
+   "text": "NVIDIA Nemotron on Nebius Token Factory reads the letter and matches the rules,"
+  },
+  {
+   "t0": 5.53,
+   "t1": 8.67,
+   "text": "and Tavily finds Aetna's current policy at runtime."
+  },
+  {
+   "t0": 8.67,
+   "t1": 12.67,
+   "text": "But code, not the model, decides verdicts, deadlines,"
+  },
+  {
+   "t0": 12.67,
+   "t1": 14.02,
+   "text": "and whether a quote is real."
+  }
+ ],
+ "proof": [
+  {
+   "t0": 0.0,
+   "t1": 2.62,
+   "text": "On thirty synthetic cases we wrote ourselves,"
+  },
+  {
+   "t0": 2.62,
+   "t1": 7.04,
+   "text": "it got every recommendation and all 138 rule statuses right,"
+  },
+  {
+   "t0": 7.04,
+   "t1": 8.91,
+   "text": "at about five cents a case."
+  },
+  {
+   "t0": 8.91,
+   "t1": 13.75,
+   "text": "That's the pipeline working as designed, not accuracy on real charts."
+  }
+ ],
+ "close": [
+  {
+   "t0": 0.0,
+   "t1": 6.3,
+   "text": "Those appeals are worth filing, and now a small practice has the time."
+  },
+  {
+   "t0": 6.3,
+   "t1": 7.39,
+   "text": "Try the live demo below."
+  },
+  {
+   "t0": 7.39,
+   "t1": 11.4,
+   "text": "Denial Auditor, by Road House. Thanks for watching."
+  }
+ ]
+}

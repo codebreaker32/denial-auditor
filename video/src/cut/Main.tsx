@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
-import { Biller, Greet, STAMP_AT } from "./scenes/Hook";
+import { Biller, Greet, Grind, STAMP_AT } from "./scenes/Hook";
+import { Subtitles } from "./Subtitles";
 import { Close, Pitch, Proof, Stakes } from "./scenes/Graphics";
 import { Appeal, Case, Check, How, Physician, Rules, Tamper, Worklist } from "./scenes/Recs";
 import { C, W } from "./theme";
@@ -15,9 +16,10 @@ const OV = 14;
 const VIEW: Record<string, { C: React.FC<{ dur: number }>; in: In }> = {
   greet: { C: Greet, in: "fade" },
   biller: { C: Biller, in: "punch" },
-  stakes: { C: Stakes, in: "rise" },
-  pitch: { C: Pitch, in: "whip" },
-  worklist: { C: Worklist, in: "zoom" },
+  grind: { C: Grind, in: "rise" },
+  stakes: { C: Stakes, in: "whip" },
+  pitch: { C: Pitch, in: "punch" },
+  worklist: { C: Worklist, in: "fade" },
   case: { C: Case, in: "whip" },
   rules: { C: Rules, in: "whip" },
   appeal: { C: Appeal, in: "whip" },
@@ -50,12 +52,16 @@ const Enter: React.FC<{ kind: In; dur: number; exitWhip: boolean; children: Reac
 const at = (id: string, s: number) => SCENES.find((x) => x.id === id)!.from + Math.round(s * 30);
 const SFX: [string, number, number][] = [
   ["thump", at("biller", STAMP_AT / 30), 0.55],
-  ["tick", at("biller", 5.4), 0.25], ["tick", at("biller", 6.4), 0.25],
-  ["pop", at("stakes", 4.4), 0.35], ["pop", at("stakes", 9.6), 0.35],
-  ["chime", at("pitch", 6.6), 0.22],
+  ["tick", at("biller", 4.2), 0.25], ["tick", at("biller", 5.2), 0.25], ["pop", at("biller", 5.45), 0.3],
+  ["pop", at("greet", 2.4), 0.3], ["pop", at("greet", 5.7), 0.25], ["pop", at("greet", 6.35), 0.25],
+  ...Array.from({ length: 8 }, (_, i) => ["click", at("greet", 9.8) + i * 4 + 6, 0.35] as [string, number, number]),
+  ["tick", at("grind", 1.6), 0.25], ["tick", at("grind", 3.65), 0.25], ["tick", at("grind", 5.05), 0.25], ["tick", at("grind", 5.95), 0.25],
+  ["whoosh", at("grind", 6.6), 0.2], ["pop", at("grind", 11.45), 0.35],
+  ["pop", at("stakes", 6.5), 0.35], ["pop", at("stakes", 10.4), 0.35], ["whoosh", at("stakes", 11.25), 0.3],
+  ["pop", at("pitch", 0.1), 0.35], ["whoosh", at("pitch", 1.8), 0.3],
   ["pop", at("proof", 4.0), 0.3], ["pop", at("proof", 7.0), 0.3], ["pop", at("proof", 8.6), 0.3],
   ["click", at("tamper", 7.6), 0.6],
-  ["chime", at("tamper", 11.8), 0.3],
+  ["chime", at("tamper", 11.0), 0.3],
   ["whoosh", at("physician", 5.5), 0.25],
   ["pop", at("check", 9.0), 0.3],
   ["chime", at("close", 7.6), 0.22],
@@ -76,6 +82,7 @@ export const Main: React.FC = () => (
         </Sequence>
       );
     })}
+    <Subtitles />
     {SCENES.map((s) => (
       <Sequence key={`a-${s.id}`} from={s.from + Math.round(s.lead * 30)} name={`vo ${s.id}`}>
         <Audio src={staticFile(s.audio)} />

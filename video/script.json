@@ -7,42 +7,55 @@
       "biller": "Ruth"
     },
     "audio_dir": "public/voiceover",
-    "note": "vo is sent to ElevenLabs as written (eleven_v3 audio tags in square brackets). text is the clean caption. Sources: docs/facts.md (KFF Jan 28 2026), eval/results/final_super_scan.md, demo/runs/case_015.json (22/22 gate), demo/runs/case_031.json (doc request), demo/checks/case_009.json (38 of 42 days). vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request."
+    "note": "vo is sent to ElevenLabs as written (eleven_v3 audio tags in square brackets). text is the clean caption. Sources: docs/facts.md (KFF Jan 28 2026), eval/results/final_super_scan.md, demo/runs/case_015.json (22/22 gate), demo/runs/case_031.json (doc request), demo/checks/case_009.json (38 of 42 days). vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request. vo keeps the eleven_v3 tags; ssml is the exact Polly request."
   },
   "scenes": [
     {
       "id": "greet",
       "kind": "hook",
       "voice": "narrator",
-      "visual": "Grey ground, the MRI glass bubble drifting in. Title card: team Road House.",
-      "text": "Hi, we're team Road House. Picture a billing specialist at a three-doctor practice, on a Monday morning.",
-      "vo": "[warmly] Hi, we're team Road House. [short pause] Picture a billing specialist at a three-doctor practice, on a Monday morning.",
-      "ssml": "<speak><prosody rate=\"96%\">Hi, we're team Road House. <break time=\"0.3s\"/> Picture a billing specialist at a three-doctor practice, on a Monday morning.</prosody></speak>"
+      "visual": "Night ground, the logo builds for 'team Road House'. Maya's avatar pops in with a name tag (fictional). Kinetic type on the beats: MONDAY · 8:01 AM · Coffee: hot · Inbox: 8 new denials, the denial pile dropping in.",
+      "text": "Hi, we're team Road House! Meet Maya, who runs billing at a small spine clinic. Monday, 8:01 a.m. Coffee: hot. Inbox: eight new denials.",
+      "ssml_raw": "<speak><prosody rate=\"110%\">Hi, we're team Road House! <break time=\"0.15s\"/> Meet Maya, who runs billing at a small spine clinic. <break time=\"0.15s\"/> Monday, eight-oh-one a.m. Coffee: hot. <break time=\"0.15s\"/> Inbox: eight new denials.</prosody></speak>",
+      "vo": "Hi, we're team Road House! Meet Maya, who runs billing at a small spine clinic. Monday, 8:01 a.m. Coffee: hot. Inbox: eight new denials.",
+      "ssml": "<speak><prosody rate=\"110%\">Hi, we're team Road House! <break time=\"0.15s\"/> Meet Maya, who runs billing at a small spine clinic. <break time=\"0.15s\"/> Monday, eight-oh-one a.m. Coffee: hot. <break time=\"0.15s\"/> Inbox: eight new denials.</prosody></speak>"
     },
     {
       "id": "biller",
       "kind": "hook",
       "voice": "biller",
-      "visual": "The synthetic fax-notice bubble lands on the desk; the word DENIED is circled. Small 'synthetic' watermark.",
-      "text": "Oh, no. Another MRI denied. And the appeal clock is already running.",
-      "vo": "[sighs] Another MRI denied. [short pause] And the appeal clock is already running.",
-      "ssml": "<speak>Oh, no. <break time=\"0.3s\"/> Another MRI, denied. <break time=\"0.3s\"/> <break time=\"0.2s\"/><prosody rate=\"92%\">And the appeal clock is already running.</prosody></speak>"
+      "visual": "The synthetic fax slams in; a big red DENIED stamp lands on 'Oh, come on!' with a shake. Maya's speech bubble. The appeal clock starts ticking.",
+      "text": "Oh, come on! Another MRI, denied? Okay. The clock's ticking. Let's do this.",
+      "ssml_raw": "<speak><prosody rate=\"108%\">Oh, come on! <break time=\"0.2s\"/> Another MRI, denied? <break time=\"0.3s\"/> Okay. The clock's ticking. Let's do this.</prosody></speak>",
+      "vo": "Oh, come on! Another MRI, denied? Okay. The clock's ticking. Let's do this.",
+      "ssml": "<speak><prosody rate=\"108%\">Oh, come on! <break time=\"0.2s\"/> Another MRI, denied? <break time=\"0.3s\"/> Okay. The clock's ticking. Let's do this.</prosody></speak>"
+    },
+    {
+      "id": "grind",
+      "kind": "hook",
+      "voice": "narrator",
+      "visual": "Kinetic checklist: find the policy, read every rule, match the chart, write the letter; an hours counter spins up; 'Payers check rule by rule. Why can't Maya?'",
+      "text": "To fight it, Maya has to dig up the payer's policy, read it rule by rule, match the chart, and write the letter. That's hours. Per denial. Payers check rule by rule. Why can't Maya?",
+      "ssml_raw": "<speak><prosody rate=\"108%\">To fight it, Maya has to dig up the payer's policy, read it rule by rule, match the chart, and write the letter.</prosody> <break time=\"0.2s\"/> That's hours. <break time=\"0.15s\"/> Per denial. <break time=\"0.3s\"/><prosody rate=\"105%\">Payers check rule by rule. <break time=\"0.15s\"/> Why can't Maya?</prosody></speak>",
+      "vo": "To fight it, Maya has to dig up the payer's policy, read it rule by rule, match the chart, and write the letter. That's hours. Per denial. Payers check rule by rule. Why can't Maya?",
+      "ssml": "<speak><prosody rate=\"108%\">To fight it, Maya has to dig up the payer's policy, read it rule by rule, match the chart, and write the letter.</prosody> <break time=\"0.2s\"/> That's hours. <break time=\"0.15s\"/> Per denial. <break time=\"0.3s\"/><prosody rate=\"105%\">Payers check rule by rule. <break time=\"0.15s\"/> Why can't Maya?</prosody></speak>"
     },
     {
       "id": "stakes",
       "kind": "hook",
       "voice": "narrator",
-      "visual": "Two large numbers on white cards: 80.7% of appealed MA prior-auth denials overturned; 11.5% appealed. Source line: KFF, Jan 2026, Medicare Advantage, 2024.",
-      "source": "docs/facts.md (KFF, Medicare Advantage Insurers Made Nearly 53 Million Prior Authorization Determinations in 2024)",
-      "text": "In Medicare Advantage, 80.7 percent of appealed prior-auth denials were overturned in 2024. But only 11.5 percent were appealed. Winning takes hours of reading that a small practice doesn't have.",
-      "vo": "[thoughtful] In Medicare Advantage, eighty point seven percent of appealed prior auth denials were overturned in twenty twenty-four. [pause] But only eleven point five percent were appealed. [short pause] Winning takes hours of reading, that a small practice doesn't have.",
-      "ssml": "<speak>In Medicare Advantage, eighty point seven percent of appealed prior auth denials were overturned in twenty twenty-four. <break time=\"0.6s\"/> But only eleven point five percent were appealed. <break time=\"0.3s\"/> Winning takes hours of reading, that a small practice doesn't have.</speak>"
+      "source": "docs/facts.md (KFF, Jan 28 2026: MA prior authorization, 2024)",
+      "visual": "Punchline: 80.7% counts up and pops (appealed MA prior-auth denials overturned, 2024); 11.5% (ever appealed) with a bar that drains; source KFF, Jan 2026. Whoosh into 'What if checking took minutes?'",
+      "text": "Here's the wild part. In Medicare Advantage in 2024, 80.7 percent of appealed prior auth denials were overturned. Only 11.5 percent were appealed. What if checking took minutes?",
+      "ssml_raw": "<speak><prosody rate=\"104%\">Here's the wild part. <break time=\"0.2s\"/> In Medicare Advantage in twenty twenty-four, eighty point seven percent of appealed prior auth denials were overturned. <break time=\"0.4s\"/> Only eleven point five percent were appealed. <break time=\"0.3s\"/></prosody><prosody rate=\"108%\">What if checking took minutes?</prosody></speak>",
+      "vo": "Here's the wild part. In Medicare Advantage in 2024, 80.7 percent of appealed prior auth denials were overturned. Only 11.5 percent were appealed. What if checking took minutes?",
+      "ssml": "<speak><prosody rate=\"104%\">Here's the wild part. <break time=\"0.2s\"/> In Medicare Advantage in twenty twenty-four, eighty point seven percent of appealed prior auth denials were overturned. <break time=\"0.4s\"/> Only eleven point five percent were appealed. <break time=\"0.3s\"/></prosody><prosody rate=\"108%\">What if checking took minutes?</prosody></speak>"
     },
     {
       "id": "pitch",
       "kind": "bridge",
       "voice": "narrator",
-      "visual": "Product name on the yellow highlight card; three short lines appear: reads the denial, checks the policy, proves every quote.",
+      "visual": "On the night band the mark pops and 'Denial Auditor' wipes in; the camera dives through it into the real landing page (homepage tour recording: hero with the policy globe, a smooth scroll through the sections).",
       "text": "So we built Denial Auditor. It checks each denial against the payer's own policy and tells you what to do next, with proof.",
       "vo": "[confident] So we built Denial Auditor. It checks each denial against the payer's own policy, and tells you what to do next. With proof.",
       "ssml": "<speak><prosody rate=\"93%\">So we built Denial Auditor. It checks each denial against the payer's own policy, and tells you what to do next. <break time=\"0.2s\"/><prosody rate=\"92%\">With proof.</prosody></prosody></speak>"
@@ -52,7 +65,7 @@
       "kind": "rec",
       "clip": "worklist",
       "voice": "narrator",
-      "visual": "Screen recording: worklist, sorted by days left; recommendation pills and the Due column.",
+      "visual": "Tour continues: the cursor clicks 'Open the demo', then 'Continue to the demo' on the login page, and lands on the worklist; ring on the days-left column, then the deadline figure 'From a rules table, not the model'.",
       "caption": "Every denial, ranked by what to do and when it's due.",
       "text": "It starts with the worklist: every denial, ranked by what to do and when it's due. Deadlines come from a fixed rules table, never from the model.",
       "vo": "It starts with the worklist. Every denial, ranked by what to do, and when it's due. [short pause] Deadlines come from a fixed rules table, never from the model.",
@@ -118,7 +131,7 @@
       "kind": "rec",
       "clip": "check",
       "voice": "narrator",
-      "visual": "Before you submit: case_009 (Aetna). Readiness Not yet; 38 of 42 days of conservative therapy; earliest date on the timeline.",
+      "visual": "Prior-auth check for Emerson Specimen (case_009, Aetna): readiness 'Qualifies if charted', 38 of 42 days charted, earliest Jul 31 against the planned Aug 3.",
       "caption": "Not ready yet? It tells you the earliest date.",
       "text": "Before a request goes out, the same checks run on the prior auth. Aetna needs six weeks of therapy and the chart shows thirty-eight days, so code works out the earliest date it qualifies.",
       "vo": "Before a request goes out, the same checks run on the prior auth. Aetna needs six weeks of therapy, and the chart shows thirty-eight days. [short pause] So code works out the earliest date it qualifies.",
@@ -128,7 +141,7 @@
       "id": "how",
       "kind": "arch",
       "voice": "narrator",
-      "visual": "One-line architecture: fax -> Nemotron on Nebius Token Factory -> CMS Coverage API / Tavily (Aetna) -> code: verdict, deadline, quote check -> human sends.",
+      "visual": "A real live run on the deployed site (case 015), time-lapsed with its speed tag (×28, ×10, ×2): the steps fold to one line each, the rule tally fills one by one, the summary card lands (Appeal). A night band on the right: NVIDIA Nemotron on Nebius Token Factory reads and matches, Tavily finds Aetna's policy live, code decides.",
       "text": "Under the hood, NVIDIA Nemotron on Nebius Token Factory reads the letter and matches the rules, and Tavily finds Aetna's current policy at runtime. But code, not the model, decides verdicts, deadlines, and whether a quote is real.",
       "vo": "Under the hood, NVIDIA Nemotron on Nebius Token Factory reads the letter and matches the rules, and Tavily finds Aetna's current policy at runtime. [short pause] But code, not the model, decides verdicts, deadlines, and whether a quote is real.",
       "ssml": "<speak>Under the hood, NVIDIA Nemotron on Nebius Token Factory reads the letter and matches the rules, and Tavily finds Aetna's current policy at runtime. <break time=\"0.3s\"/> But code, not the model, decides verdicts, deadlines, and whether a quote is real.</speak>"
