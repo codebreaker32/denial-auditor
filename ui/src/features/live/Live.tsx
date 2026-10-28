@@ -188,7 +188,8 @@ async function post(caseId: string, passcode: string): Promise<{ job?: string; s
 export function Live() {
   const { data } = useCases()
   const available = data?.available ?? []
-  const enabled = data?.live_enabled ?? true
+  const left = data?.live_left
+  const enabled = (data?.live_enabled ?? true) && left !== 0
   const [caseId, setCaseId] = useState("case_015")
   const [pass, setPass] = useState("")
   const [passErr, setPassErr] = useState<string | null>(null)
@@ -392,7 +393,11 @@ export function Live() {
               <Glyph name="cross" size={13} /> {formErr}
             </p>
           )}
-          <p className="lv-small">30 live runs a day across all visitors.</p>
+          <p className="lv-small">
+            {left === 0
+              ? "All 5 live runs for this demo have been used. The saved cases show the same pipeline's output."
+              : `${left ?? 5} of 5 live runs left on this demo. Each run makes real model calls, about $0.06.`}
+          </p>
         </motion.form>
 
         <motion.section className="lv-run" aria-label="Progress" {...enter(2)}>

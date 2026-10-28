@@ -21,7 +21,7 @@ export interface Row {
   policy: string | null
   cost_usd: number
 }
-export interface CasesResp { as_of: string; cases: Row[]; live_enabled?: boolean; available?: string[] }
+export interface CasesResp { as_of: string; cases: Row[]; live_enabled?: boolean; available?: string[]; live_left?: number }
 
 export interface Evidence { note_id: string; quote: string; verified: boolean; start?: number | null; end?: number | null }
 export interface Match {

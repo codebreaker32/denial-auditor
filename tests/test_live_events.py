@@ -173,3 +173,23 @@ def test_api_job_collects_events(monkeypatch):
     got["events"].append("x")  # a snapshot, not the live list
     assert len(api._jobs["t1"]["events"]) == 1
     del api._jobs["t1"]
+
+
+def test_live_total_limit_is_five_ever(tmp_path, monkeypatch):
+    """After TOTAL_LIMIT successful starts the passcode stops working for good (user, 2026-10-28)."""
+    import pytest
+    from fastapi import HTTPException
+
+    from nebius_nvidia import api
+
+    monkeypatch.setattr(api, "STATE", tmp_path)
+    monkeypatch.setattr(api, "TOTAL_LIMIT", 5)
+    monkeypatch.setenv("DEMO_PASSCODE", "pc")
+    monkeypatch.setattr(api.threading, "Thread", lambda *a, **k: type("T", (), {"start": lambda self: None})())
+    body = api.LiveIn(case_id="case_015", passcode="pc")
+    for _ in range(5):
+        assert api.start_live(body)["job"]
+    assert api._live_left() == 0
+    with pytest.raises(HTTPException) as e:
+        api.start_live(body)
+    assert e.value.status_code == 429 and "5 live runs" in e.value.detail

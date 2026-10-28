@@ -158,10 +158,10 @@ The demo is free to browse. It uses synthetic patients only and needs no account
 1. Open **Prior-auth checks** in the left rail, then **Emerson Specimen** (case 009, Aetna, planned for 08/03/2026).
 2. Aetna CPB 0236 asks for six weeks of conservative therapy. The chart documents 38 of 42 days. On the timeline, code places the earliest qualifying date at 07/31/2026, which is before the planned date, so the result reads "Qualifies if charted": the wait is reached, but the chart has to record it.
 
-**4. Optional: a live run (1 to 2 minutes, real Token Factory and Tavily calls)**
+**4. Optional: a live run (2 to 3 minutes, real Token Factory and Tavily calls, about $0.06)**
 1. Open **Run live**, pick an **Aetna** case (for example Emerson Specimen) to see the runtime Tavily call, and enter the passcode: **[DEMO PASSCODE — paste into the Devpost field only, never into this file]**. The policy step reads "Finding the policy in effect on the date of service (Tavily search)".
 2. Watch each step as it runs. For an Aetna case (for example case 009), the policy step says "(Tavily search)". For a Medicare case, it says "(CMS Coverage API)".
-3. Live runs are capped at 30 a day across all visitors and by a spending cap on the server. If you hit the cap, the precomputed cases above show the same pipeline's saved output.
+3. **Cost and limit:** each live run makes real calls to NVIDIA Nemotron on Nebius Token Factory (about **$0.06** per run, plus one Tavily search on an Aetna case). To keep the demo's spend bounded, the passcode allows **5 live runs in total**, shared by all judges, and the Run live page shows how many are left. Please run one or two at most. Once they're used up, the saved cases above show the same pipeline's output, and the video shows a full live run.
 
 **Run it locally:** see the README. It needs Python 3.12, Node 20+, and a Token Factory and Tavily key in `.env`.
 
@@ -329,7 +329,7 @@ Every number and checkable claim above, with where it comes from. Repo paths are
 | Empty content → retry with 2× max_tokens | `src/nebius_nvidia/llm.py` | "Empty content (reasoning used the token budget) → one retry with 2× max_tokens." |
 | Caps $27 / 4,125 credits | `src/nebius_nvidia/budget.py` | `DEFAULT_CAP_USD = 27.0`; `DEFAULT_TAVILY_CAP = 4125` |
 | ~$6.18 spent (dev ledger) | `.token_factory_spend.json` (read 2026-10-28) | `spent_usd: 6.18306…`; its note says part was reconstructed after a ledger race. The Cloud Run ledger in `gs://nebius-nvidia-state` is separate and wasn't read. |
-| Live runs: passcode, 30 per day | `src/nebius_nvidia/api.py`; `ui/src/features/live/Live.tsx` | `DAILY_LIMIT = 30`; "30 live runs a day across all visitors." |
+| Live runs: passcode, 5 in total | `src/nebius_nvidia/api.py`; `ui/src/features/live/Live.tsx` | `TOTAL_LIMIT = 5`; "N of 5 live runs left on this demo. Each run makes real model calls, about $0.06." |
 | Sign-in: "Open the demo" → "Continue to the demo", no password | `ui/src/landing/Landing.tsx`; `ui/src/app/Login.tsx` | "Open the demo"; "Continue to the demo"; "There is no password and nothing to sign up for." |
 | UI labels: Worklist, Prior-auth checks, Run live, Rules, Policy, Review appeal, Edit, Letter, Export locked, Restore the draft, Ask the physician | `ui/src/app/Shell.tsx`, `features/case/Detail.tsx`, `features/case/model.ts`, `features/appeal/Appeal.tsx`, `lib/data.ts` | as quoted in the source |
 | Patients: Drew Exemplar (015), Indigo Testdata (031), Emerson Specimen (009) | `cases/case_0NN/scenario.json` | `patient_name` fields |
