@@ -1,0 +1,21 @@
+<!doctype html><meta charset=utf-8><style>
+@font-face{font-family:Geist;src:url(../../ui/public/fonts/geist-var.woff2);font-weight:100 900}
+*{box-sizing:border-box}html,body{margin:0}
+body{width:2400px;height:1600px;overflow:hidden;font-family:Geist;background:#efefed;color:#0e0f0c;position:relative}
+.top{position:absolute;left:120px;top:110px;right:120px;display:flex;justify-content:space-between;align-items:flex-start;gap:60px}
+h1{margin:0;font-size:84px;font-weight:500;letter-spacing:-.035em;line-height:1.04;max-width:1500px;text-wrap:balance}
+h1 span{color:#6b6d66}
+.brand{display:flex;align-items:center;gap:18px;font-size:34px;font-weight:600;letter-spacing:-.02em;white-space:nowrap;margin-top:14px}
+.card{position:absolute;left:120px;right:120px;bottom:0;top:var(--top,420px);border-radius:28px 28px 0 0;overflow:hidden;background:#fff;
+ box-shadow:0 2px 4px rgba(14,15,12,.06),0 30px 80px -30px rgba(14,15,12,.28)}
+.card img{position:absolute;width:var(--w,2160px);left:var(--x,0);top:var(--y,0)}
+.foot{position:absolute;right:120px;bottom:28px;font-size:22px;color:#6b6d66;z-index:3;background:rgba(255,255,255,.85);padding:6px 14px;border-radius:999px}
+</style>
+<div class=top><h1 id=h></h1><div class=brand><svg width=48 height=48 viewBox="0 0 24 24"><rect width=24 height=24 rx=7 fill="#0e0f0c"/><path transform="rotate(180 7.9 12) translate(0 -.4)" d="M10.2 9.6a2.35 2.35 0 1 0-2.6 2.34c-.2 1.24-.94 2.2-2.1 2.86l.62.98c2.36-1.12 3.98-3.3 4.08-6.18Z" fill="#f3f3f1"/><path d="M11.6 13.2l2.5 2.6 5.1-6.4" fill=none stroke="#1e4bd7" stroke-width=2.3 stroke-linecap=round stroke-linejoin=round /></svg>Denial Auditor</div></div>
+<div class=card id=c><img id=i></div><div class=foot>Synthetic data · no real patients</div>
+<script>
+const q=new URLSearchParams(location.search);
+document.getElementById('h').innerHTML=q.get('h');
+const i=document.getElementById('i'); i.src='raw/'+q.get('img')+'.png';
+const c=document.getElementById('c'); for(const k of ['w','x','y','top']) if(q.get(k)) c.style.setProperty('--'+k,q.get(k));
+</script>

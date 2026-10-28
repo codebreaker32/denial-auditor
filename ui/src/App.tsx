@@ -1,14 +1,12 @@
 import { MotionConfig } from "framer-motion"
 import { Component, lazy, Suspense, useEffect, type ReactNode } from "react"
-import { TooltipProvider } from "@/components/skiper/skiper101"
+import { TooltipProvider } from "@/components/ui/tooltip"
 import { useHash } from "@/lib/router"
 
 // Route-level chunks: the landing, the sign-in and the signed-in app each load on their own.
 const Landing = lazy(() => import("@/landing/Landing"))
 const Login = lazy(() => import("@/app/Login").then((m) => ({ default: m.Login })))
 const AppRoute = lazy(() => import("@/app/Routes"))
-// The approved mockup, kept for reference.
-const CompB = lazy(() => import("@/comps/b/Comp"))
 
 // A screen that is mid-edit can fail to import; say so instead of showing a white page.
 class Boundary extends Component<{ children: ReactNode; resetKey: string }, { failed: boolean }> {
@@ -31,7 +29,7 @@ class Boundary extends Component<{ children: ReactNode; resetKey: string }, { fa
 
 export default function App() {
   const hash = useHash()
-  const route = hash.startsWith("#/comp/") ? "comp" : hash.startsWith("#/login") ? "login" : hash.startsWith("#/app") ? "app" : "landing"
+  const route = hash.startsWith("#/login") ? "login" : hash.startsWith("#/app") ? "app" : "landing"
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [route])
@@ -43,7 +41,6 @@ export default function App() {
             {route === "landing" && <Landing />}
             {route === "login" && <Login />}
             {route === "app" && <AppRoute path={hash} />}
-            {route === "comp" && <CompB />}
           </Suspense>
         </Boundary>
       </TooltipProvider>

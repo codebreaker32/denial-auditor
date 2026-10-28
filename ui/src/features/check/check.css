@@ -595,3 +595,7 @@
     border: 0;
   }
 }
+
+/* The policy link can be long ("Aetna policy CPB 0236, snapshot fetched …"): let it wrap on a phone instead of widening the page. */
+.cd-acts { min-width: 0; max-width: 100%; }
+.cd-acts .pill { max-width: 100%; height: auto; min-height: 32px; padding-block: 6px; white-space: normal; text-align: left; line-height: 1.35; }

@@ -31,7 +31,7 @@ Most denials that get appealed are overturned, but few are appealed. In Medicare
 
 A 2022 federal audit of 250 sampled Medicare Advantage prior-auth denials found that 13% met Medicare coverage rules. One pattern it named: plans requiring an x-ray before approving more advanced imaging, which Medicare rules don't require (HHS OIG, OEI-09-18-00260).
 
-Winning one of these appeals is mostly careful reading. You find the payer's policy as it stood on the date of service, check each requirement against the chart, and quote both exactly. A biller at a three-doctor practice rarely has the hours for that.
+Winning one of these appeals is mostly careful reading. You find the payer's policy as it stood on the date of service, check each requirement against the chart, and quote both exactly. A small practice's biller rarely has time for that on every denial.
 
 The payers already do this work with software. Availity, Cohere Health and Anterior sell criterion-by-criterion evidence review to health plans, and eviCore runs imaging review for them. The provider-side tools we found mostly generate appeal letters and are sold to hospitals and health systems. We wanted the payer's own view of a case, built for the practice.
 
@@ -148,7 +148,7 @@ The demo is free to browse. It uses synthetic patients only and needs no account
 1. In the **Worklist**, open **Drew Exemplar** (case 015, a Medicare Advantage plan that denied a lumbar MRI for having no x-ray first).
 2. Open the **Policy** tab: LCD L34220 v40, the version in force on the date of service, from the CMS Coverage API. Open the **Rules** tab: each rule is in the policy's own words, with the verified chart quote beside it. No rule asks for an x-ray first.
 3. Click **Review appeal**. The gate shows all 12 quoted passages matching their source.
-4. Click **Edit**, change "four weeks" to "two weeks" inside a quoted passage, then switch back to **Letter**. The quote is marked void, the real sentence appears beside it, and the button reads **Export locked**. Click **Restore the draft** to undo.
+4. Click **Edit**, change "four weeks" to "two weeks" inside a quoted passage, then switch back to **Letter**. The quote is struck through ("This quote isn't in the policy"), the policy's real sentence appears beside it, and the button reads **Export locked**. The count becomes "1 of 13" because your edit is a new, unmatched passage. To undo, click **Edit**, then **Restore the draft**, and Export unlocks.
 
 **2. Ask the physician (about 20 seconds)**
 1. Back in the Worklist, open **Indigo Testdata** (case 031). The recommendation is **Ask the physician**.
@@ -159,7 +159,7 @@ The demo is free to browse. It uses synthetic patients only and needs no account
 2. Aetna CPB 0236 asks for six weeks of conservative therapy. The chart documents 38 of 42 days. On the timeline, code places the earliest qualifying date at 07/31/2026, which is before the planned date, so the result reads "Qualifies if charted": the wait is reached, but the chart has to record it.
 
 **4. Optional: a live run (1 to 2 minutes, real Token Factory and Tavily calls)**
-1. Open **Run live**, pick an **Aetna** case (for example Emerson Specimen) to see the runtime Tavily call, and enter the passcode: **[DEMO PASSCODE — paste from .env before submitting]**. The policy step reads "Finding the policy in effect on the date of service (Tavily search)".
+1. Open **Run live**, pick an **Aetna** case (for example Emerson Specimen) to see the runtime Tavily call, and enter the passcode: **[DEMO PASSCODE — paste into the Devpost field only, never into this file]**. The policy step reads "Finding the policy in effect on the date of service (Tavily search)".
 2. Watch each step as it runs. For an Aetna case (for example case 009), the policy step says "(Tavily search)". For a Medicare case, it says "(CMS Coverage API)".
 3. Live runs are capped at 30 a day across all visitors and by a spending cap on the server. If you hit the cap, the precomputed cases above show the same pipeline's saved output.
 
@@ -169,7 +169,7 @@ The demo is free to browse. It uses synthetic patients only and needs no account
 
 ## How we used Nebius Token Factory and NVIDIA Nemotron
 
-Every model call in the app goes to the Token Factory OpenAI-compatible API (`https://api.tokenfactory.nebius.com/v1/`) at runtime, and every model is an NVIDIA Nemotron open model. We use five of them:
+We used no other Nebius service: Token Factory serves every model call, and the app itself is hosted on Google Cloud Run. Every model call in the app goes to the Token Factory OpenAI-compatible API (`https://api.tokenfactory.nebius.com/v1/`) at runtime, and every model is an NVIDIA Nemotron open model. We use five of them:
 - Nemotron 3 Nano 30B-A3B
 - Nemotron 3 Super 120B-A12B
 - Nemotron 3 Ultra 550B-A55B

@@ -302,7 +302,7 @@ export function Live() {
     <div className="page lv">
       <motion.header className="page-h" {...enter(0)}>
         <h1>Run live</h1>
-        <p>Check a synthetic denial from scratch: read the letter, fetch today's policy, check the chart and draft the appeal. Takes one to three minutes.</p>
+        <p>Check a synthetic denial from scratch: read the letter, fetch the policy in effect on the date of service, check the chart and draft the appeal. Takes one to three minutes.</p>
       </motion.header>
 
       <div className="lv-grid">
