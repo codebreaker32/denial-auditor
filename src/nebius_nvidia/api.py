@@ -44,7 +44,6 @@ WEB = ROOT / "web"
 UI_DIST = ROOT / "ui" / "dist"  # `cd ui && npm run build`
 STATE = Path("/state") if Path("/state").is_dir() else ROOT / ".cache"
 SESSION_LIMIT_PER_JOBS = 3  # per browser token
-DAILY_LIMIT = 30
 # Live runs allowed in total on a deployment (user, 2026-10-28: 5, ever). Counted from the "total" key in live_runs.json.
 TOTAL_LIMIT = int(os.environ.get("LIVE_TOTAL_LIMIT", "5"))
 
@@ -298,8 +297,6 @@ def start_live(body: LiveIn) -> dict:
     with _locked_json(str(STATE / "live_runs.json"), {}) as counts:
         if counts.get("total", 0) >= TOTAL_LIMIT:
             raise HTTPException(429, f"All {TOTAL_LIMIT} live runs for this demo have been used. Browse the saved cases instead.")
-        if counts.get(today, 0) >= DAILY_LIMIT:
-            raise HTTPException(429, "Today's live-run limit for this demo has been reached. Browse the precomputed cases instead.")
         counts[today] = counts.get(today, 0) + 1
         counts["total"] = counts.get("total", 0) + 1
     job = uuid.uuid4().hex[:12]
