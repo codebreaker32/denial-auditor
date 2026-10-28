@@ -1561,3 +1561,160 @@ mark.nq {
   gap: 4px;
   margin-right: 4px;
 }
+
+/* ---------- rules tab: one summary line, one line per rule (white rows, 4px apart, no lines) ---------- */
+.rsum {
+  list-style: none;
+  margin: 0;
+  padding: 10px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  border-radius: 12px;
+  background: var(--surface);
+}
+.rsum-i {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color var(--dur-micro) var(--ease-micro);
+}
+button.rsum-i {
+  cursor: pointer;
+}
+@media (hover: hover) {
+  button.rsum-i:hover {
+    background: var(--ground);
+  }
+}
+.rsec {
+  gap: 10px;
+}
+.rsec .cd-sec-h h3 {
+  font-size: var(--fs-lead);
+}
+.rsec-more {
+  justify-self: start;
+  margin-top: 2px;
+  font-size: var(--fs-small);
+}
+.rules {
+  gap: 4px;
+  border-radius: 0;
+  overflow: visible;
+}
+.rule {
+  border: 0;
+  border-radius: 10px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.rr {
+  display: grid;
+  grid-template-columns: minmax(136px, max-content) minmax(0, 1fr) auto auto 16px;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 48px;
+  padding: 6px 14px 6px 10px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: var(--ink);
+  transition: background-color var(--dur-micro) var(--ease-micro);
+}
+@media (hover: hover) {
+  .rr:hover {
+    background: rgb(14 15 12 / 0.03);
+  }
+}
+.rr:focus-visible {
+  outline-offset: -2px;
+  border-radius: 10px;
+}
+.rr-st {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.rr-st.t-pos { background: var(--t-pos-tint); }
+.rr-st.t-warn { background: var(--t-warn-tint); }
+.rr-st.t-neg { background: var(--t-neg-tint); }
+.rr-st.t-quiet { background: var(--t-quiet-tint); }
+.rr-st.t-teal { background: var(--t-teal-tint); }
+.rr-st.t-clay { background: var(--t-clay-tint); }
+/* Every deciding rule says the same: the header says it once, the chips step back. */
+.rr-st.is-quiet {
+  background: transparent;
+  padding-left: 4px;
+}
+.rr-n {
+  min-width: 0;
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.35;
+}
+.rr-f {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.rr-a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-small);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.rr-dc {
+  color: var(--t-warn);
+}
+.rule-bi {
+  gap: 14px;
+  padding: 2px 16px 16px 160px;
+}
+.rule-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+@media (max-width: 899px) {
+  /* Phone: the name on the first line; chip, counted wait and section mark on the second. */
+  .rr {
+    grid-template-columns: auto minmax(0, 1fr) auto 16px;
+    grid-template-areas: "n n n x" "st f a x";
+    gap: 2px 10px;
+    padding: 8px 12px;
+  }
+  .rr-n { grid-area: n; }
+  .rr-st { grid-area: st; height: 24px; padding: 0 8px; margin-left: -2px; }
+  .rr-st.is-quiet { padding-left: 0; }
+  .rr-f { grid-area: f; }
+  .rr-a { grid-area: a; justify-self: end; display: inline-flex; }
+  .rr .rule-x { grid-area: x; }
+  .rule-bi {
+    padding: 2px 12px 14px;
+  }
+  .rsum {
+    padding: 8px;
+  }
+}

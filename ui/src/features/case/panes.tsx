@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react"
 import { Fragment, useEffect, useMemo, useState, type ReactNode } from "react"
 import { EASE_ENTER, EASE_OUT } from "@/lib/motion"
 import { PLAN, daysBetween, fmtDate, noteKind, policyHuman, sec, secLong, shortPayer, toT, type CaseDetail, type Facts, type GlyphName, type Tone } from "@/lib/data"
-import { Glyph, Mark } from "@/features/ui"
+import { Glyph } from "@/features/ui"
 import { RuleRow } from "./parts"
 import {
   RANK, SHOW, capFirst, carcLine, carcMeaning, countWait, deciding, denialOf, notesOf, policyOf, thresholdFor, thresholdsOf,
@@ -31,11 +31,13 @@ function useFocusEl(sel: string | null, at: number | undefined) {
 }
 
 // ================= Rules =================
+// One summary line (four stages, glyph + word each), then one line per deciding rule. A wait's counted days sit in
+// its own row, so there is no separate waiting-periods block.
 const STAGES = [
-  { key: "routes", title: "Route to coverage", kinds: ["indication", "red_flag"] },
-  { key: "waits", title: "Waiting periods", kinds: ["duration"] },
-  { key: "limits", title: "Restrictions", kinds: ["exclusion"] },
-  { key: "docs", title: "Documentation", kinds: ["documentation"] },
+  { key: "routes", kinds: ["indication", "red_flag"] },
+  { key: "waits", kinds: ["duration"] },
+  { key: "limits", kinds: ["exclusion"] },
+  { key: "docs", kinds: ["documentation"] },
 ]
 type Res = { tone: Tone; glyph: GlyphName; word: string }
 const R = {
@@ -44,6 +46,13 @@ const R = {
   warn: (word: string): Res => ({ tone: "warn", glyph: "half", word }),
   mute: (word: string): Res => ({ tone: "quiet", glyph: "dash", word }),
 }
+// The group header when every deciding rule says the same thing.
+const ALL_SAY: Partial<Record<Show, (n: number) => string>> = {
+  met: (n) => (n === 1 ? "The one deciding rule is supported" : `All ${n} deciding rules are supported`),
+  not_met: (n) => (n === 1 ? "The one deciding rule blocks it" : `All ${n} deciding rules block it`),
+  missing_documentation: (n) => (n === 1 ? "The one deciding rule is missing documentation" : `All ${n} deciding rules are missing documentation`),
+}
+const COUNT_WORD: Record<string, string> = { met: "supported", missing_documentation: "missing documentation", not_met: "blocking" }
 
 export function RulesPane({ d, ms, alt, onPolicy, onNote, focus }: { d: CaseDetail; ms: Prepped[]; alt: Facts | null; onPolicy: (n: number) => void; onNote: (id: string) => void; focus: Focus | null }) {
   const live = useMemo(() => deciding(ms).sort((a, b) => RANK[a.show] - RANK[b.show] || Number(b.confidence === "escalated") - Number(a.confidence === "escalated")), [ms])
@@ -51,7 +60,6 @@ export function RulesPane({ d, ms, alt, onPolicy, onNote, focus }: { d: CaseDeta
   const firstOpen = live.find((m) => m.show === "not_met" || m.show === "missing_documentation")?.criterion_id ?? null
   const [open, setOpen] = useState<string | null>(firstOpen)
   const [showQuiet, setShowQuiet] = useState(false)
-  const crit = (m: Prepped) => m.crit
   const count = (m: Prepped) => {
     const t = thresholdFor(d, m.addr)
     return t ? countWait(d, t, alt) : null
@@ -70,32 +78,39 @@ export function RulesPane({ d, ms, alt, onPolicy, onNote, focus }: { d: CaseDeta
   }
 
   if (!ms.length) return <NoRules d={d} />
+  const same = live.length > 0 && live.every((m) => m.show === live[0].show) ? live[0].show : null
+  const header = same && ALL_SAY[same] ? ALL_SAY[same]!(live.length) : "Rules that decide it"
+  const tally = Object.entries(COUNT_WORD)
+    .map(([k, w]) => [live.filter((m) => m.show === k).length, w] as const)
+    .filter(([n]) => n > 0)
+    .map(([n, w]) => `${n} ${w}`)
+  const row = (m: Prepped, i: number, withCount: boolean) => (
+    <RuleRow
+      key={m.criterion_id} d={d} m={m} c={m.crit} index={i} show={SHOW[m.show]} count={withCount ? count(m) : null} quiet={!!same}
+      open={open === m.criterion_id} onToggle={() => setOpen(open === m.criterion_id ? null : m.criterion_id)} onPolicy={onPolicy} onNote={onNote}
+    />
+  )
   return (
     <div className="pane">
-      <Coverage d={d} ms={ms} alt={alt} onChip={jump} />
-      <section className="cd-sec" aria-label="Policy rules">
+      <Summary d={d} ms={ms} alt={alt} onJump={jump} />
+      <section className="cd-sec rsec" aria-label="Policy rules">
         <div className="cd-sec-h">
-          <h3>Rules that decide it</h3>
+          <h3>{header}</h3>
           <span className="cd-sec-a">
-            {live.length} deciding · {quiet.length} don't apply
+            {!same && tally.length ? `${tally.join(" · ")} · ` : ""}
+            {quiet.length} don't apply
           </span>
         </div>
         <ul className="rules">
-          {live.map((m, i) => (
-            <RuleRow key={m.criterion_id} d={d} m={m} c={crit(m)} index={i} show={SHOW[m.show]} count={count(m)} open={open === m.criterion_id} onToggle={() => setOpen(open === m.criterion_id ? null : m.criterion_id)} onPolicy={onPolicy} onNote={onNote} />
-          ))}
-          {showQuiet &&
-            quiet.map((m, i) => (
-              <RuleRow key={m.criterion_id} d={d} m={m} c={crit(m)} index={i} show={SHOW[m.show]} open={open === m.criterion_id} onToggle={() => setOpen(open === m.criterion_id ? null : m.criterion_id)} onPolicy={onPolicy} onNote={onNote} />
-            ))}
+          {live.map((m, i) => row(m, i, true))}
+          {showQuiet && quiet.map((m, i) => row(m, i, false))}
         </ul>
         {quiet.length > 0 && (
-          <button type="button" className="textbtn" onClick={() => setShowQuiet(!showQuiet)} aria-expanded={showQuiet}>
+          <button type="button" className="textbtn rsec-more" onClick={() => setShowQuiet(!showQuiet)} aria-expanded={showQuiet}>
             {showQuiet ? "Hide" : "Show"} the {quiet.length} rules that don't decide this case
           </button>
         )}
       </section>
-      <Waits d={d} alt={alt} onPolicy={onPolicy} />
     </div>
   )
 }
@@ -116,84 +131,51 @@ function NoRules({ d }: { d: CaseDetail }) {
   )
 }
 
-function Coverage({ d, ms, alt, onChip }: { d: CaseDetail; ms: Prepped[]; alt: Facts | null; onChip: (id: string) => void }) {
+// "Qualifies · Waits met · No restrictions · Records complete": each stage a glyph and a word; a stage with a
+// deciding rule jumps to it.
+function Summary({ d, ms, alt, onJump }: { d: CaseDetail; ms: Prepped[]; alt: Facts | null; onJump: (id: string) => void }) {
+  const red = (d.run.facts?.red_flags ?? []).length > 0
   const cells = STAGES.map((st) => {
-    const all = ms.filter((m) => st.kinds.includes(m.crit.kind))
-    const on = all.filter((m) => m.show !== "route")
+    const on = ms.filter((m) => st.kinds.includes(m.crit.kind) && m.show !== "route")
     const has = (s: Show) => on.some((m) => m.show === s)
+    const first = (s: Show) => on.find((m) => m.show === s) ?? null
     let res: Res
-    let chips = on.filter((m) => m.show !== "not_applicable")
-    if (st.key === "routes") res = has("met") ? R.ok("Qualifies") : has("not_met") ? R.bad("No route met") : R.warn("Not shown")
+    let to: Prepped | null = first("not_met") ?? first("missing_documentation") ?? first("met")
+    if (st.key === "routes") res = has("met") ? R.ok("Qualifies") : has("not_met") ? R.bad("No route met") : R.warn("Route not shown")
     else if (st.key === "waits") {
-      res = has("not_met") ? R.bad("Not met") : has("missing_documentation") ? R.warn("Undocumented") : has("met") ? R.ok("Met") : R.mute("Waived or not relevant")
-      // A wait that sits inside a route rule ("no improvement after 6 weeks"): name it with the days counted in code.
-      if (!on.length && d.run.verdict !== "appeal") {
+      res = has("not_met") ? R.bad("Waits not met") : has("missing_documentation") ? R.warn("Waits undocumented") : has("met") ? R.ok("Waits met") : red ? R.mute("Waits waived: red flag") : R.mute("No waits apply")
+      // A wait inside a route rule ("no improvement after 6 weeks"): say it with the days counted from the chart.
+      if (!on.some((m) => m.show !== "not_applicable") && d.run.verdict !== "appeal") {
         const w = ms.find((m) => m.show === "not_met" && thresholdFor(d, m.addr))
         const t = w && thresholdFor(d, w.addr)
         if (w && t) {
           const k = countWait(d, t, alt)
-          res = k.n != null ? { tone: k.tone, glyph: k.glyph, word: `${k.n} days · needs ${k.need}` } : R.bad("Not met")
-          chips = [w]
+          res = k.n != null ? { tone: k.tone, glyph: k.glyph, word: `Wait short: ${k.n} days · needs ${k.need}` } : R.bad("Wait not met")
+          to = w
         }
       }
-    } else if (st.key === "limits") res = has("not_met") ? R.bad("Applies") : on.length ? R.ok("None apply") : R.mute("None listed")
-    else res = has("missing_documentation") ? R.warn("Gaps") : has("not_met") ? R.bad("Not met") : has("met") ? R.ok("Complete") : R.mute("None listed")
-    return { ...st, res, chips }
+    } else if (st.key === "limits") res = has("not_met") ? R.bad("A restriction applies") : on.length ? R.ok("No restrictions") : R.mute("No restrictions listed")
+    else res = has("missing_documentation") ? R.warn("Records incomplete") : has("not_met") ? R.bad("Records fall short") : has("met") ? R.ok("Records complete") : R.mute("No records rule")
+    return { key: st.key, res, to }
   })
   return (
-    <section className="cov" aria-label="Coverage path">
-      <div className="cov-h">
-        <span className="lbl">Coverage path</span>
-      </div>
-      <ol className="cov-l">
-        {cells.map((c, i) => (
-          <motion.li key={c.key} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: EASE_ENTER, delay: 0.05 * i }}>
-            <span className="cov-t">{c.title}</span>
-            <Mark tone={c.res.tone} glyph={c.res.glyph} label={c.res.word} size={14} />
-            {c.chips.length > 0 && (
-              <span className="cov-c">
-                {c.chips.slice(0, 4).map((m) => (
-                  <button key={m.criterion_id} type="button" className="chip" onClick={() => onChip(m.criterion_id)} title={`${secLong(d.run.policy, m.addr)}: ${m.crit.summary}`}>
-                    {sec(m.addr) || "Rule"}
-                  </button>
-                ))}
-                {c.chips.length > 4 && <span className="cov-more num">+{c.chips.length - 4}</span>}
-              </span>
-            )}
-          </motion.li>
-        ))}
-      </ol>
-    </section>
-  )
-}
-
-function Waits({ d, alt, onPolicy }: { d: CaseDetail; alt: Facts | null; onPolicy: (n: number) => void }) {
-  const ts = thresholdsOf(d)
-  if (!d.run.facts || !ts.length) return null
-  return (
-    <section className="cd-sec" aria-label="Waiting periods">
-      <div className="cd-sec-h">
-        <h3>Waiting periods</h3>
-        <span className="cd-sec-a">Counted from the dates in the chart</span>
-      </div>
-      <ul className="thr">
-        {ts.map((t) => {
-          const k = countWait(d, t, alt)
-          return (
-            <li key={t.label}>
-              <span className="thr-l">
-                {t.label}
-                <span className="thr-x">{k.text}</span>
-              </span>
-              <button type="button" className="chip" onClick={() => onPolicy(t.sentence)} title={secLong(d.run.policy, `S${t.sentence}`)}>
-                §{t.sentence}
-              </button>
-              <Mark tone={k.tone} glyph={k.glyph} label={k.word} />
-            </li>
-          )
-        })}
-      </ul>
-    </section>
+    <ul className="rsum" aria-label="Coverage path">
+      {cells.map((c, i) => (
+        <motion.li key={c.key} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, ease: EASE_ENTER, delay: 0.04 * i }}>
+          {c.to ? (
+            <button type="button" className={`rsum-i t-${c.res.tone}`} onClick={() => onJump(c.to!.criterion_id)} title={`Open ${sec(c.to.addr) || "the rule"}: ${c.to.crit.summary}`}>
+              <Glyph name={c.res.glyph} size={14} />
+              <span>{c.res.word}</span>
+            </button>
+          ) : (
+            <span className={`rsum-i t-${c.res.tone}`}>
+              <Glyph name={c.res.glyph} size={14} />
+              <span>{c.res.word}</span>
+            </span>
+          )}
+        </motion.li>
+      ))}
+    </ul>
   )
 }
 

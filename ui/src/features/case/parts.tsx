@@ -1,6 +1,6 @@
-// Case building blocks: a policy rule row with its chart evidence (app), and the payer's sentence under a
-// highlighter (app and landing). The row speaks to a biller: what the policy requires, whether the chart shows it,
-// the quoted chart line, and at most one plain word on how sure the check is.
+// Case building blocks: a one-line policy rule row that opens to its evidence (app), and the payer's sentence under
+// a highlighter (app and landing). The row speaks to a biller: whether the chart meets the rule, the rule's name and
+// any counted wait; opened, the policy's own words, the quoted chart lines and one plain line on how sure the check is.
 import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
@@ -25,11 +25,44 @@ export function Highlight({ text, delay = 0.15 }: { text: string; delay?: number
 }
 
 
+// One line per rule: status chip (glyph + word), the rule's name, the counted wait when it has one, a quiet section
+// mark and a chevron. Everything else (the policy's words, the chart lines, why, how sure) opens below.
+export function RuleHead({
+  st, name, fig, review, addr, addrTitle, open, onToggle, bid, quiet,
+}: {
+  st: { label: string; tone: Tone; glyph: GlyphName }; name: string; fig?: { text: string; tone: Tone } | null
+  review?: boolean; addr?: string; addrTitle?: string; open: boolean; onToggle: () => void; bid: string; quiet?: boolean
+}) {
+  return (
+    <button type="button" className="rr" onClick={onToggle} aria-expanded={open} aria-controls={bid}>
+      <span className={`rr-st t-${st.tone} ${quiet ? "is-quiet" : ""}`}>
+        <Glyph name={st.glyph} size={14} />
+        <span>{st.label}</span>
+      </span>
+      <span className="rr-n">{name}</span>
+      {fig && <span className={`rr-f num t-${fig.tone}`}>{fig.text}</span>}
+      <span className="rr-a">
+        {review && <span className="rr-dc" title={DOUBLE_TIP}>Double-checked</span>}
+        {addr && <span className="sec" title={addrTitle}>{addr}</span>}
+      </span>
+      <ChevronDown size={16} strokeWidth={1.7} className="rule-x" aria-hidden="true" />
+    </button>
+  )
+}
+
+// The counted wait, short: "82 days · needs 30", or why it can't be counted.
+export function waitFig(count: Count | null | undefined): { text: string; tone: Tone } | null {
+  if (!count) return null
+  if (count.n != null) return { text: `${count.n} days · needs ${count.need}`, tone: count.tone }
+  if (count.word === "Waived") return { text: "Waived: red flag", tone: "quiet" }
+  return { text: "No dates to count", tone: count.tone }
+}
+
 export function RuleRow({
-  d, m, c, open, onToggle, index = 0, show, count, onPolicy, onNote,
+  d, m, c, open, onToggle, index = 0, show, count, quiet, onPolicy, onNote,
 }: {
   d: CaseDetail; m: Match; c?: Criterion; open: boolean; onToggle: () => void; index?: number
-  show?: { label: string; tone: Tone; glyph: GlyphName }; count?: Count | null
+  show?: { label: string; tone: Tone; glyph: GlyphName }; count?: Count | null; quiet?: boolean
   onPolicy?: (n: number) => void; onNote?: (noteId: string) => void
 }) {
   const st = show ?? STATUS[m.status]
@@ -43,31 +76,22 @@ export function RuleRow({
     <motion.li
       className={`rule ${open ? "is-open" : ""}`}
       data-rule={m.criterion_id}
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.64, ease: EASE_ENTER, delay: Math.min(index, 6) * 0.05 }}
+      transition={{ duration: 0.5, ease: EASE_ENTER, delay: Math.min(index, 6) * 0.04 }}
     >
-      <button type="button" className="rule-h" onClick={onToggle} aria-expanded={open} aria-controls={bid}>
-        <span className={`rule-g t-${st.tone}`}><Glyph name={st.glyph} size={15} /></span>
-        <span className="rule-t">
-          <b>{c ? ruleNames(d.run.criteria, d.addresses).get(c.criterion_id) : "Policy rule"}</b>
-          <span>{c?.summary}</span>
-        </span>
-        <span className="rule-a">
-          {sure?.review && <span className="rule-split" title={DOUBLE_TIP}>Double-checked</span>}
-          {addr && <span className="sec" title={secLong(policy, addr)}>{sec(addr)}</span>}
-        </span>
-        <span className={`rule-s t-${st.tone}`}>{st.label}</span>
-        <ChevronDown size={15} strokeWidth={1.7} className="rule-x" aria-hidden="true" />
-      </button>
-      {count && m.status !== "not_applicable" && (
-        <p className={`counted t-${count.tone}`}>
-          <Glyph name={count.glyph} size={13} />
-          <span>
-            {count.text} · <b>{count.word}</b>
-          </span>
-        </p>
-      )}
+      <RuleHead
+        st={st}
+        name={c ? ruleNames(d.run.criteria, d.addresses).get(c.criterion_id) ?? "Policy rule" : "Policy rule"}
+        fig={m.status !== "not_applicable" ? waitFig(count) : null}
+        review={sure?.review}
+        addr={addr ? sec(addr) : undefined}
+        addrTitle={addr ? secLong(policy, addr) : undefined}
+        open={open}
+        onToggle={onToggle}
+        bid={bid}
+        quiet={quiet}
+      />
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
@@ -76,7 +100,7 @@ export function RuleRow({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0, transition: { duration: 0.18, ease: [0.4, 0, 1, 1] } }}
-            transition={{ duration: 0.36, ease: EASE_OUT }}
+            transition={{ duration: 0.32, ease: EASE_OUT }}
           >
             <div className="rule-bi">
               {c && (
@@ -95,6 +119,7 @@ export function RuleRow({
                   </span>
                 </div>
               )}
+              {count && m.status !== "not_applicable" && <p className={`rule-count t-${count.tone}`}><Glyph name={count.glyph} size={13} /> {count.text}</p>}
               <div className="rule-ev">
                 <span className="lbl">What the chart shows</span>
                 {ev.length === 0 && <p className="muted">{m.status === "missing_documentation" ? "No chart note documents this yet." : "Nothing in the chart speaks to this."}</p>}

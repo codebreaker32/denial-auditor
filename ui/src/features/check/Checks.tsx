@@ -1,7 +1,7 @@
 // Prior-auth checks: the list of saved checks, and one check with its readiness, waiting-period timeline,
 // the rules against the chart, and the later denial when the MRI went ahead anyway.
 import { AnimatePresence, motion } from "framer-motion"
-import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronDown, Copy } from "lucide-react"
+import { ArrowLeft, ArrowRight, ArrowUpRight, Copy } from "lucide-react"
 import { useMemo, useState } from "react"
 import { useCase, useCases, useDrift, useJSON } from "@/lib/api"
 import {
@@ -15,6 +15,7 @@ import {
   type CheckDetail as Detail, type CheckRow, type Show,
 } from "./model"
 import { Timeline } from "./Timeline"
+import { RuleHead } from "@/features/case/parts"
 import "./check.css"
 
 // ---------------- list ----------------
@@ -288,22 +289,20 @@ function CheckRule({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.64, ease: EASE_ENTER, delay: Math.min(index, 6) * 0.05 }}
     >
-      <button type="button" className="rule-h" onClick={onToggle} aria-expanded={open}>
-        <span className={`rule-g t-${st.tone}`}><Glyph name={st.glyph} size={15} /></span>
-        <span className="rule-t">
-          <b>{c ? ruleNames(d.check.criteria, d.addresses).get(c.criterion_id) : "Policy rule"}</b>
-          <span>{c?.summary}</span>
-        </span>
-        <span className="rule-a">
-          {sure?.review && <span className="rule-split" title={DOUBLE_TIP}>Double-checked</span>}
-          {d.addresses[m.criterion_id] && <span className="sec" title={secLong(pol, d.addresses[m.criterion_id])}>{sec(d.addresses[m.criterion_id])}</span>}
-        </span>
-        <span className={`rule-s t-${st.tone}`}>{st.label}</span>
-        <ChevronDown size={15} strokeWidth={1.7} className="rule-x" aria-hidden="true" />
-      </button>
+      <RuleHead
+        st={st}
+        name={c ? ruleNames(d.check.criteria, d.addresses).get(c.criterion_id) ?? "Policy rule" : "Policy rule"}
+        review={sure?.review}
+        addr={d.addresses[m.criterion_id] ? sec(d.addresses[m.criterion_id]) : undefined}
+        addrTitle={d.addresses[m.criterion_id] ? secLong(pol, d.addresses[m.criterion_id]) : undefined}
+        open={open}
+        onToggle={onToggle}
+        bid={`crb-${m.criterion_id}`}
+      />
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
+            id={`crb-${m.criterion_id}`}
             className="rule-b"
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
